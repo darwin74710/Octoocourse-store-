@@ -1,0 +1,75 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>home</title>
+
+    <!-- <script src="{% static 'js/main.js' %}"></script> -->
+    <link rel="stylesheet" href="{% static 'estudiantes/css/styleHome.css' %}" />
+    <script src="{% static 'estudiantes/js/homeScript.js' %}"></script>
+</head>
+
+<body>
+    <header class="header">
+        <div class="izquierda">
+            <img src="{% static 'estudiantes/img/logo.png' %}" alt="Logo pulpo">
+        </div>
+
+        <a><button>CURSOS</button></a>
+        <a><button>OFERTAS</button></a>
+
+        <div class="derecha">
+            <img src="{% static 'estudiantes/img/notifi.png' %}" alt="Logo notificaciones" onclick="ShowNoti()">
+            <img src="{% static 'estudiantes/img/user.png' %}" alt="logo Usuario" onclick="ShowUser()"> 
+        </div>
+
+        <div class="desp-usuario">
+            <li><a>Hoja de vida</a></li>
+            <li><a>Configuración</a></li>
+            <li><a onclick="Exit()">Salir</a></li>
+        </div>
+
+        <div class="desp-notifi">
+
+        </div>
+    </header>
+
+    <h1>ME GUSTA LA EMPANADA</h1>
+    <p>LOdsadasds</p><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+    <br><br><br><br><br><br><br><br><br>
+    <p>arequipe</p>
+
+    <footer class="pie-pagina">
+        <div class="grupo-1">
+            <div class="box">
+                <figure>
+                    <a href="#">
+                        <img src="{% static 'estudiantes/img/logo.png' %}" alt="logo pie-pagina">
+                    </a>
+                </figure>
+            </div>
+            <div class="box">
+                <h2>SOBRE NOSOTROS</h2>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni, nam.</p>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni, nam.</p>
+            </div>
+            <div class="box">
+                <h2>SIGUENOS</h2>
+                <div class="red-social">
+                    <a class="fab fa-facebook"></a>
+                    <a class="fa fa-instagram"></a>
+                    <a class="fa fa-twitter"></a>
+                    <a class="fa fa-youtube"></a>
+                </div>
+            </div>
+        </div>
+        <div class="grupo-2">
+            <small>&copy; 2024 <b>OctooCourse</b> - Todos los Derechos Reservados.</small>
+        </div>
+    </footer>
+</body>
+
+</html>
