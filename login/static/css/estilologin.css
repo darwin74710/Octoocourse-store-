@@ -8,7 +8,7 @@ body{
     background-color: #1d002e;
     color: black;
     font-family: 'Quicksand', sans-serif;
-    padding: 0 1.5em;
+    padding:  2.5em; /*espaciado pag*/
 
 }
 
@@ -16,7 +16,7 @@ body{
     max-width: 1170px;
     margin-left: auto;
     margin-right: auto;
-    padding: 1.5em;
+    padding: -1em;
     margin-top: 1em;
 }
 
@@ -36,6 +36,7 @@ body{
     box-shadow: 0 0 30px 0 rgb(255, 255, 255, .3);
     display: grid;
     background-color: #f3d9ff;
+    /*1d002e  f3d9ff*/
 }
 
 .formulario-wrapper > *{
@@ -93,9 +94,11 @@ a {
 .footer{
 text-align: center;
     padding: 0.1em;
-    background: #830cc4;
+    background: #1d002e;
     color: white;
-    width: 500px;
+    width: 588px;
+    margin-left: -1em;
+    margin-bottom: -3em;
     margin-top: -2em;
     
     
