@@ -14,7 +14,7 @@ body {
 
 /*NAV VAR*/
 .header {
-    background-color: #9a2edb;
+    background-color: #8021bb;
     justify-content: space-between;
     display: flex; align-items: center;
     height: 84px; padding: 0px 1%;
@@ -47,11 +47,18 @@ body {
 
 .header a button:hover {
     background-color: #560581; color: #2e0346;
-    box-shadow: 0 0 50px 0 rgba(80, 6, 122, 0.705);
 }
 
 .header .derecha {
     margin-left: auto; display: flex;
+}
+
+.header .derecha .pc{
+    display: block;
+}
+
+.header .derecha .movil{
+    display: none;
 }
 
 .header .derecha img {
@@ -75,6 +82,10 @@ body {
     align-items: center;
     list-style: none;
     display: none; /*Este comando es para ocultar cosas*/
+}
+
+.header .menu-movil {
+    display: none;
 }
 
 .header .desp-usuario li {
@@ -109,6 +120,17 @@ body {
     align-items: center;
     list-style: none;
     display: none; /*Este comando es para ocultar cosas*/
+}
+
+/*PARA DESPLAZAR IMAGENES PRINCIPAL*/
+.img-principal{
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+    background-color: #830cc4;
+}
+
+.img-principal img{
+    width: 100%; height: 100%;
 }
 
 /*PIE DE PAGINA*/
@@ -170,5 +192,57 @@ footer {
         grid-template-columns: repeat(1, 1fr);
         grid-gap: 30px;
         padding: 35px 0px;
+    }
+
+    .header {
+        background-color: #9a2edb;
+        justify-content: space-between;
+        display: flex; align-items: center;
+        height: 70px; padding: 0px 1%;
+    }
+
+    .header .izquierda img {
+        height: 70px; width: auto;
+        margin-left: 5px;
+        transition: all 0.3s;
+    }
+
+    .header a button {
+        display: none;
+    }
+
+    .header .derecha {
+        margin-left: auto; display: flex;
+    }
+
+    .header .derecha .pc{
+        display: none;
+    }
+
+    .header .derecha .movil{
+        display: block;
+    }
+
+    .header .derecha img {
+        height: 40px;
+        margin-right: 5px; margin-left: auto;
+        transition: all 0.2s;
+    }
+    
+    .header .derecha img:hover {
+        transform: scale(1.1); cursor: pointer;
+        filter: drop-shadow(0px 0px 10px #560581); /*darle sombra a los iconos*/
+    }
+
+    .header .menu-movil {
+        background-color: #9a2edb;
+        position: absolute;
+        height: 157px; width: 150px;
+        right: 0px; top: 68px;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        list-style: none;
+        display: none; /*Este comando es para ocultar cosas*/
     }
 }

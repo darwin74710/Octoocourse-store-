@@ -8,7 +8,7 @@
     <title>home</title>
 
     <!-- <script src="{% static 'js/main.js' %}"></script> -->
-    <link rel="stylesheet" href="{% static 'estudiantes/css/styleHome.css' %}" />
+    <link rel="stylesheet" href="{% static 'estudiantes/css/EstyleHome.css' %}" />
     <script src="{% static 'estudiantes/js/homeScript.js' %}"></script>
 </head>
 
@@ -22,8 +22,12 @@
         <a><button>OFERTAS</button></a>
 
         <div class="derecha">
-            <img src="{% static 'estudiantes/img/notifi.png' %}" alt="Logo notificaciones" onclick="ShowNoti()">
-            <img src="{% static 'estudiantes/img/user.png' %}" alt="logo Usuario" onclick="ShowUser()"> 
+            <img class="pc" src="{% static 'estudiantes/img/notifi.png' %}" alt="Logo notificaciones" onclick="ShowNoti()">
+            <img class="pc" src="{% static 'estudiantes/img/user.png' %}" alt="logo Usuario" onclick="ShowUser()"> 
+            <img class="movil" src="{% static 'estudiantes/img/menuMovil.png' %}" alt="Menu" onclick="ShowOptions()"> 
+        </div>
+
+        <div class="menu-movil"></div>
         </div>
 
         <div class="desp-usuario">
@@ -37,10 +41,9 @@
         </div>
     </header>
 
-    <h1>ME GUSTA LA EMPANADA</h1>
-    <p>LOdsadasds</p><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-    <br><br><br><br><br><br><br><br><br>
-    <p>arequipe</p>
+    <div class="img-principal">
+        <img src="{% static 'estudiantes/img/1estud.png' %}" alt="">
+    </div>
 
     <footer class="pie-pagina">
         <div class="grupo-1">
