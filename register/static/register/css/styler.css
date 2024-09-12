@@ -52,43 +52,43 @@ body {
 }
 
 .botones button img {
-    width: 50px; /* Ajusta el tamaño de la imagen según sea necesario */
-    height: 50px; /* Ajusta el tamaño de la imagen según sea necesario */
+    width: 50px; 
+    height: 50px; 
     margin-bottom: 0.5em;
 }
 
 .input-form-estudiante, .input-form-empresa {
-    display: none; /* Oculta los formularios por defecto */
-    justify-content: center; /* Centra horizontalmente */
-    align-items: center; /* Centra verticalmente */
-    flex-direction: column; /* Asegura que los elementos hijos se apilen verticalmente */
+    display: none; 
+    justify-content: center; 
+    align-items: center; 
+    flex-direction: column; 
 }
 
 .input-form-estudiante form, .input-form-empresa form {
-    width: 100%; /* Asegura que el formulario ocupe todo el ancho del contenedor */
+    width: 100%; 
     display: flex;
-    flex-direction: column; /* Asegura que los elementos hijos se apilen verticalmente */
-    align-items: center; /* Centra los elementos hijos horizontalmente */
+    flex-direction: column; 
+    align-items: center; 
 }
 
 .input-form-estudiante form .form-row, .input-form-empresa form .form-row {
     display: flex;
-    justify-content: space-between; /* Distribuye el espacio entre los elementos */
-    width: 100%; /* Asegura que el contenedor ocupe todo el ancho del formulario */
-    margin-bottom: 1em; /* Añade un margen inferior para separar las filas del formulario */
+    justify-content: space-between; 
+    width: 100%; 
+    margin-bottom: 1em; 
 }
 
 .input-form-estudiante form .form-row p, .input-form-empresa form .form-row p {
-    width: 48%; /* Ajusta el ancho de cada campo para que quepan en una fila */
-    margin-bottom: 0; /* Elimina el margen inferior de los párrafos dentro de las filas */
+    width: 48%; 
+    margin-bottom: 0; 
 }
 
 .input-form-estudiante form p, .input-form-empresa form p {
-    width: 100%; /* Asegura que cada párrafo ocupe todo el ancho del formulario */
+    width: 100%; 
     display: flex;
-    flex-direction: column; /* Asegura que los labels queden arriba de los inputs */
-    align-items: flex-start; /* Alinea los labels e inputs al inicio del contenedor */
-    margin-bottom: 1em; /* Añade un margen inferior para separar los campos del formulario */
+    flex-direction: column; 
+    align-items: flex-start; 
+    margin-bottom: 1em; 
 }
 
 .input-form-estudiante form button,
