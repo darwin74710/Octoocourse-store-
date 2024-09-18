@@ -7,43 +7,87 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>home</title>
 
-    <!-- <script src="{% static 'js/main.js' %}"></script> -->
-    <link rel="stylesheet" href="{% static 'estudiantes/css/EstyleHome.css' %}" />
-    <script src="{% static 'estudiantes/js/homeScript.js' %}"></script>
+    <!-- Scripts css -->
+    <link rel="stylesheet" href="{% static 'estudiantes/css/Encab-piepag.css' %}" />
+    <link rel="stylesheet" href="{% static 'estudiantes/css/Curso.css' %}" />
+    <link rel="stylesheet" href="{% static 'estudiantes/css/Estandar.css' %}" />
+    <link rel="stylesheet" href="{% static 'estudiantes/css/ofertas-empleo.css' %}" />
+    <link rel="stylesheet" href="{% static 'estudiantes/css/navBar.css' %}" />
+
+    <!-- Scripts javaScript -->
+    <script src="{% static 'estudiantes/js/navBar.js' %}"></script>
 </head>
 
 <body>
+    <!-- NAV VAR -->
     <header class="header">
         <div class="izquierda">
-            <img src="{% static 'estudiantes/img/logo.png' %}" alt="Logo pulpo">
+            <img src="{% static 'estudiantes/img/logo.png' %}" alt="Logo pulpo" onclick="MenuEstandar()">
         </div>
 
-        <a><button>CURSOS</button></a>
-        <a><button>OFERTAS</button></a>
+        <a><button onclick="MenuCursos()">CURSOS</button></a>
+        <a><button onclick="MenuEmpleo()">OFERTAS</button></a>
 
         <div class="derecha">
-            <img class="pc" src="{% static 'estudiantes/img/notifi.png' %}" alt="Logo notificaciones" onclick="ShowNoti()">
-            <img class="pc" src="{% static 'estudiantes/img/user.png' %}" alt="logo Usuario" onclick="ShowUser()"> 
-            <img class="movil" src="{% static 'estudiantes/img/menuMovil.png' %}" alt="Menu" onclick="ShowOptions()"> 
+            <img class="pc" src="{% static 'estudiantes/img/notifi.png' %}" alt="Logo notificaciones" onclick="MenuNoti()">
+            <img class="pc" src="{% static 'estudiantes/img/user.png' %}" alt="logo Usuario" onclick="MenuPC()"> 
+            <img class="movil" src="{% static 'estudiantes/img/menuMovil.png' %}" alt="Menu" onclick="MenuMovil()"> 
         </div>
 
-        <div class="menu-movil"></div>
-        </div>
-
-        <div class="desp-usuario">
+        <div class="menu-movil">
+            <li><a onclick="MenuCursos()">Cursos</a></li>
+            <li><a onclick="MenuEmpleo()">Ofertas Empleo</a></li>
             <li><a>Hoja de vida</a></li>
             <li><a>Configuración</a></li>
             <li><a onclick="Exit()">Salir</a></li>
         </div>
 
-        <div class="desp-notifi">
+        <div class="menu-compu">
+            <li><a>Hoja de vida</a></li>
+            <li><a>Configuración</a></li>
+            <li><a onclick="Exit()">Salir</a></li>
+        </div>
+
+        <div class="menu-notifi">
 
         </div>
     </header>
+    <!-- NAV VAR FIN -->
 
-    <div class="img-principal">
+    <!-- ESTANDAR -->
+    <div class="estandar">
         <img src="{% static 'estudiantes/img/1estud.png' %}" alt="">
     </div>
+    <!-- ESTANDAR FIN -->
+    <!-- CURSOS -->
+    <div class="cursos">
+        <img src="{% static 'estudiantes/img/cursosSup.png' %}" alt="">
+        <h1>HTML</h1>
+        <div class="desplegable">
+            <table>
+                <td>
+                    <img src="{% static 'estudiantes/img/htmlBasic.png' %}" alt="">
+                    <div class="entrarCurso" onclick="">INICIAR</div>
+                </td>
+                <td>
+                    <img src="{% static 'estudiantes/img/htmlMedio.png' %}" alt="">
+                    <div class="entrarCurso" onclick="">INICIAR</div>
+                </td>
+                <td>
+                    <img src="{% static 'estudiantes/img/htmlAvanzado.png' %}" alt="">
+                    <div class="entrarCurso" onclick="">INICIAR</div>
+                </td>
+            </table>
+        </div>
+    </div>
+    <!-- CURSOS FIN -->
+    <!-- OFERTAS EMPLEO -->
+    <div class="empleo">
+        <h1>EMPLEO</h1>
+    </div>
+    <!-- OFERTAS EMPLEO FIN -->
+
+
 
     <footer class="pie-pagina">
         <div class="grupo-1">
