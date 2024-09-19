@@ -1,0 +1,196 @@
+
+* {
+    box-sizing: border-box;
+}
+
+
+body{
+    background-color: #1d002e;
+    color: black;
+    font-family: 'Quicksand', sans-serif;
+    padding:  2.5em; /*espaciado pag*/
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+
+}
+
+.content {
+    max-width: 1170px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: -1em;
+    margin-top: 1em;
+}
+
+.octo {
+    text-align: left;
+    font-size: 3em;
+    margin-top: -1em;
+    margin-bottom: 1.5em;
+    
+}
+
+.octo span{
+    color: #830cc4;
+}
+
+.formulario-wrapper {
+    box-shadow: 0 0 30px 0 rgba(255, 255, 255, 0.3);
+    display: grid;
+    background-color: #f3d9ff;
+    padding: 1em;
+    border-radius: 5px;
+}
+
+.formulario-wrapper > *{
+    padding: 1em;
+    
+}
+
+.contact-form > *{
+    padding: 5em;
+}
+
+.contact-form{
+    margin: 0;
+    padding: 1em;
+}
+
+.contact-form form .boton,
+.contact-form form input{
+    width: 100%;
+    padding: 1.5em;
+    margin-top: 1.5em;
+    border: 4px solid #830cc4;
+    cursor: pointer;
+    
+}   
+
+a {
+    color: black;
+    text-align: center;
+    display: block; /* Hace que cada enlace ocupe una línea completa */
+    margin-bottom: 1em; /* Añade espacio entre los enlaces */
+}
+
+.contact-form form .boton{
+    background: #c263f9;
+    color: #000000;
+    border: 0;
+    padding: 1em;
+    
+}
+
+.contact-form form .boton:hover,
+.contact-form form .boton:focus{
+    background: #a63aa6;  
+    color: white;
+    
+
+}
+
+.gif-logo {
+    background: #830cc4;
+    
+}
+
+.footer{
+    text-align: center;
+    padding: 0.1em;
+    background: #1d002e;
+    color: white;
+    width: 106%;
+    margin-left: -1em;
+    margin-bottom: -3em;
+    margin-top: -2em;
+    
+    
+}
+
+.footer .grupo1{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 65px;
+
+}
+
+
+.footer-logo {
+    width: 24px; /* Ajusta el tamaño del logo según sea necesario */
+    margin-top: -2em;
+}
+
+
+
+
+/*Adaptacion de otros tamaños*/
+@media (min-width: 700px){
+    
+
+    .formulario-wrapper {
+        padding: 1em;
+    }
+
+    .formulario-wrapper{
+        display: grid;
+        grid-template-columns: 3fr 2fr;
+    }
+
+
+}
+
+/* Estilos para el modal */
+.modal {
+    display: none; /* Oculto por defecto */
+    position: fixed; /* Fijo en la pantalla */
+    z-index: 1; /* Por encima de otros elementos */
+    left: 0;
+    top: 0;
+    width: 100%; /* Ancho completo */
+    height: 100%; /* Alto completo */
+    overflow: auto; /* Habilita el scroll si es necesario */
+    background-color: rgb(0,0,0); /* Color de fondo */
+    background-color: rgba(0,0,0,0.4); /* Fondo con opacidad */
+}
+
+.modal-content {
+    background-color: #d58cfc;
+    margin: 15% auto; /* 15% desde la parte superior y centrado */
+    padding: 20px;
+    border: 2px solid #ffffff;
+    box-shadow: 0 0 50px 0 rgb(131, 12, 196, .3);
+    width: 40%; /* Ancho del modal */
+}
+
+.modal-content button{
+    background: #a63aa6;  
+    color: black;
+}
+
+.modal-content form label{
+    color: #000000;
+}
+
+h2{
+    text-align: center;
+    margin-top: -0.1em;
+    margin-bottom: 1em;
+    color: #000000;
+}
+
+.close {
+    color: #830cc4;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}

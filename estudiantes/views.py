@@ -1,4 +1,4 @@
 from django.shortcuts import render
 
-def home_estudiantes(request):
-    return render(request, 'estudiantes/index.html')
+def estudiantes(request):
+    return render(request, 'estudiantes/estudiantes.html')
