@@ -70,7 +70,7 @@
             <p>
                 <button type="submit">CREAR CUENTA</button>
             </p>
-            <a href="login/">Iniciar Sesión</a> 
+            <a href="{% url 'login' %}">Iniciar Sesión</a>
         </form>
      </div>
      <div id="form-empresa" class="input-form-empresa" style="display: none;">
@@ -79,6 +79,10 @@
                 <p>
                     <label for="nombre_empresa">Nombre de la Empresa</label>
                     <input type="text" id="nombre_empresa" name="nombre_empresa">
+                </p>
+                <p>
+                    <label for="nit_empresa">Nit</label>
+                    <input type="text" id="nit_empresa" name="nit_empresa">
                 </p>
                 <p>
                     <label for="email_empresa">Correo Electrónico</label>
@@ -108,7 +112,7 @@
             <p>
                 <button type="submit">CREAR CUENTA</button>
             </p>
-            <a href="login/">Iniciar Sesión</a> 
+            <a href="{% url 'login' %}">Iniciar Sesión</a>
         </form>
      </div>
    </div>

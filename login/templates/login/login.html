@@ -31,7 +31,7 @@
                         <button type="submit">INICIAR SESIÓN</button>
                     </p>
                     <p>
-                        <a href="register/">¿No tienes cuenta? Regístrate</a> 
+                        <a href="{% url 'register' %}">¿No tienes cuenta? Regístrate</a> 
                         <a href="" id="forgot-password-link">¿Olvidaste tu contraseña?</a>
                     </p> 
                 </form>
@@ -63,7 +63,6 @@
             </form>
         </div>
     </div>
-
     <!-- JavaScript -->
     <script src="{% static 'js/modal.js' %}"></script>
 

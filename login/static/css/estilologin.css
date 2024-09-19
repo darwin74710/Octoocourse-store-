@@ -9,6 +9,11 @@ body{
     color: black;
     font-family: 'Quicksand', sans-serif;
     padding:  2.5em; /*espaciado pag*/
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
 
 }
 
@@ -33,10 +38,11 @@ body{
 }
 
 .formulario-wrapper {
-    box-shadow: 0 0 30px 0 rgb(255, 255, 255, .3);
+    box-shadow: 0 0 30px 0 rgba(255, 255, 255, 0.3);
     display: grid;
     background-color: #f3d9ff;
-    /*1d002e  f3d9ff*/
+    padding: 1em;
+    border-radius: 5px;
 }
 
 .formulario-wrapper > *{
@@ -92,11 +98,11 @@ a {
 }
 
 .footer{
-text-align: center;
+    text-align: center;
     padding: 0.1em;
     background: #1d002e;
     color: white;
-    width: 588px;
+    width: 106%;
     margin-left: -1em;
     margin-bottom: -3em;
     margin-top: -2em;
@@ -122,14 +128,17 @@ text-align: center;
 
 /*Adaptacion de otros tamaños*/
 @media (min-width: 700px){
-    .body{
-        padding: 0 4rem;
+    
+
+    .formulario-wrapper {
+        padding: 1em;
     }
 
     .formulario-wrapper{
         display: grid;
         grid-template-columns: 3fr 2fr;
     }
+
 
 }
 
