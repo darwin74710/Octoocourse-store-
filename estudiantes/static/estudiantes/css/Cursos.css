@@ -15,6 +15,8 @@
 
 .cursos .desplegable{
     overflow: auto; /* Este comando sirve para desplegar el scroll*/
+    padding-bottom: 1%;
+    margin-bottom: 1%;
 }
 
 .cursos table{
@@ -23,8 +25,8 @@
 }
 
 .cursos table td{
-    width: 33.33%;
-    border: 2px solid #560581;
+    width: 20%;
+    border: 3px solid #560581;
     border-radius: 30px;
     overflow: hidden;
 }
@@ -36,7 +38,7 @@
 
 .cursos .entrarCurso{
     font-weight: 700; font-size: 30px;
-    color: white; background: #8021bb; border: none;
+    color: white; background-color: #8021bb; border: none;
     cursor: pointer;
     padding: 10px 7vmax;
     transition: all 0.3s ease 0s;
@@ -44,4 +46,12 @@
 
 .cursos .entrarCurso:hover{
     background-color: #560581; color: #2e0346;
+}
+
+@media screen and (max-width:800px) {
+    .cursos .entrarCurso{
+        font-weight: 500;
+        font-size: 20px;
+        padding: 5px 7vmax;
+    }
 }

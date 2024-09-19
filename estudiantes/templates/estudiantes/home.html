@@ -8,10 +8,10 @@
     <title>home</title>
 
     <!-- Scripts css -->
-    <link rel="stylesheet" href="{% static 'estudiantes/css/Encab-piepag.css' %}" />
-    <link rel="stylesheet" href="{% static 'estudiantes/css/Curso.css' %}" />
+    <link rel="stylesheet" href="{% static 'estudiantes/css/encab-piepag.css' %}" />
+    <link rel="stylesheet" href="{% static 'estudiantes/css/Cursos.css' %}" />
     <link rel="stylesheet" href="{% static 'estudiantes/css/Estandar.css' %}" />
-    <link rel="stylesheet" href="{% static 'estudiantes/css/ofertas-empleo.css' %}" />
+    <link rel="stylesheet" href="{% static 'estudiantes/css/Empleo.css' %}" />
     <link rel="stylesheet" href="{% static 'estudiantes/css/navBar.css' %}" />
 
     <!-- Scripts javaScript -->
@@ -49,7 +49,9 @@
         </div>
 
         <div class="menu-notifi">
+            <div class="fondo">
 
+            </div>
         </div>
     </header>
     <!-- NAV VAR FIN -->
@@ -83,7 +85,38 @@
     <!-- CURSOS FIN -->
     <!-- OFERTAS EMPLEO -->
     <div class="empleo">
-        <h1>EMPLEO</h1>
+        <div class="tablaOfertas">
+            <div class="casillaOferta">
+                <div class="informacionOferta">
+
+                </div>
+                <div class="entrarOferta" onclick="">VER</div>
+            </div>
+            <div class="casillaOferta">
+                <div class="informacionOferta">
+                    
+                </div>
+                <div class="entrarOferta" onclick="">VER</div>
+            </div>
+            <div class="casillaOferta">
+                <div class="informacionOferta">
+                    
+                </div>
+                <div class="entrarOferta" onclick="">VER</div>
+            </div>
+            <div class="casillaOferta">
+                <div class="informacionOferta">
+                    
+                </div>
+                <div class="entrarOferta" onclick="">VER</div>
+            </div>
+            <div class="casillaOferta">
+                <div class="informacionOferta">
+                    
+                </div>
+                <div class="entrarOferta" onclick="">VER</div>
+            </div>
+        </div>
     </div>
     <!-- OFERTAS EMPLEO FIN -->
 
@@ -93,8 +126,8 @@
         <div class="grupo-1">
             <div class="box">
                 <figure>
-                    <a href="#">
-                        <img src="{% static 'estudiantes/img/logo.png' %}" alt="logo pie-pagina">
+                    <a>
+                        <img src="{% static 'estudiantes/img/logo.png' %}" alt="logo pie-pagina" onclick="MenuEstandar()">
                     </a>
                 </figure>
             </div>

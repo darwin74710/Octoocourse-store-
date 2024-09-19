@@ -146,11 +146,17 @@ body {
     position: absolute;
     height: 400px; width: 250px;
     right: 0px; top: 84px;
+    padding: 10px;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     list-style: none;
     display: none; /*Este comando es para ocultar cosas*/
+}
+
+.header .menu-notifi .fondo{
+    height: 380px; width: 230px;
+    background-color: #760ab1;
 }
 
 /*PIE DE PAGINA*/
@@ -185,6 +191,7 @@ footer {
 
 .pie-pagina .grupo-1 .box figure img {
     width: 250px;
+    cursor: pointer;
 }
 
 .pie-pagina .grupo-1 .box h2 {
