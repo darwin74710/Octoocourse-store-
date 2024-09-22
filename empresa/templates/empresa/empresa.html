@@ -12,6 +12,14 @@
     <link rel="stylesheet" href="{% static 'empresa/css/Estandar.css' %}" />
     <link rel="stylesheet" href="{% static 'empresa/css/Empleo.css' %}" />
 
+    <!-- Link Swiper's CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css"/>
+
+    <!-- Fontawesome CDN Link -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <!-- css -->
+    <link rel="stylesheet" href="{% static 'empresa/css/style.css' %}">
+
     <!-- Scripts javaScript -->
     <script src="{% static 'empresa/js/navBar.js' %}"></script>
 </head>
@@ -28,8 +36,8 @@
 
         <div class="derecha">
             <img class="pc" src="{% static 'empresa/img/notifi.png' %}" alt="Logo notificaciones" onclick="MenuNoti()">
-            <img class="pc" src="{% static 'empresa/img/user.png' %}" alt="logo Usuario" onclick="MenuPC()"> 
-            <img class="movil" src="{% static 'empresa/img/menuMovil.png' %}" alt="Menu" onclick="MenuMovil()"> 
+            <img class="pc" src="{% static 'empresa/img/user.png' %}" alt="logo Usuario" onclick="MenuPC()">
+            <img class="movil" src="{% static 'empresa/img/menuMovil.png' %}" alt="Menu" onclick="MenuMovil()">
         </div>
 
         <div class="menu-movil">
@@ -59,11 +67,308 @@
         <img src="{% static 'empresa/img/1empresa.png' %}" alt="">
     </div>
     <!-- ESTANDAR FIN -->
+
     <!-- CURSOS -->
     <div class="listaEstud">
-        
+        <section>
+            <div class="swiper mySwiper container">
+                <div class="swiper-wrapper content">
+
+                    <div class="swiper-slide card">
+                        <div class="card-content">
+                            <div class="image">
+                                <img src="{% static 'empresa/img/user.png' %}" alt="hola">
+                            </div>
+
+                            <div class="media-icons">
+                                <i class="fab fa-facebook"></i>
+                                <i class="fab fa-twitter"></i>
+                                <i class="fab fa-github"></i>
+                            </div>
+                            <div class="name-profession">
+                                <span class="name">Ally Pearson</span>
+                                <span class="profession">Web Developer</span>
+                            </div>
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+                            <div class="button">
+                                <button class="aboutMe">About Me</button>
+                                <button class="hireMe">Hire Me</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="swiper-slide card">
+                        <div class="card-content">
+                            <div class="image">
+                                <img src="{% static 'empresa/img/user.png' %}" alt="hola">
+                            </div>
+                            <div class="media-icons">
+                                <i class="fab fa-facebook"></i>
+                                <i class="fab fa-twitter"></i>
+                                <i class="fab fa-github"></i>
+                            </div>
+                            <div class="name-profession">
+                                <span class="name">Lana del Rey</span>
+                                <span class="profession">Software Engineer</span>
+                            </div>
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <div class="button">
+                                <button class="aboutMe">About Me</button>
+                                <button class="hireMe">Hire Me</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="swiper-slide card">
+                        <div class="card-content">
+                            <div class="image">
+                                <img src="{% static 'empresa/img/user.png' %}" alt="hola">
+                            </div>
+                            <div class="media-icons">
+                                <i class="fab fa-facebook"></i>
+                                <i class="fab fa-twitter"></i>
+                                <i class="fab fa-github"></i>
+                            </div>
+                            <div class="name-profession">
+                                <span class="name">Olivia Rodrigo</span>
+                                <span class="profession">UX/UI Desinger</span>
+                            </div>
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+                            <div class="button">
+                                <button class="aboutMe">About Me</button>
+                                <button class="hireMe">Hire Me</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="swiper-slide card">
+                        <div class="card-content">
+                            <div class="image">
+                                <img src="{% static 'empresa/img/user.png' %}" alt="hola">
+                            </div>
+                            <div class="media-icons">
+                                <i class="fab fa-facebook"></i>
+                                <i class="fab fa-twitter"></i>
+                                <i class="fab fa-github"></i>
+                            </div>
+                            <div class="name-profession">
+                                <span class="name">Billie Eilish</span>
+                                <span class="profession">Backend Developer</span>
+                            </div>
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+                            <div class="button">
+                                <button class="aboutMe">About Me</button>
+                                <button class="hireMe">Hire Me</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="swiper-slide card">
+                        <div class="card-content">
+                            <div class="image">
+                                <img src="{% static 'empresa/img/user.png' %}" alt="hola">
+                            </div>
+                            <div class="media-icons">
+                                <i class="fab fa-facebook"></i>
+                                <i class="fab fa-twitter"></i>
+                                <i class="fab fa-github"></i>
+                            </div>
+                            <div class="name-profession">
+                                <span class="name">Vargas</span>
+                                <span class="profession">Backend Developer</span>
+                            </div>
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+                            <div class="button">
+                                <button class="aboutMe">About Me</button>
+                                <button class="hireMe">Hire Me</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="swiper-slide card">
+                        <div class="card-content">
+                            <div class="image">
+                                <img src="{% static 'empresa/img/user.png' %}" alt="hola">
+                            </div>
+                            <div class="media-icons">
+                                <i class="fab fa-facebook"></i>
+                                <i class="fab fa-twitter"></i>
+                                <i class="fab fa-github"></i>
+                            </div>
+                            <div class="name-profession">
+                                <span class="name">Alejo</span>
+                                <span class="profession">Backend Developer</span>
+                            </div>
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+                            <div class="button">
+                                <button class="aboutMe">About Me</button>
+                                <button class="hireMe">Hire Me</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="swiper-slide card">
+                        <div class="card-content">
+                            <div class="image">
+                                <img src="{% static 'empresa/img/user.png' %}" alt="hola">
+                            </div>
+                            <div class="media-icons">
+                                <i class="fab fa-facebook"></i>
+                                <i class="fab fa-twitter"></i>
+                                <i class="fab fa-github"></i>
+                            </div>
+                            <div class="name-profession">
+                                <span class="name">Eu</span>
+                                <span class="profession">Backend Developer</span>
+                            </div>
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+                            <div class="button">
+                                <button class="aboutMe">About Me</button>
+                                <button class="hireMe">Hire Me</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="swiper-slide card">
+                        <div class="card-content">
+                            <div class="image">
+                                <img src="{% static 'empresa/img/user.png' %}" alt="hola">
+                            </div>
+                            <div class="media-icons">
+                                <i class="fab fa-facebook"></i>
+                                <i class="fab fa-twitter"></i>
+                                <i class="fab fa-github"></i>
+                            </div>
+                            <div class="name-profession">
+                                <span class="name">Cheverongo</span>
+                                <span class="profession">Backend Developer</span>
+                            </div>
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+                            <div class="button">
+                                <button class="aboutMe">About Me</button>
+                                <button class="hireMe">Hire Me</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="swiper-slide card">
+                        <div class="card-content">
+                            <div class="image">
+                                <img src="{% static 'empresa/img/user.png' %}" alt="hola">
+                            </div>
+                            <div class="media-icons">
+                                <i class="fab fa-facebook"></i>
+                                <i class="fab fa-twitter"></i>
+                                <i class="fab fa-github"></i>
+                            </div>
+                            <div class="name-profession">
+                                <span class="name">Barbatruquini</span>
+                                <span class="profession">Backend Developer</span>
+                            </div>
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+                            <div class="button">
+                                <button class="aboutMe">About Me</button>
+                                <button class="hireMe">Hire Me</button>
+                            </div>
+                        </div>
+                    </div>  
+
+                    <div class="swiper-slide card">
+                        <div class="card-content">
+                            <div class="image">
+                                <img src="{% static 'empresa/img/user.png' %}" alt="hola">
+                            </div>
+                            <div class="media-icons">
+                                <i class="fab fa-facebook"></i>
+                                <i class="fab fa-twitter"></i>
+                                <i class="fab fa-github"></i>
+                            </div>
+                            <div class="name-profession">
+                                <span class="name">Alice</span>
+                                <span class="profession">Network Engineer</span>
+                            </div>
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+                            <div class="button">
+                                <button class="aboutMe">About Me</button>
+                                <button class="hireMe">Hire Me</button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-pagination"></div>
+        </section>
+
+        <!-- Swiper JS -->
+        <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+        <script src="{% static 'empresa/js/script.js' %}"></script>
     </div>
     <!-- CURSOS FIN -->
+
     <!-- OFERTAS EMPLEO -->
     <div class="empleo">
         <div class="tablaOfertas">
@@ -75,33 +380,31 @@
             </div>
             <div class="casillaOferta">
                 <div class="informacionOferta">
-                    
+
                 </div>
                 <div class="entrarOferta" onclick="">VER</div>
             </div>
             <div class="casillaOferta">
                 <div class="informacionOferta">
-                    
+
                 </div>
                 <div class="entrarOferta" onclick="">VER</div>
             </div>
             <div class="casillaOferta">
                 <div class="informacionOferta">
-                    
+
                 </div>
                 <div class="entrarOferta" onclick="">VER</div>
             </div>
             <div class="casillaOferta">
                 <div class="informacionOferta">
-                    
+
                 </div>
                 <div class="entrarOferta" onclick="">VER</div>
             </div>
         </div>
     </div>
     <!-- OFERTAS EMPLEO FIN -->
-
-
 
     <footer class="pie-pagina">
         <div class="grupo-1">
