@@ -141,24 +141,6 @@ body {
     color: #2e0346;
 }
 
-.header .menu-notifi {
-    background-color: #8021bb;
-    position: absolute;
-    height: 400px; width: 250px;
-    right: 0px; top: 84px;
-    padding: 10px;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    list-style: none;
-    display: none; /*Este comando es para ocultar cosas*/
-}
-
-.header .menu-notifi .fondo{
-    height: 380px; width: 230px;
-    background-color: #760ab1;
-}
-
 /*PIE DE PAGINA*/
 footer {
     text-align: center;
@@ -192,6 +174,13 @@ footer {
 .pie-pagina .grupo-1 .box figure img {
     width: 250px;
     cursor: pointer;
+    transition: all 0.2s;
+}
+
+.pie-pagina .grupo-1 .box figure img:hover {
+    transform: scale(1.2);
+    cursor: pointer;
+    filter: drop-shadow(0px 0px 5px #560581); /*Darle sombrita al logo del pulpo*/
 }
 
 .pie-pagina .grupo-1 .box h2 {
@@ -203,6 +192,17 @@ footer {
 .pie-pagina .grupo-1 .box p {
     color: rgb(223, 223, 223);
     margin-bottom: 10px;
+}
+
+.pie-pagina .red-social img {
+    height: 50px;
+    margin-right: 5px; margin-left: auto;
+    transition: all 0.2s;
+}
+
+.pie-pagina .red-social img:hover {
+    transform: scale(1.1); cursor: pointer;
+    filter: drop-shadow(0px 0px 10px #560581); /*darle sombra a los iconos*/
 }
 
 .pie-pagina .grupo-2 {
@@ -246,7 +246,7 @@ footer {
     .header .derecha .pc{
         display: none;
     }
-
+    
     .header .derecha .movil{
         display: block;
     }

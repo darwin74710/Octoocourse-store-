@@ -8,10 +8,14 @@
     <title>Estudiantes</title>
 
     <!-- Scripts css -->
-    <link rel="stylesheet" href="{% static 'estudiantes/css/encab-piepag.css' %}" />
+    <link rel="stylesheet" href="{% static 'estudiantes/css/Encab-piepag.css' %}" />
     <link rel="stylesheet" href="{% static 'estudiantes/css/Cursos.css' %}" />
     <link rel="stylesheet" href="{% static 'estudiantes/css/Estandar.css' %}" />
-    <link rel="stylesheet" href="{% static 'estudiantes/css/Empleo.css' %}" />
+    <link rel="stylesheet" href="{% static 'estudiantes/css/Empleos.css' %}" />
+    <link rel="stylesheet" href="{% static 'estudiantes/css/HojaVida.css' %}" />
+    <link rel="stylesheet" href="{% static 'estudiantes/css/Config.css' %}" />
+    <link rel="stylesheet" href="{% static 'estudiantes/css/des_ofertas.css' %}" />
+    <link rel="stylesheet" href="{% static 'estudiantes/css/des_cursos.css' %}" />
 
     <!-- Scripts javaScript -->
     <script src="{% static 'estudiantes/js/navBar.js' %}"></script>
@@ -21,36 +25,29 @@
     <!-- NAV VAR -->
     <header class="header">
         <div class="izquierda">
-            <img src="{% static 'estudiantes/img/logo.png' %}" alt="Logo pulpo" onclick="MenuEstandar()">
+            <img src="{% static 'estudiantes/img/logo.png' %}" alt="Logo pulpo" onclick="Navegacion('estandar')">
         </div>
 
-        <a><button onclick="MenuCursos()">CURSOS</button></a>
-        <a><button onclick="MenuEmpleo()">OFERTAS</button></a>
+        <a><button onclick="Navegacion('cursos')">CURSOS</button></a>
+        <a><button onclick="Navegacion('empleo')">OFERTAS</button></a>
 
         <div class="derecha">
-            <img class="pc" src="{% static 'estudiantes/img/notifi.png' %}" alt="Logo notificaciones" onclick="MenuNoti()">
             <img class="pc" src="{% static 'estudiantes/img/user.png' %}" alt="logo Usuario" onclick="MenuPC()"> 
             <img class="movil" src="{% static 'estudiantes/img/menuMovil.png' %}" alt="Menu" onclick="MenuMovil()"> 
         </div>
 
         <div class="menu-movil">
-            <li><a onclick="MenuCursos()">Cursos</a></li>
-            <li><a onclick="MenuEmpleo()">Ofertas Empleo</a></li>
-            <li><a>Hoja de vida</a></li>
-            <li><a>Configuración</a></li>
+            <li><a onclick="Navegacion('cursos')">Cursos</a></li>
+            <li><a onclick="Navegacion('empleo')">Ofertas Empleo</a></li>
+            <li><a onclick="Navegacion('hojaVida')">Hoja de vida</a></li>
+            <li><a onclick="Navegacion('config')">Configuración</a></li>
             <li><a href="{% url 'login' %}">Salir</a></li>
         </div>
 
         <div class="menu-compu">
-            <li><a>Hoja de vida</a></li>
-            <li><a>Configuración</a></li>
+            <li><a onclick="Navegacion('hojaVida')">Hoja de vida</a></li>
+            <li><a onclick="Navegacion('config')">Configuración</a></li>
             <li><a href="{% url 'login' %}">Salir</a></li>
-        </div>
-
-        <div class="menu-notifi">
-            <div class="fondo">
-
-            </div>
         </div>
     </header>
     <!-- NAV VAR FIN -->
@@ -68,15 +65,15 @@
             <table>
                 <td>
                     <img src="{% static 'estudiantes/img/htmlBasic.png' %}" alt="">
-                    <div class="entrarCurso" onclick="">INICIAR</div>
+                    <div class="entrarCurso" onclick="Navegacion('des_cursos')">INICIAR</div>
                 </td>
                 <td>
                     <img src="{% static 'estudiantes/img/htmlMedio.png' %}" alt="">
-                    <div class="entrarCurso" onclick="">INICIAR</div>
+                    <div class="entrarCurso" onclick="Navegacion('des_cursos')">INICIAR</div>
                 </td>
                 <td>
                     <img src="{% static 'estudiantes/img/htmlAvanzado.png' %}" alt="">
-                    <div class="entrarCurso" onclick="">INICIAR</div>
+                    <div class="entrarCurso" onclick="Navegacion('des_cursos')">INICIAR</div>
                 </td>
             </table>
         </div>
@@ -84,64 +81,89 @@
     <!-- CURSOS FIN -->
     <!-- OFERTAS EMPLEO -->
     <div class="empleo">
+        <img src="{% static 'estudiantes/img/ofertasSup.png' %}" alt="">
         <div class="tablaOfertas">
             <div class="casillaOferta">
                 <div class="informacionOferta">
-
+                    <h2>TITULO OFERTA</h2>
+                    <P>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Vel modi est animi nesciunt vero magni voluptatibus quod libero at cupiditate, ad perferendis neque temporibus quisquam culpa reiciendis mollitia dicta corrupti eligendi, consequatur architecto aut ducimus tempora praesentium! Consectetur voluptates exercitationem quaerat sequi optio? Quas quae adipisci laudantium delectus fugiat hic ex quod, accusamus ratione mollitia placeat cum aliquid accusantium soluta pariatur vel necessitatibus temporibus, quis tempora, sed architecto. Optio repellat dolorum, dicta molestiae aliquid eos. Delectus maxime fugit eius? Rerum dolorum sed ex qui iure assumenda, neque, deleniti nisi facere odio, ut ullam. Harum ea eligendi reiciendis consequuntur suscipit vitae.</P>
                 </div>
-                <div class="entrarOferta" onclick="">VER</div>
+                <div class="entrarOferta" onclick="Navegacion('des_ofertas')">VER</div>
             </div>
             <div class="casillaOferta">
                 <div class="informacionOferta">
-                    
+                    <h2>TITULO OFERTA</h2>
+                    <P>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Vel modi est animi nesciunt vero magni voluptatibus quod libero at cupiditate, ad perferendis neque temporibus quisquam culpa reiciendis mollitia dicta corrupti eligendi, consequatur architecto aut ducimus tempora praesentium! Consectetur voluptates exercitationem quaerat sequi optio? Quas quae adipisci laudantium delectus fugiat hic ex quod, accusamus ratione mollitia placeat cum aliquid accusantium soluta pariatur vel necessitatibus temporibus, quis tempora, sed architecto. Optio repellat dolorum, dicta molestiae aliquid eos. Delectus maxime fugit eius? Rerum dolorum sed ex qui iure assumenda, neque, deleniti nisi facere odio, ut ullam. Harum ea eligendi reiciendis consequuntur suscipit vitae.</P>
                 </div>
-                <div class="entrarOferta" onclick="">VER</div>
+                <div class="entrarOferta" onclick="Navegacion('des_ofertas')">VER</div>
             </div>
             <div class="casillaOferta">
                 <div class="informacionOferta">
-                    
+                    <h2>TITULO OFERTA</h2>
+                    <P>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Vel modi est animi nesciunt vero magni voluptatibus quod libero at cupiditate, ad perferendis neque temporibus quisquam culpa reiciendis mollitia dicta corrupti eligendi, consequatur architecto aut ducimus tempora praesentium! Consectetur voluptates exercitationem quaerat sequi optio? Quas quae adipisci laudantium delectus fugiat hic ex quod, accusamus ratione mollitia placeat cum aliquid accusantium soluta pariatur vel necessitatibus temporibus, quis tempora, sed architecto. Optio repellat dolorum, dicta molestiae aliquid eos. Delectus maxime fugit eius? Rerum dolorum sed ex qui iure assumenda, neque, deleniti nisi facere odio, ut ullam. Harum ea eligendi reiciendis consequuntur suscipit vitae.</P>
                 </div>
-                <div class="entrarOferta" onclick="">VER</div>
+                <div class="entrarOferta" onclick="Navegacion('des_ofertas')">VER</div>
             </div>
             <div class="casillaOferta">
                 <div class="informacionOferta">
-                    
+                    <h2>TITULO OFERTA</h2>
+                    <P>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Vel modi est animi nesciunt vero magni voluptatibus quod libero at cupiditate, ad perferendis neque temporibus quisquam culpa reiciendis mollitia dicta corrupti eligendi, consequatur architecto aut ducimus tempora praesentium! Consectetur voluptates exercitationem quaerat sequi optio? Quas quae adipisci laudantium delectus fugiat hic ex quod, accusamus ratione mollitia placeat cum aliquid accusantium soluta pariatur vel necessitatibus temporibus, quis tempora, sed architecto. Optio repellat dolorum, dicta molestiae aliquid eos. Delectus maxime fugit eius? Rerum dolorum sed ex qui iure assumenda, neque, deleniti nisi facere odio, ut ullam. Harum ea eligendi reiciendis consequuntur suscipit vitae.</P>
                 </div>
-                <div class="entrarOferta" onclick="">VER</div>
+                <div class="entrarOferta" onclick="Navegacion('des_ofertas')">VER</div>
             </div>
             <div class="casillaOferta">
                 <div class="informacionOferta">
-                    
+                    <h2>TITULO OFERTA</h2>
+                    <P>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Vel modi est animi nesciunt vero magni voluptatibus quod libero at cupiditate, ad perferendis neque temporibus quisquam culpa reiciendis mollitia dicta corrupti eligendi, consequatur architecto aut ducimus tempora praesentium! Consectetur voluptates exercitationem quaerat sequi optio? Quas quae adipisci laudantium delectus fugiat hic ex quod, accusamus ratione mollitia placeat cum aliquid accusantium soluta pariatur vel necessitatibus temporibus, quis tempora, sed architecto. Optio repellat dolorum, dicta molestiae aliquid eos. Delectus maxime fugit eius? Rerum dolorum sed ex qui iure assumenda, neque, deleniti nisi facere odio, ut ullam. Harum ea eligendi reiciendis consequuntur suscipit vitae.</P>
                 </div>
-                <div class="entrarOferta" onclick="">VER</div>
+                <div class="entrarOferta" onclick="Navegacion('des_ofertas')">VER</div>
             </div>
         </div>
     </div>
-    <!-- OFERTAS EMPLEO FIN -->
-
-
+    <!-- HOJA DE VIDA -->
+    <div class="hojaVida">
+        <h1>hojavida</h1>
+    </div>
+    <!-- HOJA DE VIDA FIN -->
+    <!-- CONFIGURACIONES -->
+    <div class="config">
+        <h1>config</h1>
+    </div>
+    <!-- CONFIGURACIONES FIN -->
+    <!-- DES_OFERTAS -->
+     <div class="des_ofertas">
+        <H1>descripcion ofertas</H1>
+     </div>
+    <!-- DES_OFERTAS FIN -->
+     <!-- DES_CURSOS -->
+     <div class="des_cursos">
+        <h1>descripcion cursos</h1>
+     </div>
+    <!-- DES_CURSOS FIN -->
 
     <footer class="pie-pagina">
         <div class="grupo-1">
             <div class="box">
                 <figure>
                     <a>
-                        <img src="{% static 'estudiantes/img/logo.png' %}" alt="logo pie-pagina" onclick="MenuEstandar()">
+                        <img src="{% static 'estudiantes/img/logo.png' %}" alt="logo pie-pagina" onclick="Navegacion('estandar')">
                     </a>
                 </figure>
             </div>
             <div class="box">
                 <h2>SOBRE NOSOTROS</h2>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni, nam.</p>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni, nam.</p>
+                <p>
+                    Somos OctooCourse, ofrecemos cursos para reforzar el aprendizaje de amantes a la programación, también contamos con ofertas de empleo para generar
+                    oportunidades y llegar al camino del éxito.
+                </p>
             </div>
             <div class="box">
                 <h2>SIGUENOS</h2>
                 <div class="red-social">
-                    <a class="fab fa-facebook"></a>
-                    <a class="fa fa-instagram"></a>
-                    <a class="fa fa-twitter"></a>
-                    <a class="fa fa-youtube"></a>
+                    <img src="{% static 'estudiantes/img/UilFacebook.svg' %}" alt="">
+                    <img src="{% static 'estudiantes/img/BiYoutube.svg' %}" alt="">
+                    <img src="{% static 'estudiantes/img/MdiGmail.svg' %}" alt="">
+                    <img src="{% static 'estudiantes/img/FormKitWhatsapp.svg' %}" alt="">
                 </div>
             </div>
         </div>
