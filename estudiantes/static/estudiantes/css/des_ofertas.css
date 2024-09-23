@@ -1,3 +1,75 @@
 .des_ofertas{
     display: none;
 }
+
+.marco_ofertas{
+    overflow: auto;
+    margin: 15px auto;
+    padding: 5px;
+    width: 50%; height: 45vmax;
+    border: 3px solid #560581;
+}
+
+.marco_ofertas h1{
+    text-align: center;
+    word-break: break-word;
+    margin-bottom: 10px;
+    font-size: 30px;
+    color: #8021bb;
+}
+
+.marco_ofertas h2{
+    font-size: 20px;
+}
+
+.marco_ofertas .marco_inferior{
+    margin: auto;
+    margin-top: 10px;
+    justify-content: space-between;
+    text-align: center; display: flex;
+}
+
+.marco_ofertas .aplicarOferta{
+    width: 200px; height: 35px;
+    font-weight: 700; font-size: 25px;
+    color: white; background-color: #8021bb; border: none;
+    cursor: pointer;
+    padding: 0px 2vmax;
+    transition: all 0.3s ease 0s;
+}
+
+.marco_ofertas .aplicarOferta:hover{
+    background-color: #560581; color: #2e0346;
+}
+
+@media screen and (max-width:1200px) {
+    .marco_ofertas h1{
+        font-size: 20px;
+    }
+
+    .marco_ofertas h2{
+        font-size: 15px;
+    }
+
+    .marco_ofertas p{
+        font-size: 15px;
+    }
+
+    .marco_ofertas .aplicarOferta{
+        width: 150px; height: 30px;
+        font-weight: 600; font-size: 20px;
+    }
+}
+
+@media screen and (max-width:800px) {
+    .marco_ofertas{
+        width: 70%; 
+    }
+
+    .marco_ofertas .marco_inferior{
+        margin-top: 20px;
+        text-align: center; display: grid;
+        justify-content: center;
+        align-content: center;
+    }
+}
