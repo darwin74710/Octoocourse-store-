@@ -23,7 +23,6 @@ function MenuEstandar() {
     var estudiantes = document.getElementsByClassName("listaEstud")[0];
     var empleo = document.getElementsByClassName("empleo")[0];
     var config = document.getElementsByClassName("config")[0];
-    var perfil = document.getElementsByClassName("perfil")[0];
 
 
     if (empleo.style.display != "none") {
@@ -35,10 +34,6 @@ function MenuEstandar() {
     if (config.style.display != "none") {
         config.style.display = "none";
     }
-    if (perfil.style.display != "none") {
-        perfil.style.display = "none";
-    }
-
     if (estandar.style.display == "none" || estandar.style.display != "block") {
         estandar.style.display = "block";
     }
@@ -49,7 +44,6 @@ function MenuCursos() {
     var estudiantes = document.getElementsByClassName("listaEstud")[0];
     var empleo = document.getElementsByClassName("empleo")[0];
     var config = document.getElementsByClassName("config")[0];
-    var perfil = document.getElementsByClassName("perfil")[0];
 
 
     if (empleo.style.display != "none") {
@@ -60,9 +54,6 @@ function MenuCursos() {
     }
     if (config.style.display != "none") {
         config.style.display = "none";
-    }
-    if (perfil.style.display != "none") {
-        perfil.style.display = "none";
     }
 
     if (estudiantes.style.display == "none" || estudiantes.style.display != "block") {
@@ -75,8 +66,6 @@ function MenuEmpleo() {
     var estudiantes = document.getElementsByClassName("listaEstud")[0];
     var empleo = document.getElementsByClassName("empleo")[0];
     var config = document.getElementsByClassName("config")[0];
-    var perfil = document.getElementsByClassName("perfil")[0];
-
 
     if (estandar.style.display != "none") {
         estandar.style.display = "none";
@@ -86,9 +75,6 @@ function MenuEmpleo() {
     }
     if (config.style.display != "none") {
         config.style.display = "none";
-    }
-    if (perfil.style.display != "none") {
-        perfil.style.display = "none";
     }
 
     if (empleo.style.display == "none" || empleo.style.display != "block") {
@@ -113,39 +99,12 @@ function MenuConfig() {
     if (empleo.style.display != "none") {
         empleo.style.display = "none";
     }
-    if (perfil.style.display != "none") {
-        perfil.style.display = "none";
-    }
     
     if (config.style.display == "none" || config.style.display != "block") {
         config.style.display = "block";
     }
 }
 
-function MenuPerfil() {
-    var estandar = document.getElementsByClassName("estandar")[0];
-    var estudiantes = document.getElementsByClassName("listaEstud")[0];
-    var empleo = document.getElementsByClassName("empleo")[0];
-    var config = document.getElementsByClassName("config")[0];
-    var perfil = document.getElementsByClassName("perfil")[0];
-
-
-    if (estandar.style.display != "none") {
-        estandar.style.display = "none";
-    }
-    if (estudiantes.style.display != "none") {
-        estudiantes.style.display = "none";
-    }
-    if (empleo.style.display != "none") {
-        empleo.style.display = "none";
-    }
-    if (config.style.display != "none") {
-        config.style.display = "none";
-    }
-    if (perfil.style.display == "none" || perfil.style.display != "block") {
-        perfil.style.display = "block";
-    }
-}
 
 function Exit() {
     var menu_pc = document.getElementsByClassName("menu-compu")[0];

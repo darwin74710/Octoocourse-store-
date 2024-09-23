@@ -1,0 +1,18 @@
+.nav-link:hover {
+    color: #6CAE75 !important;
+    /* Cambia el color al pasar el mouse */
+}
+
+.nav-link {
+    color: #417B4E;
+    /* Color del enlace */
+    font-size: 18px;
+    /* Tamaño de la fuente */
+    font-weight: bold;
+    /* Grosor de la fuente */
+}
+
+.nav-link:focus {
+    color: #6CAE75 !important;
+    /* Amarillo */
+}
