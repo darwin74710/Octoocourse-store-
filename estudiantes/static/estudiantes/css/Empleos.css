@@ -10,6 +10,7 @@
 
 .empleo h1 {
     text-align: center;
+    word-break: break-word;
     font-size: 60px;
     color: #8021bb;
 }
@@ -60,7 +61,7 @@
 }
 
 
-@media screen and (max-width:800px) {
+@media screen and (max-width:1000px) {
     .tabla-flexible {
         grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
     }
