@@ -192,6 +192,13 @@ footer {
 .pie-pagina .grupo-1 .box figure img {
     width: 250px;
     cursor: pointer;
+    transition: all 0.2s;
+}
+
+.pie-pagina .grupo-1 .box figure img:hover {
+    transform: scale(1.2);
+    cursor: pointer;
+    filter: drop-shadow(0px 0px 5px #560581); /*Darle sombrita al logo del pulpo*/
 }
 
 .pie-pagina .grupo-1 .box h2 {
@@ -205,6 +212,16 @@ footer {
     margin-bottom: 10px;
 }
 
+.pie-pagina .red-social img {
+    height: 50px;
+    margin-right: 5px; margin-left: auto;
+    transition: all 0.2s;
+}
+
+.pie-pagina .red-social img:hover {
+    transform: scale(1.1); cursor: pointer;
+    filter: drop-shadow(0px 0px 10px #560581); /*darle sombra a los iconos*/
+}
 .pie-pagina .grupo-2 {
     background-color: #560581;
     padding: 15px 10px;
@@ -246,7 +263,7 @@ footer {
     .header .derecha .pc{
         display: none;
     }
-
+    
     .header .derecha .movil{
         display: block;
     }
