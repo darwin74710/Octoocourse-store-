@@ -11,11 +11,11 @@
     <link rel="stylesheet" href="{% static 'estudiantes/css/Encab-piepag.css' %}" />
     <link rel="stylesheet" href="{% static 'estudiantes/css/Cursos.css' %}" />
     <link rel="stylesheet" href="{% static 'estudiantes/css/Estandar.css' %}" />
-    <link rel="stylesheet" href="{% static 'estudiantes/css/Empleos.css' %}" />
-    <link rel="stylesheet" href="{% static 'estudiantes/css/HojaVida.css' %}" />
+    <link rel="stylesheet" href="{% static 'estudiantes/css/empleos.css' %}" />
+    <link rel="stylesheet" href="{% static 'estudiantes/css/HojaVidas.css' %}" />
     <link rel="stylesheet" href="{% static 'estudiantes/css/Config.css' %}" />
-    <link rel="stylesheet" href="{% static 'estudiantes/css/des_ofertas.css' %}" />
-    <link rel="stylesheet" href="{% static 'estudiantes/css/des_cursos.css' %}" />
+    <link rel="stylesheet" href="{% static 'estudiantes/css/des_oferta.css' %}" />
+    <link rel="stylesheet" href="{% static 'estudiantes/css/des_curso.css' %}" />
 
     <!-- Scripts javaScript -->
     <script src="{% static 'estudiantes/js/NavBar.js' %}"></script>
@@ -32,8 +32,8 @@
         <a><button onclick="Navegacion('empleo')">OFERTAS</button></a>
 
         <div class="derecha">
-            <img class="pc" src="{% static 'estudiantes/img/user.png' %}" alt="logo Usuario" onclick="MenuPC()"> 
-            <img class="movil" src="{% static 'estudiantes/img/menuMovil.png' %}" alt="Menu" onclick="MenuMovil()"> 
+            <img class="pc" src="{% static 'estudiantes/img/user.png' %}" alt="logo Usuario" onclick="MenuPC()">
+            <img class="movil" src="{% static 'estudiantes/img/menuMovil.png' %}" alt="Menu" onclick="MenuMovil()">
         </div>
 
         <div class="menu-movil">
@@ -57,6 +57,7 @@
         <img src="{% static 'estudiantes/img/1estud.png' %}" alt="">
     </div>
     <!-- ESTANDAR FIN -->
+
     <!-- CURSOS -->
     <div class="cursos">
         <img src="{% static 'estudiantes/img/cursosSup.png' %}" alt="">
@@ -79,6 +80,7 @@
         </div>
     </div>
     <!-- CURSOS FIN -->
+
     <!-- OFERTAS EMPLEO -->
     <div class="empleo">
         <img src="{% static 'estudiantes/img/ofertasSup.png' %}" alt="">
@@ -86,84 +88,304 @@
             <div class="casillaOferta">
                 <div class="informacionOferta">
                     <h2>TITULO OFERTA</h2>
-                    <P>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Vel modi est animi nesciunt vero magni voluptatibus quod libero at cupiditate, ad perferendis neque temporibus quisquam culpa reiciendis mollitia dicta corrupti eligendi, consequatur architecto aut ducimus tempora praesentium! Consectetur voluptates exercitationem quaerat sequi optio? Quas quae adipisci laudantium delectus fugiat hic ex quod, accusamus ratione mollitia placeat cum aliquid accusantium soluta pariatur vel necessitatibus temporibus, quis tempora, sed architecto. Optio repellat dolorum, dicta molestiae aliquid eos. Delectus maxime fugit eius? Rerum dolorum sed ex qui iure assumenda, neque, deleniti nisi facere odio, ut ullam. Harum ea eligendi reiciendis consequuntur suscipit vitae.</P>
+                    <p>La naturaleza siempre ha sido una fuente inagotable de inspiración para el ser humano. Desde el
+                        susurro del viento entre los árboles hasta el canto armonioso de los pájaros al amanecer, cada
+                        detalle refleja la belleza intrínseca del mundo en el que vivimos. Sin embargo, en la era
+                        moderna, la conexión con el entorno natural parece haberse debilitado. La urbanización y el
+                        ritmo acelerado de la vida han llevado a muchas personas a olvidarse de la serenidad y el
+                        equilibrio que la naturaleza puede proporcionar. No obstante, es fundamental recordar la
+                        importancia de preservar nuestros ecosistemas, no solo por el bienestar de las generaciones
+                        futuras, sino también por el nuestro. La biodiversidad no es simplemente un término científico;
+                        es un recordatorio de que todos los seres vivos, grandes y pequeños, tienen un papel esencial en
+                        el equilibrio de la vida. A medida que avanzamos hacia un futuro incierto, debemos esforzarnos
+                        por encontrar formas de coexistir de manera armoniosa con nuestro planeta, protegiendo sus
+                        recursos y respetando su sabiduría milenaria.</p>
                 </div>
                 <div class="entrarOferta" onclick="Navegacion('des_ofertas')">VER</div>
             </div>
             <div class="casillaOferta">
                 <div class="informacionOferta">
                     <h2>TITULO OFERTA</h2>
-                    <P>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Vel modi est animi nesciunt vero magni voluptatibus quod libero at cupiditate, ad perferendis neque temporibus quisquam culpa reiciendis mollitia dicta corrupti eligendi, consequatur architecto aut ducimus tempora praesentium! Consectetur voluptates exercitationem quaerat sequi optio? Quas quae adipisci laudantium delectus fugiat hic ex quod, accusamus ratione mollitia placeat cum aliquid accusantium soluta pariatur vel necessitatibus temporibus, quis tempora, sed architecto. Optio repellat dolorum, dicta molestiae aliquid eos. Delectus maxime fugit eius? Rerum dolorum sed ex qui iure assumenda, neque, deleniti nisi facere odio, ut ullam. Harum ea eligendi reiciendis consequuntur suscipit vitae.</P>
+                    <p>La naturaleza siempre ha sido una fuente inagotable de inspiración para el ser humano. Desde el
+                        susurro del viento entre los árboles hasta el canto armonioso de los pájaros al amanecer, cada
+                        detalle refleja la belleza intrínseca del mundo en el que vivimos. Sin embargo, en la era
+                        moderna, la conexión con el entorno natural parece haberse debilitado. La urbanización y el
+                        ritmo acelerado de la vida han llevado a muchas personas a olvidarse de la serenidad y el
+                        equilibrio que la naturaleza puede proporcionar. No obstante, es fundamental recordar la
+                        importancia de preservar nuestros ecosistemas, no solo por el bienestar de las generaciones
+                        futuras, sino también por el nuestro. La biodiversidad no es simplemente un término científico;
+                        es un recordatorio de que todos los seres vivos, grandes y pequeños, tienen un papel esencial en
+                        el equilibrio de la vida. A medida que avanzamos hacia un futuro incierto, debemos esforzarnos
+                        por encontrar formas de coexistir de manera armoniosa con nuestro planeta, protegiendo sus
+                        recursos y respetando su sabiduría milenaria.</p>
                 </div>
                 <div class="entrarOferta" onclick="Navegacion('des_ofertas')">VER</div>
             </div>
             <div class="casillaOferta">
                 <div class="informacionOferta">
                     <h2>TITULO OFERTA</h2>
-                    <P>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Vel modi est animi nesciunt vero magni voluptatibus quod libero at cupiditate, ad perferendis neque temporibus quisquam culpa reiciendis mollitia dicta corrupti eligendi, consequatur architecto aut ducimus tempora praesentium! Consectetur voluptates exercitationem quaerat sequi optio? Quas quae adipisci laudantium delectus fugiat hic ex quod, accusamus ratione mollitia placeat cum aliquid accusantium soluta pariatur vel necessitatibus temporibus, quis tempora, sed architecto. Optio repellat dolorum, dicta molestiae aliquid eos. Delectus maxime fugit eius? Rerum dolorum sed ex qui iure assumenda, neque, deleniti nisi facere odio, ut ullam. Harum ea eligendi reiciendis consequuntur suscipit vitae.</P>
+                    <p>La naturaleza siempre ha sido una fuente inagotable de inspiración para el ser humano. Desde el
+                        susurro del viento entre los árboles hasta el canto armonioso de los pájaros al amanecer, cada
+                        detalle refleja la belleza intrínseca del mundo en el que vivimos. Sin embargo, en la era
+                        moderna, la conexión con el entorno natural parece haberse debilitado. La urbanización y el
+                        ritmo acelerado de la vida han llevado a muchas personas a olvidarse de la serenidad y el
+                        equilibrio que la naturaleza puede proporcionar. No obstante, es fundamental recordar la
+                        importancia de preservar nuestros ecosistemas, no solo por el bienestar de las generaciones
+                        futuras, sino también por el nuestro. La biodiversidad no es simplemente un término científico;
+                        es un recordatorio de que todos los seres vivos, grandes y pequeños, tienen un papel esencial en
+                        el equilibrio de la vida. A medida que avanzamos hacia un futuro incierto, debemos esforzarnos
+                        por encontrar formas de coexistir de manera armoniosa con nuestro planeta, protegiendo sus
+                        recursos y respetando su sabiduría milenaria.</p>
                 </div>
                 <div class="entrarOferta" onclick="Navegacion('des_ofertas')">VER</div>
             </div>
             <div class="casillaOferta">
                 <div class="informacionOferta">
                     <h2>TITULO OFERTA</h2>
-                    <P>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Vel modi est animi nesciunt vero magni voluptatibus quod libero at cupiditate, ad perferendis neque temporibus quisquam culpa reiciendis mollitia dicta corrupti eligendi, consequatur architecto aut ducimus tempora praesentium! Consectetur voluptates exercitationem quaerat sequi optio? Quas quae adipisci laudantium delectus fugiat hic ex quod, accusamus ratione mollitia placeat cum aliquid accusantium soluta pariatur vel necessitatibus temporibus, quis tempora, sed architecto. Optio repellat dolorum, dicta molestiae aliquid eos. Delectus maxime fugit eius? Rerum dolorum sed ex qui iure assumenda, neque, deleniti nisi facere odio, ut ullam. Harum ea eligendi reiciendis consequuntur suscipit vitae.</P>
+                    <p>La naturaleza siempre ha sido una fuente inagotable de inspiración para el ser humano. Desde el
+                        susurro del viento entre los árboles hasta el canto armonioso de los pájaros al amanecer, cada
+                        detalle refleja la belleza intrínseca del mundo en el que vivimos. Sin embargo, en la era
+                        moderna, la conexión con el entorno natural parece haberse debilitado. La urbanización y el
+                        ritmo acelerado de la vida han llevado a muchas personas a olvidarse de la serenidad y el
+                        equilibrio que la naturaleza puede proporcionar. No obstante, es fundamental recordar la
+                        importancia de preservar nuestros ecosistemas, no solo por el bienestar de las generaciones
+                        futuras, sino también por el nuestro. La biodiversidad no es simplemente un término científico;
+                        es un recordatorio de que todos los seres vivos, grandes y pequeños, tienen un papel esencial en
+                        el equilibrio de la vida. A medida que avanzamos hacia un futuro incierto, debemos esforzarnos
+                        por encontrar formas de coexistir de manera armoniosa con nuestro planeta, protegiendo sus
+                        recursos y respetando su sabiduría milenaria.</p>
                 </div>
                 <div class="entrarOferta" onclick="Navegacion('des_ofertas')">VER</div>
             </div>
             <div class="casillaOferta">
                 <div class="informacionOferta">
-                    <h2>TITULO OFERTA</h2>
-                    <P>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Vel modi est animi nesciunt vero magni voluptatibus quod libero at cupiditate, ad perferendis neque temporibus quisquam culpa reiciendis mollitia dicta corrupti eligendi, consequatur architecto aut ducimus tempora praesentium! Consectetur voluptates exercitationem quaerat sequi optio? Quas quae adipisci laudantium delectus fugiat hic ex quod, accusamus ratione mollitia placeat cum aliquid accusantium soluta pariatur vel necessitatibus temporibus, quis tempora, sed architecto. Optio repellat dolorum, dicta molestiae aliquid eos. Delectus maxime fugit eius? Rerum dolorum sed ex qui iure assumenda, neque, deleniti nisi facere odio, ut ullam. Harum ea eligendi reiciendis consequuntur suscipit vitae.</P>
+                    <h2>12345678901234567890123456789012345678901234567890</h2>
+                    <p>La naturaleza siempre ha sido una fuente inagotable de inspiración para el ser humano. Desde el
+                        susurro del viento entre los árboles hasta el canto armonioso de los pájaros al amanecer, cada
+                        detalle refleja la belleza intrínseca del mundo en el que vivimos. Sin embargo, en la era
+                        moderna, la conexión con el entorno natural parece haberse debilitado. La urbanización y el
+                        ritmo acelerado de la vida han llevado a muchas personas a olvidarse de la serenidad y el
+                        equilibrio que la naturaleza puede proporcionar. No obstante, es fundamental recordar la
+                        importancia de preservar nuestros ecosistemas, no solo por el bienestar de las generaciones
+                        futuras, sino también por el nuestro. La biodiversidad no es simplemente un término científico;
+                        es un recordatorio de que todos los seres vivos, grandes y pequeños, tienen un papel esencial en
+                        el equilibrio de la vida. A medida que avanzamos hacia un futuro incierto, debemos esforzarnos
+                        por encontrar formas de coexistir de manera armoniosa con nuestro planeta, protegiendo sus
+                        recursos y respetando su sabiduría milenaria.</p>
                 </div>
                 <div class="entrarOferta" onclick="Navegacion('des_ofertas')">VER</div>
             </div>
         </div>
     </div>
+    <!-- OFERTAS EMPLEO FIN-->
+
     <!-- HOJA DE VIDA -->
     <div class="hojaVida">
-        <h1>hojavida</h1>
+        <div class="marco">
+            <div class="izquierda">
+                <img id="perfilImg" src="{% static 'estudiantes/img/default-perfil.png' %}" alt="">
+
+                <h1>DATOS PERSONALES</h1>
+                <div class="minContent">
+                    <img src="{% static 'estudiantes/img/icon-llamada.svg' %}" alt="">
+                    <h2>+57 333 333 33 33</h2>
+                </div>
+                <div class="minContent">
+                    <img src="{% static 'estudiantes/img/icon-correo2.svg' %}" alt="">
+                    <h2>correo_master121212@correo.edu.co</h2>
+                </div>
+                <div class="minContent">
+                    <img src="{% static 'estudiantes/img/icon-ubicacion.svg' %}" alt="">
+                    <h2>Cra 33 #33-33</h2>
+                </div>
+
+                <h1>APTITUDES</h1>
+                <div class="lista">
+                    <h2>APTITUD</h2>
+                    <h2>APTITUD</h2>
+                    <h2>APTITUD</h2>
+                    <h2>APTITUD</h2>
+                    <h2>APTITUD</h2>
+                </div>
+
+                <h1>IDIOMAS</h1>
+                <div class="minContent">
+                    <img src="{% static 'estudiantes/img/icon-happy.svg' %}" alt="">
+                    <h2>C2</h2>
+                    <h2>ESPAÑOL</h2>
+                </div>
+                <div class="minContent">
+                    <img src="{% static 'estudiantes/img/icon-normal.svg' %}" alt="">
+                    <h2>B1</h2>
+                    <h2>INGLES</h2>
+                </div>
+                <div class="minContent">
+                    <img src="{% static 'estudiantes/img/icon-sad.svg' %}" alt="">
+                    <h2>A1</h2>
+                    <h2>CATALAN</h2>
+                </div>
+
+                <h1>CONOCIMIENTOS</h1>
+                <div class="lista">
+                    <h2>JAVA</h2>
+                    <h2>C++</h2>
+                    <h2>PYTHON</h2>
+                </div>
+
+            </div>
+            <div class="derecha">
+                <h3>JOSE IGNACIO GUADALUPE TERCERO</h3>
+
+                <h1>EXPERIENCIA LABORAL</h1>
+                <div class="infoExp">
+                    <h2>NOMBRE_CARGO</h2>
+                    <h4>NOMBRE_EMPRESA</h4>
+                    <h4>TIEMPO_INICIO / TIEMPO_FINAL</h4>
+                    <p>DESCRIPCION: Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero odio repudiandae
+                        porro eveniet odit laudantium laborum a quasi corporis, dolores nostrum! Inventore natus dolore
+                        autem? Ut tempora labore quisquam. Dolor, quae eligendi unde earum, itaque commodi corrupti
+                        minima quisquam fuga est voluptate ipsum error, id soluta saepe reiciendis sequi quis ut! Quas
+                        dolore commodi repudiandae beatae excepturi incidunt voluptate impedit, libero nulla numquam
+                        natus alias nisi cupiditate debitis, deserunt id, et porro. Itaque ex enim, aliquid facilis
+                        dolor nesciunt sed est? Quidem, magnam minima nihil dolores sed accusantium in adipisci eius?
+                        Excepturi fugit dignissimos nam error, aliquam tempora velit libero.</p>
+                </div>
+                <div class="infoExp">
+                    <h2>NOMBRE_CARGO</h2>
+                    <h4>NOMBRE_EMPRESA</h4>
+                    <h4>TIEMPO_INICIO / TIEMPO_FINAL</h4>
+                    <p>DESCRIPCION: Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero odio repudiandae
+                        porro eveniet odit laudantium laborum a quasi corporis, dolores nostrum! Inventore natus dolore
+                        autem? Ut tempora labore quisquam. Dolor, quae eligendi unde earum, itaque commodi corrupti
+                        minima quisquam fuga est voluptate ipsum error, id soluta saepe reiciendis sequi quis ut! Quas
+                        dolore commodi repudiandae beatae excepturi incidunt voluptate impedit, libero nulla numquam
+                        natus alias nisi cupiditate debitis, deserunt id, et porro. Itaque ex enim, aliquid facilis
+                        dolor nesciunt sed est? Quidem, magnam minima nihil dolores sed accusantium in adipisci eius?
+                        Excepturi fugit dignissimos nam error, aliquam tempora velit libero.</p>
+                </div>
+
+                <h1>FORMACIÓN ACADEMICA</h1>
+                <div class="infoExp">
+                    <h2>NOMBRE_TITULO</h2>
+                    <h4>NOMBRE_INSTITUCIÓN</h4>
+                    <h4>TIEMPO_INICIO / TIEMPO_FINAL</h4>
+                </div>
+                <div class="infoExp">
+                    <h2>NOMBRE_TITULO</h2>
+                    <h4>NOMBRE_INSTITUCIÓN</h4>
+                    <h4>TIEMPO_INICIO / TIEMPO_FINAL</h4>
+                </div>
+            </div>
+        </div>
     </div>
     <!-- HOJA DE VIDA FIN -->
+
     <!-- CONFIGURACIONES -->
     <div class="config">
-        <h1>config</h1>
+        <div class="marco">
+            <h1>PERFIL</h1>
+            <div class="configMini">
+                <div class="minContent">
+                    <h2>Nombre</h2>
+                    <input type="text">
+                    <h2>Apellido</h2>
+                    <input type="text">
+                </div>
+                <div class="minContent">
+                    <h2>Fecha Nacimiento</h2>
+                    <input type="text">
+                    <h2>Correo</h2>
+                    <input type="text">
+                </div>
+            </div>
+            <button>CONFIGURAR</button>
+
+            <h1>TEMA</h1>
+            <div class="configMini">
+                <button class="botonTemas" id="btn1">CLARO</button>
+                <button class="botonTemas" id="btn2">OSCURO</button>
+            </div>
+        </div>
     </div>
     <!-- CONFIGURACIONES FIN -->
+
     <!-- DES_OFERTAS -->
-     <div class="des_ofertas">
-        <H1>descripcion ofertas</H1>
-     </div>
+    <div class="des_ofertas">
+        <div class="marco_ofertas">
+            <div class="titulo">
+                <h1>AQUÍ VA EL TITULO</h1>
+            </div>
+            <p>La naturaleza siempre ha sido una fuente inagotable de inspiración para el ser humano. Desde el susurro
+                del viento entre los árboles hasta el canto armonioso de los pájaros al amanecer, cada detalle refleja
+                la belleza intrínseca del mundo en el que vivimos. Sin embargo, en la era moderna, la conexión con el
+                entorno natural parece haberse debilitado. La urbanización y el ritmo acelerado de la vida han llevado a
+                muchas personas a olvidarse de la serenidad y el equilibrio que la naturaleza puede proporcionar. No
+                obstante, es fundamental recordar la importancia de preservar nuestros ecosistemas, no solo por el
+                bienestar de las generaciones futuras, sino también por el nuestro. La biodiversidad no es simplemente
+                un término científico; es un recordatorio de que todos los seres vivos, grandes y pequeños, tienen un
+                papel esencial en el equilibrio de la vida. A medida que avanzamos hacia un futuro incierto, debemos
+                esforzarnos por encontrar formas de coexistir de manera armoniosa con nuestro planeta, protegiendo sus
+                recursos y respetando su sabiduría milenaria.</p>
+            <div class="marco_inferior">
+                <h2>Personas aplicadas: 10</h2>
+                <div class="aplicarOferta">APLICAR</div>
+            </div>
+        </div>
+    </div>
     <!-- DES_OFERTAS FIN -->
-     <!-- DES_CURSOS -->
-     <div class="des_cursos">
-        <h1>descripcion cursos</h1>
-     </div>
+
+    <!-- DES_CURSOS -->
+    <div class="des_cursos">
+        <div class="marco_cursos">
+            <div class="titulo">
+                <h1>AQUÍ VA EL TITULO</h1>
+            </div>
+            <img src="{% static 'estudiantes/img/htmlAvanzado.png' %}" alt="">
+            <p>La naturaleza siempre ha sido una fuente inagotable de inspiración para el ser humano. Desde el susurro
+                del viento entre los árboles hasta el canto armonioso de los pájaros al amanecer, cada detalle refleja
+                la belleza intrínseca del mundo en el que vivimos. Sin embargo, en la era moderna, la conexión con el
+                entorno natural parece haberse debilitado. La urbanización y el ritmo acelerado de la vida han llevado a
+                muchas personas a olvidarse de la serenidad y el equilibrio que la naturaleza puede proporcionar. No
+                obstante, es fundamental recordar la importancia de preservar nuestros ecosistemas, no solo por el
+                bienestar de las generaciones futuras, sino también por el nuestro. La biodiversidad no es simplemente
+                un término científico; es un recordatorio de que todos los seres vivos, grandes y pequeños, tienen un
+                papel esencial en el equilibrio de la vida. A medida que avanzamos hacia un futuro incierto, debemos
+                esforzarnos por encontrar formas de coexistir de manera armoniosa con nuestro planeta, protegiendo sus
+                recursos y respetando su sabiduría milenaria.</p>
+            <div class="marco_inferior">
+                <h2>Dificultad: Basico</h2>
+                <div class="realizarCurso">REALIZAR</div>
+            </div>
+        </div>
+    </div>
     <!-- DES_CURSOS FIN -->
 
+    <!-- PIE DE PAGINA -->
     <footer class="pie-pagina">
         <div class="grupo-1">
             <div class="box">
                 <figure>
                     <a>
-                        <img src="{% static 'estudiantes/img/logo.png' %}" alt="logo pie-pagina" onclick="Navegacion('estandar')">
+                        <img src="{% static 'estudiantes/img/logo.png' %}" alt="logo pie-pagina"
+                            onclick="Navegacion('estandar')">
                     </a>
                 </figure>
             </div>
             <div class="box">
                 <h2>SOBRE NOSOTROS</h2>
                 <p>
-                    Somos OctooCourse, ofrecemos cursos para reforzar el aprendizaje de amantes a la programación, también contamos con ofertas de empleo para generar
+                    Somos OctooCourse, ofrecemos cursos para reforzar el aprendizaje de amantes a la programación,
+                    también contamos con ofertas de empleo para generar
                     oportunidades y llegar al camino del éxito.
                 </p>
             </div>
             <div class="box">
                 <h2>SIGUENOS</h2>
                 <div class="red-social">
-                    <img src="{% static 'estudiantes/img/UilFacebook.svg' %}" alt="">
-                    <img src="{% static 'estudiantes/img/BiYoutube.svg' %}" alt="">
-                    <img src="{% static 'estudiantes/img/MdiGmail.svg' %}" alt="">
-                    <img src="{% static 'estudiantes/img/FormKitWhatsapp.svg' %}" alt="">
+                    <img src="{% static 'estudiantes/img/icon-facebook.svg' %}" alt="">
+                    <img src="{% static 'estudiantes/img/icon-youtube.svg' %}" alt="">
+                    <img src="{% static 'estudiantes/img/icon-correo.svg' %}" alt="">
+                    <img src="{% static 'estudiantes/img/icon-whatsapp.svg' %}" alt="">
                 </div>
             </div>
         </div>
