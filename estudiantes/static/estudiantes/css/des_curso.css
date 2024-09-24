@@ -3,19 +3,28 @@
 }
 
 .marco_cursos{
-    overflow: auto;
+    display: flex;
+    flex-direction: column;
     margin: 15px auto;
     padding: 5px;
-    width: 50%; height: 45vmax;
+    width: 40%; height: auto;
     border: 3px solid #560581;
+}
+
+.marco_cursos .titulo{
+    background-color: #560581;
+    margin-bottom: 10px;
 }
 
 .marco_cursos h1{
     text-align: center;
     word-break: break-word;
-    margin-bottom: 10px;
     font-size: 30px;
-    color: #8021bb;
+    color: white;
+}
+
+.marco_cursos img{
+    width: 100%; height: 50%;
 }
 
 .marco_cursos h2{
@@ -25,11 +34,13 @@
 .marco_cursos .marco_inferior{
     margin: auto;
     margin-top: 10px;
-    justify-content: space-between;
-    text-align: center; display: flex;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
 }
 
 .marco_cursos .realizarCurso{
+    margin: auto;
     width: 200px; height: 35px;
     font-weight: 700; font-size: 25px;
     color: white; background-color: #8021bb; border: none;
@@ -42,9 +53,13 @@
     background-color: #560581; color: #2e0346;
 }
 
-@media screen and (max-width:1200px) {
+@media screen and (max-width:800px) {
+    .marco_cursos{
+        width: 70%;
+    }
+
     .marco_cursos h1{
-        font-size: 20px;
+        font-size: 15px;
     }
 
     .marco_cursos h2{
@@ -56,20 +71,8 @@
     }
 
     .marco_cursos .realizarCurso{
-        width: 150px; height: 30px;
-        font-weight: 600; font-size: 20px;
-    }
-}
-
-@media screen and (max-width:800px) {
-    .marco_cursos{
-        width: 70%; 
-    }
-
-    .marco_cursos .marco_inferior{
-        margin-top: 20px;
-        text-align: center; display: grid;
-        justify-content: center;
-        align-content: center;
+        width: 100px; height: 25px;
+        font-weight: 600; font-size: 15px;
+        padding: 2px 2vmax;
     }
 }
