@@ -87,7 +87,7 @@ function MenuConfig() {
     var estudiantes = document.getElementsByClassName("listaEstud")[0];
     var empleo = document.getElementsByClassName("empleo")[0];
     var config = document.getElementsByClassName("config")[0];
-    var perfil = document.getElementsByClassName("perfil")[0];
+
 
 
     if (estandar.style.display != "none") {
@@ -106,6 +106,8 @@ function MenuConfig() {
 }
 
 
+
+
 function Exit() {
     var menu_pc = document.getElementsByClassName("menu-compu")[0];
     var menu_movil = document.getElementsByClassName("menu-movil")[0];
@@ -113,3 +115,31 @@ function Exit() {
     menu_pc.style.display = "none";
     menu_movil.style.display = "none";
 }
+
+
+/*Nav Bar ali*/ 
+function mostrarPublicarOferta() {
+    ocultarTodasLasSecciones();
+    document.querySelector('.publicar-oferta').style.display = 'block';
+}
+
+function mostrarOferta() {
+    ocultarTodasLasSecciones();
+    document.querySelector('.VerOferta').style.display = 'block';
+}
+
+function mostrarOrdenes() {
+    ocultarTodasLasSecciones();
+    alert('Aquí iría la sección de Órdenes');
+}
+
+
+function ocultarTodasLasSecciones() {
+    document.querySelector('.hola').style.display = 'none';
+    document.querySelector('.publicar-oferta').style.display = 'none';
+    document.querySelector('.VerOferta').style.display = 'none';
+}
+
+window.onload = function () {
+    document.querySelector('.hola').style.display = 'block';
+};

@@ -1,0 +1,70 @@
+.oferta-slide.card-oferta {
+    background-color: #f3e8ff;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    max-width: 300px; 
+    padding: 20px;
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: center;
+}
+
+
+.card-oferta-content .titulo-oferta {
+    border-radius: 50%;
+    margin-bottom: 10px;
+    color: #7d2ae8;
+    font-size: 18px;
+}
+
+
+.acciones-icons {
+    display: flex;
+    justify-content: center; /* Centra los íconos */
+    margin-top: 10px; /* Espaciado superior */
+}
+
+.acciones-icons i {
+    margin: 0 10px; /* Espaciado entre íconos */
+    color: #7d2ae8; /* Color de los íconos */
+    font-size: 18px; /* Tamaño del ícono */
+    cursor: pointer; /* Cambia el cursor al pasar el mouse */
+    transition: color 0.3s ease; /* Efecto al cambiar el color */
+}
+
+.acciones-icons i:hover {
+    color: #5a16b2; /* Color al pasar el mouse */
+}
+
+
+
+
+
+.cantAplicados i {
+    color: #1d002e;
+    margin-top: 10px;
+}
+
+
+.botones-acciones {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 15px;
+}
+
+.botones-acciones button {
+    background-color: #7d2ae8;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+}
+
+.botones-acciones button:hover {
+    background-color: #5a16b2;
+}
