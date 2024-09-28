@@ -1,70 +1,75 @@
-.oferta-slide.card-oferta {
-    background-color: #f3e8ff;
-    border-radius: 15px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    max-width: 300px; 
-    padding: 20px;
-    margin: 10px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+.empleo img {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+
+.empleo .veroferta .tablaOfertas .casillaOferta .informacionOferta #titulo {
     text-align: center;
-}
-
-
-.card-oferta-content .titulo-oferta {
-    border-radius: 50%;
-    margin-bottom: 10px;
-    color: #7d2ae8;
-    font-size: 18px;
-}
-
-
-.acciones-icons {
-    display: flex;
-    justify-content: center; /* Centra los íconos */
-    margin-top: 10px; /* Espaciado superior */
-}
-
-.acciones-icons i {
-    margin: 0 10px; /* Espaciado entre íconos */
-    color: #7d2ae8; /* Color de los íconos */
-    font-size: 18px; /* Tamaño del ícono */
-    cursor: pointer; /* Cambia el cursor al pasar el mouse */
-    transition: color 0.3s ease; /* Efecto al cambiar el color */
-}
-
-.acciones-icons i:hover {
-    color: #5a16b2; /* Color al pasar el mouse */
+    font-size: 20px;
+    color: #000000;
 }
 
 
 
+.empleo .veroferta .tablaOfertas {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 10px; /* espaciado entre celdas*/
+    border: 1px solid black;
+    padding: 10px;
+}
 
-
-.cantAplicados i {
-    color: #1d002e;
-    margin-top: 10px;
+.empleo .veroferta .tablaOfertas .casillaOferta {
+    border: 1px solid #ddd;
+    text-align: center;
+    border: 3px solid #560581;
+    border-radius: 30px;
+    overflow: hidden;
 }
 
 
-.botones-acciones {
-    display: flex;
-    justify-content: space-around;
-    margin-top: 15px;
+.empleo .veroferta .informacionOferta {
+    height: 12vmax;
+    z-index: 1;
+    overflow: hidden;
 }
 
-.botones-acciones button {
-    background-color: #7d2ae8;
+.empleo .veroferta .entrarOferta {
+    z-index: 2;
+    font-weight: 700;
+    font-size: 30px;
     color: white;
+    background: #8021bb;
     border: none;
-    padding: 10px 15px;
-    border-radius: 8px;
     cursor: pointer;
-    font-size: 14px;
-    transition: background-color 0.3s ease;
+    padding: 10px 7vmax;
+    transition: all 0.3s ease 0s;
 }
 
-.botones-acciones button:hover {
-    background-color: #5a16b2;
+.empleo .veroferta .entrarOferta:hover {
+    background-color: #560581;
+    color: #2e0346;
 }
+
+@media screen and (max-width:1000px) {
+    .empleo .veroferta .tablaOfertas {
+        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    }
+
+    .empleo .veroferta .entrarOferta {
+        font-weight: 500;
+        font-size: 20px;
+        padding: 5px 7vmax;
+    }
+
+    .empleo .veroferta h2 {
+        font-size: 15px;
+    }
+
+    .empleo .veroferta p {
+        font-size: 13px;
+    }
+}
+

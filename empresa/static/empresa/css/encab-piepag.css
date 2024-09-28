@@ -75,7 +75,7 @@ body {
 .header .menu-compu {
     background-color: #8021bb;
     position: absolute;
-    height: 120px; width: 150px;
+    height: 157px; width: 150px;
     right: 0px; top: 84px;
     flex-direction: column;
     justify-content: center;
@@ -141,7 +141,6 @@ body {
     color: #2e0346;
 }
 
-
 /*PIE DE PAGINA*/
 footer {
     text-align: center;
@@ -205,6 +204,7 @@ footer {
     transform: scale(1.1); cursor: pointer;
     filter: drop-shadow(0px 0px 10px #560581); /*darle sombra a los iconos*/
 }
+
 .pie-pagina .grupo-2 {
     background-color: #560581;
     padding: 15px 10px;

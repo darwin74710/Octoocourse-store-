@@ -40,6 +40,8 @@
     width: 100%;
     text-align: center;
     margin: auto;
+    border-radius: 5px;
+
 }
 
 .config .marco button{

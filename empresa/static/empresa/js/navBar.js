@@ -1,111 +1,58 @@
-function MenuPC() {
+function MenuPC(){
     var menu_pc = document.getElementsByClassName("menu-compu")[0];
+    var menu_movil = document.getElementsByClassName("menu-movil")[0];
 
-    if (menu_pc.style.display == "none" || menu_pc.style.display != "block") {
+    if(menu_movil.style.display != "none"){
+        menu_movil.style.display = "none";
+    }
+
+    if(menu_pc.style.display == "none" || menu_pc.style.display != "block"){
         menu_pc.style.display = "block";
-    } else {
+    }else{
         menu_pc.style.display = "none";
     }
 }
 
-function MenuMovil() {
+function MenuMovil(){
+    var menu_pc = document.getElementsByClassName("menu-compu")[0];
     var menu_movil = document.getElementsByClassName("menu-movil")[0];
 
-    if (menu_movil.style.display == "none" || menu_movil.style.display != "block") {
+    if(menu_pc.style.display != "none"){
+        menu_pc.style.display = "none";
+    }
+
+    if(menu_movil.style.display == "none" || menu_movil.style.display != "block"){
         menu_movil.style.display = "block";
-    } else {
+    }else{
         menu_movil.style.display = "none";
     }
 }
 
-function MenuEstandar() {
+function Navegacion(nav){
     var estandar = document.getElementsByClassName("estandar")[0];
-    var estudiantes = document.getElementsByClassName("listaEstud")[0];
+    var listaEstud = document.getElementsByClassName("listaEstud")[0];
     var empleo = document.getElementsByClassName("empleo")[0];
     var config = document.getElementsByClassName("config")[0];
+    var des_ofertas = document.getElementsByClassName("des_ofertas")[0];
 
+    estandar.style.display = "none";
+    listaEstud.style.display = "none";
+    empleo.style.display = "none";
+    config.style.display = "none";
+    des_ofertas.style.display = "none";
 
-    if (empleo.style.display != "none") {
-        empleo.style.display = "none";
-    }
-    if (estudiantes.style.display != "none") {
-        estudiantes.style.display = "none";
-    }
-    if (config.style.display != "none") {
-        config.style.display = "none";
-    }
-    if (estandar.style.display == "none" || estandar.style.display != "block") {
+    if(nav === 'estandar'){
         estandar.style.display = "block";
-    }
-}
-
-function MenuCursos() {
-    var estandar = document.getElementsByClassName("estandar")[0];
-    var estudiantes = document.getElementsByClassName("listaEstud")[0];
-    var empleo = document.getElementsByClassName("empleo")[0];
-    var config = document.getElementsByClassName("config")[0];
-
-
-    if (empleo.style.display != "none") {
-        empleo.style.display = "none";
-    }
-    if (estandar.style.display != "none") {
-        estandar.style.display = "none";
-    }
-    if (config.style.display != "none") {
-        config.style.display = "none";
-    }
-
-    if (estudiantes.style.display == "none" || estudiantes.style.display != "block") {
-        estudiantes.style.display = "block";
-    }
-}
-
-function MenuEmpleo() {
-    var estandar = document.getElementsByClassName("estandar")[0];
-    var estudiantes = document.getElementsByClassName("listaEstud")[0];
-    var empleo = document.getElementsByClassName("empleo")[0];
-    var config = document.getElementsByClassName("config")[0];
-
-    if (estandar.style.display != "none") {
-        estandar.style.display = "none";
-    }
-    if (estudiantes.style.display != "none") {
-        estudiantes.style.display = "none";
-    }
-    if (config.style.display != "none") {
-        config.style.display = "none";
-    }
-
-    if (empleo.style.display == "none" || empleo.style.display != "block") {
+    }else if(nav === 'listaEstud'){
+        listaEstud.style.display = "block";
+    }else if(nav === 'empleo'){
         empleo.style.display = "block";
-    }
-}
-
-function MenuConfig() {
-    var estandar = document.getElementsByClassName("estandar")[0];
-    var estudiantes = document.getElementsByClassName("listaEstud")[0];
-    var empleo = document.getElementsByClassName("empleo")[0];
-    var config = document.getElementsByClassName("config")[0];
-
-
-
-    if (estandar.style.display != "none") {
-        estandar.style.display = "none";
-    }
-    if (estudiantes.style.display != "none") {
-        estudiantes.style.display = "none";
-    }
-    if (empleo.style.display != "none") {
-        empleo.style.display = "none";
-    }
-    
-    if (config.style.display == "none" || config.style.display != "block") {
+    }else if(nav === 'config'){
         config.style.display = "block";
+    }else if(nav === 'des_ofertas'){
+        des_ofertas.style.display = "block";
     }
 }
-
-
 
 
 function Exit() {
@@ -125,7 +72,7 @@ function mostrarPublicarOferta() {
 
 function mostrarOferta() {
     ocultarTodasLasSecciones();
-    document.querySelector('.VerOferta').style.display = 'block';
+    document.querySelector('.veroferta').style.display = 'block';
 }
 
 function mostrarOrdenes() {
@@ -137,7 +84,7 @@ function mostrarOrdenes() {
 function ocultarTodasLasSecciones() {
     document.querySelector('.hola').style.display = 'none';
     document.querySelector('.publicar-oferta').style.display = 'none';
-    document.querySelector('.VerOferta').style.display = 'none';
+    document.querySelector('.veroferta').style.display = 'none';
 }
 
 window.onload = function () {

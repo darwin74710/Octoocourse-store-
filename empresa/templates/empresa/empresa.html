@@ -27,10 +27,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <!-- css -->
     <link rel="stylesheet" href="{% static 'empresa/css/style.css' %}">
-    <link rel="stylesheet" href="{% static 'empresa/css/Config.css' %}" />
+    <link rel="stylesheet" href="{% static 'empresa/css/configs.css' %}" />
     <link rel="stylesheet" href="{% static 'empresa/css/estiloNav.css' %}" />
     <link rel="stylesheet" href="{% static 'empresa/css/PublicarOferta.css' %}" />
     <link rel="stylesheet" href="{% static 'empresa/css/VerOferta.css' %}" />
+    <link rel="stylesheet" href="{% static 'empresa/css/des_ofertas.css' %}" />
 
 
     <!-- Scripts javaScript -->
@@ -42,11 +43,11 @@
     <!-- NAV VAR -->
     <header class="header">
         <div class="izquierda">
-            <img src="{% static 'empresa/img/logo.png' %}" alt="Logo pulpo" onclick="MenuEstandar()">
+            <img src="{% static 'empresa/img/logo.png' %}" alt="Logo pulpo" onclick="Navegacion('estandar')">
         </div>
 
-        <a><button onclick="MenuCursos()">ESTUDIANTES</button></a>
-        <a><button onclick="MenuEmpleo()">OFERTAS</button></a>
+        <a><button onclick="Navegacion('listaEstud')">ESTUDIANTES</button></a>
+        <a><button onclick="Navegacion('empleo')">OFERTAS</button></a>
 
         <div class="derecha">
             <img class="pc" src="{% static 'empresa/img/user.png' %}" alt="logo Usuario" onclick="MenuPC()">
@@ -54,15 +55,14 @@
         </div>
 
         <div class="menu-movil">
-            <li><a onclick="MenuCursos()">Estudiantes</a></li>
-            <li><a onclick="MenuEmpleo()">Ofertas Empleo</a></li>
-            <li><a onclick="MenuPerfil()">Perfil</a></li>
-            <li><a onclick="MenuConfig()">Configuración</a></li>
+            <li><a onclick="Navegacion('listaEstud')">Estudiantes</a></li>
+            <li><a onclick="Navegacion('empleo')">Ofertas Empleo</a></li>
+            <li><a onclick="Navegacion('config')">Configuración</a></li>
             <li><a href="{% url 'login' %}">Salir</a></li>
         </div>
 
         <div class="menu-compu">
-            <li><a onclick="MenuConfig()">Configuración</a></li>
+            <li><a onclick="Navegacion('config')">Configuración</a></li>
             <li><a href="{% url 'login' %}">Salir</a></li>
         </div>
     </header>
@@ -103,8 +103,8 @@
                                 <i class="far fa-star"></i>
                             </div>
                             <div class="button">
-                                <button class="aboutMe">About Me</button>
-                                <button class="hireMe">Hire Me</button>
+                                <a href="{% url 'aboutMeStudent' %}" class="aboutMe">About Me</a>
+                                <a href="" class="hireMe">Hire Me</a> <!-- Cambia 'hireMeStudent' a la URL correcta -->
                             </div>
                         </div>
                     </div>
@@ -376,13 +376,39 @@
     <!-- ESTUDIANTES FIN -->
 
     <!-- CONFIGURACIONES -->
-    <div class="config">
-        <h1>config holaaaaaa</h1>
+    <div class="config" style="display: none;">
+        <div class="config-container">
+            <h1>Perfil Empresa</h1>
+            <div class="empresa-form">
+                <div class="form-group">
+                    <h2>Nombre Empresa</h2>
+                    <input type="text">
+                    <h2>Correo</h2>
+                    <input type="email">
+
+                </div>
+                <div class="form-group">
+                    <h2>Télefono</h2>
+                    <input type="number">
+                    <h2>Dirección</h2>
+                    <input type="text">
+                </div>
+            </div>
+            <div id="nit">
+                <h2>Nit</h2>
+                <input type="text">
+            </div>
+            <button>CONFIGURAR</button>
+
+            <h1>TEMA</h1>
+            <div class="empresa-form">
+                <button class="botonTemas" id="btn1">CLARO</button>
+                <button class="botonTemas" id="btn2">OSCURO</button>
+            </div>
+        </div>
     </div>
     <!-- CONFIGURACIONES FIN -->
 
-
-    <!-- OFERTAS EMPLEO -->
     <!-- OFERTAS EMPLEO -->
     <div class="empleo">
         <ul class="nav justify-content-center">
@@ -392,54 +418,112 @@
             <li class="nav-item">
                 <a class="nav-link" href="#" onclick="mostrarOferta()">Ofertas</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#" onclick="mostrarOrdenes()">Órdenes</a>
-            </li>
         </ul>
 
         <div class="hola">Hola bienvenido</div>
 
-        <div class="VerOferta" style="display: none;">
-            <section>
-                <div class="swiper mySwiper container">
-                    <div class="swiper-wrapper content">
-
-                        <div class="oferta-slide card-oferta">
-                            <div class="card-oferta-content">
-                                <div class="titulo-oferta">
-                                    <span>Nombre de la oferta</span>
-                                </div>
-                               
-
-                                <div class="cantAplicados">
-                                    <span id="contador-aplicantes">Cantidad Aplicados 0</span> <!-- Cantidad de aplicantes -->
-                                </div>
-                                
-
-                                <div class="botones-acciones">
-                                    <button class="ver-oferta">Ver</button>
-                                </div>
-
-                                <div class="acciones-icons">
-                                    <i class="fas fa-sync" title="Actualizar"></i> <!-- Ícono de actualizar -->
-                                    <i class="fas fa-trash" title="Eliminar"></i> <!-- Ícono de eliminar -->
-                                </div>
-                                
-
-                            </div>
-                        </div>
+        <div class="veroferta" style="display: none;">
+            <img src="{% static 'estudiantes/img/ofertasSup.png' %}" alt="">
+            <div class="tablaOfertas">
+                <div class="casillaOferta">
+                    <div class="informacionOferta">
+                        <h2>TITULO OFERTA</h2>
+                        <p>La naturaleza siempre ha sido una fuente inagotable de inspiración para el ser humano. Desde
+                            el
+                            susurro del viento entre los árboles hasta el canto armonioso de los pájaros al amanecer,
+                            cada
+                            detalle refleja la belleza intrínseca del mundo en el que vivimos. Sin embargo, en la era
+                            moderna, la conexión con el entorno natural parece haberse debilitado. La urbanización y el
+                            ritmo acelerado de la vida han llevado a muchas personas a olvidarse de la serenidad y el
+                            equilibrio que la naturaleza puede proporcionar. No obstante, es fundamental recordar la
+                            importancia de preservar nuestros ecosistemas, no solo por el bienestar de las generaciones
+                            futuras, sino también por el nuestro. La biodiversidad no es simplemente un término
+                            científico;
+                            es un recordatorio de que todos los seres vivos, grandes y pequeños, tienen un papel
+                            esencial en
+                            el equilibrio de la vida. A medida que avanzamos hacia un futuro incierto, debemos
+                            esforzarnos
+                            por encontrar formas de coexistir de manera armoniosa con nuestro planeta, protegiendo sus
+                            recursos y respetando su sabiduría milenaria.</p>
                     </div>
+                    <div class="entrarOferta" onclick="Navegacion('des_ofertas')">VER</div>
                 </div>
-            </section>
-
-            <!-- Swiper JS -->
-            <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-            <script src="{% static 'empresa/js/script.js' %}"></script>
+                <div class="casillaOferta">
+                    <div class="informacionOferta">
+                        <h2>TITULO OFERTA</h2>
+                        <p>La naturaleza siempre ha sido una fuente inagotable de inspiración para el ser humano. Desde
+                            el
+                            susurro del viento entre los árboles hasta el canto armonioso de los pájaros al amanecer,
+                            cada
+                            detalle refleja la belleza intrínseca del mundo en el que vivimos. Sin embargo, en la era
+                            moderna, la conexión con el entorno natural parece haberse debilitado. La urbanización y el
+                            ritmo acelerado de la vida han llevado a muchas personas a olvidarse de la serenidad y el
+                            equilibrio que la naturaleza puede proporcionar. No obstante, es fundamental recordar la
+                            importancia de preservar nuestros ecosistemas, no solo por el bienestar de las generaciones
+                            futuras, sino también por el nuestro. La biodiversidad no es simplemente un término
+                            científico;
+                            es un recordatorio de que todos los seres vivos, grandes y pequeños, tienen un papel
+                            esencial en
+                            el equilibrio de la vida. A medida que avanzamos hacia un futuro incierto, debemos
+                            esforzarnos
+                            por encontrar formas de coexistir de manera armoniosa con nuestro planeta, protegiendo sus
+                            recursos y respetando su sabiduría milenaria.</p>
+                    </div>
+                    <div class="entrarOferta" onclick="Navegacion('des_ofertas')">VER</div>
+                </div>
+                <div class="casillaOferta">
+                    <div class="informacionOferta">
+                        <h2>TITULO OFERTA</h2>
+                        <p>La naturaleza siempre ha sido una fuente inagotable de inspiración para el ser humano. Desde
+                            el
+                            susurro del viento entre los árboles hasta el canto armonioso de los pájaros al amanecer,
+                            cada
+                            detalle refleja la belleza intrínseca del mundo en el que vivimos. Sin embargo, en la era
+                            moderna, la conexión con el entorno natural parece haberse debilitado. La urbanización y el
+                            ritmo acelerado de la vida han llevado a muchas personas a olvidarse de la serenidad y el
+                            equilibrio que la naturaleza puede proporcionar. No obstante, es fundamental recordar la
+                            importancia de preservar nuestros ecosistemas, no solo por el bienestar de las generaciones
+                            futuras, sino también por el nuestro. La biodiversidad no es simplemente un término
+                            científico;
+                            es un recordatorio de que todos los seres vivos, grandes y pequeños, tienen un papel
+                            esencial en
+                            el equilibrio de la vida. A medida que avanzamos hacia un futuro incierto, debemos
+                            esforzarnos
+                            por encontrar formas de coexistir de manera armoniosa con nuestro planeta, protegiendo sus
+                            recursos y respetando su sabiduría milenaria.</p>
+                    </div>
+                    <div class="entrarOferta" onclick="Navegacion('des_ofertas')">VER</div>
+                </div>
+                <div class="casillaOferta">
+                    <div class="informacionOferta">
+                        <h2>TITULO OFERTA</h2>
+                        <p>La naturaleza siempre ha sido una fuente inagotable de inspiración para el ser humano. Desde
+                            el
+                            susurro del viento entre los árboles hasta el canto armonioso de los pájaros al amanecer,
+                            cada
+                            detalle refleja la belleza intrínseca del mundo en el que vivimos. Sin embargo, en la era
+                            moderna, la conexión con el entorno natural parece haberse debilitado. La urbanización y el
+                            ritmo acelerado de la vida han llevado a muchas personas a olvidarse de la serenidad y el
+                            equilibrio que la naturaleza puede proporcionar. No obstante, es fundamental recordar la
+                            importancia de preservar nuestros ecosistemas, no solo por el bienestar de las generaciones
+                            futuras, sino también por el nuestro. La biodiversidad no es simplemente un término
+                            científico;
+                            es un recordatorio de que todos los seres vivos, grandes y pequeños, tienen un papel
+                            esencial en
+                            el equilibrio de la vida. A medida que avanzamos hacia un futuro incierto, debemos
+                            esforzarnos
+                            por encontrar formas de coexistir de manera armoniosa con nuestro planeta, protegiendo sus
+                            recursos y respetando su sabiduría milenaria.</p>
+                    </div>
+                    <div class="entrarOferta" onclick="Navegacion('des_ofertas')">VER</div>
+                </div>
+            </div>
         </div>
+
 
         <div class="publicar-oferta" style="display: none;">
             <form class="form-container">
-                <h2>Nombre de la Empresa</h2>
+                <h2 id="titloP">Nombre de la Empresa</h2>
 
                 <div class="form-section">
                     <label for="nombreOferta">Nombre de la oferta</label>
@@ -462,6 +546,51 @@
     </div>
     <!-- OFERTAS EMPLEO FIN -->
 
+    <!-- DES_OFERTAS -->
+    <div class="des_ofertas" style="display: none">
+        <div class="marco_ofertas">
+            <div class="titulo">
+                <h1>
+                    AQUÍ VA EL TITULO
+                    <span class="media-icons">
+                        <i class="fas fa-sync-alt"></i>
+                        <i class="fas fa-trash"></i>
+                    </span>
+                </h1>
+            </div>
+            <p>La naturaleza siempre ha sido una fuente inagotable de inspiración para el ser humano...
+                You leave in the morning with
+                everything you own in a little black case
+                Alone on a platform, the wind and the rain on a sad and lonely face
+                Mother will never understand why you had to leave
+                But the answers you seek will never be found at home
+                The love that you need will never be found at home
+                Run away, turn away, run away, turn away, run away
+                Run away, turn away, run away, turn away, run away
+                Pushed around and kicked around, always a lonely boy
+                You were the one that they'd talk
+                about around town as they put you down
+                And as hard as they would try, they'd hurt to make you cry
+                But you never cried to them, just to your soul
+                No, you never cried to them, just to your soul
+                Run away, turn away, run away,
+                turn away, run away (crying to your soul)
+                Run away, turn away, run away,
+                turn away, run away (crying to your soul)
+                Run away, turn away, run away,
+                turn away, run away (crying to your soul)
+                Run away, turn away, run away, turn away, run away
+                Cry, boy, cry
+            </p>
+            <div class="marco_inferior">
+                <h2>Personas aplicadas: 10</h2>
+            </div>
+        </div>
+    </div>
+    <!-- DES_OFERTAS FIN -->
+
+
+
     <footer class="pie-pagina">
         <div class="grupo-1">
             <div class="box">
@@ -473,7 +602,7 @@
             </div>
             <div class="box">
                 <h2>SOBRE NOSOTROS</h2>
-                <p> 
+                <p>
                     Somos OctooCourse, ofrecemos cursos para reforzar el aprendizaje de amantes a la programación,
                     también contamos con ofertas de empleo para generar
                     oportunidades y llegar al camino del éxito.

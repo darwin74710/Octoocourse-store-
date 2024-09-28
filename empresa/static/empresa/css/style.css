@@ -106,6 +106,39 @@
             color: #7d2ae8;
         }
     
+
+        .aboutMe {
+            background: #7d2ae8;
+            color: #fff; /* Color del texto */
+            padding: 8px 22px; /* Espaciado interno */
+            border-radius: 10px; /* Bordes redondeados */
+            text-decoration: none; /* Sin subrayado */
+            font-size: 14px; /* Tamaño de la fuente */
+            transition: all 0.3s ease; /* Transición suave */
+            display: inline-block; /* Para permitir el padding */
+        }
+        
+        .aboutMe:hover {
+            background: #6616d0;
+        }
+        
+
+        .hireMe {
+            background: #7d2ae8;
+            color: #fff; /* Color del texto */
+            padding: 8px 22px; /* Espaciado interno */
+            border-radius: 10px; /* Bordes redondeados */
+            text-decoration: none; /* Sin subrayado */
+            font-size: 14px; /* Tamaño de la fuente */
+            transition: all 0.3s ease; /* Transición suave */
+            display: inline-block; /* Para permitir el padding */
+        }
+        
+        .hireMe:hover {
+            background: #6616d0;
+        }
+        
+
         .card .button {
             width: 100%;
             display: flex;
