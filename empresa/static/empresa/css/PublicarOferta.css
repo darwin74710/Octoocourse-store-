@@ -1,0 +1,128 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+.publicar-oferta {
+    font-family: 'Quicksand', sans-serif;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px; 
+}
+
+.form-container {
+    background-color: #f3d9ff;
+    max-width: 500px;
+    width: 100%; 
+    margin: 20px auto;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    box-sizing: border-box; 
+}
+
+.publicar-oferta #titloP {
+    text-align: center;
+    color: #7d2ae8;
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+label {
+    display: block;
+    color: black;
+    font-weight: 500;
+    font-size: 16px;
+    margin-bottom: 8px;
+}
+
+input[type="text"], textarea {
+    width: 100%;
+    padding: 15px; 
+    border: 4px solid #830cc4;
+    border-radius: 8px;
+    font-size: 16px;
+    font-family: 'Poppins', sans-serif;
+    margin-bottom: 20px;
+    transition: border-color 0.3s ease;
+    box-sizing: border-box;
+}
+
+textarea {
+    min-height: 150px;
+    max-height: 300px;
+    resize: vertical;
+}
+
+input[type="text"]:focus, textarea:focus {
+    border-color: #7d2ae8;
+    outline: none;
+}
+
+button {
+    background-color: #c263f9;
+    color: black;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-size: 20px;
+    width: auto; 
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}  
+
+button:hover {
+    background-color: #a63aa6;
+    color: white;
+}
+
+.form-section {
+    margin-bottom: 20px;
+}
+
+.form-section:last-child {
+    margin-top: -20px;
+    display: flex;
+    justify-content: center; 
+}
+
+@media (max-width: 768px) {
+    .form-container {
+        max-width: 90%; 
+        padding: 15px; 
+    }
+
+    h2 {
+        font-size: 24px; 
+    }
+
+    input[type="text"], textarea {
+        font-size: 14px; 
+        padding: 12px; 
+    }
+
+    button {
+        font-size: 16px; 
+        padding: 10px; 
+    }
+}
+
+@media (max-width: 480px) {
+    .form-container {
+        max-width: 100%; 
+        padding: 10px; 
+    }
+
+    h2 {
+        font-size: 20px; 
+    }
+
+    input[type="text"], textarea {
+        font-size: 14px;
+        padding: 10px; 
+    }
+
+    button {
+        font-size: 14px; 
+        padding: 8px; 
+    }
+}
