@@ -8,7 +8,10 @@
     margin: 15px auto;
     padding: 5px;
     width: 50%; height: auto;
+    background-color: #f3d9ff;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
     border: 3px solid #560581;
+    border-radius: 10px;
 }
 
 .config .marco h1{
@@ -17,6 +20,7 @@
     font-size: 30px;
     width: 100%;
     color: white; background-color: #560581;
+    border-radius: 10px;
 }
 
 .config .marco .configMini{
@@ -41,7 +45,6 @@
     text-align: center;
     margin: auto;
     border-radius: 5px;
-
 }
 
 .config .marco button{
@@ -52,6 +55,7 @@
     cursor: pointer;
     padding: 15px 0px;
     margin-bottom: 10px;
+    border-radius: 10px;
     transition: all 0.3s ease 0s;
 }
 
