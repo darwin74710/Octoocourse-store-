@@ -1,37 +1,56 @@
-.des_cursos{
+.des_ofertas{
     display: none;
 }
 
-.marco_cursos{
+.marco_ofertas{
     display: flex;
     flex-direction: column;
     margin: 15px auto;
     padding: 5px;
     width: 40%; height: auto;
+    background-color: #f3d9ff;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
     border: 3px solid #560581;
+    border-radius: 10px;
 }
 
-.marco_cursos .titulo{
+.marco_ofertas .titulo{
     background-color: #560581;
     margin-bottom: 10px;
+    border-radius: 10px;
 }
 
-.marco_cursos h1{
+.marco_ofertas h1{
     text-align: center;
     word-break: break-word;
     font-size: 30px;
     color: white;
 }
 
-.marco_cursos img{
+.marco_ofertas img{
     width: 100%; height: 50%;
 }
 
-.marco_cursos h2{
+.marco_ofertas h2{
     font-size: 20px;
 }
 
-.marco_cursos .marco_inferior{
+.marco_ofertas h3{
+    font-size: 20px;
+    color: #560581;
+    text-align: center;
+    margin-top: 5px;
+}
+
+.marco_ofertas p{
+    border-radius: 10px;
+    background-color: white;
+    border: 3px solid #560581;
+    padding: 5px;
+    font-weight: bold;
+}
+
+.marco_ofertas .marco_inferior{
     margin: auto;
     margin-top: 10px;
     display: flex;
@@ -39,38 +58,43 @@
     text-align: center;
 }
 
-.marco_cursos .realizarCurso{
+.marco_ofertas .aplicarOferta{
     margin: auto;
     width: 200px; height: 35px;
     font-weight: 700; font-size: 25px;
     color: white; background-color: #8021bb; border: none;
+    border-radius: 10px;
     cursor: pointer;
     padding: 0px 2vmax;
     transition: all 0.3s ease 0s;
 }
 
-.marco_cursos .realizarCurso:hover{
+.marco_ofertas .aplicarOferta:hover{
     background-color: #560581; color: #2e0346;
 }
 
 @media screen and (max-width:800px) {
-    .marco_cursos{
+    .marco_ofertas{
         width: 70%;
     }
 
-    .marco_cursos h1{
+    .marco_ofertas h1{
         font-size: 15px;
     }
 
-    .marco_cursos h2{
+    .marco_ofertas h2{
         font-size: 15px;
     }
 
-    .marco_cursos p{
+    .marco_ofertas h3{
         font-size: 15px;
     }
 
-    .marco_cursos .realizarCurso{
+    .marco_ofertas p{
+        font-size: 15px;
+    }
+
+    .marco_ofertas .aplicarOferta{
         width: 100px; height: 25px;
         font-weight: 600; font-size: 15px;
         padding: 2px 2vmax;
