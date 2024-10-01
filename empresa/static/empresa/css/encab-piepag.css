@@ -88,6 +88,7 @@ body {
 
 .header .menu-compu li {
     background-color: #760ab1;
+    border-radius: 5px;
     margin: 10px;
     transition: all 0.3s ease 0s;
 }
@@ -123,6 +124,7 @@ body {
 
 .header .menu-movil li {
     background-color: #760ab1;
+    border-radius: 5px;
     margin: 10px;
     transition: all 0.3s ease 0s;
 }

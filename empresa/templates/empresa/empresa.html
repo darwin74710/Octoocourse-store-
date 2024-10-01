@@ -7,6 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Empresas</title>
 
+    <link rel="icon" href="{% static 'empresa/img/logo.png' %}"> 
+
     <!-- Scripts css -->
     <link rel="stylesheet" href="{% static 'empresa/css/encab-piepag.css' %}" />
     <link rel="stylesheet" href="{% static 'empresa/css/Estandar.css' %}" />
@@ -75,7 +77,7 @@
     <!-- ESTANDAR FIN -->
 
     <!-- INICIO ESTUDIANTES -->
-    <div class="listaEstud">
+    <div  class="listaEstud">
         <section>
             <div class="swiper mySwiper container">
                 <div class="swiper-wrapper content">
@@ -104,7 +106,7 @@
                             </div>
                             <div class="button">
                                 <a href="{% url 'aboutMeStudent' %}" class="aboutMe">About Me</a>
-                                <a href="" class="hireMe">Hire Me</a> <!-- Cambia 'hireMeStudent' a la URL correcta -->
+                                <a href="" class="hireMe">Hire Me</a> 
                             </div>
                         </div>
                     </div>
@@ -131,8 +133,8 @@
                                 <i class="fas fa-star"></i>
                             </div>
                             <div class="button">
-                                <button class="aboutMe">About Me</button>
-                                <button class="hireMe">Hire Me</button>
+                                <a href="{% url 'aboutMeStudent' %}" class="aboutMe">About Me</a>
+                                <a href="" class="hireMe">Hire Me</a> 
                             </div>
                         </div>
                     </div>
@@ -159,8 +161,8 @@
                                 <i class="far fa-star"></i>
                             </div>
                             <div class="button">
-                                <button class="aboutMe">About Me</button>
-                                <button class="hireMe">Hire Me</button>
+                                <a href="{% url 'aboutMeStudent' %}" class="aboutMe">About Me</a>
+                                <a href="" class="hireMe">Hire Me</a> 
                             </div>
                         </div>
                     </div>
@@ -187,8 +189,8 @@
                                 <i class="far fa-star"></i>
                             </div>
                             <div class="button">
-                                <button class="aboutMe">About Me</button>
-                                <button class="hireMe">Hire Me</button>
+                                <a href="{% url 'aboutMeStudent' %}" class="aboutMe">About Me</a>
+                                <a href="" class="hireMe">Hire Me</a> 
                             </div>
                         </div>
                     </div>
@@ -215,8 +217,8 @@
                                 <i class="far fa-star"></i>
                             </div>
                             <div class="button">
-                                <button class="aboutMe">About Me</button>
-                                <button class="hireMe">Hire Me</button>
+                                <a href="{% url 'aboutMeStudent' %}" class="aboutMe">About Me</a>
+                                <a href="" class="hireMe">Hire Me</a> 
                             </div>
                         </div>
                     </div>
@@ -243,8 +245,8 @@
                                 <i class="far fa-star"></i>
                             </div>
                             <div class="button">
-                                <button class="aboutMe">About Me</button>
-                                <button class="hireMe">Hire Me</button>
+                                <a href="{% url 'aboutMeStudent' %}" class="aboutMe">About Me</a>
+                                <a href="" class="hireMe">Hire Me</a> 
                             </div>
                         </div>
                     </div>
@@ -271,8 +273,8 @@
                                 <i class="far fa-star"></i>
                             </div>
                             <div class="button">
-                                <button class="aboutMe">About Me</button>
-                                <button class="hireMe">Hire Me</button>
+                                <a href="{% url 'aboutMeStudent' %}" class="aboutMe">About Me</a>
+                                <a href="" class="hireMe">Hire Me</a> 
                             </div>
                         </div>
                     </div>
@@ -299,8 +301,8 @@
                                 <i class="far fa-star"></i>
                             </div>
                             <div class="button">
-                                <button class="aboutMe">About Me</button>
-                                <button class="hireMe">Hire Me</button>
+                                <a href="{% url 'aboutMeStudent' %}" class="aboutMe">About Me</a>
+                                <a href="" class="hireMe">Hire Me</a> 
                             </div>
                         </div>
                     </div>
@@ -327,8 +329,8 @@
                                 <i class="far fa-star"></i>
                             </div>
                             <div class="button">
-                                <button class="aboutMe">About Me</button>
-                                <button class="hireMe">Hire Me</button>
+                                <a href="{% url 'aboutMeStudent' %}" class="aboutMe">About Me</a>
+                                <a href="" class="hireMe">Hire Me</a> 
                             </div>
                         </div>
                     </div>
@@ -355,8 +357,8 @@
                                 <i class="far fa-star"></i>
                             </div>
                             <div class="button">
-                                <button class="aboutMe">About Me</button>
-                                <button class="hireMe">Hire Me</button>
+                                <a href="{% url 'aboutMeStudent' %}" class="aboutMe">About Me</a>
+                                <a href="" class="hireMe">Hire Me</a> 
                             </div>
                         </div>
                     </div>
@@ -378,11 +380,11 @@
     <!-- CONFIGURACIONES -->
     <div class="config" style="display: none;">
         <div class="config-container">
-            <h1>Perfil Empresa</h1>
+            <h1>PERFIL EMPRESA</h1>
             <div class="empresa-form">
                 <div class="form-group">
                     <h2>Nombre Empresa</h2>
-                    <input type="text">
+                    <input type="char">
                     <h2>Correo</h2>
                     <input type="email">
 
@@ -391,12 +393,12 @@
                     <h2>Télefono</h2>
                     <input type="number">
                     <h2>Dirección</h2>
-                    <input type="text">
+                    <input type="char">
                 </div>
             </div>
             <div id="nit">
                 <h2>Nit</h2>
-                <input type="text">
+                <input type="varchar">
             </div>
             <button>CONFIGURAR</button>
 
@@ -410,7 +412,7 @@
     <!-- CONFIGURACIONES FIN -->
 
     <!-- OFERTAS EMPLEO -->
-    <div class="empleo">
+    <div class="empleo" style="display: none;">
         <ul class="nav justify-content-center">
             <li class="nav-item">
                 <a class="nav-link" href="#" onclick="mostrarPublicarOferta()">Publicar</a>
@@ -427,7 +429,8 @@
             <div class="tablaOfertas">
                 <div class="casillaOferta">
                     <div class="informacionOferta">
-                        <h2>TITULO OFERTA</h2>
+                        <h2 class="tituloH2">TITULO OFERTA</h2>
+                        <h3>DESCRIPCIÓN:</h3>
                         <p>La naturaleza siempre ha sido una fuente inagotable de inspiración para el ser humano. Desde
                             el
                             susurro del viento entre los árboles hasta el canto armonioso de los pájaros al amanecer,
@@ -450,7 +453,8 @@
                 </div>
                 <div class="casillaOferta">
                     <div class="informacionOferta">
-                        <h2>TITULO OFERTA</h2>
+                        <h2 class="tituloH2">TITULO OFERTA</h2>
+                        <h3>DESCRIPCIÓN:</h3>
                         <p>La naturaleza siempre ha sido una fuente inagotable de inspiración para el ser humano. Desde
                             el
                             susurro del viento entre los árboles hasta el canto armonioso de los pájaros al amanecer,
@@ -473,7 +477,8 @@
                 </div>
                 <div class="casillaOferta">
                     <div class="informacionOferta">
-                        <h2>TITULO OFERTA</h2>
+                        <h2 class="tituloH2">TITULO OFERTA</h2>
+                        <h3>DESCRIPCIÓN:</h3>
                         <p>La naturaleza siempre ha sido una fuente inagotable de inspiración para el ser humano. Desde
                             el
                             susurro del viento entre los árboles hasta el canto armonioso de los pájaros al amanecer,
@@ -496,7 +501,32 @@
                 </div>
                 <div class="casillaOferta">
                     <div class="informacionOferta">
-                        <h2>TITULO OFERTA</h2>
+                        <h2 class="tituloH2">TITULO OFERTA</h2>
+                        <h3>DESCRIPCIÓN:</h3>
+                        <p>La naturaleza siempre ha sido una fuente inagotable de inspiración para el ser humano. Desde
+                            el
+                            susurro del viento entre los árboles hasta el canto armonioso de los pájaros al amanecer,
+                            cada
+                            detalle refleja la belleza intrínseca del mundo en el que vivimos. Sin embargo, en la era
+                            moderna, la conexión con el entorno natural parece haberse debilitado. La urbanización y el
+                            ritmo acelerado de la vida han llevado a muchas personas a olvidarse de la serenidad y el
+                            equilibrio que la naturaleza puede proporcionar. No obstante, es fundamental recordar la
+                            importancia de preservar nuestros ecosistemas, no solo por el bienestar de las generaciones
+                            futuras, sino también por el nuestro. La biodiversidad no es simplemente un término
+                            científico;
+                            es un recordatorio de que todos los seres vivos, grandes y pequeños, tienen un papel
+                            esencial en
+                            el equilibrio de la vida. A medida que avanzamos hacia un futuro incierto, debemos
+                            esforzarnos
+                            por encontrar formas de coexistir de manera armoniosa con nuestro planeta, protegiendo sus
+                            recursos y respetando su sabiduría milenaria.</p>
+                    </div>
+                    <div class="entrarOferta" onclick="Navegacion('des_ofertas')">VER</div>
+                </div>
+                <div class="casillaOferta">
+                    <div class="informacionOferta">
+                        <h2 class="tituloH2">TITULO OFERTA</h2>
+                        <h3>DESCRIPCIÓN:</h3>
                         <p>La naturaleza siempre ha sido una fuente inagotable de inspiración para el ser humano. Desde
                             el
                             susurro del viento entre los árboles hasta el canto armonioso de los pájaros al amanecer,
@@ -538,7 +568,7 @@
                 </div>
 
                 <div class="form-section">
-                    <button type="submit">Publicar oferta</button>
+                    <button type="submit">Publicar Oferta</button>
                 </div>
             </form>
         </div>
@@ -558,6 +588,7 @@
                     </span>
                 </h1>
             </div>
+            <h3>DESCRIPCIÓN:</h3>
             <p>La naturaleza siempre ha sido una fuente inagotable de inspiración para el ser humano...
                 You leave in the morning with
                 everything you own in a little black case

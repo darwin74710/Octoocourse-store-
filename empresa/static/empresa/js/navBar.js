@@ -64,7 +64,7 @@ function Exit() {
 }
 
 
-/*Nav Bar ali*/ 
+/*NavBar ali*/ 
 function mostrarPublicarOferta() {
     ocultarTodasLasSecciones();
     document.querySelector('.publicar-oferta').style.display = 'block';
@@ -74,12 +74,6 @@ function mostrarOferta() {
     ocultarTodasLasSecciones();
     document.querySelector('.veroferta').style.display = 'block';
 }
-
-function mostrarOrdenes() {
-    ocultarTodasLasSecciones();
-    alert('Aquí iría la sección de Órdenes');
-}
-
 
 function ocultarTodasLasSecciones() {
     document.querySelector('.hola').style.display = 'none';

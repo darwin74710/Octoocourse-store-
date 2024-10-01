@@ -1,0 +1,26 @@
+.custom-button {
+    display: inline-block;
+    padding: 12px 24px; /* Aumenta el tamaño del botón */
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+    background-color: #007bff;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 8px; /* Bordes más redondeados */
+    border: 2px solid transparent; /* Asegura que el botón tenga un borde definido */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Añade una sombra para darle más profundidad */
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.custom-button:hover {
+    background-color: #0056b3; /* Color más oscuro en hover */
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15); /* Aumenta la sombra en hover */
+}
+
+.custom-button:active {
+    background-color: #00408a; /* Color más oscuro al hacer clic */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Reduce la sombra en el clic */
+    transform: translateY(2px); /* Le da un pequeño efecto de "presionado" */
+}
