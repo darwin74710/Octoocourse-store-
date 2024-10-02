@@ -1,16 +1,16 @@
 from django.shortcuts import render
 
-def administrator(request):
+def administratorAdmin(request):
     return render(request, 'administrator/administrator.html')
 
-def estudiantes(request):
+def estudiantesAdmin(request):
     return render(request, 'administrator/estudiantes.html')
 
-def curso(request):
+def cursoAdmin(request):
     return render(request, 'administrator/curso.html')
 
-def empresa(request):
+def empresaAdmin(request):
     return render(request, 'administrator/empresa.html')
 
-def aboutMe(request):
+def aboutMeAdmin(request):
     return render(request, 'administrator/aboutMeStudent.html')
