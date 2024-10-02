@@ -1,0 +1,155 @@
+
+
+.hojaVida .marco {
+    display: flex;
+    margin: 15px auto;
+    padding: 5px;
+    width: 50%; height: auto;
+    border: 3px solid #560581;
+    background-color: #8021bb;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+/*IZQUIERDA*/
+.hojaVida .marco .izquierda{
+    background-color: #f3d9ff;
+    border: 3px solid #560581;
+    padding: 5px;
+    border-radius: 5px;
+    margin-right: 5px;
+    width: 35%;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    align-items: stretch;
+}
+.hojaVida .marco .izquierda #perfilImg{
+    width: 100px; height: 100px;
+    margin-left: auto; margin-right: auto;
+}
+
+.hojaVida .marco h1{
+    word-break: break-word; text-align: center;
+    padding: 4%;
+    font-size: 20px;
+    width: 100%;
+    color: white; background-color: #8021bb;
+    border-radius: 10px;
+}
+
+.hojaVida .marco h3{
+    word-break: break-word; text-align: center;
+    padding: 4%;
+    font-size: 20px;
+    width: 100%;
+    color: #8021bb; background-color: #2e0346;
+    margin-bottom: 5px;
+}
+
+.hojaVida .marco .izquierda .minContent{
+    display: flex;
+    flex-wrap: wrap;
+    text-align: right;
+    justify-content: space-between;
+    align-content: center;
+    height: auto;
+}
+
+.hojaVida .marco .izquierda .minContent h2{
+    word-break: break-word;
+    padding: 4%;
+    font-size: 15px;
+    flex: 1;
+}
+
+.hojaVida .marco .izquierda .minContent img{
+    width: 15%; height: 100%;
+    flex-shrink: 0;
+}
+
+.hojaVida .marco .izquierda .lista{
+    text-align: center;
+}
+
+.hojaVida .marco .izquierda .lista h2{
+    font-size: 20px;
+    word-break: break-word;
+    flex: 1;
+}
+
+/*DERECHA*/
+.hojaVida .marco .derecha{
+    background-color: #f3d9ff;
+    border: 3px solid #560581;
+    padding: 5px;
+    border-radius: 5px;
+    margin-left: 5px;
+    width: 65%;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    align-items: stretch;
+}
+
+.infoExp{
+    margin-bottom: 10px;
+}
+
+.infoExp h2{
+    color: #8021bb;
+    font-size: 20px;
+}
+
+.infoExp h4{
+    color: #560581;
+    font-size: 15px;
+}
+
+.infoExp p{
+    font-size: 15px;
+    font-weight: bold;
+}
+
+@media screen and (max-width:800px) {
+    .hojaVida .marco{
+        width: 90%; 
+    }
+
+    .hojaVida .marco .izquierda #perfilImg{
+        width: 50px; height: 50px;
+    }
+
+    .hojaVida .marco .izquierda .minContent{
+        height: auto;
+    }
+
+    .hojaVida .marco .izquierda .minContent h2{
+        font-size: 10px;
+    }
+
+    .hojaVida .marco h1{
+        font-size: 10px;
+    }
+
+    .hojaVida .marco h3{
+        font-size: 10px;
+    }
+    
+    .hojaVida .marco .izquierda .lista h2{
+        font-size: 10px;
+    }
+
+    .infoExp h2{
+        font-size: 15px;
+    }
+
+    .infoExp h4{
+        font-size: 10px;
+    }
+
+    .infoExp p{
+        overflow: auto;
+        font-size: 10px;
+    }
+}

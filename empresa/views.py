@@ -5,3 +5,4 @@ def empresa(request):
 
 def aboutMe(request):
     return render(request, 'empresa/aboutMeStudent.html')
+

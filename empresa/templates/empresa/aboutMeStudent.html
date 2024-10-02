@@ -5,19 +5,129 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sobre Estudiante</title>
+    <title>Hoja Vida Estudiabte</title>
 
     <!-- Scripts css -->
     <link rel="stylesheet" href="{% static 'empresa/css/encab-piepag.css' %}" />
+    <link rel="stylesheet" href="{% static 'empresa/css/HojaVida.css' %}" />
+    <link rel="stylesheet" href="{% static 'empresa/css/aboutMe.css' %}" />
+    <link rel="icon" href="{% static 'empresa/img/logo.png' %}">
 
-
-
-
+    
+    <!-- Scripts javaScript -->
+    <script src="{% static 'empresa/js/navBar.js' %}"></script>
 
 </head>
 
 <body>
     
+    <div class="top-left">
+        <a href="{% url 'empresa' %}" class="custom-button">RETURN</a>
+    </div>
+
+    
+
+    <div class="hojaVida">
+        <div class="marco">
+            <div class="izquierda">
+                <img id="perfilImg" src="{% static 'estudiantes/img/default-perfil.png' %}" alt="">
+
+                <h1>DATOS PERSONALES</h1>
+                <div class="minContent">
+                    <img src="{% static 'estudiantes/img/icon-llamada.svg' %}" alt="">
+                    <h2>+57 333 333 33 33</h2>
+                </div>
+                <div class="minContent">
+                    <img src="{% static 'estudiantes/img/icon-correo2.svg' %}" alt="">
+                    <h2>correo_master121212@correo.edu.co</h2>
+                </div>
+                <div class="minContent">
+                    <img src="{% static 'estudiantes/img/icon-ubicacion.svg' %}" alt="">
+                    <h2>Cra 33 #33-33</h2>
+                </div>
+
+                <h1>APTITUDES</h1>
+                <div class="lista">
+                    <h2>APTITUD</h2>
+                    <h2>APTITUD</h2>
+                    <h2>APTITUD</h2>
+                    <h2>APTITUD</h2>
+                    <h2>APTITUD</h2>
+                </div>
+
+                <h1>IDIOMAS</h1>
+                <div class="minContent">
+                    <img src="{% static 'estudiantes/img/icon-happy.svg' %}" alt="">
+                    <h2>C2</h2>
+                    <h2>ESPAÑOL</h2>
+                </div>
+                <div class="minContent">
+                    <img src="{% static 'estudiantes/img/icon-normal.svg' %}" alt="">
+                    <h2>B1</h2>
+                    <h2>INGLES</h2>
+                </div>
+                <div class="minContent">
+                    <img src="{% static 'estudiantes/img/icon-sad.svg' %}" alt="">
+                    <h2>A1</h2>
+                    <h2>CATALAN</h2>
+                </div>
+
+                <h1>CONOCIMIENTOS</h1>
+                <div class="lista">
+                    <h2>JAVA</h2>
+                    <h2>C++</h2>
+                    <h2>PYTHON</h2>
+                </div>
+
+            </div>
+            <div class="derecha">
+                <h3>JOSE IGNACIO GUADALUPE TERCERO</h3>
+
+                <h1>EXPERIENCIA LABORAL</h1>
+                <div class="infoExp">
+                    <h2>NOMBRE_CARGO</h2>
+                    <h4>NOMBRE_EMPRESA</h4>
+                    <h4>TIEMPO_INICIO / TIEMPO_FINAL</h4>
+                    <p>DESCRIPCION: Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero odio repudiandae
+                        porro eveniet odit laudantium laborum a quasi corporis, dolores nostrum! Inventore natus dolore
+                        autem? Ut tempora labore quisquam. Dolor, quae eligendi unde earum, itaque commodi corrupti
+                        minima quisquam fuga est voluptate ipsum error, id soluta saepe reiciendis sequi quis ut! Quas
+                        dolore commodi repudiandae beatae excepturi incidunt voluptate impedit, libero nulla numquam
+                        natus alias nisi cupiditate debitis, deserunt id, et porro. Itaque ex enim, aliquid facilis
+                        dolor nesciunt sed est? Quidem, magnam minima nihil dolores sed accusantium in adipisci eius?
+                        Excepturi fugit dignissimos nam error, aliquam tempora velit libero.</p>
+                </div>
+                <div class="infoExp">
+                    <h2>NOMBRE_CARGO</h2>
+                    <h4>NOMBRE_EMPRESA</h4>
+                    <h4>TIEMPO_INICIO / TIEMPO_FINAL</h4>
+                    <p>DESCRIPCION: Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero odio repudiandae
+                        porro eveniet odit laudantium laborum a quasi corporis, dolores nostrum! Inventore natus dolore
+                        autem? Ut tempora labore quisquam. Dolor, quae eligendi unde earum, itaque commodi corrupti
+                        minima quisquam fuga est voluptate ipsum error, id soluta saepe reiciendis sequi quis ut! Quas
+                        dolore commodi repudiandae beatae excepturi incidunt voluptate impedit, libero nulla numquam
+                        natus alias nisi cupiditate debitis, deserunt id, et porro. Itaque ex enim, aliquid facilis
+                        dolor nesciunt sed est? Quidem, magnam minima nihil dolores sed accusantium in adipisci eius?
+                        Excepturi fugit dignissimos nam error, aliquam tempora velit libero.</p>
+                </div>
+
+                <h1>FORMACIÓN ACADEMICA</h1>
+                <div class="infoExp">
+                    <h2>NOMBRE_TITULO</h2>
+                    <h4>NOMBRE_INSTITUCIÓN</h4>
+                    <h4>TIEMPO_INICIO / TIEMPO_FINAL</h4>
+                </div>
+                <div class="infoExp">
+                    <h2>NOMBRE_TITULO</h2>
+                    <h4>NOMBRE_INSTITUCIÓN</h4>
+                    <h4>TIEMPO_INICIO / TIEMPO_FINAL</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- HOJA DE VIDA FIN -->
+
+
     <footer class="pie-pagina">
         <div class="grupo-1">
             <div class="box">
