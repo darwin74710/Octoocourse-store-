@@ -3,7 +3,4 @@ entornoVirtual
 db.sqlite3
 manage.py
 __pycache__/
-empresa/migrations/__pycache__/
-estudiantes/migrations/__pycache__/
-login/migrations/__pycache__/
-register/migrations/__pycache__/
+migrations/
