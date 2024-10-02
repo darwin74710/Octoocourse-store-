@@ -2,3 +2,4 @@ blog
 entornoVirtual
 db.sqlite3
 manage.py
+__pycache__/
