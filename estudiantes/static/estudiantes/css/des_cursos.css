@@ -60,6 +60,7 @@
 
 .marco_cursos .realizarCurso{
     margin: auto;
+    text-decoration: none;
     width: 200px; height: 35px;
     font-weight: 700; font-size: 25px;
     color: white; background-color: #8021bb; border: none;

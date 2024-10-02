@@ -1,0 +1,54 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sobre Estudiante</title>
+
+    <!-- Scripts css -->
+    <link rel="stylesheet" href="{% static 'empresa/css/encab-piepag.css' %}" />
+
+
+
+
+
+</head>
+
+<body>
+    
+    <footer class="pie-pagina">
+        <div class="grupo-1">
+            <div class="box">
+                <figure>
+                    <a>
+                        <img src="{% static 'empresa/img/logo.png' %}" alt="logo pie-pagina" onclick="MenuEstandar()">
+                    </a>
+                </figure>
+            </div>
+            <div class="box">
+                <h2>SOBRE NOSOTROS</h2>
+                <p>
+                    Somos OctooCourse, ofrecemos cursos para reforzar el aprendizaje de amantes a la programación,
+                    también contamos con ofertas de empleo para generar
+                    oportunidades y llegar al camino del éxito.
+                </p>
+            </div>
+            <div class="box">
+                <h2>SIGUENOS</h2>
+                <div class="red-social">
+                    <img src="{% static 'estudiantes/img/icon-facebook.svg' %}" alt="">
+                    <img src="{% static 'estudiantes/img/icon-youtube.svg' %}" alt="">
+                    <img src="{% static 'estudiantes/img/icon-correo.svg' %}" alt="">
+                    <img src="{% static 'estudiantes/img/icon-whatsapp.svg' %}" alt="">
+                </div>
+            </div>
+        </div>
+        <div class="grupo-2">
+            <small>&copy; 2024 <b>OctooCourse</b> - Todos los Derechos Reservados.</small>
+        </div>
+    </footer>
+</body>
+
+</html>
