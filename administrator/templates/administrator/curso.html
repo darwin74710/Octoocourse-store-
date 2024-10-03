@@ -8,26 +8,26 @@
     <title>Curso</title>
 
     <link rel="stylesheet" href="{% static 'estudiantes/css/Encab-piepags.css' %}" />
-    <link rel="stylesheet" href="{% static 'estudiantes/css/cursosInteract.css' %}" />
+    <link rel="stylesheet" href="{% static 'estudiantes/css/cursosInteracts.css' %}" />
 </head>
 
 <body>
     <!-- PREGUNTAS-->
     <!--TIPO 1 -->
     <div class="marco">
-        <h1>¿CUAL SERIA TU PREGUNTA?</h1>
+        <h1>¿CUAL SERIA TU RESPUESTA?</h1>
 
         <div id="interact1">
-            <div class="option"></div>
-            <div class="option"></div>
-            <div class="option"></div>
-            <div class="option"></div>
+            <div id="A" class="option"></div>
+            <div id="B" class="option"></div>
+            <div id="C" class="option"></div>
+            <div id="D" class="option"></div>
         </div>
     </div>
 
     <!--TIPO 2 -->
     <div class="marco">
-        <h1>¿CUAL SERIA TU PREGUNTA?</h1>
+        <h1>¿CUAL SERIA TU RESPUESTA?</h1>
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor temporibus cum molestias laborum voluptas
             labore sapiente. Illo, eum. Impedit, consequuntur error illo labore voluptatem veniam veritatis totam,
             voluptatibus repellendus, tempore iure mollitia? Cum doloremque tenetur eos vero praesentium
@@ -48,7 +48,7 @@
         </div>
     </div>
 
-    <div id="btnNext">FINALIZAR</div>
+    <div id="btnNext"><a href="{% url 'estudiantes' %}">FINALIZAR</a></div>
     <!-- FIN PREGUNTAS-->
 
     <!-- RESULTADOS -->
