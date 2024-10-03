@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>editOfertas</title>
 
-    <link rel="stylesheet" href="{% static 'administrator/css/administrador.css' %}" />
+    <link rel="stylesheet" href="{% static 'administrator/css/Administrador.css' %}" />
 </head>
 <body>
     <h1>OFERTAS</h1>
@@ -15,11 +15,30 @@
         <a href="{% url 'administratorAdmin' %}" id="volver"><img id="imgVolver" src="{% static 'administrator/img/casa.png' %}" alt=""></a>
 
         <div class="listas">
-            <li class="interact"><p>PRIMERA OFERTA LABORAL</p><img class="editar" src="{% static 'administrator/img/editar.png' %}" alt=""><img class="eliminar" src="{% static 'administrator/img/basura.png' %}" alt=""></li>
-            <li class="interact"><p>SEGUNDA OFERTA LABORAL</p><img class="editar" src="{% static 'administrator/img/editar.png' %}" alt=""><img class="eliminar" src="{% static 'administrator/img/basura.png' %}" alt=""></li>
-            <li class="interact"><p>TERCERA OFERTA LABORAL</p><img class="editar" src="{% static 'administrator/img/editar.png' %}" alt=""><img class="eliminar" src="{% static 'administrator/img/basura.png' %}" alt=""></li>
-            <li class="interact"><p>CUARTA OFERTA LABORAL</p><img class="editar" src="{% static 'administrator/img/editar.png' %}" alt=""><img class="eliminar" src="{% static 'administrator/img/basura.png' %}" alt=""></li>
-            <li class="interact"><p>QUINTA OFERTA LABORAL</p><img class="editar" src="{% static 'administrator/img/editar.png' %}" alt=""><img class="eliminar" src="{% static 'administrator/img/basura.png' %}" alt=""></li>
+            <li class="interact">
+                <p>PRIMERA OFERTA LABORAL</p>
+                <div class="crudLista">
+                    <img class="visualizar" src="{% static 'administrator/img/ver.png' %}" alt="">
+                    <img class="editar" src="{% static 'administrator/img/editar.png' %}" alt="">
+                    <img class="eliminar" src="{% static 'administrator/img/basura.png' %}" alt="">
+                </div>
+            </li>
+            <li class="interact">
+                <p>SEGUNDA OFERTA LABORAL</p>
+                <div class="crudLista">
+                    <img class="visualizar" src="{% static 'administrator/img/ver.png' %}" alt="">
+                    <img class="editar" src="{% static 'administrator/img/editar.png' %}" alt="">
+                    <img class="eliminar" src="{% static 'administrator/img/basura.png' %}" alt="">
+                </div>
+            </li>
+            <li class="interact">
+                <p>TERCERA OFERTA LABORAL</p>
+                <div class="crudLista">
+                    <img class="visualizar" src="{% static 'administrator/img/ver.png' %}" alt="">
+                    <img class="editar" src="{% static 'administrator/img/editar.png' %}" alt="">
+                    <img class="eliminar" src="{% static 'administrator/img/basura.png' %}" alt="">
+                </div>
+            </li>
         </div>
     </div>
 </body>

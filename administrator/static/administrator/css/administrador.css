@@ -124,18 +124,19 @@ h2{
     cursor: pointer;
     padding: 5px;
     width: 65px; height: 65px;
-    
 }
 
 .interact img:hover{
     background-color: #2e0346;
 }
 
-.interact .editar{
+.interact .crudLista{
     margin-left: auto;
+    display: flex;
+    flex-direction: row;
 }
 
-.interact .eliminar{
+.interact .crudLista .eliminar{
     border-radius: 0px 10px 10px 0px;
 }
 
@@ -156,5 +157,9 @@ h2{
 
     .btn{
         font-size: 20px;
+    }
+
+    .interact .crudLista{
+        flex-direction: column;
     }
 }
