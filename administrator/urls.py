@@ -7,4 +7,7 @@ urlpatterns = [
     path('estudiantes/cursos/', views.cursoAdmin, name='cursoAdmin'),
     path('empresa/', views.empresaAdmin, name='empresaAdmin'),
     path('empresa/about-me/', views.aboutMeAdmin, name='aboutMeStudentAdmin'), 
+    path('editUsuarios', views.editUsuarios, name='editUsuarios'), 
+    path('editOfertas', views.editOfertas, name='editOfertas'), 
+    path('editCV', views.editCV, name='editCV'), 
 ]

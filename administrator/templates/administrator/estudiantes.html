@@ -8,7 +8,7 @@
     <title>Estudiantes</title>
 
     <!-- Scripts css -->
-    <link rel="stylesheet" href="{% static 'estudiantes/css/encab-piepag.css' %}" />
+    <link rel="stylesheet" href="{% static 'estudiantes/css/Encab-piepags.css' %}" />
     <link rel="stylesheet" href="{% static 'estudiantes/css/curso.css' %}" />
     <link rel="stylesheet" href="{% static 'estudiantes/css/Estandar.css' %}" />
     <link rel="stylesheet" href="{% static 'estudiantes/css/Empleos.css' %}" />
@@ -32,23 +32,17 @@
         <a><button onclick="Navegacion('empleo')">OFERTAS</button></a>
 
         <div class="derecha">
-            <img class="pc" src="{% static 'estudiantes/img/user.png' %}" alt="logo Usuario" onclick="MenuPC()">
             <img class="movil" src="{% static 'estudiantes/img/menuMovil.png' %}" alt="Menu" onclick="MenuMovil()">
+            <a class="pc" href="{% url 'administratorAdmin' %}"><img src="{% static 'administrator/img/casa.png' %}" alt="logo Usuario"></a>
         </div>
 
         <div class="menu-movil">
             <li><a onclick="Navegacion('cursos')">Cursos</a></li>
             <li><a onclick="Navegacion('empleo')">Ofertas Empleo</a></li>
-            <li><a onclick="Navegacion('hojaVida')">Hoja de vida</a></li>
-            <li><a onclick="Navegacion('config')">Configuración</a></li>
-            <li><a href="{% url 'login' %}">Salir</a></li>
+            <li><a href="{% url 'administratorAdmin' %}">Volver</a></li>
         </div>
 
-        <div class="menu-compu">
-            <li><a onclick="Navegacion('hojaVida')">Hoja de vida</a></li>
-            <li><a onclick="Navegacion('config')">Configuración</a></li>
-            <li><a href="{% url 'login' %}">Salir</a></li>
-        </div>
+        <div class="menu-compu"></div>
     </header>
     <!-- NAV VAR FIN -->
 

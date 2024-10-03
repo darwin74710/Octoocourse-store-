@@ -14,3 +14,12 @@ def empresaAdmin(request):
 
 def aboutMeAdmin(request):
     return render(request, 'administrator/aboutMeStudent.html')
+
+def editOfertas(request):
+    return render(request, 'administrator/editOfertas.html')
+
+def editUsuarios(request):
+    return render(request, 'administrator/editUsuarios.html')
+
+def editCV(request):
+    return render(request, 'administrator/editCV.html')
