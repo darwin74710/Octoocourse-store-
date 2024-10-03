@@ -14,11 +14,14 @@
     <div id="marcoCont">
         <a href="{% url 'login' %}" id="volver"><img id="imgVolver" src="{% static 'administrator/img/casa.png' %}" alt=""></a>
 
-        <img src="{% static 'administrator/img/logo.png' %}" alt="">
+        <h2>VISUALIZAR</h2>
+        <a href="{% url 'estudiantesAdmin' %}" id="btn1" class="btn">ESTUDIANTE</a>
+        <a href="{% url 'empresaAdmin' %}" id="btn3" class="btn">EMPRESA</a>
 
-        <a href="{% url 'estudiantesAdmin' %}" class="btn">ESTUDIANTE</a>
-
-        <a href="{% url 'empresaAdmin' %}" class="btn">EMPRESA</a>
+        <h2>ADMINISTRAR</h2>
+        <a href="{% url 'editUsuarios' %}" id="btn1" class="btn">USUARIOS</a>
+        <a href="{% url 'editOfertas' %}" id="btn2" class="btn">OFERTAS</a>
+        <a href="{% url 'editCV' %}" id="btn3" class="btn">H_VIDA</a>
     </div>
 </body>
 </html>

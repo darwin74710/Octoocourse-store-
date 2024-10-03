@@ -3,4 +3,4 @@ entornoVirtual
 db.sqlite3
 manage.py
 __pycache__/
-migrations/
+migrations/__pycache__/

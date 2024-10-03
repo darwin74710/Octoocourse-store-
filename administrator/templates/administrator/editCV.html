@@ -1,0 +1,30 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>editCV</title>
+
+    <link rel="stylesheet" href="{% static 'administrator/css/administrador.css' %}" />
+</head>
+
+<body>
+    <h1>HOJAS DE VIDA</h1>
+
+    <div id="marcoCont">
+        <a href="{% url 'administratorAdmin' %}" id="volver"><img id="imgVolver"
+                src="{% static 'administrator/img/casa.png' %}" alt=""></a>
+
+        <div class="listas">
+            <li class="interact"><p>PRIMERA HOJA DE VIDA</p><img class="editar" src="{% static 'administrator/img/editar.png' %}" alt=""><img class="eliminar" src="{% static 'administrator/img/basura.png' %}" alt=""></li>
+            <li class="interact"><p>SEGUNDA HOJA DE VIDA</p><img class="editar" src="{% static 'administrator/img/editar.png' %}" alt=""><img class="eliminar" src="{% static 'administrator/img/basura.png' %}" alt=""></li>
+            <li class="interact"><p>TERCERA HOJA DE VIDA</p><img class="editar" src="{% static 'administrator/img/editar.png' %}" alt=""><img class="eliminar" src="{% static 'administrator/img/basura.png' %}" alt=""></li>
+            <li class="interact"><p>CUARTA HOJA DE VIDA</p><img class="editar" src="{% static 'administrator/img/editar.png' %}" alt=""><img class="eliminar" src="{% static 'administrator/img/basura.png' %}" alt=""></li>
+            <li class="interact"><p>QUINTA HOJA DE VIDA</p><img class="editar" src="{% static 'administrator/img/editar.png' %}" alt=""><img class="eliminar" src="{% static 'administrator/img/basura.png' %}" alt=""></li>
+        </div>
+    </div>
+</body>
+
+</html>
