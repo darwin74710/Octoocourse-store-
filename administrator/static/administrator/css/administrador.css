@@ -4,38 +4,27 @@
 /*GENERAL*/
 * {
     box-sizing: border-box;
-    margin: 0; padding: 0;
+    margin: 0px; padding: 0px;
     font-family: "Quicksand", sans-serif; font-size: 20px;
 }
 
-h1{
-    height: auto; width: 50%;
-    text-align: center;
-    word-break: break-word;
-    font-size: 40px;
-    font-weight: 200px;
-    margin: 10px auto;
-    border-radius: 10px;
-    background-color: #560581; color: white;
-}
-
-h2{
-    margin-top: 40px; margin-bottom: 40px;
-    text-align: center;
-    color: #8021bb;
-    background-color: white;
-    font-size: 40px;
+body{
+    display: flex;
 }
 
 #marcoCont{
-    height: auto; width: 50%;
-    margin: 10px auto;
-    border: 3px solid #560581;
-    background-color: #f3d9ff;
+    height: 100vh; width: 20%;
+    overflow: auto;
+    margin-right: auto;
+    background-color: #2e0346;
     display: flex;
     flex-direction: column;
-    border-radius: 10px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    z-index: 2;
+}
+
+#supMarco{
+    display: flex;
 }
 
 #volver{
@@ -56,17 +45,32 @@ h2{
     height: 100%; width: 100%;
 }
 
-.btn{
-    margin: 10px auto;
+h1{
     word-break: break-word;
-    margin-bottom: 2px;
+    font-size: 25px;
+    margin: auto;
+    font-weight: bold;
+    color: white;
+}
+
+h2{
+    text-align: center;
+    color: white;
+    margin: 10px 0px;
+    background-color: #560581;
+    font-size: 40px;
+}
+
+.btn{
+    word-break: break-word;
     text-decoration: none;
-    width: 70%; height: auto;
-    font-weight: 700; font-size: 45px;
+    width: 90%;
+    margin: 5px auto;
+    border-radius: 20px;
+    font-weight: bold; font-size: 25px;
     text-align: center;
     color: white; background-color: #8021bb; border: none;
     cursor: pointer;
-    padding: 20px 0px;
     transition: all 0.3s ease 0s;
 }
 
@@ -74,92 +78,24 @@ h2{
     background-color: #560581; color: #2e0346;
 }
 
-#btn1{
-    border-radius: 10px 10px 0px 0px;
-    margin-bottom: 2px;
-}
-
-#btn2{
-    margin-top: 2px;
-    margin-bottom: 2px;
-}
-
-#btn3{
-    border-radius: 0px 0px 10px 10px;
-    margin-top: 2px;
-    margin-bottom: 10px;
-}
-
-.listas{
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-    overflow: auto;
-    border: 3px solid #560581;
-    background-color: #2e0346;
-    border-radius: 10px;
-    width: 90%; height: 800px;
-    margin: auto;
-    margin-bottom: 10px;
-}
-
-.interact{
-    background-color: #8021bb;
-    display: flex;
-    word-break: break-word;
-    height: auto;
-    list-style: none;
-    margin: 10px;
-    border-radius: 10px;
-    color: white;
-    font-weight: bold;
-    transition: all 0.3s ease 0s;
-}
-
-.interact p{
-    padding: 20px 10px;
-}
-
-.interact img{
-    background-color: #560581;
-    border: 2px solid #8021bb;
-    cursor: pointer;
-    padding: 5px;
-    width: 65px; height: 65px;
-}
-
-.interact img:hover{
-    background-color: #2e0346;
-}
-
-.interact .crudLista{
-    margin-left: auto;
-    display: flex;
-    flex-direction: row;
-}
-
-.interact .crudLista .eliminar{
-    border-radius: 0px 10px 10px 0px;
-}
-
 @media screen and (max-width:1000px) {
     #marcoCont{
         width: 80%;
     }
 
+    #volver{
+        height: 30px; width: 30px;
+    }
+
     h1{
-        width: 80%;
-        font-size: 20px;
+        font-size: 12px;
     }
 
     h2{
-        margin-top: 20px; margin-bottom: 20px;
-        font-size: 20px;
+        font-size: 15px;
     }
 
     .btn{
-        font-size: 20px;
-    }
-
-    .interact .crudLista{
-        flex-direction: column;
+        font-size: 15px;
     }
 }
