@@ -6,22 +6,153 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Administrador</title>
 
+    <!-- Scripts css -->
     <link rel="stylesheet" href="{% static 'administrator/css/Administrador.css' %}" />
+    <link rel="stylesheet" href="{% static 'administrator/css/listas.css' %}" />
+
+    <!-- Scripts javaScript -->
+    <script src="{% static 'administrator/js/NavBarLeft.js' %}"></script>
 </head>
 <body>
-    <h1>ADMINISTRADOR</h1>
-
+    <!-- BARRA ADMINISTRADOR -->
     <div id="marcoCont">
-        <a href="{% url 'login' %}" id="volver"><img id="imgVolver" src="{% static 'administrator/img/casa.png' %}" alt=""></a>
+        <div id="supMarco">
+            <h1>ADMINISTRADOR</h1>
+            <a href="{% url 'login' %}" id="volver"><img id="imgVolver" src="{% static 'administrator/img/casa.png' %}" alt=""></a>
+        </div>
 
         <h2>VISUALIZAR</h2>
-        <a href="{% url 'estudiantesAdmin' %}" id="btn1" class="btn">ESTUDIANTE</a>
-        <a href="{% url 'empresaAdmin' %}" id="btn3" class="btn">EMPRESA</a>
+        <a href="{% url 'estudiantesAdmin' %}" class="btn">ESTUDIANTE</a>
+        <a href="{% url 'empresaAdmin' %}" class="btn">EMPRESA</a>
 
         <h2>ADMINISTRAR</h2>
-        <a href="{% url 'editUsuarios' %}" id="btn1" class="btn">USUARIOS</a>
-        <a href="{% url 'editOfertas' %}" id="btn2" class="btn">OFERTAS</a>
-        <a href="{% url 'editCV' %}" id="btn3" class="btn">H_VIDA</a>
+        <button class="btn" onclick="NavegacionAdmin('marcoUsuarios')">USUARIOS</button>
+        <button class="btn" onclick="NavegacionAdmin('marcoOfertas')">OFERTAS</button>
+        <button class="btn" onclick="NavegacionAdmin('marcoCV')">H_VIDA</button>
     </div>
+    <!-- BARRA ADMINISTRADOR FIN -->
+
+    <!-- EDITAR CV -->
+    <div class="marcoCV">
+        <div class="listas">
+            <h3>HOJAS DE VIDA</h3>
+
+            <li class="interact">
+                <p>PRIMERA HOJA DE VIDA</p>
+                <div class="crudLista">
+                    <img class="visualizar" src="{% static 'administrator/img/ver.png' %}" alt="">
+                    <img class="editar" src="{% static 'administrator/img/editar.png' %}" alt="">
+                    <img class="eliminar" src="{% static 'administrator/img/basura.png' %}" alt="">
+                </div>
+            </li>
+            <li class="interact">
+                <p>SEGUNDA HOJA DE VIDA</p>
+                <div class="crudLista">
+                    <img class="visualizar" src="{% static 'administrator/img/ver.png' %}" alt="">
+                    <img class="editar" src="{% static 'administrator/img/editar.png' %}" alt="">
+                    <img class="eliminar" src="{% static 'administrator/img/basura.png' %}" alt="">
+                </div>
+            </li>
+            <li class="interact">
+                <p>TERCERA HOJA DE VIDA</p>
+                <div class="crudLista">
+                    <img class="visualizar" src="{% static 'administrator/img/ver.png' %}" alt="">
+                    <img class="editar" src="{% static 'administrator/img/editar.png' %}" alt="">
+                    <img class="eliminar" src="{% static 'administrator/img/basura.png' %}" alt="">
+                </div>
+            </li>
+            <li class="interact">
+                <p>CUARTA HOJA DE VIDA</p>
+                <div class="crudLista">
+                    <img class="visualizar" src="{% static 'administrator/img/ver.png' %}" alt="">
+                    <img class="editar" src="{% static 'administrator/img/editar.png' %}" alt="">
+                    <img class="eliminar" src="{% static 'administrator/img/basura.png' %}" alt="">
+                </div>
+            </li>
+            <li class="interact">
+                <p>QUINTA HOJA DE VIDA</p>
+                <div class="crudLista">
+                    <img class="visualizar" src="{% static 'administrator/img/ver.png' %}" alt="">
+                    <img class="editar" src="{% static 'administrator/img/editar.png' %}" alt="">
+                    <img class="eliminar" src="{% static 'administrator/img/basura.png' %}" alt="">
+                </div>
+            </li>
+        </div>
+    </div>
+    <!-- EDITAR CV FIN -->
+
+    <!-- EDITAR OFERTAS -->
+    <div class="marcoOfertas">
+        <div class="listas">
+            <h3>OFERTAS</h3>
+
+            <li class="interact">
+                <p>PRIMERA OFERTA LABORAL</p>
+                <div class="crudLista">
+                    <img class="visualizar" src="{% static 'administrator/img/ver.png' %}" alt="">
+                    <img class="editar" src="{% static 'administrator/img/editar.png' %}" alt="">
+                    <img class="eliminar" src="{% static 'administrator/img/basura.png' %}" alt="">
+                </div>
+            </li>
+            <li class="interact">
+                <p>SEGUNDA OFERTA LABORAL</p>
+                <div class="crudLista">
+                    <img class="visualizar" src="{% static 'administrator/img/ver.png' %}" alt="">
+                    <img class="editar" src="{% static 'administrator/img/editar.png' %}" alt="">
+                    <img class="eliminar" src="{% static 'administrator/img/basura.png' %}" alt="">
+                </div>
+            </li>
+            <li class="interact">
+                <p>TERCERA OFERTA LABORAL</p>
+                <div class="crudLista">
+                    <img class="visualizar" src="{% static 'administrator/img/ver.png' %}" alt="">
+                    <img class="editar" src="{% static 'administrator/img/editar.png' %}" alt="">
+                    <img class="eliminar" src="{% static 'administrator/img/basura.png' %}" alt="">
+                </div>
+            </li>
+        </div>
+    </div>
+    <!-- EDITAR OFERTAS FIN -->
+
+    <!-- EDITAR USUARIOS -->
+    <div class="marcoUsuarios">
+        <div class="listas">
+            <h3>USUARIOS</h3>
+
+            <li class="interact">
+                <p>PRIMER USUARIO REGISTRADO</p>
+                <div class="crudLista">
+                    <img class="visualizar" src="{% static 'administrator/img/ver.png' %}" alt="">
+                    <img class="editar" src="{% static 'administrator/img/editar.png' %}" alt="">
+                    <img class="eliminar" src="{% static 'administrator/img/basura.png' %}" alt="">
+                </div>
+            </li>
+            <li class="interact">
+                <p>SEGUNDO USUARIO REGISTRADO</p>
+                <div class="crudLista">
+                    <img class="visualizar" src="{% static 'administrator/img/ver.png' %}" alt="">
+                    <img class="editar" src="{% static 'administrator/img/editar.png' %}" alt="">
+                    <img class="eliminar" src="{% static 'administrator/img/basura.png' %}" alt="">
+                </div>
+            </li>
+            <li class="interact">
+                <p>TERCER USUARIO REGISTRADO</p>
+                <div class="crudLista">
+                    <img class="visualizar" src="{% static 'administrator/img/ver.png' %}" alt="">
+                    <img class="editar" src="{% static 'administrator/img/editar.png' %}" alt="">
+                    <img class="eliminar" src="{% static 'administrator/img/basura.png' %}" alt="">
+                </div>
+            </li>
+            <li class="interact">
+                <p>CUARTO USUARIO REGISTRADO</p>
+                <div class="crudLista">
+                    <img class="visualizar" src="{% static 'administrator/img/ver.png' %}" alt="">
+                    <img class="editar" src="{% static 'administrator/img/editar.png' %}" alt="">
+                    <img class="eliminar" src="{% static 'administrator/img/basura.png' %}" alt="">
+                </div>
+            </li>
+        </div>
+    </div>
+    <!-- EDITAR USUARIOS FIN -->
 </body>
 </html>
