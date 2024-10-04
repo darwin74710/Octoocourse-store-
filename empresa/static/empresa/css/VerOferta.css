@@ -11,6 +11,7 @@
     color: #8021bb;
 }
 
+
 .empleo .veroferta .tablaOfertas .casillaOferta .informacionOferta p {
     text-align: center;
     font-size: 15px;
@@ -80,21 +81,23 @@
         grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
     }
 
-    .empleo .veroferta .casillaOferta .entrarOferta {
+    .empleo .veroferta .tablaOfertas .casillaOferta .entrarOferta {
         font-weight: 500;
         font-size: 20px;
         padding: 5px 7vmax;
     }
 
-    .empleo .veroferta .casillaOferta .informacionOferta h2 {
+    .empleo .veroferta .tablaOfertas .casillaOferta .informacionOferta .tituloH2 {
         font-size: 10px;
+        margin-bottom: 5px; 
     }
 
-    .empleo .veroferta .casillaOferta .informacionOferta p {
+    .empleo .veroferta .tablaOfertas .casillaOferta .informacionOferta p {
         font-size: 10px;
+        margin-top: -8px; 
     }
 
-    .empleo .veroferta .casillaOferta .informacionOferta h3 {
+    .empleo .veroferta .tablaOfertas .casillaOferta .informacionOferta h3 {
         font-size: 10px;
     }
 }
