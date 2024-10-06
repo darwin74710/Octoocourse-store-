@@ -1,7 +1,13 @@
 from django.shortcuts import render
 
-def estudiantes(request):
-    return render(request, 'estudiantes/estudiantes.html')
+def Inicio(request):
+    return render(request, 'estudiantes/Inicio.html')
 
-def curso(request):
-    return render(request, 'estudiantes/curso.html')
+def Cursos(request):
+    return render(request, 'estudiantes/Cursos.html')
+
+def Ofertas(request):
+    return render(request, 'estudiantes/Ofertas.html')
+
+def Configuracion(request):
+    return render(request, 'estudiantes/Configuracion.html')
