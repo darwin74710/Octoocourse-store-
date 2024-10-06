@@ -13,7 +13,7 @@ body{
 }
 
 #marcoCont{
-    height: 100vh; width: 20%;
+    height: 100vh; width: 25%;
     overflow: auto;
     margin-right: auto;
     background-color: #2e0346;
@@ -58,7 +58,7 @@ h2{
     color: white;
     margin: 10px 0px;
     background-color: #560581;
-    font-size: 40px;
+    font-size: 30px;
 }
 
 .btn{
