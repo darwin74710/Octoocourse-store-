@@ -1,0 +1,272 @@
+/* Marco general */
+#MarcoCursos{
+    display: flex;
+}
+
+.linea{
+    height: 1px; width: 90%;
+    border-bottom: 1px solid gray;
+    margin: 5px auto;
+}
+
+#filtros, #listaCursos{
+    display: flex;
+    flex-direction: column;
+    margin: 20px;
+    border: 1px solid gray;
+    box-shadow: 0px 1px 5px black;
+}
+
+/* Filtros */
+#filtros{
+    width: 250px; height: 1200px;
+    margin-right: 5px;
+    margin-left: auto;
+}
+
+#filtros h1{
+    cursor: default;
+    font-size: 23px;
+    font-weight: bold;
+    padding: 5px;
+    margin: 0;
+    text-align: center;
+    margin-left: 10px;
+}
+
+#filtros h2{
+    cursor: default;
+    font-size: 18px;
+    padding: 5px;
+    margin: 0;
+    margin-left: 10px;
+}
+
+#MensajeLenguajes{
+    cursor: default;
+    margin: 2px auto;
+    color: #5a16b2;
+    text-align: center;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.contentFiltro{
+    cursor: default;
+    height: 30px; width: 270px;
+    margin: 2px auto;
+    font-size: 15px;
+    margin-left: 14px;
+}
+
+.contentFiltro:hover{
+    color: #8928bd;
+}
+
+.contentFiltro i{
+    margin-right: 5px;
+    font-size: 18px;
+    color: gray;
+    cursor: pointer;
+}
+
+.contentFiltro i:hover{
+    filter: drop-shadow(0px 0px 1px gray);
+}
+
+/* Cursos */
+#listaCursos{
+    width: 800px; height: 1200px;
+    margin-left: 5px;
+    padding: 15px 10px;
+    margin-right: auto; 
+}
+
+/* Cursos Content */
+.contentCurso{
+    width: 100%; height: 215px;
+    background-color: white;
+    position: relative;
+    margin: 5px auto;
+    display: flex;
+    padding: 10px;
+    flex-direction: row;
+    cursor: pointer;
+    border-bottom: 1px solid gray;
+}
+
+.contentCurso:hover{
+    filter: brightness(85%);
+    transition: filter 0.3s ease;
+}
+
+.contentCurso img{
+    width: 280px; height: 100%;
+}
+
+.infoCurso{
+    width: 400px; height: 100%;
+    margin: 0 5px;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+}
+
+.infoCurso h1{
+    font-size: 18px;
+    margin: 0;
+    font-weight: bold;
+}
+
+.infoCurso p{
+    overflow: hidden;
+    height: 65px;
+    font-size: 15px;
+    margin: 0;
+    margin-bottom: auto;
+}
+
+.infoCurso i{
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 500;
+    margin: 0;
+    margin-bottom: 0px;
+}
+
+.precioCurso{
+    width: 70px;
+    text-align: right;
+    font-weight: bold;
+    font-size: 15px;
+}
+
+/* Nav Cursos */
+#ordenCursos{
+    width: 100%; height: 30px;
+    margin-top: auto;
+}
+
+#ordenCursos ul{
+    margin-right: 50px;
+    list-style-type: none;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+}
+
+#ordenCursos ul li{
+    margin: 0 5px;
+}
+
+#ordenCursos ul li a{
+    text-decoration: none;
+    cursor: pointer;
+}
+
+#ordenCursos ul li .nav{
+    color: black;
+}
+
+#ordenCursos ul li .nav:hover{
+    color: #8928bd;
+}
+
+#ordenCursos ul li .nav_active{
+    color: #5a16b2;
+}
+
+#ordenCursos ul li .direccion{
+    padding: 0 5px;
+    font-weight: bold;
+    border: 1px solid gray;
+    border-radius: 10px;
+}
+
+@media screen and (max-width:1100px) {
+    #MarcoCursos{
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* Filtros */
+    #filtros{
+        overflow: hidden;
+        width: 100%; height: auto;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .seccionFiltros{
+        height: auto;
+    }
+
+    .seccionFiltros h2{
+        text-align: center;
+    }
+
+    .numFiltros{
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .contentFiltro{
+        flex: 0 0 calc(33.33% - 20px);
+        height: auto;
+        align-content: center;
+        justify-content: center;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* Cursos */
+    #listaCursos{
+        overflow: hidden;
+        width: 100%; height: 2120px;
+        margin: 0px;
+        margin-bottom: 10px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .contentCurso{
+        height: auto;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .contentCurso img{
+        margin: auto;
+        margin-bottom: 10px;
+    }
+
+    .infoCurso{
+        text-align: center;
+        width: auto;
+    }
+
+    .infoCurso h1{
+        overflow-wrap: break-word;
+        height: auto; width: 100;
+    }
+    
+    .infoCurso p{
+        overflow-wrap: break-word;
+        margin-bottom: 10px;
+        height: auto; width: 100%;
+    }
+
+    .precioCurso{
+        width: 100%;
+        margin: 5px;
+        padding-right: 10px;
+        text-align: right;
+    }
+}
+
+@media screen and (max-width:340px) {
+    .contentCurso img{
+        width: 170px;
+    }
+}
