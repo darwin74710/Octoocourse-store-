@@ -11,3 +11,6 @@ def Ofertas(request):
 
 def Configuracion(request):
     return render(request, 'estudiantes/Configuracion.html')
+
+def OfertasInfo(request):
+    return render(request, 'estudiantes/OfertasInfo.html')
