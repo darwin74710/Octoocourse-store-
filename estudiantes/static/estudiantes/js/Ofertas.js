@@ -17,7 +17,9 @@ function sliderInfo(){
     /*Para cambiar el tamaño de la información*/
     if (slideOfertas.style.width != "700px") {
         slideOfertas.style.width = "700px";
+        slideOfertas.style.padding = "5px";
         slideOfertas.style.border = "1px solid gray";
+        slideOfertas.style.overflow = "auto";
     }
 }
 
@@ -26,6 +28,8 @@ function cerrarInfo(){
 
     if (slideOfertas.style.width === "700px") {
         slideOfertas.style.width = "0";
+        slideOfertas.style.padding = "0";
         slideOfertas.style.border = "none";
+        slideOfertas.style.overflow = "hidden";
     }
 }

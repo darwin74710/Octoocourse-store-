@@ -109,8 +109,8 @@
 #infoOfertas{
     background-color: white;
     height: 1240px; width: 0;
-    overflow: auto;
-    padding: 5px;
+    overflow: hidden;
+    padding: 0;
     top: 70px; right: 0;
     transition: width 0.5s;
     display: flex;
