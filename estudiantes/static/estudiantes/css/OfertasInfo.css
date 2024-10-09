@@ -1,0 +1,57 @@
+#MarcoOfertasInfo{
+    width: auto; height: auto;
+    margin: 0 auto;
+    padding: 0 auto;
+    display: flex;
+    flex-direction: column;
+}
+
+#MarcoOfertasInfo h1{
+    margin: 0;
+    margin-bottom: 15px;
+    text-align: center;
+    width: 100%; height: auto;
+    background-color: #250338; color: white;
+    padding: 10px;
+    padding-top: 20px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+#MarcoOfertasInfo h2{
+    font-weight: bold; font-size: 20px;
+    margin: 15px 5px;
+    margin-bottom: 0;
+}
+
+#MarcoOfertasInfo i{
+    overflow: hidden;
+    margin: 0 5px;
+    font-style: normal;
+    font-size: 15px;
+    font-weight: 500;
+}
+
+#MarcoOfertasInfo p{
+    font-size: 15px;
+    margin: 5px 5px;
+    border-top: 1px solid gray;
+    padding: 5px;
+}
+
+#MarcoOfertasInfo a{
+    text-decoration: none;
+    text-align: center;
+    margin: 10px auto;
+    padding: 0 80px;
+    font-size: 25px;
+    font-weight: 500;
+    border-radius: 20px;
+    color: white; background-color: #8021bb;
+    cursor: pointer;
+    transition: all 0.3s ease 0s;
+}
+
+#MarcoOfertasInfo a:hover{
+    background-color: #560581; color: #2e0346;
+}

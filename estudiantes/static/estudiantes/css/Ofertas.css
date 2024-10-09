@@ -5,17 +5,19 @@
 
 /* Lista Ofertas */
 #listOfertas{
-    height: 1050px; width: 50%;
+    height: 1220px; width: 50%;
     background-color: white;
     display: flex;
     flex-direction: column;
     margin: auto;
-    padding: 5px;
+    padding: 10px;
+    padding-bottom: 5px;
     border: 1px solid gray;
     box-shadow: 0px 1px 5px black;
 }
 
 .ofertaElement{
+    background-color: white;
     width: 100%; height: auto;
     cursor: pointer;
     display: flex;
@@ -30,12 +32,18 @@
 }
 
 .ofertaElement h1{
-    height: 40px;
+    height: 75px;
+    display: flex;
+    justify-content: left;
+    align-items: flex-end;
     overflow: hidden;
     font-weight: bold;
+    color: white; 
+    background-color: #250338;
     font-size: 18px;
     margin: 0px;
     margin-bottom: 5px;
+    padding: 5px;
 }
 
 .ofertaElement p{
@@ -100,7 +108,7 @@
 /* Info Ofertas */
 #infoOfertas{
     background-color: white;
-    height: 1070px; width: 0;
+    height: 1240px; width: 0;
     overflow: auto;
     padding: 5px;
     top: 70px; right: 0;
@@ -125,23 +133,44 @@
     display: block;
 }
 
-#elementsOferta h1{    
+#elementsOferta h1{
+    display: flex;
+    justify-content: left;
+    align-items: flex-end;   
     font-size: 25px;
+    color: white;
+    padding: 10px;
+    padding-top: 30px;
+    background-color: #250338;
     margin: 0;
     font-weight: bold;
     margin-bottom: 10px;
 }
 
+#elementsOferta h2{    
+    font-size: 20px;
+    padding-bottom: 5px;
+    margin: 0;
+    font-weight: bold;
+    margin-top: 10px;
+    border-bottom: 1px solid gray;
+}
+
 #elementsOferta a{
-    width: 90px;
+    width: 95px;
     text-decoration: none;
     display: block;
-    padding: 0 10px;
-    padding-bottom: 2px;
-    font-size: 18px;
+    padding: 5px 15px;
+    font-size: 20px;
     color: white; background-color: #8021bb;
+    border-radius: 100px;
     cursor: pointer;
     margin-bottom: 10px;
+    transition: all 0.3s ease 0s;
+}
+
+#elementsOferta a:hover{
+    background-color: #560581; color: #2e0346;
 }
 
 #elementsOferta i{
@@ -154,7 +183,8 @@
 }
 
 #elementsOferta p{
-    margin-top: 10px;
+    margin: 5px;
+    margin-top: 5px;
     font-size: 18px;
 }
 
