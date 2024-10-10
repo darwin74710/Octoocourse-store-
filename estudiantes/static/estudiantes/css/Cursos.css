@@ -36,7 +36,7 @@
 }
 
 #filtros h2{
-    color: #8928bd;
+    color: #250338;
     cursor: default;
     font-size: 18px;
     padding: 5px;
@@ -47,7 +47,7 @@
 #MensajeLenguajes{
     cursor: default;
     margin: 2px auto;
-    color: #250338;
+    color: #8928bd;
     font-weight: bold;
     text-align: center;
     font-size: 12px;
