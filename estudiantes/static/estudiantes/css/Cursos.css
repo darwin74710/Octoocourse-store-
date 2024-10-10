@@ -17,14 +17,14 @@
 
 /* Filtros */
 #filtros{
-    background-color: #250338;
-    color: white;
+    background-color: white;
     width: 250px; height: 1125px;
     margin-right: 5px;
     margin-left: auto;
 }
 
 #filtros h1{
+    background-color: #250338;
     color: white;
     cursor: default;
     font-size: 23px;
@@ -47,7 +47,8 @@
 #MensajeLenguajes{
     cursor: default;
     margin: 2px auto;
-    color: white;
+    color: #250338;
+    font-weight: bold;
     text-align: center;
     font-size: 12px;
 }
@@ -67,7 +68,6 @@
 .contentFiltro i{
     margin-right: 5px;
     font-size: 18px;
-    color: white;
     cursor: pointer;
 }
 
@@ -83,7 +83,6 @@
     padding: 10px 10px;
     padding-bottom: 5px;
     margin-right: auto;
-    box-shadow: 0px 1px 5px black;
 }
 
 /* Cursos Content */
@@ -149,7 +148,7 @@
 /* Nav Cursos */
 #ordenCursos{
     width: 100%; height: 30px;
-    margin-top: auto;
+    margin-top: 10px;
 }
 
 #ordenCursos ul{
@@ -228,7 +227,7 @@
     /* Cursos */
     #listaCursos{
         overflow: hidden;
-        width: 100%; height: 2120px;
+        width: 100%; height: auto;
         margin: 0px;
         margin-bottom: 10px;
         display: flex;

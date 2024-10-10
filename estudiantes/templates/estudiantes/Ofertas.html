@@ -65,10 +65,6 @@
         <div id="listOfertas">
             <div class="ofertaElement" onclick="activarInfo()">
                 <h1>Titulo Oferta 1 Lorem ipsum, dolor sit amet consectetur adipisicing elit. Minus, recusandae?sadfs</h1>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos quaerat soluta incidunt iusto quo suscipit in eius, 
-                    placeat minima rem? sajkdsa  lkasdj ask a lal dasjjkl Lorem ipsum dolor sit, amet consectetur adipisicing elit. 
-                    Dolorem, non. lorem19
-                </p>
                 <i class="bi bi-person"> : 10 Aplicados</i>
                 <i class="bi bi-terminal"> : Html, CSS, JavaScript</i>
                 <i class="bi bi-cash"> : 1.000.000</i>
@@ -76,10 +72,6 @@
             </div>
             <div class="ofertaElement" onclick="activarInfo()">
                 <h1>Titulo Oferta 1 Lorem ipsum, dolor sit amet consectetur adipisicing elit. Minus, recusandae?sadfs</h1>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos quaerat soluta incidunt iusto quo suscipit in eius, 
-                    placeat minima rem? sajkdsa  lkasdj ask a lal dasjjkl Lorem ipsum dolor sit, amet consectetur adipisicing elit. 
-                    Dolorem, non. lorem19
-                </p>
                 <i class="bi bi-person"> : 10 Aplicados</i>
                 <i class="bi bi-terminal"> : Html, CSS, JavaScript</i>
                 <i class="bi bi-cash"> : 1.000.000</i>
@@ -87,10 +79,6 @@
             </div>
             <div class="ofertaElement" onclick="activarInfo()">
                 <h1>Titulo Oferta 1 Lorem ipsum, dolor sit amet consectetur adipisicing elit. Minus, recusandae?sadfs</h1>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos quaerat soluta incidunt iusto quo suscipit in eius, 
-                    placeat minima rem? sajkdsa  lkasdj ask a lal dasjjkl Lorem ipsum dolor sit, amet consectetur adipisicing elit. 
-                    Dolorem, non. lorem19
-                </p>
                 <i class="bi bi-person"> : 10 Aplicados</i>
                 <i class="bi bi-terminal"> : Html, CSS, JavaScript</i>
                 <i class="bi bi-cash"> : 1.000.000</i>
@@ -98,10 +86,6 @@
             </div>
             <div class="ofertaElement" onclick="activarInfo()">
                 <h1>Titulo Oferta 1 Lorem ipsum, dolor sit amet consectetur adipisicing elit. Minus, recusandae?sadfs</h1>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos quaerat soluta incidunt iusto quo suscipit in eius, 
-                    placeat minima rem? sajkdsa  lkasdj ask a lal dasjjkl Lorem ipsum dolor sit, amet consectetur adipisicing elit. 
-                    Dolorem, non. lorem19
-                </p>
                 <i class="bi bi-person"> : 10 Aplicados</i>
                 <i class="bi bi-terminal"> : Html, CSS, JavaScript</i>
                 <i class="bi bi-cash"> : 1.000.000</i>
@@ -109,10 +93,6 @@
             </div>
             <div class="ofertaElement" onclick="activarInfo()">
                 <h1>Titulo Oferta 1 Lorem ipsum, dolor sit amet consectetur adipisicing elit. Minus, recusandae?sadfs</h1>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos quaerat soluta incidunt iusto quo suscipit in eius, 
-                    placeat minima rem? sajkdsa  lkasdj ask a lal dasjjkl Lorem ipsum dolor sit, amet consectetur adipisicing elit. 
-                    Dolorem, non. lorem19
-                </p>
                 <i class="bi bi-person"> : 10 Aplicados</i>
                 <i class="bi bi-terminal"> : Html, CSS, JavaScript</i>
                 <i class="bi bi-cash"> : 1.000.000</i>
@@ -153,6 +133,22 @@
             </div>
         </div>
     </div>
+
+    <script>
+        /* Con este codigo la ventana de información se re ajuta a la ventana de lista*/
+        const listOfertas = document.getElementById('listOfertas');
+        const infoOfertas = document.getElementById('infoOfertas');
+        
+        function updateHeight() {
+            const tamañoVentanas = listOfertas.offsetHeight + 20;
+            infoOfertas.style.height = tamañoVentanas + 'px';
+        }
+        
+        /* Con este comando se actualiza incluso cuando cambia de tamaño */
+        window.addEventListener('resize', updateHeight);
+        
+        updateHeight();
+    </script>
     
     <!-- Footer -->
     <footer class="piePag">
