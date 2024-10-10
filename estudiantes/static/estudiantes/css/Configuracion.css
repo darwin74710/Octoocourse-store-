@@ -1,0 +1,141 @@
+#MarcoConfig{
+    width: 800px; height: 940px;
+    margin: 10px auto;
+    display: flex;
+    flex-direction: column;
+}
+
+#MarcoConfig h1{
+    padding: 10px 0;
+    font-size: 25px;
+    background-color: #250338; color: white;
+    text-align: center;
+}
+
+#MarcoConfig a{
+    text-decoration: none;
+    margin: 10px auto;
+    padding: 5px 15px;
+    font-size: 20px;
+    color: white; background-color: #8021bb;
+    border-radius: 100px;
+    cursor: pointer;
+    transition: all 0.3s ease 0s;
+}
+
+#MarcoConfig a:hover{
+    background-color: #560581; color: #2e0346;
+}
+
+.contentDatos{
+    display: flex;
+    flex-direction: row;
+}
+
+.camposDatos{
+    margin: 10px 0;
+    width: 400px;
+}
+
+.camposDatos h2{
+    width: 400px;
+    margin: 0;
+    text-align: center;
+    font-size: 20px;
+}
+
+.camposDatos input{
+    display: block;
+    margin: auto;
+    width: 300px;
+}
+
+.adjuntarHV{
+    height: 100px;
+    margin: 10px;
+    border-radius: 10px;
+    border: 1px solid gray;
+    background-color: white;
+    cursor: pointer;
+    display: flex;
+}
+
+.adjuntarHV:hover, #plantillaHV:hover{
+    filter: brightness(85%);
+    transition: filter 0.3s ease;
+}
+
+.adjuntarHV i{
+    color: #8021bb;
+    margin: 25px 10px;
+    margin-left: auto;
+    font-size: 30px;
+    font-weight: normal;
+}
+
+.adjuntarHV #document{
+    color: black;
+    margin: 0;
+    font-size: 65px;
+    font-weight: normal;
+}
+
+.adjuntarHV h2{
+    margin: 30px;
+    margin-left: 5px;
+    font-size: 30px;
+    font-weight: normal;
+}
+
+.seleccionador{
+    font-size: 65px;
+}
+
+#botonesHV{
+    margin: 10px;
+    padding: auto;
+    text-align: center;
+}
+
+#botonesHV a{
+    margin: 0 5px;
+}
+
+#adjuntarHV{
+    display: inline;
+}
+
+/* Temas*/
+#temas{
+    display: flex;
+}
+
+#temaClaro, #temaOscuro{
+    width: 350px; height: 240px;
+    margin: auto;
+    border: 1px solid gray;
+    cursor: pointer;
+}
+
+#temaClaro:hover, #temaOscuro:hover{
+    filter: brightness(85%);
+    transition: filter 0.3s ease;
+}
+
+#temaClaro{
+    background-color: white;
+}
+
+#temaClaro h3{
+    text-align: center;
+    color: #8021bb;
+}
+
+#temaOscuro{
+    background-color: #250338;
+}
+
+#temaOscuro h3{
+    text-align: center;
+    color: white;
+}
