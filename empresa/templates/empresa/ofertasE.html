@@ -1,0 +1,302 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ofertas Empresa</title>
+
+    <!-- Scripts css -->
+    <link rel="stylesheet" href="{% static 'empresa/css/navBarE.css' %}" />
+    <link rel="stylesheet" href="{% static 'empresa/css/footerE.css' %}" />
+    <link rel="stylesheet" href="{% static 'empresa/css/InicioE.css' %}" />
+    <link rel="stylesheet" href="{% static 'empresa/css/fondo.css' %}" />
+    <link rel="stylesheet" href="{% static 'empresa/css/estiloNav.css' %}" />
+    <link rel="stylesheet" href="{% static 'empresa/css/PublicarOferta.css' %}" />
+    <link rel="stylesheet" href="{% static 'empresa/css/VerOferta.css' %}" />
+
+
+
+
+
+    <!-- Imagenes -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <!-- Botstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
+
+<body>
+    <!-- NavBar -->
+    <header id="navBar">
+        <img id="logo" src="{% static 'estudiantes/img/navBar/Logo2.png' %}" alt="">
+
+        <!-- MENU PC -->
+        <div id="derecha">
+            <a href="{% url 'inicioE' %}" class="options_active">Inicio</a>
+            <a href="{% url 'estudiantesE' %}" class="options">Estudiantes</a>
+            <a href="{% url 'ofertasE' %}" class="options">Ofertas</a>
+
+            <div class="linea"></div>
+
+            <a id="btn_icono" href="{% url 'configE' %}"><i class="fas fa-cog"></i></a>
+            <a id="btn_icono" href="{% url 'login' %}"><i class="fa-solid fa-arrow-right-from-bracket"></i></a>
+        </div>
+
+        <!-- MENU MOVIL -->
+        <div id="menuMovil" onclick="activarMenu()">&#9776;</div>
+        <div id="menuHamburguersa">
+            <div id="Elementos">
+                <div id="btnCerrar" onclick="activarMenu()">&times;</div>
+                <img id="logo" src="{% static 'estudiantes/img/navBar/Logo2.png' %}" alt="">
+
+                <div class="linea"></div>
+
+                <h1>Navegación</h1>
+                <a href="{% url 'inicioE' %}" class="options_active">Inicio</a>
+                <a href="{% url 'estudiantesE' %}" class="options">Estudiantes</a>
+                <a href="{% url 'Ofertas' %}" class="options">Ofertas</a>
+                <a href="{% url 'configE' %}" class="options">Configuración</a>
+
+                <div class="linea"></div>
+
+                <a href="{% url 'login' %}" class="logOut">Log out</a>
+
+            </div>
+        </div>
+    </header>
+
+    <div class="empleo">
+        <ul class="nav justify-content-center">
+            <li class="nav-item">
+                <a class="nav-link" href="#" onclick="mostrarPublicarOferta()">Publicar</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#" onclick="mostrarOferta()">Mis Ofertas</a>
+            </li>
+        </ul>
+        <!-- Principal Interfaz -->
+        <div class="fondo">
+            <img src="{% static 'empresa/img/fonditoE.jpg' %}" alt="">
+        </div>
+        <!-- Fin Principal Interfaz -->
+
+
+        <!-- Inicio  ver Ofertas -->
+        <div class="veroferta" style="display: none;">
+            <!-- Contenido de la sección de ofertas -->
+            <img src="{% static 'estudiantes/img/ofertasSup.png' %}" alt="">
+            <div class="tablaOfertas">
+                <!-- Repite la estructura de 'casillaOferta' según sea necesario -->
+                <div class="casillaOferta">
+                    <div class="informacionOferta">
+                        <h2 class="tituloH2">TITULO OFERTA</h2>
+                        <h3>DESCRIPCIÓN:</h3>
+                        <p>La naturaleza siempre ha sido una fuente inagotable de inspiración para el ser humano. Desde
+                            el
+                            susurro del viento entre los árboles hasta el canto armonioso de los pájaros al amanecer,
+                            cada
+                            detalle refleja la belleza intrínseca del mundo en el que vivimos. Sin embargo, en la era
+                            moderna, la conexión con el entorno natural parece haberse debilitado. La urbanización y el
+                            ritmo acelerado de la vida han llevado a muchas personas a olvidarse de la serenidad y el
+                            equilibrio que la naturaleza puede proporcionar. No obstante, es fundamental recordar la
+                            importancia de preservar nuestros ecosistemas, no solo por el bienestar de las generaciones
+                            futuras, sino también por el nuestro. La biodiversidad no es simplemente un término
+                            científico;
+                            es un recordatorio de que todos los seres vivos, grandes y pequeños, tienen un papel
+                            esencial en
+                            el equilibrio de la vida. A medida que avanzamos hacia un futuro incierto, debemos
+                            esforzarnos
+                            por encontrar formas de coexistir de manera armoniosa con nuestro planeta, protegiendo sus
+                            recursos y respetando su sabiduría milenaria.</p>
+                    </div>
+                    <a class="entrarOferta" href="{% url 'des_ofertas' %}">VER</a>
+
+                </div>
+                <div class="casillaOferta">
+                    <div class="informacionOferta">
+                        <h2 class="tituloH2">TITULO OFERTA</h2>
+                        <h3>DESCRIPCIÓN:</h3>
+                        <p>La naturaleza siempre ha sido una fuente inagotable de inspiración para el ser humano. Desde
+                            el
+                            susurro del viento entre los árboles hasta el canto armonioso de los pájaros al amanecer,
+                            cada
+                            detalle refleja la belleza intrínseca del mundo en el que vivimos. Sin embargo, en la era
+                            moderna, la conexión con el entorno natural parece haberse debilitado. La urbanización y el
+                            ritmo acelerado de la vida han llevado a muchas personas a olvidarse de la serenidad y el
+                            equilibrio que la naturaleza puede proporcionar. No obstante, es fundamental recordar la
+                            importancia de preservar nuestros ecosistemas, no solo por el bienestar de las generaciones
+                            futuras, sino también por el nuestro. La biodiversidad no es simplemente un término
+                            científico;
+                            es un recordatorio de que todos los seres vivos, grandes y pequeños, tienen un papel
+                            esencial en
+                            el equilibrio de la vida. A medida que avanzamos hacia un futuro incierto, debemos
+                            esforzarnos
+                            por encontrar formas de coexistir de manera armoniosa con nuestro planeta, protegiendo sus
+                            recursos y respetando su sabiduría milenaria.</p>
+                    </div>
+                    <a class="entrarOferta" href="{% url 'des_ofertas' %}">VER</a>
+                </div>
+                <div class="casillaOferta">
+                    <div class="informacionOferta">
+                        <h2 class="tituloH2">TITULO OFERTA</h2>
+                        <h3>DESCRIPCIÓN:</h3>
+                        <p>La naturaleza siempre ha sido una fuente inagotable de inspiración para el ser humano. Desde
+                            el
+                            susurro del viento entre los árboles hasta el canto armonioso de los pájaros al amanecer,
+                            cada
+                            detalle refleja la belleza intrínseca del mundo en el que vivimos. Sin embargo, en la era
+                            moderna, la conexión con el entorno natural parece haberse debilitado. La urbanización y el
+                            ritmo acelerado de la vida han llevado a muchas personas a olvidarse de la serenidad y el
+                            equilibrio que la naturaleza puede proporcionar. No obstante, es fundamental recordar la
+                            importancia de preservar nuestros ecosistemas, no solo por el bienestar de las generaciones
+                            futuras, sino también por el nuestro. La biodiversidad no es simplemente un término
+                            científico;
+                            es un recordatorio de que todos los seres vivos, grandes y pequeños, tienen un papel
+                            esencial en
+                            el equilibrio de la vida. A medida que avanzamos hacia un futuro incierto, debemos
+                            esforzarnos
+                            por encontrar formas de coexistir de manera armoniosa con nuestro planeta, protegiendo sus
+                            recursos y respetando su sabiduría milenaria.</p>
+                    </div>
+                    <a class="entrarOferta" href="{% url 'des_ofertas' %}">VER</a>
+                </div>
+                <div class="casillaOferta">
+                    <div class="informacionOferta">
+                        <h2 class="tituloH2">TITULO OFERTA</h2>
+                        <h3>DESCRIPCIÓN:</h3>
+                        <p>La naturaleza siempre ha sido una fuente inagotable de inspiración para el ser humano. Desde
+                            el
+                            susurro del viento entre los árboles hasta el canto armonioso de los pájaros al amanecer,
+                            cada
+                            detalle refleja la belleza intrínseca del mundo en el que vivimos. Sin embargo, en la era
+                            moderna, la conexión con el entorno natural parece haberse debilitado. La urbanización y el
+                            ritmo acelerado de la vida han llevado a muchas personas a olvidarse de la serenidad y el
+                            equilibrio que la naturaleza puede proporcionar. No obstante, es fundamental recordar la
+                            importancia de preservar nuestros ecosistemas, no solo por el bienestar de las generaciones
+                            futuras, sino también por el nuestro. La biodiversidad no es simplemente un término
+                            científico;
+                            es un recordatorio de que todos los seres vivos, grandes y pequeños, tienen un papel
+                            esencial en
+                            el equilibrio de la vida. A medida que avanzamos hacia un futuro incierto, debemos
+                            esforzarnos
+                            por encontrar formas de coexistir de manera armoniosa con nuestro planeta, protegiendo sus
+                            recursos y respetando su sabiduría milenaria.</p>
+                    </div>
+                    <a class="entrarOferta" href="{% url 'des_ofertas' %}">VER</a>
+                </div>
+                <div class="casillaOferta">
+                    <div class="informacionOferta">
+                        <h2 class="tituloH2">TITULO OFERTA</h2>
+                        <h3>DESCRIPCIÓN:</h3>
+                        <p>La naturaleza siempre ha sido una fuente inagotable de inspiración para el ser humano. Desde
+                            el
+                            susurro del viento entre los árboles hasta el canto armonioso de los pájaros al amanecer,
+                            cada
+                            detalle refleja la belleza intrínseca del mundo en el que vivimos. Sin embargo, en la era
+                            moderna, la conexión con el entorno natural parece haberse debilitado. La urbanización y el
+                            ritmo acelerado de la vida han llevado a muchas personas a olvidarse de la serenidad y el
+                            equilibrio que la naturaleza puede proporcionar. No obstante, es fundamental recordar la
+                            importancia de preservar nuestros ecosistemas, no solo por el bienestar de las generaciones
+                            futuras, sino también por el nuestro. La biodiversidad no es simplemente un término
+                            científico;
+                            es un recordatorio de que todos los seres vivos, grandes y pequeños, tienen un papel
+                            esencial en
+                            el equilibrio de la vida. A medida que avanzamos hacia un futuro incierto, debemos
+                            esforzarnos
+                            por encontrar formas de coexistir de manera armoniosa con nuestro planeta, protegiendo sus
+                            recursos y respetando su sabiduría milenaria.</p>
+                    </div>
+                    <a class="entrarOferta" href="{% url 'des_ofertas' %}">VER</a>
+                </div>
+            </div>
+        </div>
+        <!-- Fin  ver Ofertas -->
+
+        <!-- Inicio  publicar Ofertas -->
+        <div class="publicar-oferta" style="display: none;">
+            <form class="form-container">
+                <h2 id="titloP">Nombre de la Empresa</h2>
+                <div class="form-section">
+                    <label for="nombreOferta">Nombre de la oferta</label>
+                    <input type="text" id="nombreOferta" name="nombreOferta" placeholder="Ej. Desarrollador Junior"
+                        required>
+                </div>
+                <div class="form-section">
+                    <label for="descripcionOferta">Descripción de la oferta</label>
+                    <textarea id="descripcionOferta" name="descripcionOferta"
+                        placeholder="Ej. Descripción detallada de la oferta" maxlength="1000" required></textarea>
+                </div>
+                <div class="form-section">
+                    <button type="submit">Publicar Oferta</button>
+                </div>
+            </form>
+        </div>
+        <!-- FIn  publicar Ofertas -->
+
+
+        <script src="{% static 'empresa/js/script.js' %}"></script>
+
+    </div>
+
+    <script>
+        window.onload = function () {
+            document.querySelector('.fondo').style.display = 'block'; 
+            ocultarTodasLasSecciones(); 
+        };
+
+        function mostrarPublicarOferta() {
+            ocultarTodasLasSecciones(); 
+            document.querySelector('.publicar-oferta').style.display = 'block'; 
+            document.querySelector('.fondo').style.display = 'none'; 
+        }
+
+        function mostrarOferta() {
+            ocultarTodasLasSecciones(); 
+            document.querySelector('.veroferta').style.display = 'block'; 
+            document.querySelector('.fondo').style.display = 'none'; 
+        }
+
+        function ocultarTodasLasSecciones() {
+            document.querySelector('.publicar-oferta').style.display = 'none'; 
+            document.querySelector('.veroferta').style.display = 'none'; 
+        }
+
+    </script>
+
+
+    <!-- Footer -->
+    <footer class="piePag">
+        <div id="Marco1">
+            <div class="Elementos">
+                <h1>SOBRE NOSOTROS</h1>
+                <p>Somos OctooCourse, ofrecemos cursos para reforzar el aprendizaje de amantes a la programación,
+                    también contamos con ofertas de empleo para generar
+                    oportunidades y llegar al camino del éxito.
+                </p>
+            </div>
+            <div class="Elementos">
+                <h1>SÍGUENOS</h1>
+                <div id="redes">
+                    <a href="https://whatsapp.com" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                    <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://youtube.com" target="_blank"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+        <div id="Marco2">&copy; 2024 OctooCourse - Todos los Derechos Reservados.</div>
+    </footer>
+
+    <!-- Scripts js -->
+    <script src="{% static 'empresas/js/navBarE.js' %}"></script>
+
+    <!-- Scripts Botstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

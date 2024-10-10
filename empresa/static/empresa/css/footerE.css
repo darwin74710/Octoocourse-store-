@@ -1,0 +1,79 @@
+.piePag{
+    width: 100%; height: auto;
+    background-color: #2e0346;
+    display: flex;
+    flex-direction: column;
+}
+
+#Marco1{
+    width: 100%; height: auto;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+}
+
+#Marco1 .Elementos{
+    margin: 0px auto;
+    width: 40%;
+}
+
+#Marco1 h1{
+    text-align: center;
+    margin-top: 20px;
+    font-size: 25px;
+    margin-bottom: 10px;
+    color: #8928bd;
+}
+
+#Marco1 p{
+    text-align: center;
+    color: white;
+}
+
+#Marco1 #redes{
+    align-content: center;
+    justify-content: center;
+    margin-top: 20px;
+    display: flex;
+    gap: 20px;
+    flex-direction: row;
+}
+
+#Marco1 #redes a {
+    text-decoration: none;
+    color: #8928bd;
+}
+
+#Marco1 #redes a:hover {
+    color: #540f79;
+}
+
+#Marco1 #redes a i{
+    font-size: 50px;
+}
+
+#Marco2, b{
+    margin: auto;
+    margin-top: 70px;
+    width: 90%; height: auto;
+    border-top: 1px solid #540f79;
+    padding: 10px;
+    font-size: 15px;
+    color: #8928bd;
+    text-align: center;
+}
+
+@media screen and (max-width:800px) {
+    #Marco1{
+        display: flex;
+        flex-direction: column;
+    }
+
+    #Marco1 h1{
+        margin-top: 60px;
+    }
+
+    #Marco1 .Elementos{
+        width: 80%;
+    }
+}

@@ -17,7 +17,7 @@
             if (valorInput === "estudiante"){
                 location.href = "{% url 'Inicio' %}";
             }else if(valorInput === "empresa"){
-                location.href = "{% url 'empresa' %}";
+                location.href = "{% url 'inicioE' %}";
             }else if(valorInput === "administrador"){
                 location.href = "{% url 'administratorAdmin' %}";
             }
@@ -40,7 +40,7 @@
                     </p>
                     <p>
                         <label for="password">Contraseña</label>
-                        <input type="text" name="password" id="password">
+                        <input type="password" name="password" id="password">
                     </p>
                     <p>
                         <a class="boton" onclick="ingresar()">INICIAR SESIÓN</a>
