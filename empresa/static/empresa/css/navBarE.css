@@ -1,0 +1,175 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap');
+*{
+    margin: 0px; padding: 0px;
+    font-family: "Quicksand", sans-serif; font-size: 20px;
+}
+
+#navBar{
+    width: auto; height: 70px;
+    padding: 0px 20px;
+    box-shadow: 0px 1px 5px black;
+    display: flex;
+    align-items: center;
+}
+
+#navBar .logOut{
+    text-decoration: none;
+    margin: 5px auto;
+    padding: 0 10px;
+    padding-bottom: 2px;
+    font-size: 18px;
+    color: white; background-color: #8021bb;
+    cursor: pointer;
+}
+
+/* MENU PC */
+#navBar #logo{
+    width: 120px; height: 70px;
+    margin-left: 20px;
+}
+
+#navBar #derecha{
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+}
+
+#navBar #btn_icono{
+    margin-left: 10px;
+    text-decoration: none;
+    color: black;
+}
+
+#navBar #btn_icono:hover{
+    color: #8021bb;
+}
+
+#navBar #btn_icono_active{
+    margin-left: 10px;
+    text-decoration: none;
+    color: #8021bb;
+}
+
+#navBar a i{
+    font-size: 30px;
+}
+
+#navBar #derecha .linea{
+    border-left: 1px solid black;
+    height: 50px;
+    margin: 0px 10px;
+}
+
+#navBar #derecha .options{
+    text-decoration: none;
+    margin: 0px 20px;
+    color: black;
+    cursor: pointer;
+    font-size: 15px;
+}
+
+#navBar #derecha .options:hover{
+    color: #8021bb;
+}
+
+#navBar #derecha .options_active{
+    text-decoration: none;
+    margin: 0px 20px;
+    color: #8021bb;
+    cursor: pointer;
+    font-size: 15px;
+}
+
+
+/* MENU MOVIL */
+#menuMovil {
+    display: none;
+    font-size: 30px;
+    color: black;
+    cursor: pointer;
+}
+
+#menuMovil:hover{
+    color: #8021bb;
+}
+
+#menuHamburguersa {
+    display: flex;
+    flex-direction: column;
+    height: 100%; width: 0px;
+    top: 0px; left: 0px;
+    background-color: white; box-shadow: 0px 1px 5px black;
+    overflow-x: hidden;
+    transition: width 0.5s;
+    position: absolute;
+    z-index: 5;
+}
+
+#menuHamburguersa #Elementos{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    list-style: none;
+    
+}
+
+#menuHamburguersa #Elementos .linea{
+    border-bottom: 1px solid black;
+    margin: 10px;
+}
+
+#menuHamburguersa #btnCerrar {
+    position: absolute;
+    top: 0px;
+    right: 15px;
+    font-size: 36px;
+}
+
+#menuHamburguersa #Elementos img{
+    margin: auto;
+    width: 120px; height: 70px;
+}
+
+#menuHamburguersa #Elementos h1{
+    font-size: 20px;
+    color: black;
+    margin-bottom: 5px;
+}
+
+#menuHamburguersa #Elementos .options{
+    text-decoration: none;
+    margin: 5px;
+    font-size: 18px;
+    color: black;
+    cursor: pointer;
+}
+
+#menuHamburguersa #Elementos .options:hover{
+    color: #8021bb;
+}
+
+#menuHamburguersa #Elementos .options_active{
+    text-decoration: none;
+    margin: 5px;
+    font-size: 18px;
+    color: #8021bb;
+    cursor: pointer;
+}
+
+/*Responsive pie de pagina menos del valor*/
+@media screen and (max-width:800px) {
+    #navBar #logo, #navBar #derecha{
+        display: none;
+    }
+
+    #menuMovil, #menuHamburguersa{
+        display: block;
+    }
+}
+
+/*Responsive pie de pagina mas del valor*/
+@media (min-width: 800px) {
+    #menuHamburguersa{
+        display: none;
+    }
+}
