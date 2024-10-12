@@ -1,6 +1,13 @@
 #MarcoOfertas{
     display: flex;
     margin: 10px 0;
+    
+}
+
+#CerrarInfo{
+    width: 100%; height: 100%;
+    position: absolute;
+    z-index: 0;
 }
 
 /* Lista Ofertas */
@@ -12,6 +19,7 @@
     margin: auto;
     padding: 10px;
     padding-bottom: 5px;
+    z-index: 1;
 }
 
 .ofertaElement{
@@ -92,6 +100,7 @@
 
 /* Info Ofertas */
 #infoOfertas{
+    z-index: 2;
     background-color: white;
     height: auto; width: 0;
     overflow: hidden;
