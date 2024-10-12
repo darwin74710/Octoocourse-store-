@@ -63,6 +63,46 @@
     <!-- Ofertas interfaz -->
     <div id="MarcoOfertas">
         <div id="CerrarInfo" onclick="cerrarInfo()"></div>
+        <div id="filtros">
+            <h1>Filtros</h1>
+            <label class="linea"></label>
+    
+            <div class="seccionFiltros">
+                <h2>Lenguaje:</h2>
+                <div class="numFiltros">
+                    <div class="contentFiltro"><i id="HtmlFilter" onclick="filtro_lenguaje('Html')" class="bi bi-square"></i>Html</div>
+                    <div class="contentFiltro"><i id="CSSFilter" onclick="filtro_lenguaje('CSS')" class="bi bi-square"></i>CSS</div>
+                    <div class="contentFiltro"><i id="JavaFilter" onclick="filtro_lenguaje('Java')" class="bi bi-square"></i>Java</div>
+                    <div class="contentFiltro"><i id="JavaScriptFilter" onclick="filtro_lenguaje('JavaScript')" class="bi bi-square"></i>JavaScript</div>
+                    <div class="contentFiltro"><i id="PythonFilter" onclick="filtro_lenguaje('Python')" class="bi bi-square"></i>Python</div>
+                    <div class="contentFiltro"><i id="SQLFilter" onclick="filtro_lenguaje('SQL')" class="bi bi-square"></i>SQL</div>
+                </div>
+            </div>
+
+            <label class="linea"></label>
+
+            <div class="seccionFiltros">
+                <h2>Salario:</h2>
+                <div class="numFiltros">
+                    <div class="contentFiltro"><i id="5_1Filter" onclick="filtro_salario('5_1')" class="bi bi-square"></i>500.000 / 1.000.000</div>
+                    <div class="contentFiltro"><i id="1_2Filter" onclick="filtro_salario('1_2')" class="bi bi-square"></i>1.100.000 / 2.000.000</div>
+                    <div class="contentFiltro"><i id="2_3Filter" onclick="filtro_salario('2_3')" class="bi bi-square"></i>2.100.000 / 3.000.000</div>
+                </div>
+            </div>
+
+            <label class="linea"></label>
+
+            <div class="seccionFiltros">
+                <h2>Contrato:</h2>
+                <div class="numFiltros">
+                    <div class="contentFiltro"><i id="FijoFilter" onclick="filtro_contrato('Fijo')" class="bi bi-square"></i>Fijo</div>
+                    <div class="contentFiltro"><i id="IndefinidoFilter" onclick="filtro_contrato('Indefinido')" class="bi bi-square"></i>Indefinido</div>
+                    <div class="contentFiltro"><i id="ObraLaborFilter" onclick="filtro_contrato('ObraLabor')" class="bi bi-square"></i>ObraLabor</div>
+                    <div class="contentFiltro"><i id="AprendizajeFilter" onclick="filtro_contrato('Aprendizaje')" class="bi bi-square"></i>Aprendizaje</div>
+                </div>
+            </div>
+        </div>
+
         <div id="listOfertas">
             <div class="ofertaElement" onclick="activarInfo()">
                 <h1>Titulo Oferta 1 Lorem ipsum, dolor sit amet consectetur adipisicing elit. Minus, recusandae?sadfs</h1>
