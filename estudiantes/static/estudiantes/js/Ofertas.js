@@ -17,7 +17,7 @@ function sliderInfo(){
     if (slideOfertas.style.width != "700px") {
         slideOfertas.style.width = "700px";
         slideOfertas.style.padding = "5px";
-        slideOfertas.style.border = "1px solid gray";
+        slideOfertas.style.border = "1px solid var(--borde1)";
         slideOfertas.style.overflow = "auto";
     }
 }
@@ -56,7 +56,7 @@ function filtro_lenguaje(Lenguaje) {
     if (checkButton) {
         if (checkButton.classList.contains('bi-check-square')) {
             checkButton.classList.remove('bi-check-square');
-            checkButton.style.color = "black";
+            checkButton.style.color = "var(--letra1)";
             checkButton.classList.add('bi-square');
         } else {
             checkButton.classList.remove('bi-square');
@@ -80,7 +80,7 @@ function filtro_salario(salario) {
     if (checkButton) {
         if (checkButton.classList.contains('bi-check-square')) {
             checkButton.classList.remove('bi-check-square');
-            checkButton.style.color = "black";
+            checkButton.style.color = "var(--letra1)";
             checkButton.classList.add('bi-square');
         } else {
             checkButton.classList.remove('bi-square');
@@ -106,12 +106,23 @@ function filtro_contrato(contrato) {
     if (checkButton) {
         if (checkButton.classList.contains('bi-check-square')) {
             checkButton.classList.remove('bi-check-square');
-            checkButton.style.color = "black";
+            checkButton.style.color = "var(--letra1)";
             checkButton.classList.add('bi-square');
         } else {
             checkButton.classList.remove('bi-square');
             checkButton.style.color = "#8021bb";
             checkButton.classList.add('bi-check-square');
         }
+    }
+}
+
+/* Activar Modal Pago */
+function modal_Pag(activador){
+    const modal = document.getElementById("modalPago");
+
+    if(activador === "activado"){
+        modalPago.style.display = "flex";
+    }else if (activador === "desactivado"){
+        modalPago.style.display = "none";
     }
 }

@@ -11,7 +11,7 @@
     margin-bottom: 15px;
     text-align: center;
     width: 100%; height: auto;
-    background-color: #250338; color: white;
+    background-color: var(--fondoTitulo2); color: var(--letraTitulo2);
     padding: 10px;
     padding-top: 20px;
     font-size: 20px;
@@ -19,12 +19,14 @@
 }
 
 #MarcoOfertasInfo h2{
+    color: var(--letratitulo1);
     font-weight: bold; font-size: 20px;
     margin: 15px 5px;
     margin-bottom: 0;
 }
 
 #MarcoOfertasInfo i{
+    color: var(--letra1);
     overflow: hidden;
     margin: 0 5px;
     font-style: normal;
@@ -33,9 +35,10 @@
 }
 
 #MarcoOfertasInfo p{
+    color: var(--letra1);
     font-size: 15px;
     margin: 5px 5px;
-    border-top: 1px solid gray;
+    border-top: 1px solid var(--borde1);
     padding: 5px;
 }
 
@@ -47,11 +50,11 @@
     font-size: 25px;
     font-weight: 500;
     border-radius: 20px;
-    color: white; background-color: #8021bb;
+    color: var(--letraBotones1); background-color: var(--fondoBotones1);
     cursor: pointer;
     transition: all 0.3s ease 0s;
 }
 
 #MarcoOfertasInfo a:hover{
-    background-color: #560581; color: #2e0346;
+    background-color: var(--hFondoBotones1); color: var(--hLetraBotones1);
 }

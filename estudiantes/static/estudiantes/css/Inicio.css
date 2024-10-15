@@ -28,6 +28,10 @@
     flex-direction: row;
 }
 
+#ultimoCont{
+    margin-bottom: 30px;
+}
+
 .infoCont .izquierda img, .infoCont .derecha img{
     border-radius: 500px;
 }
@@ -38,12 +42,13 @@
 }
 
 .infoMensaje h1{
-    color: #8021bb; height: auto;
-    border-bottom: 1px solid gray;
+    color: var(--letratitulo1); height: auto;
+    border-bottom: 1px solid var(--borde1);
     font-size: 30px;
 }
 
 .infoMensaje p{
+    color: var(--letra1);
     width: 500px; height: auto;
     font-size: 25px;
 }
