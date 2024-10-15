@@ -8,9 +8,13 @@
     <title>Oferta Info</title>
 
     <!-- Scripts css -->
+    <link rel="stylesheet" href="{% static 'estudiantes/css/Colores.css' %}" />
     <link rel="stylesheet" href="{% static 'estudiantes/css/navBar.css' %}" />
     <link rel="stylesheet" href="{% static 'estudiantes/css/footer.css' %}" />
     <link rel="stylesheet" href="{% static 'estudiantes/css/OfertasInfo.css' %}" />
+
+    <!-- Cargar tema -->
+    <script src="{% static 'estudiantes/js/Temas.js' %}"></script>
 
     <!-- Imagenes -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -20,7 +24,7 @@
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
 
-<body>
+<body style="background-color: var(--fondo1);">
     <!-- NavBar -->
     <header id="navBar">
         <img id="logo" src="{% static 'estudiantes/img/navBar/Logo2.png' %}" alt="">

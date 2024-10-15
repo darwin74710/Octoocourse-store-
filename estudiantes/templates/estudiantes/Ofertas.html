@@ -8,9 +8,14 @@
     <title>Ofertas</title>
 
     <!-- Scripts css -->
+    <link rel="stylesheet" href="{% static 'estudiantes/css/Colores.css' %}" />
     <link rel="stylesheet" href="{% static 'estudiantes/css/navBar.css' %}" />
     <link rel="stylesheet" href="{% static 'estudiantes/css/footer.css' %}" />
     <link rel="stylesheet" href="{% static 'estudiantes/css/Ofertas.css' %}" />
+    <link rel="stylesheet" href="{% static 'estudiantes/css/OfertasPago.css' %}" />
+
+    <!-- Cargar tema -->
+    <script src="{% static 'estudiantes/js/Temas.js' %}"></script>
 
     <!-- Imagenes -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -21,7 +26,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 </head>
 
-<body>
+<body style="background-color: var(--fondo1);">
     <!-- NavBar -->
     <header id="navBar">
         <img id="logo" src="{% static 'estudiantes/img/navBar/Logo2.png' %}" alt="">
@@ -156,7 +161,7 @@
             <i onclick="cerrarInfo()" id="cerrar" class="bi bi-x-lg"></i>
             <div id="elementsOferta">
                 <h1>Titulo Oferta 1 Lorem ipsum, dolor sit amet consectetur adipisicing elit. Minus, recusandae?sadfs</h1>
-                <a >Aplicar</a>
+                <a onclick="modal_Pag('activado')">Aplicar</a>
                 <i class="bi bi-person"> : 10 Aplicados</i>
                 <i class="bi bi-terminal"> : Html, CSS, JavaScript</i>
                 <i class="bi bi-cash"> : 1.000.000</i>
@@ -175,13 +180,32 @@
         </div>
     </div>
 
+    <div id="modalPago">
+        <div id="contentModal">
+            <div id="superior">
+                <div id="pagos">
+                        <h1>Tarjetas de crédito o débito</h1>
+                        <div id="pagoImg">
+
+                        </div>
+                </div>
+
+            </div>
+
+            <div id="inferior">
+                <a onclick="modal_Pag('desactivado')">Atras</a>
+                <a>Pagar</a>
+            </div>
+        </div>
+    </div>
+
     <script>
         /* Con este codigo la ventana de información se re ajuta a la ventana de lista*/
         const listOfertas = document.getElementById('listOfertas');
         const infoOfertas = document.getElementById('infoOfertas');
         
         function updateHeight() {
-            const tamañoVentanas = listOfertas.offsetHeight + 20;
+            const tamañoVentanas = listOfertas.offsetHeight + 40;
             infoOfertas.style.height = tamañoVentanas + 'px';
         }
         

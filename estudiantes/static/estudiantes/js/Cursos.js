@@ -11,7 +11,7 @@ function filtro_lenguaje(Lenguaje) {
     if (checkButton) {
         if (checkButton.classList.contains('bi-check-square')) {
             checkButton.classList.remove('bi-check-square');
-            checkButton.style.color = "black";
+            checkButton.style.color = "var(--letra1)";
             checkButton.classList.add('bi-square');
         } else {
             checkButton.classList.remove('bi-square');
@@ -36,7 +36,7 @@ function filtro_dificultad(Dificultad) {
     if (checkButton) {
         if (checkButton.classList.contains('bi-check-square')) {
             checkButton.classList.remove('bi-check-square');
-            checkButton.style.color = "black";
+            checkButton.style.color = "var(--letra1)";
             checkButton.classList.add('bi-square');
         } else {
             checkButton.classList.remove('bi-square');
@@ -62,7 +62,7 @@ function filtro_tiempo(Tiempo) {
     if (checkButton) {
         if (checkButton.classList.contains('bi-check-square')) {
             checkButton.classList.remove('bi-check-square');
-            checkButton.style.color = "black";
+            checkButton.style.color = "var(--letra1)";
             checkButton.classList.add('bi-square');
         } else {
             checkButton.classList.remove('bi-square');
@@ -84,7 +84,7 @@ function filtro_Certificado(Certificado) {
     if (checkButton) {
         if (checkButton.classList.contains('bi-check-square')) {
             checkButton.classList.remove('bi-check-square');
-            checkButton.style.color = "black";
+            checkButton.style.color = "var(--letra1)";
             checkButton.classList.add('bi-square');
         } else {
             checkButton.classList.remove('bi-square');
