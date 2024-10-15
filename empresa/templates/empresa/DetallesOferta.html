@@ -1,27 +1,25 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Configuración Empresa</title>
+    <title>Detalles oferta</title>
 
     <!-- Scripts css -->
     <link rel="stylesheet" href="{% static 'empresa/css/navBarE.css' %}" />
     <link rel="stylesheet" href="{% static 'empresa/css/footerE.css' %}" />
     <link rel="stylesheet" href="{% static 'empresa/css/InicioE.css' %}" />
-    <link rel="stylesheet" href="{% static 'empresa/css/fondo.css' %}" />
-    <link rel="stylesheet" href="{% static 'empresa/css/configs.css' %}" />
-
-
+    <link rel="stylesheet" href="{% static 'empresa/css/desOferta.css' %}" /> 
 
     <!-- Imagenes -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
-    <!-- Botstrap -->
+    <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
 </head>
 
 <body>
@@ -31,9 +29,10 @@
 
         <!-- MENU PC -->
         <div id="derecha">
-            <a href="{% url 'inicioE' %}" class="options_active">Inicio</a>
-            <a href="{% url 'estudiantesE' %}" class="options">Estudiantes</a>
-            <a href="{% url 'Ofertas' %}" class="options">Ofertas</a>
+            <a href="{% url 'inicioE' %}"class="options_active">Inicio</a>
+            <a href="{% url 'estudiantesE' %}" class="options">Estudiantes</a> 
+            <a href="{% url 'publicaro' %}" class="options">Publicar</a>
+            <a href="{% url 'ofertasE' %}" class="options">Ofertas</a>
 
             <div class="linea"></div>
 
@@ -51,53 +50,43 @@
                 <div class="linea"></div>
 
                 <h1>Navegación</h1>
-                <a class="options_active">Inicio</a>
-                <a href="{% url 'Cursos' %}" class="options">Cursos</a>
+                <a href="{% url 'inicioE' %}"class="options_active">Inicio</a>
+                <a href="{% url 'estudiantesE' %}" class="options">Estudiantes</a> 
                 <a href="{% url 'Ofertas' %}" class="options">Ofertas</a>
-                <a href="{% url 'Configuracion' %}" class="options">Configuración</a>
+                <a href="{% url 'configE' %}" class="options">Configuración</a>
 
                 <div class="linea"></div>
-
+                
                 <a href="{% url 'inicioS' %}" class="logOut">Log out</a>
-
             </div>
         </div>
     </header>
 
-    <!-- CONFIGURACIONES -->
-    <div class="config">
-        <div class="config-container">
-            <h1>PERFIL EMPRESA</h1>
-            <div class="empresa-form">
-                <div class="form-group">
-                    <h2>Nombre Empresa</h2>
-                    <input type="char">
-                    <h2>Correo</h2>
-                    <input type="email">
-
-                </div>
-                <div class="form-group">
-                    <h2>Télefono</h2>
-                    <input type="number">
-                    <h2>Dirección</h2>
-                    <input type="char">
+    <main class="container">
+        <div class="detalles">
+            <h1 class="titulo">{{ oferta.nombre }}</h1>
+            <div class="job-info">
+                <p><strong>Salario:</strong> {{ oferta.salario }}</p>
+                <p><strong>Tipo de Contrato:</strong> {{ oferta.tipo_contrato }}</p>
+                <div>
+                    <strong>Conocimientos Requeridos:</strong>
+                    <div class="mt-2">
+                        {% for conocimiento in oferta.conocimientos.split|slice:":5" %}
+                            <span class="etiquetas-tag">{{ conocimiento }}</span>
+                        {% endfor %}
+                    </div>
                 </div>
             </div>
-            <div id="nit">
-                <h2>Nit</h2>
-                <input type="varchar">
+            <div class="job-descripcion">
+                <h3>Descripción de la Oferta</h3>
+                <p>{{ oferta.descripcion }}</p>
             </div>
-            <button>CONFIGURAR</button>
-
-            <h1>TEMA</h1>
-            <div class="empresa-form">
-                <button class="botonTemas" id="btn1">CLARO</button>
-                <button class="botonTemas" id="btn2">OSCURO</button>
+            <div class="aplicados-info mt-4 d-flex justify-content-between align-items-center">
+                <p class="mb-0">Personas Aplicadas: {{ oferta.personas_aplicadas }}</p>
+                <a href="#" class="botonAplicados">Ver Aplicantes</a>
             </div>
         </div>
-    </div>
-    <!-- CONFIGURACIONES FIN -->
-
+    </main>
 
     <!-- Footer -->
     <footer class="piePag">
@@ -123,9 +112,9 @@
     </footer>
 
     <!-- Scripts js -->
-    <script src="{% static 'empresas/js/navBarE.js.js' %}"></script>
+    <script src="{% static 'empresas/js/navBarE.js' %}"></script>
 
-    <!-- Scripts Botstrap -->
+    <!-- Scripts Bootstrap -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>

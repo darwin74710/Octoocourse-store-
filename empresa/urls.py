@@ -7,7 +7,8 @@ urlpatterns = [
     path('estudiantes/', views.estudiantesE, name='estudiantesE'), 
     path('configE/', views.configE, name='configE'), 
     path('ofertasE/', views.ofertasE, name='ofertasE'), 
-    path('des_ofertas/', views.des_ofertas, name='des_ofertas'), 
+    path('publicarO/', views.publicaro, name='publicaro'), 
+    path('DetallesOferta/', views.DetallesOferta, name='DetallesOferta'), 
     path('listEAp/', views.listEAp, name='listEAp'), 
 
 

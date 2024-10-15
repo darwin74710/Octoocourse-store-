@@ -1,0 +1,101 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio Sesión</title>
+    <!--CSS-->
+    <link rel="stylesheet" href="{% static '/css/stInicioS.css' %}">
+    <link rel="icon" href="{% static 'empresa/img/logo.png' %}">
+
+
+    <script>
+        function ingresar() {
+            var valorInput = document.getElementById("name").value;
+
+            if (valorInput === "estudiante") {
+                location.href = "{% url 'Inicio' %}";
+            } else if (valorInput === "empresa") {
+                location.href = "{% url 'inicioE' %}";
+            } else if (valorInput === "administrador") {
+                location.href = "{% url 'administratorAdmin' %}";
+            }
+        }
+
+        function mostrarSiguienteDiv() {
+            var divActual = document.getElementById("formulario1");
+            var divSiguiente = document.getElementById("formulario2");
+
+            divActual.style.display = "none";
+            divSiguiente.style.display = "block";
+        }
+        document.addEventListener('DOMContentLoaded', function () {
+            document.getElementById('show-password').addEventListener('change', function () {
+                var passwordInput = document.getElementById('password');
+                if (this.checked) {
+                    passwordInput.type = 'text'; // mostrar contraseña
+                } else {
+                    passwordInput.type = 'password'; // ocultar contraseña
+                }
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <div class="content">
+        <div class="formulario-wrapper" id="formulario1">
+            <div class="contact-form">
+                <form action="">
+
+                    <h1 class="octo">
+                        <span>Inicia </span>sesión
+                    </h1>
+                    <p>Utiliza tu cuenta de Google</p>
+                    <p>
+                        <label for="name">Nombre</label>
+                        <input type="text" name="nombre" id="name">
+                        <a href="" id="forgot-password-link">¿Olvidaste tu contraseña?</a>
+                    </p>
+                    <p id="p1">¿No es tu ordenador? Usa el modo Invitado para iniciar sesión de<br> forma privada. Más
+                        información sobre cómo usar el modo<br> Invitado</p>
+                    <p>
+                        <a class="boton" onclick="mostrarSiguienteDiv()">Siguientes</a>
+                    </p>
+                    <p>
+                        <a href="{% url 'register' %}" class="boton2">Crear cuenta</a>
+                    </p>
+
+                </form>
+            </div>
+        </div>
+
+        <div class="formulario-wrapper" id="formulario2" style="display: none;">
+            <div class="contact-form">
+                <form action="">
+
+                    <h1 class="octo" id="formulario2>">
+                        <p>Te damos la <span>bienvenida</span></p>
+                        <p id="cuenta">Cuenta ingresada: <span id="cuenta-usuario">{{ cuenta_usuario }}</span></p>
+                    </h1>
+                    <p>
+                        <input type="password" name="password" id="password">
+                    </p>
+
+                    <div style="margin-top: 10px;">
+                        <input type="checkbox" id="show-password">
+                        <label for="show-password" class="show-password-label">Mostrar contraseña</label>
+                    </div>
+                    <p>
+                        <a class="boton" onclick="ingresar()">Ingresar</a>
+                    </p>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

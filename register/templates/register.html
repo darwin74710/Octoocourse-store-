@@ -15,11 +15,11 @@
      <h1 id="titulo-principal" class="estudiante-empresa"><span>¿Estudiante</span> ó <span>Empresa?</span></h1>
      <div class="botones">
         <button type="button" class="btn-estudiante" onclick="mostrarFormulario('estudiante')">
-            <img src="{% static 'register/img/student.png' %}" alt="Estudiante">
+            <img src="{% static 'register/img/estudiante.jpg' %}" alt="Estudiante">
             Estudiante
         </button>
         <button type="button" class="btn-empresa" onclick="mostrarFormulario('empresa')">
-            <img src="{% static 'register/img/office-building.png' %}" alt="Empresa">
+            <img src="{% static 'register/img/empresa.jpg' %}" alt="Empresa">
             Empresa
         </button>
      </div>
@@ -72,7 +72,7 @@
             <p>
                 <button type="submit">CREAR CUENTA</button>
             </p>
-            <a href="{% url 'login' %}">Iniciar Sesión</a>
+            <a href="{% url 'inicioS' %}">Iniciar Sesión</a>
         </form>
      </div>
      <div id="form-empresa" class="input-form-empresa" style="display: none;">
@@ -114,7 +114,7 @@
             <p>
                 <button type="submit">CREAR CUENTA</button>
             </p>
-            <a href="{% url 'login' %}">Iniciar Sesión</a>
+            <a href="{% url 'inicioS' %}">Iniciar Sesión</a>
         </form>
      </div>
    </div>
