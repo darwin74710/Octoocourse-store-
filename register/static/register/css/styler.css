@@ -7,16 +7,16 @@
 body {
     background-color: #DEDEDE;
     display: flex;
-    height: 100vh;
+    min-height: 100vh;
     justify-content: center;
     align-items: center;
-    padding: 10px; /*espaciado pag*/
+    padding: 10px;
     color: black;
     font-family: 'Quicksand', sans-serif;
-    background-image: url('{% static "register/img/fondopulpito.png" %}'); 
-    background-size: cover; 
-    background-position: center; 
-    background-repeat: no-repeat; 
+    background-image: url('{% static "register/img/fondopulpito.png" %}');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
 .estudiante-empresa span {
@@ -25,12 +25,25 @@ body {
 
 .container {
     max-width: 700px;
-    width: 100%;
+    width: 95%;
     padding: 25px 30px;
     background-color: white;
     border-radius: 25px;
-    box-shadow: 0 0 30px 0 rgb(29, 0, 46, .3); 
+    box-shadow: 0 0 30px 0 rgba(29, 0, 46, 0.3);
     text-align: center;
+}
+
+
+.imagen-seleccionada {
+    text-align: center;
+    margin-bottom: 1em;
+}
+
+.imagen-seleccionada img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 50%;
 }
 
 .botones {
@@ -42,51 +55,54 @@ body {
 
 .botones button {
     background: none;
-    border: none;
+    border: 2px solid #3F2A8C;
+    border-radius: 20px;
     cursor: pointer;
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #3F2A8C;
+    transition: all 0.3s ease;
+}
+
+.botones button:hover,
+.botones button:focus {
+    background-color: #3F2A8C;
+    color: white;
+}
+.botones button img {
+    width: 50px;
+    height: 50px;
+    margin-bottom: 0.5em;
+}
+
+.input-form-estudiante, .input-form-empresa {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.input-form-estudiante form, .input-form-empresa form {
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.botones button img {
-    width: 50px; 
-    height: 50px; 
-    margin-bottom: 0.5em;
-}
-
-.input-form-estudiante, .input-form-empresa {
-    display: none; 
-    justify-content: center; 
-    align-items: center; 
-    flex-direction: column; 
-}
-
-.input-form-estudiante form, .input-form-empresa form {
-    width: 100%; 
-    display: flex;
-    flex-direction: column; 
-    align-items: center; 
-}
-
 .input-form-estudiante form .form-row, .input-form-empresa form .form-row {
     display: flex;
-    justify-content: space-between; 
-    width: 100%; 
-    margin-bottom: 1em; 
-}
-
-.input-form-estudiante form .form-row p, .input-form-empresa form .form-row p {
-    width: 48%; 
-    margin-bottom: 0; 
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 1em;
+    gap: 1em;
 }
 
 .input-form-estudiante form p, .input-form-empresa form p {
-    width: 100%; 
+    width: 48%;
     display: flex;
-    flex-direction: column; 
-    align-items: flex-start; 
-    margin-bottom: 1em; 
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 0;
 }
 
 .input-form-estudiante form button,
@@ -95,7 +111,7 @@ body {
 .input-form-empresa form button,
 .input-form-empresa form input,
 .input-form-empresa form select {
-    width: 100%; 
+    width: 100%;
     padding: 1em;
     margin-bottom: 1em;
     border: 2px solid;
@@ -119,20 +135,53 @@ body {
     color: #2e0346;
 }
 
-.input-form-estudiante form .form-row,
-.input-form-empresa form .form-row {
-    display: flex;
-    justify-content: space-between; /* Alinea los campos de manera horizontal */
-    width: 100%; 
-    gap: 1em; /* Espaciado horizontal entre los campos */
-    margin-bottom: 1em; /* Espaciado entre filas */
+@media (max-width: 768px) {
+    .container {
+        padding: 20px;
+    }
+
+    .botones {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .botones button {
+        margin-bottom: 1em;
+    }
+
+    .input-form-estudiante form .form-row,
+    .input-form-empresa form .form-row {
+        flex-direction: column;
+        gap: 0;
+    }
+
+    .input-form-estudiante form p,
+    .input-form-empresa form p {
+        width: 100%;
+        margin-bottom: 1em;
+    }
 }
 
-.input-form-estudiante form p,
-.input-form-empresa form p {
-    width: 48%; /* Ancho del 48% para que dos campos caben en una línea */
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    margin-bottom: 0; /* Ajuste para eliminar el margen adicional entre campos */
+@media (max-width: 480px) {
+    body {
+        padding: 5px;
+    }
+
+    .container {
+        padding: 15px;
+    }
+
+    .botones button img {
+        width: 40px;
+        height: 40px;
+    }
+
+    .input-form-estudiante form button,
+    .input-form-estudiante form input,
+    .input-form-estudiante form select,
+    .input-form-empresa form button,
+    .input-form-empresa form input,
+    .input-form-empresa form select {
+        padding: 0.8em;
+    }
 }

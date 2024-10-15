@@ -13,6 +13,10 @@
 <body>
    <div class="container">
      <h1 id="titulo-principal" class="estudiante-empresa"><span>¿Estudiante</span> ó <span>Empresa?</span></h1>
+     <div id="imagen-seleccionada" class="imagen-seleccionada">
+        <img id="img-estudiante" src="{% static 'register/img/estudiante.jpg' %}" alt="Estudiante" style="display: none;">
+        <img id="img-empresa" src="{% static 'register/img/empresa.jpg' %}" alt="Empresa" style="display: none;">
+     </div>
      <div class="botones">
         <button type="button" class="btn-estudiante" onclick="mostrarFormulario('estudiante')">
             <img src="{% static 'register/img/estudiante.jpg' %}" alt="Estudiante">

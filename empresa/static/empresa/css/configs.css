@@ -1,154 +1,117 @@
-.config .config-container {
+#MarcoConfig{
+    width: 800px; height: auto;
+    margin: 10px auto;
     display: flex;
     flex-direction: column;
-    margin: 15px auto;
-    padding: 5px;
-    width: 50%; 
-    height: auto;
-    background-color: #f3d9ff;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-    border: 3px solid #560581;
-    border-radius: 10px;
 }
 
-.config .config-container h1 {
-    word-break: break-word; 
+#MarcoConfig h1{
+    padding: 10px 0;
+    font-size: 25px;
+    background-color: var(--fondoTitulo2); color: var(--letraTitulo2);
     text-align: center;
-    padding: 2%;
+}
+
+#MarcoConfig a{
+    text-decoration: none;
+    margin: 10px auto;
+    padding: 5px 15px;
+    font-size: 20px;
+    color: var(--letraBotones1); background-color: var(--fondoBotones1);
+    border-radius: 100px;
+    cursor: pointer;
+    transition: all 0.3s ease 0s;
+}
+
+#MarcoConfig a:hover{
+    background-color: var(--hFondoBotones1); color: var(--hLetraBotones1);
+}
+
+.marcoOpcion{
+    height: 100px;
+    margin: 10px;
+    border-radius: 10px;
+    border: 1px solid var(--borde1);
+    background-color: var(--fondoBotones2);
+    cursor: pointer;
+    display: flex;
+}
+
+.marcoOpcion:hover, #plantillaHV:hover{
+    filter: brightness(85%);
+    transition: filter 0.3s ease;
+}
+
+.marcoOpcion i{
+    color: var(--fondoBotones1);
+    margin: 25px 10px;
+    margin-left: auto;
     font-size: 30px;
-    width: 100%;
-    color: white; 
-    background-color: #560581;
-    border-radius: 10px;
-    font-weight: bold;
+    font-weight: normal;
 }
 
-.config .config-container .empresa-form h2 {
-    font-size: 18px; 
-    color: black; 
-    margin-bottom: 5px; 
-    font-weight: bold;
+.marcoOpcion #document{
+    color: var(--letra1);
+    margin: 0 10px;
+    font-size: 65px;
+    font-weight: normal;
 }
 
-.config .config-container .empresa-form {
+.marcoOpcion h2{
+    color: var(--letra1);
+    margin: 30px;
+    margin-left: 5px;
+    font-size: 30px;
+    font-weight: normal;
+}
+
+.seleccionador{
+    font-size: 65px;
+}
+
+#botonesHV{
+    margin: 10px;
+    padding: auto;
     text-align: center;
-    align-content: center;
-    display: flex;
-    justify-content: space-evenly;
-    margin-bottom: 10px;
 }
 
-.config .config-container .empresa-form .form-group {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    text-align: center;
-    align-content: center;
-    width: 40%;
+#botonesHV a{
+    margin: 0 5px;
 }
 
-.config .config-container .empresa-form input {
-    width: 100%;
-    text-align: center;
-    margin: auto;
-    border-radius: 5px;
-}
-
-.config .config-container #nit {
-    text-align: center;
-    align-content: center;
-    justify-content: center;
-    margin-bottom: 10px;
-}
-
-.config .config-container #nit input {
-    width: 40%;
-    margin: auto;
-    border-radius: 5px;
-}
-
-.config-container #nit h2 {
-    font-size: 18px; 
-    color: black; 
-    margin-bottom: 5px; 
-    font-weight: bold;
-}
-
-.config .config-container button {
-    font-weight: 700; 
-    font-size: 100%;
-    width: 60%;
-    margin: auto;
-    color: white; 
-    background-color: #8021bb; 
-    border: none;
-    cursor: pointer;
-    padding: 15px 0px;
-    margin-bottom: 10px;
-    border-radius: 10px;
-    transition: all 0.3s ease 0s;
-}
-
-.config .config-container button:hover {
-    background-color: #560581; 
-    color: #2e0346;
-}
-
-/*TEMAS*/
-.config .config-container .empresa-form .botonTemas {
-    font-weight: 700; 
-    font-size: 100%;
-    width: 60%;
-    cursor: pointer;
-    margin-top: 20px;
-    padding: 15px 0;
-    transition: all 0.3s ease 0s;
-}
-
-.config .config-container .empresa-form #btn1 {
-    color: white; 
-    background: #8021bb; 
-    border: none;
-}
-
-.config .config-container .empresa-form #btn2 {
-    color: #2e0346; 
-    background: #7009a8; 
-    border: none;
-}
-
-.config .config-container .empresa-form #btn1:hover {
-    background-color: #560581; 
-    color: #2e0346;
-}
-
-.config .config-container .empresa-form #btn2:hover {
-    background-color: #2e0346; 
-    color: white;
-}
-
-@media screen and (max-width: 1000px) {
-    .config .config-container {
-        width: 80%; 
+@media screen and (max-width:800px) {
+    #MarcoConfig{
+        width: auto;
     }
 
-    .config .config-container .empresa-form .form-group {
-        width: 45%; 
+    #MarcoConfig a{
+        margin: 5px auto;
+        font-size: 20px;
     }
 
-    .config .config-container #nit input {
-        width: 70%; 
+    .marcoOpcion{
+        height: auto;
+    }
+        
+    .marcoOpcion #document{
+        font-size: 35px;
     }
 
-    .config .config-container button {
-        width: 70%; 
+    .marcoOpcion h2{
+        margin: auto;
+        font-size: 15px;
+        font-weight: normal;
     }
 
-    .config .config-container .empresa-form .botonTemas {
-        width: 70%;
+    .marcoOpcion i{
+        margin: auto 5px;
+        margin-left: auto;
+        font-size: 15px;
+        font-weight: normal;
     }
 
-    .config .config-container h1 {
-        font-size: 28px; 
+    #botonesHV{
+        display: flex;
+        flex-direction: column;
     }
 }

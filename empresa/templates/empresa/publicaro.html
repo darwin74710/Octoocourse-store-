@@ -41,6 +41,7 @@
     </header>
 
     <!-- Principal Interfaz -->
+    <!-- Principal Interfaz -->
     <div class="container">
         <h1 class="text-center mb-4">Publicar Oferta de Trabajo</h1>
         <form id="oferta-form">
@@ -57,7 +58,8 @@
 
                 <div class="col-md-6 mb-3">
                     <label for="conocimientos" class="form-label">Conocimientos:</label>
-                    <input type="text" class="form-control" id="conocimientos" name="conocimientos" placeholder="Presiona Enter para agregar">
+                    <input type="text" class="form-control" id="conocimientos" name="conocimientos"
+                        placeholder="Presiona Enter para agregar">
                     <div id="conocimientos-container" class="mt-2"></div>
                 </div>
 
@@ -73,13 +75,22 @@
                     </select>
                 </div>
 
-                <div class="col-md-6 mb-3 form-check">
-                    <input type="checkbox" class="form-check-input" id="estado" name="estado" checked>
-                    <label class="form-check-label" for="estado">Oferta activa</label>
+                <div class="col-12 mb-3">
+                    <label for="descripcion" class="form-label">Descripción:</label>
+                    <textarea class="form-control" id="descripcion" name="descripcion" rows="4" required></textarea>
+                </div>
+
+                <div class="col-12 text-center mb-3">
+                    <div class="form-check d-inline-block">
+                        <input type="checkbox" class="form-check-input" id="estado" name="estado" checked>
+                        <label class="form-check-label" for="estado">Oferta activa</label>
+                    </div>
                 </div>
             </div>
 
-            <button type="submit" class="btn btn-primary w-100">Publicar Oferta</button>
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary rounded-pill">Publicar Oferta</button>
+            </div>
         </form>
     </div>
 
@@ -119,7 +130,7 @@
         const conocimientosContainer = document.getElementById('conocimientos-container');
         const form = document.getElementById('oferta-form');
 
-        conocimientosInput.addEventListener('keypress', function(e) {
+        conocimientosInput.addEventListener('keypress', function (e) {
             if (e.key === 'Enter') {
                 e.preventDefault();
                 const conocimiento = this.value.trim();
@@ -144,12 +155,12 @@
             button.parentElement.remove();
         }
 
-        form.addEventListener('submit', function(e) {
+        form.addEventListener('submit', function (e) {
             e.preventDefault();
             const formData = new FormData(form);
             const conocimientos = Array.from(conocimientosContainer.children).map(tag => tag.textContent.trim());
             formData.set('conocimientos', conocimientos.join(', '));
-            
+
             console.log(Object.fromEntries(formData));
             alert('Oferta publicada con éxito!');
         });
