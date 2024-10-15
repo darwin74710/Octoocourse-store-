@@ -25,3 +25,12 @@ def des_ofertas(request):
 def listEAp(request):
     return render(request, 'empresa/listEAp.html')
 
+def publicaro(request):
+    return render(request, 'empresa/publicaro.html')
+
+def DetallesOferta(request):
+    return render(request, 'empresa/DetallesOferta.html')
+
+
+
+

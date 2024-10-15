@@ -31,12 +31,15 @@
         <div id="derecha">
             <a href="{% url 'inicioE' %}"class="options_active">Inicio</a>
             <a href="{% url 'estudiantesE' %}" class="options">Estudiantes</a> 
+            <a href="{% url 'publicaro' %}" class="options">Publicar</a>
             <a href="{% url 'ofertasE' %}" class="options">Ofertas</a>
+
+
 
             <div class="linea"></div>
 
             <a id="btn_icono" href="{% url 'configE' %}"><i class="fas fa-cog"></i></a>
-            <a id="btn_icono" href="{% url 'login' %}"><i class="fa-solid fa-arrow-right-from-bracket"></i></a>
+            <a id="btn_icono" href="{% url 'inicioS' %}"><i class="fa-solid fa-arrow-right-from-bracket"></i></a>
         </div>
 
         <!-- MENU MOVIL -->
@@ -56,7 +59,7 @@
 
                 <div class="linea"></div>
                 
-                <a href="{% url 'login' %}" class="logOut">Log out</a>
+                <a href="{% url 'inicioS' %}" class="logOut">Log out</a>
 
             </div>
         </div>
