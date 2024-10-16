@@ -58,12 +58,14 @@ function modalConfig(tipo){
     const mContra = document.getElementById("modalContra");
     const mHV = document.getElementById("modalHV");
     const mNoDocument = document.getElementById("modalNoDocument");
+    const mHVM = document.getElementById("modalHVM");
 
     mFondo.style.display = "none";
     mUsu.style.display = "none";
     mContra.style.display = "none";
     mHV.style.display = "none";
     mNoDocument.style.display = "none";
+    mHVM.style.display = "none";
 
     if (tipo === "usuDesactive"){
         mFondo.style.display = "none";
@@ -77,6 +79,9 @@ function modalConfig(tipo){
     }else if (tipo === "NoDocumentDesactive"){
         mFondo.style.display = "none";
         mNoDocument.style.display = "none";
+    }else if (tipo === "hvMDesactive"){
+        mFondo.style.display = "none";
+        mHVM.style.display = "none";
     }
     
     
@@ -93,6 +98,9 @@ function modalConfig(tipo){
     }else if (tipo === "NoDocumentActive"){
         mFondo.style.display = "flex";
         mNoDocument.style.display = "flex";
+    }else if (tipo === "hvMActive"){
+        mFondo.style.display = "flex";
+        mHVM.style.display = "flex";
     }
 }
 

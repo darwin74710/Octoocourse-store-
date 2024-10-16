@@ -9,7 +9,7 @@
     background-color: rgba(34, 34, 34, 0.712);
 }
 
-#modalUsu, #modalContra, #modalHV, #modalNoDocument{
+#modalUsu, #modalContra, #modalHV, #modalNoDocument, #modalHVM{
     display: none;
     border-radius: 10px;
     padding: 10px;
@@ -31,33 +31,58 @@
     width: 290px; height: 140px;
 }
 
-#modalUsu h1, #modalContra h1, #modalNoDocument h1{
+#modalHV{
+    padding: 0;
+    width: 800px; height: 90%;
+}
+
+#modalHVM{
+    overflow-y: auto; overflow-x: hidden;
+    width: 800px; height: 90%;
+}
+
+#modalConfig h1{
     color: var(--letratitulo1);
     font-size: 30px;
 }
 
-#modalUsu p, #modalContra p, #modalNoDocument p{
+#modalConfig h3{
+    color: var(--letra1);
+    font-size: 20px;
+    text-align: center;
+    border-bottom: 1px solid var(--borde1);
+    margin: 10px 0;
+}
+
+#modalConfig p{
     font-size: 18px;
     margin: 0;
     color: var(--letra1);
 }
 
 
-#modalUsu input, #modalContra input{
+#modalConfig input{
     margin-bottom: 5px;
-    width: 260px;
+    width: 250px;
     border-radius: 10px;
     border: 1px solid var(--borde1);
 }
 
-#modalUsu .botones, #modalContra .botones, #modalNoDocument .botones{
+#modalConfig textarea{
+    resize: none;
+    width: 700px; height: 300px;
+    border-radius: 10px;
+    border: 1px solid var(--borde1);
+}
+
+#modalConfig .botones{
     margin: 15px;
     margin-left: auto;
     text-align: right;
     display: flex;
 }
 
-#modalUsu .botones a, #modalContra .botones a, #modalHV .botones a, #modalNoDocument .botones a{
+#modalConfig .botones a{
     padding: 0 15px;
     text-decoration: none;
     margin: 0 5px;
@@ -68,41 +93,45 @@
     transition: all 0.3s ease 0s;
 }
 
-#modalUsu .botones a:hover, #modalContra .botones a:hover, #modalHV .botones a:hover, #modalNoDocument .botones a:hover{
+#modalConfig .botones a:hover{
     background-color: var(--hFondoBotones1); color: var(--hLetraBotones1);
 }
 
-#modalHV{
-    width: 800px; height: 90%;
-    overflow-y: auto; overflow-x: hidden;
-    margin: 10px;
-}
-
-#modalHV .botones{
+#modalHVM p{
     text-align: center;
-    margin: 10px;
-    margin-left: auto;
 }
 
-#modalHV .botones a{
-    font-size: 25px;
+#modalHVM input{
+    margin: 5px;
+    text-align: center;
+}
+
+.elementsModify{
+    margin: 0 auto;
+    display: flex;
+}
+
+.oneElementModify{
+    text-align: center;
 }
 
 @media screen and (max-width:1000px) {
-    #modalHV{
+    .elementsModify{
+        width: 100%;
+    }
+
+    #modalHV, #modalHVM{
         margin: 0;
         width: 100%;
     }
 
-    #modalHV .botones{
+    #modalConfig textarea{
+        width: 100%;
+    }
+
+    .elementsModify{
         display: flex;
         flex-direction: column;
-        margin: 10px auto;
-    }
-    
-    #modalHV .botones a{
-        margin: 5px;
-        font-size: 25px;
     }
 }
 
@@ -118,11 +147,11 @@
         flex-direction: column;
     }
 
-    #modalUsu input, #modalContra input{
+    #modalConfig input{
         width: 100%;
     }
 
-    #modalUsu .botones, #modalContra .botones, #modalNoDocument .botones{
+    #modalConfig .botones{
         margin: 15px;
         text-align: right;
         display: flex;
@@ -130,7 +159,7 @@
         text-align: center;
     }
 
-    #modalUsu .botones a, #modalContra .botones a, #modalHV .botones a, #modalNoDocument .botones a{
+    #modalConfig .botones a{
         margin: 5px;
     }
 }

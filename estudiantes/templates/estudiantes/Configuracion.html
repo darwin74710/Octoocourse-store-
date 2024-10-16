@@ -77,7 +77,7 @@
             <div class="marcoOpcion" onclick="cambiarHV('plantilla')"><i id="document" class="bi bi-file-earmark-person"></i><h2>UTILIZAR PLANTILLA</h2><i id="hvElect2" class="bi bi-circle"></i></div>
             <div id="botonesHV">
                 <div id="btnAdjuntar"><a>Adjuntar</a><a onclick="modalConfig('NoDocumentActive')">Visualizar</a></div>
-                <div id="btnPlantilla"><a>Modificar</a><a onclick="modalConfig('hvActive')">Visualizar</a></div>
+                <div id="btnPlantilla"><a onclick="modalConfig('hvMActive')">Modificar</a><a onclick="modalConfig('hvActive')">Visualizar</a></div>
             </div>
         
         <h1>TEMA</h1>
@@ -86,7 +86,8 @@
     </div>
 
     <!-- Modal -->
-     <div id="modalConfig">
+    <div id="modalConfig">
+        <!-- MODAL CAMBIAR USUARIO -->
         <div id="modalUsu">
             <h1>CAMBIAR USUARIO</h1>
             <p>
@@ -101,6 +102,8 @@
             </div>
 
         </div>
+
+        <!-- MODAL CAMBIAR CONTRASEÑA -->
         <div id="modalContra">
             <h1>CAMBIAR CONTRASEÑA</h1>
             <p>
@@ -124,7 +127,7 @@
             </div>
         </div>
 
-        <!-- HV -->
+        <!-- HOJA DE VIDA -->
         <div id="modalHV">
             <div id="hojaVida">
                 <div class="marco">
@@ -210,7 +213,7 @@
                                 Excepturi fugit dignissimos nam error, aliquam tempora velit libero.</p>
                         </div>
         
-                        <h1>FORMACIÓN ACADEMICA</h1>
+                        <h1>FORMACIÓN ACADÉMICA</h1>
                         <div class="infoExp">
                             <h2>NOMBRE_TITULO</h2>
                             <h4>NOMBRE_INSTITUCIÓN</h4>
@@ -230,11 +233,188 @@
             </div>
         </div>
         
+        <!-- AVISO DE NO HAY DOCUMENTO -->
         <div id="modalNoDocument">
             <h1>ERROR</h1>
             <p>No existe documento adjunto.</p>
             <div class="botones">
                 <a onclick="modalConfig('NoDocumentDesactive')" class="btnIzquierda">Regresar</a>
+            </div>
+        </div>
+
+        <!-- MODIFICAR HOJA DE VIDA -->
+        <div id="modalHVM">
+            <h1>MODIFICAR HOJA DE VIDA</h1>
+            <h3>Datos Personales</h3>
+            <div class="elementsModify">
+                <div class="oneElementModify">
+                    <p>Celular</p>
+                    <input type="text">
+                </div>
+                <div class="oneElementModify">
+                    <p>Correo</p>
+                    <input type="text">
+                </div>
+                <div class="oneElementModify">
+                    <p>Dirección</p>
+                    <input type="text">
+                </div>
+            </div>
+
+            <h3>Aptitudes</h3>
+            <p>Dejar algún campo vacío implica reducir la cantidad de aptitudes a mostrar.</p>
+            <div class="elementsModify">
+                <div class="oneElementModify">
+                    <p>1</p>
+                    <input type="text">
+                </div>
+                <div class="oneElementModify">
+                    <p>2</p>
+                    <input type="text">
+                </div>
+                <div class="oneElementModify">
+                    <p>3</p>
+                    <input type="text">
+                </div>
+            </div>
+            <div class="elementsModify">
+                <div class="oneElementModify">
+                    <p>4</p>
+                    <input type="text">
+                </div>
+                <div class="oneElementModify">
+                    <p>5</p>
+                    <input type="text">
+                </div>
+            </div>
+
+            <h3>Idiomas</h3>
+            <p>Dejar algún campo vacío implica reducir la cantidad de idiomas a mostrar.</p>
+            <div class="elementsModify">
+                <div class="oneElementModify">
+                    <p>1</p>
+                    <input type="text">
+                </div>
+                <div class="oneElementModify">
+                    <p>2</p>
+                    <input type="text">
+                </div>
+                <div class="oneElementModify">
+                    <p>3</p>
+                    <input type="text">
+                </div>
+            </div>
+
+            <h3>Conocimimentos</h3>
+            <p>Dejar algún campo vacío implica reducir la cantidad de conocimientos a mostrar.</p>
+            <div class="elementsModify">
+                <div class="oneElementModify">
+                    <p>1</p>
+                    <input type="text">
+                </div>
+                <div class="oneElementModify">
+                    <p>2</p>
+                    <input type="text">
+                </div>
+                <div class="oneElementModify">
+                    <p>3</p>
+                    <input type="text">
+                </div>
+            </div>
+            <div class="elementsModify">
+                <div class="oneElementModify">
+                    <p>4</p>
+                    <input type="text">
+                </div>
+                <div class="oneElementModify">
+                    <p>5</p>
+                    <input type="text">
+                </div>
+                <div class="oneElementModify">
+                    <p>6</p>
+                    <input type="text">
+                </div>
+            </div>
+
+            <h3>Experiencia laboral 1</h3>
+            <div class="elementsModify">
+                <div class="oneElementModify">
+                    <p>Cargo</p>
+                    <input type="text">
+                </div>
+                <div class="oneElementModify">
+                    <p>Empresa</p>
+                    <input type="text">
+                </div>
+                <div class="oneElementModify">
+                    <p>Fecha inicio/final</p>
+                    <input type="text">
+                </div>
+            </div>
+            <div class="elementsModify">
+                <div class="oneElementModify">
+                    <p>Descripción</p>
+                    <textarea></textarea>
+                </div>
+            </div>
+
+            <h3>Experiencia laboral 2</h3>
+            <div class="elementsModify">
+                <div class="oneElementModify">
+                    <p>Cargo</p>
+                    <input type="text">
+                </div>
+                <div class="oneElementModify">
+                    <p>Empresa</p>
+                    <input type="text">
+                </div>
+                <div class="oneElementModify">
+                    <p>Fecha inicio/final</p>
+                    <input type="text">
+                </div>
+            </div>
+            <div class="elementsModify">
+                <div class="oneElementModify">
+                    <p>Descripción</p>
+                    <textarea></textarea>
+                </div>
+            </div>
+
+            <h3>Formación Académica 1</h3>
+            <div class="elementsModify">
+                <div class="oneElementModify">
+                    <p>Título</p>
+                    <input type="text">
+                </div>
+                <div class="oneElementModify">
+                    <p>Institución</p>
+                    <input type="text">
+                </div>
+                <div class="oneElementModify">
+                    <p>Fecha inicio/final</p>
+                    <input type="text">
+                </div>
+            </div>
+
+            <h3>Formación Académica 2</h3>
+            <div class="elementsModify">
+                <div class="oneElementModify">
+                    <p>Título</p>
+                    <input type="text">
+                </div>
+                <div class="oneElementModify">
+                    <p>Institución</p>
+                    <input type="text">
+                </div>
+                <div class="oneElementModify">
+                    <p>Fecha inicio/final</p>
+                    <input type="text">
+                </div>
+            </div>
+
+            <div class="botones">
+                <a onclick="modalConfig('hvMDesactive')" class="btnIzquierda">Regresar</a>
+                <a>Aplicar</a>
             </div>
         </div>
      </div>
