@@ -141,6 +141,7 @@
 }
 
 .precioCurso{
+    color: var(--letra1);
     width: 70px;
     text-align: right;
     font-weight: bold;

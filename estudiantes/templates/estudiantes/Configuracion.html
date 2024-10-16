@@ -12,6 +12,8 @@
     <link rel="stylesheet" href="{% static 'estudiantes/css/navBar.css' %}" />
     <link rel="stylesheet" href="{% static 'estudiantes/css/footer.css' %}" />
     <link rel="stylesheet" href="{% static 'estudiantes/css/Configuracion.css' %}" />
+    <link rel="stylesheet" href="{% static 'estudiantes/css/ModalConfig.css' %}" />
+    <link rel="stylesheet" href="{% static 'estudiantes/css/hojaVida.css' %}" />
 
     <!-- Cargar tema -->
     <script src="{% static 'estudiantes/js/Temas.js' %}"></script>
@@ -67,18 +69,175 @@
     <!-- Configuración Interfaz -->
     <div id="MarcoConfig">
         <h1>INFORMACIÓN PERSONAL</h1>
-        <div class="marcoOpcion"><i id="document" class="bi bi-person"></i><h2>MODIFICAR USUARIO</h2></div>
-        <div class="marcoOpcion"><i id="document" class="bi bi-person-lock"></i><h2>MODIFICAR CONTRASEÑA</h2></div>
+        <div onclick="modalConfig('usuActive')" class="marcoOpcion"><i id="document" class="bi bi-person"></i><h2>MODIFICAR USUARIO</h2></div>
+        <div onclick="modalConfig('contraActive')" class="marcoOpcion"><i id="document" class="bi bi-person-lock"></i><h2>MODIFICAR CONTRASEÑA</h2></div>
 
         <h1>HOJA DE VIDA</h1>
             <div class="marcoOpcion" onclick="cambiarHV('adjuntar')"><i id="document" class="bi bi-file-earmark-text"></i><h2>ADJUNTAR DOCUMENTO</h2><i id="hvElect1" class="bi bi-circle-fill"></i></div>
             <div class="marcoOpcion" onclick="cambiarHV('plantilla')"><i id="document" class="bi bi-file-earmark-person"></i><h2>UTILIZAR PLANTILLA</h2><i id="hvElect2" class="bi bi-circle"></i></div>
-            <div id="botonesHV"><a id="btnAdjuntar">Adjuntar</a><a>Visualizar</a></div>
+            <div id="botonesHV">
+                <div id="btnAdjuntar"><a>Adjuntar</a><a onclick="modalConfig('NoDocumentActive')">Visualizar</a></div>
+                <div id="btnPlantilla"><a>Modificar</a><a onclick="modalConfig('hvActive')">Visualizar</a></div>
+            </div>
         
         <h1>TEMA</h1>
-        <div class="marcoOpcion" onclick="cambiarTema('claro')"><i id="document" class="bi bi-brightness-high"></i><h2>CLARO</h2><i id="temaElect1" class="bi bi-circle-fill"></i></div>
-        <div class="marcoOpcion" onclick="cambiarTema('oscuro')"><i id="document" class="bi bi-moon"></i><h2>OSCURO</h2><i id="temaElect2" class="bi bi-circle"></i></div>
+        <div class="marcoOpcion" onclick="cambiarTema('claro')"><i id="document" class="bi bi-brightness-high"></i><h2>CLARO</h2><i id="temaElect1"></i></div>
+        <div class="marcoOpcion" onclick="cambiarTema('oscuro')"><i id="document" class="bi bi-moon"></i><h2>OSCURO</h2><i id="temaElect2"></i></div>
     </div>
+
+    <!-- Modal -->
+     <div id="modalConfig">
+        <div id="modalUsu">
+            <h1>CAMBIAR USUARIO</h1>
+            <p>
+                No repitas el mismo usuario y procura evitar caracteres extraños.
+                <br>
+                Nuevo usuario:
+            </p>
+            <input type="text">
+            <div class="botones">
+                <a onclick="modalConfig('usuDesactive')" class="btnIzquierda">Regresar</a>
+                <a>Aplicar</a>
+            </div>
+
+        </div>
+        <div id="modalContra">
+            <h1>CAMBIAR CONTRASEÑA</h1>
+            <p>
+                No repitas la misma contraseña y procura evitar caracteres extraños.
+                <br>
+                Antigua contraseña:
+            </p>
+            <input type="text">
+            <p>
+                Nueva contraseña:
+            </p>
+            <input type="text">
+            <p>
+                Repite nueva contraseña:
+            </p>
+            <input type="text">
+
+            <div class="botones">
+                <a onclick="modalConfig('contraDesactive')" class="btnIzquierda">Regresar</a>
+                <a>Aplicar</a>
+            </div>
+        </div>
+
+        <!-- HV -->
+        <div id="modalHV">
+            <div id="hojaVida">
+                <div class="marco">
+                    <div class="izquierda">
+                        <i id="imgPerfil" class="bi bi-person-circle"></i>
+        
+                        <h1>DATOS PERSONALES</h1>
+                        <div class="minContent">
+                            <i class="fab fa-whatsapp"></i>
+                            <h2>+57 333 333 33 33</h2>
+                        </div>
+                        <div class="minContent">
+                            <i class="bi bi-envelope"></i>
+                            <h2>correo_master121212@correo.edu.co</h2>
+                        </div>
+                        <div class="minContent">
+                            <i class="bi bi-geo-alt"></i>
+                            <h2>Cra 33 #33-33</h2>
+                        </div>
+        
+                        <h1>APTITUDES</h1>
+                        <div class="lista">
+                            <h2>APTITUD</h2>
+                            <h2>APTITUD</h2>
+                            <h2>APTITUD</h2>
+                            <h2>APTITUD</h2>
+                            <h2>APTITUD</h2>
+                        </div>
+        
+                        <h1>IDIOMAS</h1>
+                        <div class="minContent">
+                            <i class="bi bi-emoji-laughing"></i>
+                            <h2>C2</h2>
+                            <h2>ESPAÑOL</h2>
+                        </div>
+                        <div class="minContent">
+                            <i class="bi bi-emoji-neutral"></i>
+                            <h2>B1</h2>
+                            <h2>INGLES</h2>
+                        </div>
+                        <div class="minContent">
+                            <i class="bi bi-emoji-frown"></i>
+                            <h2>A1</h2>
+                            <h2>CATALAN</h2>
+                        </div>
+        
+                        <h1>CONOCIMIENTOS</h1>
+                        <div class="lista">
+                            <h2>JAVA</h2>
+                            <h2>C++</h2>
+                            <h2>PYTHON</h2>
+                        </div>
+        
+                    </div>
+                    <div class="derecha">
+                        <h3>JOSE IGNACIO GUADALUPE TERCERO</h3>
+        
+                        <h1>EXPERIENCIA LABORAL</h1>
+                        <div class="infoExp">
+                            <h2>NOMBRE_CARGO</h2>
+                            <h4>NOMBRE_EMPRESA</h4>
+                            <h4>TIEMPO_INICIO / TIEMPO_FINAL</h4>
+                            <p>DESCRIPCION: Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero odio repudiandae
+                                porro eveniet odit laudantium laborum a quasi corporis, dolores nostrum! Inventore natus dolore
+                                autem? Ut tempora labore quisquam. Dolor, quae eligendi unde earum, itaque commodi corrupti
+                                minima quisquam fuga est voluptate ipsum error, id soluta saepe reiciendis sequi quis ut! Quas
+                                dolore commodi repudiandae beatae excepturi incidunt voluptate impedit, libero nulla numquam
+                                natus alias nisi cupiditate debitis, deserunt id, et porro. Itaque ex enim, aliquid facilis
+                                dolor nesciunt sed est? Quidem, magnam minima nihil dolores sed accusantium in adipisci eius?
+                                Excepturi fugit dignissimos nam error, aliquam tempora velit libero.</p>
+                        </div>
+                        <div class="infoExp">
+                            <h2>NOMBRE_CARGO</h2>
+                            <h4>NOMBRE_EMPRESA</h4>
+                            <h4>TIEMPO_INICIO / TIEMPO_FINAL</h4>
+                            <p>DESCRIPCION: Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero odio repudiandae
+                                porro eveniet odit laudantium laborum a quasi corporis, dolores nostrum! Inventore natus dolore
+                                autem? Ut tempora labore quisquam. Dolor, quae eligendi unde earum, itaque commodi corrupti
+                                minima quisquam fuga est voluptate ipsum error, id soluta saepe reiciendis sequi quis ut! Quas
+                                dolore commodi repudiandae beatae excepturi incidunt voluptate impedit, libero nulla numquam
+                                natus alias nisi cupiditate debitis, deserunt id, et porro. Itaque ex enim, aliquid facilis
+                                dolor nesciunt sed est? Quidem, magnam minima nihil dolores sed accusantium in adipisci eius?
+                                Excepturi fugit dignissimos nam error, aliquam tempora velit libero.</p>
+                        </div>
+        
+                        <h1>FORMACIÓN ACADEMICA</h1>
+                        <div class="infoExp">
+                            <h2>NOMBRE_TITULO</h2>
+                            <h4>NOMBRE_INSTITUCIÓN</h4>
+                            <h4>TIEMPO_INICIO / TIEMPO_FINAL</h4>
+                        </div>
+                        <div class="infoExp">
+                            <h2>NOMBRE_TITULO</h2>
+                            <h4>NOMBRE_INSTITUCIÓN</h4>
+                            <h4>TIEMPO_INICIO / TIEMPO_FINAL</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="botones">
+                <a onclick="modalConfig('hvDesactive')" class="btnIzquierda">Regresar</a>
+                <a onclick="descargarPDF()">Descargar</a>
+            </div>
+        </div>
+        
+        <div id="modalNoDocument">
+            <h1>ERROR</h1>
+            <p>No existe documento adjunto.</p>
+            <div class="botones">
+                <a onclick="modalConfig('NoDocumentDesactive')" class="btnIzquierda">Regresar</a>
+            </div>
+        </div>
+     </div>
 
     <!-- Footer -->
     <footer class="piePag">
@@ -94,14 +253,17 @@
                 <h1>SÍGUENOS</h1>
                 <div id="redes">
                     <a href="https://whatsapp.com" target="_blank"><i class="fab fa-whatsapp"></i></a>
-                    <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook-f"></i></a>
-                    <a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
-                    <a href="https://youtube.com" target="_blank"><i class="fab fa-youtube"></i></a>
+                    <a href="https://www.facebook.com/profile.php?id=61567434383968" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://www.instagram.com/octoocourse/" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.youtube.com/@OctooCourse" target="_blank"><i class="fab fa-youtube"></i></a>
                 </div>
             </div>
         </div>
         <div id="Marco2">&copy; 2024 OctooCourse - Todos los Derechos Reservados.</div>
     </footer>
+
+    <!-- Scripts html2pdf -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
 
     <!-- Scripts js -->
     <script src="{% static 'estudiantes/js/navBar.js' %}"></script>
