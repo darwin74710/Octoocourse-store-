@@ -1,0 +1,136 @@
+#modalConfig{
+    width: 100%; height: 100%;
+    position: fixed;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    z-index: 6;
+    background-color: rgba(34, 34, 34, 0.712);
+}
+
+#modalUsu, #modalContra, #modalHV, #modalNoDocument{
+    display: none;
+    border-radius: 10px;
+    padding: 10px;
+    margin: auto;
+    background-color: var(--fondo1);
+    position: fixed;
+    flex-direction: column;
+}
+
+#modalUsu{
+    width: 500px; height: 230px;
+}
+
+#modalContra{
+    width: 450px; height: 360px;
+}
+
+#modalNoDocument{
+    width: 290px; height: 140px;
+}
+
+#modalUsu h1, #modalContra h1, #modalNoDocument h1{
+    color: var(--letratitulo1);
+    font-size: 30px;
+}
+
+#modalUsu p, #modalContra p, #modalNoDocument p{
+    font-size: 18px;
+    margin: 0;
+    color: var(--letra1);
+}
+
+
+#modalUsu input, #modalContra input{
+    margin-bottom: 5px;
+    width: 260px;
+    border-radius: 10px;
+    border: 1px solid var(--borde1);
+}
+
+#modalUsu .botones, #modalContra .botones, #modalNoDocument .botones{
+    margin: 15px;
+    margin-left: auto;
+    text-align: right;
+    display: flex;
+}
+
+#modalUsu .botones a, #modalContra .botones a, #modalHV .botones a, #modalNoDocument .botones a{
+    padding: 0 15px;
+    text-decoration: none;
+    margin: 0 5px;
+    font-size: 20px;
+    color: var(--letraBotones1); background-color: var(--fondoBotones1);
+    border-radius: 100px;
+    cursor: pointer;
+    transition: all 0.3s ease 0s;
+}
+
+#modalUsu .botones a:hover, #modalContra .botones a:hover, #modalHV .botones a:hover, #modalNoDocument .botones a:hover{
+    background-color: var(--hFondoBotones1); color: var(--hLetraBotones1);
+}
+
+#modalHV{
+    width: 800px; height: 90%;
+    overflow-y: auto; overflow-x: hidden;
+    margin: 10px;
+}
+
+#modalHV .botones{
+    text-align: center;
+    margin: 10px;
+    margin-left: auto;
+}
+
+#modalHV .botones a{
+    font-size: 25px;
+}
+
+@media screen and (max-width:1000px) {
+    #modalHV{
+        margin: 0;
+        width: 100%;
+    }
+
+    #modalHV .botones{
+        display: flex;
+        flex-direction: column;
+        margin: 10px auto;
+    }
+    
+    #modalHV .botones a{
+        margin: 5px;
+        font-size: 25px;
+    }
+}
+
+@media screen and (max-width:500px) {
+    #modalUsu, #modalContra, #modalNoDocument{
+        width: 100%; height: auto;
+        border-radius: 10px;
+        padding: 10px;
+        margin: auto;
+        background-color: var(--fondo1);
+        position: fixed;
+        display: flex;
+        flex-direction: column;
+    }
+
+    #modalUsu input, #modalContra input{
+        width: 100%;
+    }
+
+    #modalUsu .botones, #modalContra .botones, #modalNoDocument .botones{
+        margin: 15px;
+        text-align: right;
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+    }
+
+    #modalUsu .botones a, #modalContra .botones a, #modalHV .botones a, #modalNoDocument .botones a{
+        margin: 5px;
+    }
+}

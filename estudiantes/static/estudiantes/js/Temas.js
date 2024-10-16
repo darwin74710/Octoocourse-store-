@@ -28,7 +28,7 @@ function aplicarEstilos() {
         style.innerHTML = `
         :root {
             /*Tema Claro*/
-            --fondo1: #250338;
+            --fondo1: #1b0229;
         
             --borde1: #540f79;
             --letra1: white;
@@ -42,7 +42,7 @@ function aplicarEstilos() {
             --hFondoBotones1: #560581;
             --hLetraBotones1: #2e0346;
         
-            --fondoBotones2: #250338;
+            --fondoBotones2: #1b0229;
         }
         `;
     }

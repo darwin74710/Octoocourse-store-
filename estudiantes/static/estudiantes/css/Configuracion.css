@@ -79,6 +79,14 @@
     margin: 0 5px;
 }
 
+#btnAdjuntar{
+    display: inline;
+}
+
+#btnPlantilla{
+    display: none;
+}
+
 @media screen and (max-width:800px) {
     #MarcoConfig{
         width: auto;
