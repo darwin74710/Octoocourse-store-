@@ -5,6 +5,7 @@
 }
 
 #carouselExampleDark{
+    border: 5px solid var(--letratitulo1);
     display: block;
 }
 
@@ -19,6 +20,7 @@
 }
 
 .contImg img{
+    border: 3px solid var(--letratitulo1);
     width: 100%; height: 100%;
 }
 
@@ -33,6 +35,7 @@
 }
 
 .infoCont .izquierda img, .infoCont .derecha img{
+    border: 5px solid var(--letratitulo1);
     border-radius: 500px;
 }
 

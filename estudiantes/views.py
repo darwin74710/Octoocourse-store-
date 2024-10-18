@@ -14,3 +14,6 @@ def Configuracion(request):
 
 def OfertasInfo(request):
     return render(request, 'estudiantes/OfertasInfo.html')
+
+def CursosInfo(request):
+    return render(request, 'estudiantes/CursosInfo.html')
