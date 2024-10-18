@@ -1,0 +1,130 @@
+#MarcoInfoCursos{
+    width: 800px; height: auto;
+    margin: 10px auto;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+#MarcoInfoCursos h1{
+    text-align: center;
+    font-size: 25px;
+    color: var(--letratitulo1);
+}
+
+#MarcoInfoCursos h2{
+    font-size: 20px;
+    font-weight: bold;
+    color: var(--letra1);
+    margin: 0;
+    margin-top: 20px;
+    border-bottom: 1px solid var(--borde1);
+}
+
+#MarcoInfoCursos img{
+    margin: 0 auto;
+    width: 500px; height: 300px;
+}
+
+
+#MarcoInfoCursos i{
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    color: var(--letra1);
+}
+
+#btnesNavs{
+    display: flex;
+}
+
+#MarcoInfoCursos a{
+    width: 125px;
+    text-align: center;
+    margin: 0 5px;
+    margin-top: 10px;
+    text-decoration: none;
+    padding: 5px 15px;
+    font-size: 20px;
+    color: var(--letraBotones1); background-color: var(--fondoBotones1);
+    border-radius: 100px;
+    cursor: pointer;
+    transition: all 0.3s ease 0s;
+}
+
+#MarcoInfoCursos a:hover{
+    background-color: var(--hFondoBotones1); color: var(--hLetraBotones1);
+}
+
+#MarcoInfoCursos p{
+    font-size: 18px;
+    color: var(--letra1);
+}
+
+#MarcoInfoCursos .contentCursos{
+    width: 100%; height: auto;
+    margin: 5px 0;
+    display: flex;
+    flex-direction: column;
+}
+
+#MarcoInfoCursos #bloqueoContent{
+    display: none;
+}
+
+#MarcoInfoCursos .contentCursos #superior{
+    height: 35px;
+    padding: 0 10px;
+    border: 1px solid var(--borde1);
+    background-color: var(--fondoTitulo2);
+    border-radius: 10px 10px 0 0;
+    display: flex;
+    cursor: pointer;
+}
+
+#MarcoInfoCursos .contentCursos #superior p, #MarcoInfoCursos .contentCursos #superior i{
+    color: var(--letraTitulo2);
+    font-size: 20px;
+}
+
+.contentCursos #superior i{
+    margin-left: auto;
+}
+
+#MarcoInfoCursos .contentCursos #inferior{
+    width: auto; height: 0px;
+    border: 1px solid var(--borde1);
+    border-top: none;
+    border-radius: 0 0 10px 10px;
+    overflow: hidden;
+    transition: all 0.5s;
+}
+
+#inferior .contenido{
+    height: auto;
+    border-bottom: 1px solid var(--borde1);
+    background-color: var(--fondo1);
+    padding: 5px;
+    cursor: pointer;
+}
+
+#inferior .contenido:hover{
+    filter: brightness(85%);
+    transition: filter 0.3s ease;
+}
+
+#inferior .contenido p{
+    color: var(--letra1);
+    display: inline;
+}
+
+@media screen and (max-width:800px) {
+    #MarcoInfoCursos{
+        width: auto;
+    }
+
+    #MarcoInfoCursos img{
+        margin: 0 auto;
+        width: 300px; height: 200px;
+    }
+}

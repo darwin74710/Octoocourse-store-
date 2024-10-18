@@ -93,3 +93,13 @@ function filtro_Certificado(Certificado) {
         }
     }
 }
+
+function ContenidoCursos(elementoSuperior){
+    const divInferior = elementoSuperior.parentElement.querySelector('#inferior');
+
+    if (divInferior.style.height === "0px" || divInferior.style.height === "") {
+        divInferior.style.height = divInferior.scrollHeight + "px";
+    } else {
+        divInferior.style.height = "0px";
+    }
+}

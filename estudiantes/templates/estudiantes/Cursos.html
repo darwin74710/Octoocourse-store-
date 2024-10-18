@@ -66,7 +66,6 @@
     </header>
 
     <!-- Cursos interfaz -->
-    <!-- Cursos interfaz -->
     <div id="MarcoCursos">
         <!-- Filtros -->
         <div id="filtros">
@@ -117,7 +116,7 @@
 
         <!-- Cursos -->
         <div id="listaCursos">
-            <div class="contentCurso">
+            <div class="contentCurso" onclick="InfoCursos()">
                 <img src="{% static 'estudiantes/img/principal/1Carousel.png' %}" alt="">
                 <div class="infoCurso">
                     <h1>Bases para programar en html.</h1>
@@ -130,7 +129,7 @@
                 <div class="precioCurso">Gratis</div>
             </div>
 
-            <div class="contentCurso">
+            <div class="contentCurso" onclick="InfoCursos()">
                 <img src="{% static 'estudiantes/img/principal/1Carousel.png' %}" alt="">
                 <div class="infoCurso">
                     <h1>Clases e identificadores en html.</h1>
@@ -143,7 +142,7 @@
                 <div class="precioCurso">$13.000</div>
             </div>
 
-            <div class="contentCurso">
+            <div class="contentCurso" onclick="InfoCursos()">
                 <img src="{% static 'estudiantes/img/principal/1Carousel.png' %}" alt="">
                 <div class="infoCurso">
                     <h1>Bases para programar en html.</h1>
@@ -156,7 +155,7 @@
                 <div class="precioCurso">$150.000</div>
             </div>
 
-            <div class="contentCurso">
+            <div class="contentCurso" onclick="InfoCursos()">
                 <img src="{% static 'estudiantes/img/principal/1Carousel.png' %}" alt="">
                 <div class="infoCurso">
                     <h1>Bases para programar en html.</h1>
@@ -169,7 +168,7 @@
                 <div class="precioCurso">Gratis</div>
             </div>
 
-            <div class="contentCurso">
+            <div class="contentCurso" onclick="InfoCursos()">
                 <img src="{% static 'estudiantes/img/principal/1Carousel.png' %}" alt="">
                 <div class="infoCurso">
                     <h1>Bases para programar en html.</h1>
@@ -217,6 +216,13 @@
         </div>
         <div id="Marco2">&copy; 2024 OctooCourse - Todos los Derechos Reservados.</div>
     </footer>
+
+    <!-- Ver Información de oferta -->
+    <script>
+        function InfoCursos(){
+            window.location.href = "{% url 'CursosInfo' %}";
+        }
+    </script>
 
     <!-- Scripts js -->
     <script src="{% static 'estudiantes/js/navBar.js' %}"></script>
