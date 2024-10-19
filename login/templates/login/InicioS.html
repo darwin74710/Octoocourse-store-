@@ -12,26 +12,6 @@
 
 
     <script>
-        function ingresar(event) {
-            event.preventDefault();  // Evita el envío del formulario
-            var valorInput = document.getElementById("name").value;
-
-            if (valorInput === "estudiante") {
-                location.href = "{% url 'Inicio' %}";
-            } else if (valorInput === "empresa") {
-                location.href = "{% url 'inicioE' %}";
-            } else if (valorInput === "administrador") {
-                location.href = "{% url 'administratorAdmin' %}";
-            }
-        }
-
-        function mostrarSiguienteDiv() {
-            var divActual = document.getElementById("formulario1");
-            var divSiguiente = document.getElementById("formulario2");
-
-            divActual.style.display = "none";
-            divSiguiente.style.display = "block";
-        }
         document.addEventListener('DOMContentLoaded', function () {
             document.getElementById('show-password').addEventListener('change', function () {
                 var passwordInput = document.getElementById('password');
@@ -51,10 +31,11 @@
             <img src="{% static 'empresa/img/logo.png' %}" alt="OctooCourse Logo">
         </div>
         <h1><span>Iniciar</span> sesión</h1>
-        <form>
-            <input type="text" id="name" placeholder="Correo electrónico o teléfono">
-            <input type="password" placeholder="Contraseña">
-            <button onclick="ingresar(event)">Ingresar</button>
+        <form action="{% url 'inicioS' %}" method="post">
+            {% csrf_token %}
+            <input type="email" id="correo" name="correo" placeholder="Correo electrónico o teléfono">
+            <input type="password" id="password" name="password" placeholder="password">
+            <button type="submit">Ingresar</button>
         </form>
         <div class="links">
             <a href="#" id="forgot-password-link">¿Olvidaste tu contraseña?</a>
@@ -62,8 +43,8 @@
         </div>
     </div>
 
-     <!-- Modal -->
-     <div id="forgot-password-modal" class="modal">
+    <!-- Modal -->
+    <div id="forgot-password-modal" class="modal">
         <div class="modal-content">
             <span class="close">&times;</span>
             <h2>Recuperar contraseña</h2>
