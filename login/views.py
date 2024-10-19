@@ -32,7 +32,6 @@ def inicioS(request):
 
         try:
             with connection.cursor() as cursor:
-                # Fetch user data
                 cursor.execute(f"""
                     SELECT * FROM {table_name}
                     WHERE {email_field} = %s
@@ -40,14 +39,12 @@ def inicioS(request):
                 user = cursor.fetchone()
                 
                 if user:
-                    # Get the index of the password field
                     desc = cursor.description
                     password_index = next(i for i, d in enumerate(desc) if d[0].lower() == password_field.lower())
                     
-                    # Check password
                     if check_password(password, user[password_index]):
                         # Login successful
-                        request.session['user_id'] = user[0]  # Assuming ID is the first field
+                        request.session['user_id'] = user[0]  
                         request.session['user_type'] = user_type
                         messages.success(request, f"Bienvenido, {'estudiante' if user_type == 'estudiante' else 'empresa'}!")
                         return redirect(redirect_url)
