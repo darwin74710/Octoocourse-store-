@@ -17,3 +17,6 @@ def OfertasInfo(request):
 
 def CursosInfo(request):
     return render(request, 'estudiantes/CursosInfo.html')
+
+def CursosContent(request):
+    return render(request, 'estudiantes/CursosContent.html')
