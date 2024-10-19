@@ -1,0 +1,10 @@
+Crear bd y ejecutar proyecto
+1)Ejecutar Scrip de Creacion de tablas
+2)Ejecutar Scrip de Creacion de relaciones (Constrains)
+3)realizar un py .\manage.py migrate
+4)pip install django-jazzmin
+5)pip install mysqlclient
+6)pip install oracledb
+7)pip install pillow
+8)realizar un py .\manage.py runserver
+9)todo OK
