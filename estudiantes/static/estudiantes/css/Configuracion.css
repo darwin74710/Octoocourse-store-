@@ -69,16 +69,6 @@
     font-size: 65px;
 }
 
-#botonesHV{
-    margin: 10px;
-    padding: auto;
-    text-align: center;
-}
-
-#botonesHV a{
-    margin: 0 5px;
-}
-
 #btnAdjuntar{
     display: inline;
 }
@@ -116,10 +106,5 @@
         margin-left: auto;
         font-size: 15px;
         font-weight: normal;
-    }
-
-    #botonesHV{
-        display: flex;
-        flex-direction: column;
     }
 }
