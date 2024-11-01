@@ -115,79 +115,33 @@
 
         <!-- Cursos -->
         <div id="listaCursos">
-            <div class="contentCurso" onclick="InfoCursos()">
-                <img src="{% static 'estudiantes/img/Cursos/html.jpg' %}" alt="">
+            {% for curso in page_obj %}
+            <div class="contentCurso" onclick="InfoCursos(this)">
+                <h5>{{ curso.0 }}</h5>
+                <img src="{% static curso.8 %}" alt="">
                 <div class="infoCurso">
-                    <h1>Bases para programar en html.</h1>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus vero saepe doloremque aslkf lasfjklasj kjfaskf jasasfd as.</p>
-                    <i class="bi bi-terminal"> : Html</i>
-                    <i class="bi bi-bar-chart-fill"> : Básico</i>
-                    <i class="bi bi-clock"> : 1-5 Horas</i>
-                    <i class="bi bi-file-earmark-text"> : Sin certificado</i>
+                    <h1>{{ curso.1 }}</h1>
+                    <p>{{ curso.2 }}</p>
+                    <i class="bi bi-terminal"> : {{ curso.3 }}</i>
+                    <i class="bi bi-bar-chart-fill"> : {{ curso.4 }}</i>
+                    <i class="bi bi-clock"> : {{ curso.5 }}</i>
+                    <i class="bi bi-file-earmark-text"> : {{ curso.6 }}</i>
                 </div>
-                <div class="precioCurso">Gratis</div>
+                <div class="precioCurso">{{ curso.7 }}</div>
             </div>
+            {% endfor %}
 
-            <div class="contentCurso" onclick="InfoCursos()">
-                <img src="{% static 'estudiantes/img/Cursos/html.jpg' %}" alt="">
-                <div class="infoCurso">
-                    <h1>Clases e identificadores en html.</h1>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-                    <i class="bi bi-terminal"> : Html</i>
-                    <i class="bi bi-bar-chart-fill"> : Medio</i>
-                    <i class="bi bi-clock"> : 6-10 Horas</i>
-                    <i class="bi bi-file-earmark-text"> : Con certificado</i>
-                </div>
-                <div class="precioCurso">$13.000</div>
-            </div>
-
-            <div class="contentCurso" onclick="InfoCursos()">
-                <img src="{% static 'estudiantes/img/Cursos/html.jpg' %}" alt="">
-                <div class="infoCurso">
-                    <h1>Bases para programar en html.</h1>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus vero saepe doloremque aslkf lasfjklasj.</p>
-                    <i class="bi bi-terminal"> : Html</i>
-                    <i class="bi bi-bar-chart-fill"> : Avanzado</i>
-                    <i class="bi bi-clock"> : 15+ Horas</i>
-                    <i class="bi bi-file-earmark-text"> : Con certificado</i>
-                </div>
-                <div class="precioCurso">$150.000</div>
-            </div>
-
-            <div class="contentCurso" onclick="InfoCursos()">
-                <img src="{% static 'estudiantes/img/Cursos/html.jpg' %}" alt="">
-                <div class="infoCurso">
-                    <h1>Bases para programar en html.</h1>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus vero saepe doloremque aslkf lasfjklasj kjfaskf jasasfd as.</p>
-                    <i class="bi bi-terminal"> : Html</i>
-                    <i class="bi bi-bar-chart-fill"> : Básico</i>
-                    <i class="bi bi-clock"> : 11-15 Horas</i>
-                    <i class="bi bi-file-earmark-text"> : Sin certificado</i>
-                </div>
-                <div class="precioCurso">Gratis</div>
-            </div>
-
-            <div class="contentCurso" onclick="InfoCursos()">
-                <img src="{% static 'estudiantes/img/Cursos/html.jpg' %}" alt="">
-                <div class="infoCurso">
-                    <h1>Bases para programar en html.</h1>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus vero saepe doloremque aslkf lasfjklasj kjfaskf jasasfd as.</p>
-                    <i class="bi bi-terminal"> : Html</i>
-                    <i class="bi bi-bar-chart-fill"> : Básico</i>
-                    <i class="bi bi-clock"> : 1-5 Horas</i>
-                    <i class="bi bi-file-earmark-text"> : Con certificado</i>
-                </div>
-                <div class="precioCurso">Gratis</div>
-            </div>
-            
             <div id="ordenCursos">
                 <ul>
-                    <li><a class="nav_active" class="direccion">&lt;</a></li>
-                    <li><a class="nav_active">1</a></li>
-                    <li><a class="nav">2</a></li>
-                    <li><a class="nav">3</a></li>
-                    <li><a class="nav">...10</a></li>
-                    <li><a class="nav" class="direccion">&gt;</a></li>
+                    {% if page_obj.has_previous %}
+                        <li><a class="nav" class="direccion" href="?page={{ page_obj.previous_page_number }}">&lt;</a></li>
+                    {% endif %}
+                    
+                    <li><p class="nav_active">{{ page_obj.number }}</p></li>
+                    
+                    {% if page_obj.has_next %}
+                        <li><a class="nav" class="direccion" href="?page={{ page_obj.next_page_number }}">&gt;</a></li>
+                    {% endif %}
                 </ul>
             </div>
         </div>
@@ -218,8 +172,13 @@
 
     <!-- Ver Información de oferta -->
     <script>
-        function InfoCursos(){
-            window.location.href = "{% url 'CursosInfo' %}";
+        function InfoCursos(elemento){
+            const idCurso = elemento.querySelector('h5').innerText;
+            const idParametro = encodeURIComponent(idCurso);
+
+            var cursoInfoUrl = "{% url 'CursosInfo' %}";
+
+            window.location.href = `${cursoInfoUrl}?idCurso=${idParametro}`;
         }
     </script>
 

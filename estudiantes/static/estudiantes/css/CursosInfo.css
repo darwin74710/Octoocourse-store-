@@ -118,6 +118,10 @@
     display: inline;
 }
 
+#inferior .contenido h5, #inferior .contenido h6{
+    display: none;
+}
+
 @media screen and (max-width:800px) {
     #MarcoInfoCursos{
         width: auto;

@@ -10,7 +10,7 @@
     <!-- Scripts css -->
     <link rel="stylesheet" href="{% static 'estudiantes/css/navBar.css' %}" />
     <link rel="stylesheet" href="{% static 'estudiantes/css/footer.css' %}" />
-    <link rel="stylesheet" href="{% static 'estudiantes/css/Ofertas.css' %}" />
+    <link rel="stylesheet" href="{% static 'estudiantes/css/oferta.css' %}" />
     <link rel="stylesheet" href="{% static 'estudiantes/css/OfertasPago.css' %}" />
 
     <!-- Cargar tema -->
@@ -70,20 +70,6 @@
         <div id="filtros">
             <h1>Filtros</h1>
             <label class="linea"></label>
-    
-            <div class="seccionFiltros">
-                <h2>Lenguaje:</h2>
-                <div class="numFiltros">
-                    <div class="contentFiltro"><i id="HtmlFilter" onclick="filtro_lenguaje('Html')" class="bi bi-square"></i>Html</div>
-                    <div class="contentFiltro"><i id="CSSFilter" onclick="filtro_lenguaje('CSS')" class="bi bi-square"></i>CSS</div>
-                    <div class="contentFiltro"><i id="JavaFilter" onclick="filtro_lenguaje('Java')" class="bi bi-square"></i>Java</div>
-                    <div class="contentFiltro"><i id="JavaScriptFilter" onclick="filtro_lenguaje('JavaScript')" class="bi bi-square"></i>JavaScript</div>
-                    <div class="contentFiltro"><i id="PythonFilter" onclick="filtro_lenguaje('Python')" class="bi bi-square"></i>Python</div>
-                    <div class="contentFiltro"><i id="SQLFilter" onclick="filtro_lenguaje('SQL')" class="bi bi-square"></i>SQL</div>
-                </div>
-            </div>
-
-            <label class="linea"></label>
 
             <div class="seccionFiltros">
                 <h2>Salario:</h2>
@@ -101,57 +87,52 @@
                 <div class="numFiltros">
                     <div class="contentFiltro"><i id="FijoFilter" onclick="filtro_contrato('Fijo')" class="bi bi-square"></i>Fijo</div>
                     <div class="contentFiltro"><i id="IndefinidoFilter" onclick="filtro_contrato('Indefinido')" class="bi bi-square"></i>Indefinido</div>
-                    <div class="contentFiltro"><i id="ObraLaborFilter" onclick="filtro_contrato('ObraLabor')" class="bi bi-square"></i>ObraLabor</div>
+                    <div class="contentFiltro"><i id="ObraLaborFilter" onclick="filtro_contrato('ObraLabor')" class="bi bi-square"></i>Obra o Labor</div>
                     <div class="contentFiltro"><i id="AprendizajeFilter" onclick="filtro_contrato('Aprendizaje')" class="bi bi-square"></i>Aprendizaje</div>
                 </div>
             </div>
+
+            <a>Aplicar Filtros</a>
         </div>
 
         <div id="listOfertas">
-            <div class="ofertaElement" onclick="activarInfo()">
-                <h1>Titulo Oferta 1 Lorem ipsum, dolor sit amet consectetur adipisicing elit. Minus, recusandae?sadfs</h1>
-                <i class="bi bi-person"> : 10 Aplicados</i>
-                <i class="bi bi-terminal"> : Html, CSS, JavaScript</i>
-                <i class="bi bi-cash"> : 1.000.000</i>
-                <i class="bi bi-briefcase"> : Obra Labor</i>
-            </div>
-            <div class="ofertaElement" onclick="activarInfo()">
-                <h1>Titulo Oferta 1 Lorem ipsum, dolor sit amet consectetur adipisicing elit. Minus, recusandae?sadfs</h1>
-                <i class="bi bi-person"> : 10 Aplicados</i>
-                <i class="bi bi-terminal"> : Html, CSS, JavaScript</i>
-                <i class="bi bi-cash"> : 1.000.000</i>
-                <i class="bi bi-briefcase"> : Obra Labor</i>
-            </div>
-            <div class="ofertaElement" onclick="activarInfo()">
-                <h1>Titulo Oferta 1 Lorem ipsum, dolor sit amet consectetur adipisicing elit. Minus, recusandae?sadfs</h1>
-                <i class="bi bi-person"> : 10 Aplicados</i>
-                <i class="bi bi-terminal"> : Html, CSS, JavaScript</i>
-                <i class="bi bi-cash"> : 1.000.000</i>
-                <i class="bi bi-briefcase"> : Obra Labor</i>
-            </div>
-            <div class="ofertaElement" onclick="activarInfo()">
-                <h1>Titulo Oferta 1 Lorem ipsum, dolor sit amet consectetur adipisicing elit. Minus, recusandae?sadfs</h1>
-                <i class="bi bi-person"> : 10 Aplicados</i>
-                <i class="bi bi-terminal"> : Html, CSS, JavaScript</i>
-                <i class="bi bi-cash"> : 1.000.000</i>
-                <i class="bi bi-briefcase"> : Obra Labor</i>
-            </div>
-            <div class="ofertaElement" onclick="activarInfo()">
-                <h1>Titulo Oferta 1 Lorem ipsum, dolor sit amet consectetur adipisicing elit. Minus, recusandae?sadfs</h1>
-                <i class="bi bi-person"> : 10 Aplicados</i>
-                <i class="bi bi-terminal"> : Html, CSS, JavaScript</i>
-                <i class="bi bi-cash"> : 1.000.000</i>
-                <i class="bi bi-briefcase"> : Obra Labor</i>
-            </div>
-
-           <div id="ordenOfertas">
+            {% for data in ofertas_data %}
+                <div class="ofertaElement" onclick="activarInfo(this)">
+                    <h1>{{ data.nombre_oferta }}</h1>
+                    <i class="bi bi-person"> : 1 Aplicados</i>
+                    <i class="bi bi-terminal"> : 
+                        {% for conocimiento in data.conocimientos %}
+                            {{ conocimiento.nom_con }}{% if not forloop.last %}, {% endif %}
+                        {% endfor %}
+                    </i>
+                    <i class="bi bi-cash"> : {{ data.salario }}</i>
+                    <i class="bi bi-briefcase"> : 
+                        {% if data.tipoCont.id_tipo_cont == 1 %}
+                            Término Fijo
+                        {% elif data.tipoCont.id_tipo_cont == 2 %}
+                            Término Indefinido
+                        {% elif data.tipoCont.id_tipo_cont == 3 %}
+                            Obra o Labor
+                        {% elif data.tipoCont.id_tipo_cont == 4 %}
+                            Aprendizaje
+                        {% else %}
+                            Tipo de contrato desconocido
+                        {% endif %}
+                    </i>
+                    <p>{{ data.descripcion }}</p>
+                    <h5>{{ data.id_oferta }}</h5>
+                </div>   
+            {% endfor %}
+        
+            <div id="ordenOfertas">
                 <ul>
-                    <li><a class="nav_active" class="direccion">&lt;</a></li>
-                    <li><a class="nav_active">1</a></li>
-                    <li><a class="nav">2</a></li>
-                    <li><a class="nav">3</a></li>
-                    <li><a class="nav">...10</a></li>
-                    <li><a class="nav" class="direccion">&gt;</a></li>
+                    {% if ofertas_data.has_previous %}
+                        <li><a class="nav" class="direccion" href="?page={{ ofertas_data.previous_page_number }}">&lt;</a></li>
+                    {% endif %}
+                    <li><p class="nav_active">{{ ofertas_data.number }}</p></li>
+                    {% if ofertas_data.has_next %}
+                        <li><a class="nav" class="direccion" href="?page={{ ofertas_data.next_page_number }}">&gt;</a></li>
+                    {% endif %}
                 </ul>
             </div>
         </div>
@@ -159,21 +140,14 @@
         <div id="infoOfertas">
             <i onclick="cerrarInfo()" id="cerrar" class="bi bi-x-lg"></i>
             <div id="elementsOferta">
-                <h1>Titulo Oferta 1 Lorem ipsum, dolor sit amet consectetur adipisicing elit. Minus, recusandae?sadfs</h1>
+                <h1></h1>
                 <a onclick="modal_Pag('activado')">Aplicar</a>
-                <i class="bi bi-person"> : 10 Aplicados</i>
-                <i class="bi bi-terminal"> : Html, CSS, JavaScript</i>
-                <i class="bi bi-cash"> : 1.000.000</i>
-                <i class="bi bi-briefcase"> : Obra Labor</i>
+                <i class="bi bi-person"></i>
+                <i class="bi bi-terminal"></i>
+                <i class="bi bi-cash"></i>
+                <i class="bi bi-briefcase"></i>
                 <h2>Descripción</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos quaerat soluta incidunt iusto quo suscipit in eius, 
-                    placeat minima rem? sajkdsa  lkasdj ask a lal dasjjkl Lorem ipsum dolor sit, amet consectetur adipisicing elit. 
-                    Dolorem, non. lorem19 Lorem ipsum dolor, sit amet consectetur adipisicing elit. Accusantium delectus mollitia 
-                    perspiciatis expedita, at esse nobis sequi dolores voluptate, molestias temporibus tempore nulla est in pariatur 
-                    eum. Est hic maxime fugit cum, inventore deleniti a harum. Et placeat id deserunt totam nostrum quo iure illo 
-                    molestias rerum ullam ab blanditiis est assumenda quod illum animi, accusamus consectetur aspernatur, quasi, 
-                    incidunt libero atque. Temporibus, illo cum odio ipsa eveniet exercitationem omnis nihil impedit maxime cumque, 
-                    aspernatur quidem eius esse natus beatae quibusdam deleniti dicta molestiae, modi saepe ratione commodi tempora 
+                <p> 
                 </p>
             </div>
         </div>
@@ -245,7 +219,7 @@
 
     <!-- Scripts js -->
     <script src="{% static 'estudiantes/js/Front/navBar.js' %}"></script>
-    <script src="{% static 'estudiantes/js/Front/Ofertas.js' %}"></script>
+    <script src="{% static 'estudiantes/js/Front/ofertas.js' %}"></script>
 
     <!-- Scripts Botstrap -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"

@@ -1,0 +1,6 @@
+0|Titulo de curso1|esto es un curso dedicado al html y esta es su descripción.|Html|Básico|1-5 Horas|Sin certificado|gratis|estudiantes/img/Cursos/html.jpg|
+1|Titulo de curso2|Este es el segundo curso para poder aplicar al html.|Html|Medio|3-6 Horas|Con certificado|1.000|estudiantes/img/Cursos/html.jpg|
+2|Titulo de curso3|Descripcion Bizarra porque necesito una descripción bastante bizarra|Html|Avanzado|1-2 Horas|Con certificado|100.000|estudiantes/img/Cursos/html.jpg|
+3|Titulo de curso4|Este es el segundo curso para poder aplicar a curso.|Html|Básico|4-6 Horas|Sin certificado|25.000|estudiantes/img/Cursos/html.jpg|
+4|Titulo de curso5|Este es el segundo curso para poder aplicar a curso.|Html|Básico|2-6 Horas|Sin certificado|gratis|estudiantes/img/Cursos/html.jpg|
+5|Titulo de curso6|Este es el segundo curso para poder aplicar a curso.|Html|Avanzado|1-6 Horas|Con certificado|10.000|estudiantes/img/Cursos/html.jpg|

@@ -71,9 +71,10 @@
 
     <!-- INTERFAZ CONTENTCURSOS -->
     <div id="MarcoContentCursos">
-        <iframe src="https://1drv.ms/p/c/44ed2870e915acd4/IQTuZtBdY3uuTrQ16xzYmhDSAQeIaO-X4466oxqXZ_Zek_U" frameborder="0" scrolling="no"></iframe>
+        <iframe src="{{ urlPower }}" frameborder="0" scrolling="no"></iframe>
         <a id="btn1">Realizar Prueba</a>
-        <a id="btn2" href="{% url 'CursosInfo' %}">Volver</a>
+        <!-- le añado a la url el curso en donde estoy parado. -->
+        <a id="btn2" href="{% url 'CursosInfo' %}?idCurso={{ idCurso }}">Volver</a>
     </div>
     
     <!-- Footer -->

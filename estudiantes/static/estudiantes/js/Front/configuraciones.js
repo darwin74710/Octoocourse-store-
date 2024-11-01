@@ -34,6 +34,9 @@ function modalConfig(tipo){
     const mHV = document.getElementById("modalHV");
     const mNoDocument = document.getElementById("modalNoDocument");
     const mHVM = document.getElementById("modalHVM");
+    const old_contra_input = document.getElementById("old_contra");
+    const nuv_contra1_input = document.getElementById("nuv_contra1");
+    const nuv_contra2_input = document.getElementById("nuv_contra2");
 
     mFondo.style.display = "none";
     mContra.style.display = "none";
@@ -60,6 +63,10 @@ function modalConfig(tipo){
     if (tipo === "contraActive"){
         mFondo.style.display = "flex";
         mContra.style.display = "flex";
+
+        old_contra_input.value = "";
+        nuv_contra1_input.value = "";
+        nuv_contra2_input.value = "";
     }else if (tipo === "hvActive"){
         mFondo.style.display = "flex";
         mHV.style.display = "flex";
