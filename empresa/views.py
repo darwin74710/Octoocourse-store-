@@ -19,7 +19,20 @@ def aboutMe(request):
 
 
 def estudiantesE(request):
-    return render(request, 'empresa/estudiantesE.html')
+    with connection.cursor() as cursor:
+        cursor.execute("SELECT ID_ESTUDIANTE, TIPO_ID, NOM_ESTUDIANTE, APELLIDO, CORREO_ESTUDIANTE, FECHA_NAC FROM ESTUDIANTES")
+        estudiantes = [
+            {
+                'id': row[0],
+                'tipo_id': row[1],
+                'nombre': row[2],
+                'apellido': row[3],
+                'correo': row[4],
+                'fecha_nac': row[5]
+            }
+            for row in cursor.fetchall()
+        ]
+    return render(request, 'empresa/estudiantesE.html', {'estudiantes': estudiantes})
 
 
 def configE(request):

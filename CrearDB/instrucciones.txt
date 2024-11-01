@@ -22,3 +22,6 @@ python manage.py createsuperuser
 username: allis
 email:  allison@gmail.com
 password: 2525
+
+python manage.py makemigrations  
+python manage.py migrate   

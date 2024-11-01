@@ -35,9 +35,10 @@ class OfertaEmpleo(models.Model):
     nombre_oferta = models.CharField(max_length=50)
     salario = models.DecimalField(max_digits=15, decimal_places=2)
     descripcion = models.TextField(max_length=1000)
+    estado = models.BooleanField(default=True)  
 
     class Meta:
-        db_table = 'ofertas_empleos'  # Nombre exacto de la tabla en la base de datos
+        db_table = 'ofertas_empleos' 
 
     def __str__(self):
         return self.nombre_oferta

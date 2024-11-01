@@ -12,4 +12,6 @@ urlpatterns = [
     path('DetallesOferta/', views.DetallesOferta, name='DetallesOferta'), 
     path('listEAp/', views.listEAp, name='listEAp'), 
     path('logout/', views.logout_view, name='logout'),  
+    path('estudiantes_lista/', views.estudiantesE, name='lista_estudiantes'),
+
 ]
