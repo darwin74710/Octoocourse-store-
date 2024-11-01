@@ -11,4 +11,6 @@ urlpatterns = [
     path('Configuración/', views.Configuracion, name='Configuracion'), 
     path('guardarContra/', views_data.guardarContra, name='guardarContra'),
     path('guardarHV/', views_data.guardarHV, name='guardarHV'),
+    path('logout/', views.logout_view, name='logout'),  
+
 ]
