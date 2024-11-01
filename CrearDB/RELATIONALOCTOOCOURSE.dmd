@@ -1,0 +1,16 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<OSDM_Design class="oracle.dbtools.crest.model.design.Design" name="RELATIONALOCTOOCOURSE" id="8F0E83B9-940A-2536-5867-556B617A9B7D" version="3.5">
+<createdBy>allil</createdBy>
+<createdTime>2024-10-20 16:53:26 UTC</createdTime>
+<ownerDesignName>RELATIONALOCTOOCOURSE</ownerDesignName>
+<capitalNames>false</capitalNames>
+<designId>8F0E83B9-940A-2536-5867-556B617A9B7D</designId>
+<usedDesignStorageDescriptors>
+<designDescr class="oracle.dbtools.crest.model.design.Design$DesignStorageDesc" id="2904F2D0-210E-D3D4-B099-96ABC858E065">
+<designStoragePath>C:\</designStoragePath>
+</designDescr>
+<designDescr class="oracle.dbtools.crest.model.design.Design$DesignStorageDesc" id="D4031ABB-1171-72B0-2DCC-E8B05DE4B526">
+<designStoragePath>C:\</designStoragePath>
+</designDescr>
+</usedDesignStorageDescriptors>
+</OSDM_Design>

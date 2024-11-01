@@ -8,3 +8,17 @@ Crear bd y ejecutar proyecto
 7)pip install pillow
 8)realizar un py .\manage.py runserver
 9)todo OK
+
+
+
+admin interface
+pip install -U django-jazzmin
+jazzmin en setting
+
+
+***crear super usuario
+python manage.py createsuperuser
+
+username: allis
+email:  allison@gmail.com
+password: 2525
