@@ -5,12 +5,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inicio</title>
+    <title>CursosInfo</title>
 
     <!-- Scripts css -->
     <link rel="stylesheet" href="{% static 'estudiantes/css/navBar.css' %}" />
     <link rel="stylesheet" href="{% static 'estudiantes/css/footer.css' %}" />
-    <link rel="stylesheet" href="{% static 'estudiantes/css/Inicio.css' %}" />
+    <link rel="stylesheet" href="{% static 'estudiantes/css/CursosInfo.css' %}" />
 
     <!-- Cargar tema -->
     <script src="{% static 'estudiantes/js/Front/Temas.js' %}"></script>
@@ -21,23 +21,29 @@
     <!-- Botstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 </head>
 
 <body style="background-color: var(--fondo1);">
+    <script>
+        const urlCursos = "{% url 'CursosContent' %}";
+    </script>
+
+
     <!-- NavBar -->
     <header id="navBar">
         <img id="logo" src="{% static 'estudiantes/img/navBar/Logo2.png' %}" alt="">
 
         <!-- MENU PC -->
         <div id="derecha">
-            <a class="options_active">Inicio</a>
-            <a href="{% url 'Cursos' %}" class="options">Cursos</a>
+            <a href="{% url 'Inicio' %}" class="options">Inicio</a>
+            <a class="options_active">Cursos</a>
             <a href="{% url 'Ofertas' %}" class="options">Ofertas</a>
 
             <div class="linea"></div>
 
             <a id="btn_icono" href="{% url 'Configuracion' %}"><i class="fas fa-cog"></i></a>
-            <a id="btn_icono" href="{% url 'logout' %}"><i class="fa-solid fa-arrow-right-from-bracket"></i></a>
+            <a id="btn_icono" href="{% url 'home' %}"><i class="fa-solid fa-arrow-right-from-bracket"></i></a>
         </div>
 
         <!-- MENU MOVIL -->
@@ -50,79 +56,62 @@
                 <div class="linea"></div>
 
                 <h1>Navegación</h1>
-                <a class="options_active">Inicio</a>
-                <a href="{% url 'Cursos' %}" class="options">Cursos</a>
+                <a href="{% url 'Inicio' %}" class="options">Inicio</a>
+                <a class="options_active">Cursos</a>
                 <a href="{% url 'Ofertas' %}" class="options">Ofertas</a>
                 <a href="{% url 'Configuracion' %}" class="options">Configuración</a>
 
                 <div class="linea"></div>
-                
-                <a href="{% url 'logout' %}" class="logOut">Log out</a>
+
+                <a href="{% url 'home' %}" class="logOut">Log out</a>
 
             </div>
         </div>
     </header>
 
-    <!-- Principal Interfaz -->
-    <!-- Carousel Slider (Bootstrap)-->
-    <div id="carouselExampleDark" class="carousel carousel-dark slide" style="margin: 30px;">
-        <div class="carousel-indicators">
-            <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active"
-                aria-current="true" aria-label="Slide 1"></button>
-            <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1"
-                aria-label="Slide 2"></button>
-            <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2"
-                aria-label="Slide 3"></button>
-        </div>
-        <div class="carousel-inner">
-            <div class="carousel-item active">
-                <img src="{% static 'estudiantes/img/principal/titulo.png' %}" class="d-block w-100" alt="...">
-            </div>
-            <div class="carousel-item">
-                <img src="{% static 'estudiantes/img/principal/estudiantesNav.png' %}" class="d-block w-100" alt="...">
-            </div>
-            <div class="carousel-item">
-                <img src="{% static 'estudiantes/img/principal/empresasNav.png' %}" class="d-block w-100" alt="...">
-            </div>
-        </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-        </button>
-    </div>
+    <!-- INTERFAZ INFOCURSOS -->
+    <div id="MarcoInfoCursos">
+        <h1>{{ curso.1 }}</h1>
+        <img src="{% static curso.8 %}" alt="">
+        <i class="bi bi-cash"> : {{ curso.7 }}</i>
+        <i class="bi bi-terminal"> : {{ curso.3 }}</i>
+        <i class="bi bi-bar-chart-fill"> : {{ curso.4 }}</i>
+        <i class="bi bi-clock"> : {{ curso.5 }}</i>
+        <i class="bi bi-file-earmark-text"> : {{ curso.6 }}</i>
 
-    <!-- Imagene carousel-->
-    <div id="imgCarousel">
-        <div class="contImg"><img src="{% static 'estudiantes/img/principal/titulo.png' %}" alt=""></div>
-        <div class="contImg"><img src="{% static 'estudiantes/img/principal/estudiantesNav.png' %}" alt=""></div>
-        <div class="contImg"><img src="{% static 'estudiantes/img/principal/empresasNav.png' %}" alt=""></div>
-    </div>
-
-    <!-- Info-->
-    <div class="infoCont">
-        <div class="izquierda">
-            <img src="{% static 'estudiantes/img/principal/hi.png' %}" alt="">
-            <div class="infoMensaje">
-                <h1>¿QUÉ ES OCTOOCOURSE?</h1>
-                <p>Octoocourse es una web enfocada a la programación, disponemos de cursos y ofertas de empleo para los usuarios.</p>
-            </div>
+        <div id="btnesNavs">
+            <a>Aplicar</a>
+            <a href="{% url 'Cursos' %}">Regresar</a>
         </div>
-    </div>
+        
 
-    <div id="ultimoCont" class="infoCont">
-        <div class="derecha">
-            <img src="{% static 'estudiantes/img/principal/roles.png' %}" alt="">
-            <div class="infoMensaje">
-                <h1>ROLES</h1>
-                <p>Disponemos de dos roles (estudiante, empresa). Cada uno cuenta con diferentes funciones dentro de la web.</p>
+        <h2>Descripción</h2>
+        <p>{{ curso.2 }}</p>
+        
+
+        <!-- CONTENIDO DE CURSOS (ME VOY A VOLVER LOCO CON TANTOS ARRAYS) -->
+        <h2>Contenido</h2>
+        {% for content in contentCursos %}
+            <div class="contentCursos">
+                <div id="superior" onclick="ContenidoCursos(this)">
+                    <p>{{ content.nombre }}</p>
+                    <i class="bi bi-arrow-bar-down"></i>
+                </div>
+                <div id="inferior">
+                    {% for tema in content.temas %}
+                    <div class="contenido" onclick="abrirContent(urlCursos, this)">
+                        <p>{{ tema.tema }}</p>
+                        <h5>{{ tema.enlace }}</h5>
+                        <h6>{{ curso.0 }}</h6>
+                    </div>
+                    {% endfor %}
+                </div>
             </div>
-        </div>
-    </div>
+        {% endfor %}
 
+        <p id="bloqueoContent">Aplica al curso para desbloquear el contenido.</p>
+    </div>
+    
     <!-- Footer -->
     <footer class="piePag">
         <div id="Marco1">
@@ -148,6 +137,8 @@
 
     <!-- Scripts js -->
     <script src="{% static 'estudiantes/js/Front/navBar.js' %}"></script>
+    <script src="{% static 'estudiantes/js/Front/cursos.js' %}"></script>
+    <script src="{% static 'estudiantes/js/Front/CursosContent.js' %}"></script>
 
     <!-- Scripts Botstrap -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"

@@ -5,12 +5,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Oferta Info</title>
+    <title>CursosContent</title>
 
     <!-- Scripts css -->
     <link rel="stylesheet" href="{% static 'estudiantes/css/navBar.css' %}" />
     <link rel="stylesheet" href="{% static 'estudiantes/css/footer.css' %}" />
-    <link rel="stylesheet" href="{% static 'estudiantes/css/OfertasInfo.css' %}" />
+    <link rel="stylesheet" href="{% static 'estudiantes/css/CursosContent.css' %}" />
 
     <!-- Cargar tema -->
     <script src="{% static 'estudiantes/js/Front/Temas.js' %}"></script>
@@ -25,6 +25,11 @@
 </head>
 
 <body style="background-color: var(--fondo1);">
+    <script>
+        const urlCursos = "{% url 'CursosContent' %}";
+    </script>
+
+
     <!-- NavBar -->
     <header id="navBar">
         <img id="logo" src="{% static 'estudiantes/img/navBar/Logo2.png' %}" alt="">
@@ -32,8 +37,8 @@
         <!-- MENU PC -->
         <div id="derecha">
             <a href="{% url 'Inicio' %}" class="options">Inicio</a>
-            <a href="{% url 'Cursos' %}" class="options">Cursos</a>
-            <a class="options_active">Ofertas</a>
+            <a class="options_active">Cursos</a>
+            <a href="{% url 'Ofertas' %}" class="options">Ofertas</a>
 
             <div class="linea"></div>
 
@@ -52,48 +57,26 @@
 
                 <h1>Navegación</h1>
                 <a href="{% url 'Inicio' %}" class="options">Inicio</a>
-                <a href="{% url 'Cursos' %}" class="options">Cursos</a>
-                <a class="options_active">Ofertas</a>
+                <a class="options_active">Cursos</a>
+                <a href="{% url 'Ofertas' %}" class="options">Ofertas</a>
                 <a href="{% url 'Configuracion' %}" class="options">Configuración</a>
 
                 <div class="linea"></div>
 
                 <a href="{% url 'home' %}" class="logOut">Log out</a>
+
             </div>
         </div>
     </header>
 
-    <!-- Ofertas interfaz -->
-    <div id="MarcoOfertasInfo">
-    <h1>{{ ofertasEmpleos.nombre_oferta }}</h1>
-
-    <i class="bi bi-person"> : 10 Aplicados</i>
-    <i class="bi bi-terminal"> : 
-        {% for conocimiento in conocimientos %}
-        {{ conocimiento.nom_con }}{% if not forloop.last %}, {% endif %}
-        {% endfor %}
-    </i>
-    <i class="bi bi-cash"> : {{ ofertasEmpleos.salario }}</i>
-    <i class="bi bi-briefcase"> : 
-        {% if contrato.id_tipo_cont == 1 %}
-            Término Fijo
-        {% elif contrato.id_tipo_cont == 2 %}
-            Término Indefinido
-        {% elif contrato.id_tipo_cont == 3 %}
-            Obra o Labor
-        {% elif contrato.id_tipo_cont == 4 %}
-            Aprendizaje
-        {% else %}
-            Tipo de contrato desconocido
-        {% endif %}
-    </i>
-    <h2>Descripción</h2>
-    <p>{{ ofertasEmpleos.descripcion }}</p>
-
-    <a>Aplicar</a>
-    <a href="{% url 'Ofertas' %}">Regresar</a>
+    <!-- INTERFAZ CONTENTCURSOS -->
+    <div id="MarcoContentCursos">
+        <iframe src="{{ urlPower }}" frameborder="0" scrolling="no"></iframe>
+        <a id="btn1">Realizar Prueba</a>
+        <!-- le añado a la url el curso en donde estoy parado. -->
+        <a id="btn2" href="{% url 'CursosInfo' %}?idCurso={{ idCurso }}">Volver</a>
     </div>
-
+    
     <!-- Footer -->
     <footer class="piePag">
         <div id="Marco1">
@@ -119,6 +102,7 @@
 
     <!-- Scripts js -->
     <script src="{% static 'estudiantes/js/Front/navBar.js' %}"></script>
+    <script src="{% static 'estudiantes/js/Front/cursos.js' %}"></script>
 
     <!-- Scripts Botstrap -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"

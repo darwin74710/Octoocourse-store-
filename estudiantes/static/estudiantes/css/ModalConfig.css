@@ -9,7 +9,7 @@
     background-color: rgba(34, 34, 34, 0.712);
 }
 
-#modalUsu, #modalContra, #modalHV, #modalNoDocument, #modalHVM{
+#modalContra, #modalHV, #modalNoDocument, #modalHVM{
     display: none;
     border-radius: 10px;
     padding: 10px;
@@ -17,10 +17,6 @@
     background-color: var(--fondo1);
     position: fixed;
     flex-direction: column;
-}
-
-#modalUsu{
-    width: 500px; height: 230px;
 }
 
 #modalContra{
@@ -82,7 +78,8 @@
     display: flex;
 }
 
-#modalConfig .botones a{
+#modalConfig .botones a, #modalConfig .botones button{
+    border: none;
     padding: 0 15px;
     text-decoration: none;
     margin: 0 5px;
@@ -93,7 +90,7 @@
     transition: all 0.3s ease 0s;
 }
 
-#modalConfig .botones a:hover{
+#modalConfig .botones a:hover, #modalConfig .botones button:hover{
     background-color: var(--hFondoBotones1); color: var(--hLetraBotones1);
 }
 
@@ -112,6 +109,10 @@
 }
 
 .oneElementModify{
+    text-align: center;
+}
+
+.oneElementModify input{
     text-align: center;
 }
 
@@ -136,7 +137,7 @@
 }
 
 @media screen and (max-width:500px) {
-    #modalUsu, #modalContra, #modalNoDocument{
+    #modalContra, #modalNoDocument{
         width: 100%; height: auto;
         border-radius: 10px;
         padding: 10px;
@@ -159,7 +160,7 @@
         text-align: center;
     }
 
-    #modalConfig .botones a{
+    #modalConfig .botones a, #modalConfig .botones button{
         margin: 5px;
     }
 }

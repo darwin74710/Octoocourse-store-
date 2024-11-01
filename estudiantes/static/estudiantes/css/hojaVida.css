@@ -111,8 +111,8 @@
     font-size: 15px;
 }
 
-.infoExp p{
-    margin: 5px;
+#hojaVida .marco .derecha .infoExp p{
+    color: black;
     font-size: 15px;
     font-weight: bold;
 }

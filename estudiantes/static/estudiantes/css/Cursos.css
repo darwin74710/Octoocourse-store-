@@ -98,6 +98,10 @@
     border-bottom: 1px solid var(--borde1);
 }
 
+.contentCurso h5{
+    display: none;
+}
+
 .contentCurso:hover{
     filter: brightness(85%);
     transition: filter 0.3s ease;

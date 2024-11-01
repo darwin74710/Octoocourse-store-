@@ -1,101 +1,54 @@
-@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap');
-/*IMPORTAR LA FUENTE*/
-
-/*GENERAL*/
-* {
-    box-sizing: border-box;
-    margin: 0px; padding: 0px;
-    font-family: "Quicksand", sans-serif; font-size: 20px;
-}
-
-body{
-    display: flex;
-}
-
-#marcoCont{
-    height: 100vh; width: 25%;
-    overflow: auto;
-    margin-right: auto;
-    background-color: #2e0346;
+#marcoInicio{
+    margin: 10px;
     display: flex;
     flex-direction: column;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-    z-index: 2;
 }
 
-#supMarco{
-    display: flex;
+#marcoInicio h1{
+    width: 700px;
+    margin: 10px auto;
+    text-align: center;
+    font-size: 40px;
+    color: var(--letratitulo1);
 }
 
-#volver{
-    height: 50px; width: 50px;
+#infoAdmin{
+    width: 700px; height: 700px;
+    margin: 10px auto;
+    box-shadow: 0px 1px 5px black;
+    padding: 10px;
+}
+
+#infoAdmin h2{
     margin: 10px;
-    padding: 5px;
-    margin-left: auto;
-    border-radius: 10px;
-    background-color: #8021bb;
-    transition: all 0.3s ease 0s;
-}
-
-#volver:hover{
-    background-color: #560581;
-}
-
-#imgVolver{
-    height: 100%; width: 100%;
-}
-
-h1{
-    word-break: break-word;
+    text-align: center;
     font-size: 25px;
-    margin: auto;
-    font-weight: bold;
-    color: white;
+    color: var(--letraTitulo2); background-color: var(--fondoTitulo2);
 }
 
-h2{
+.elementInfo{
+    margin: 0; padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.minElement{
+    margin: 10px;
+    width: 200px;
+    display: flex;
+    flex-direction: column;
     text-align: center;
-    color: white;
-    margin: 10px 0px;
-    background-color: #560581;
-    font-size: 30px;
 }
 
-.btn{
-    word-break: break-word;
-    text-decoration: none;
-    width: 90%;
-    margin: 5px auto;
-    border-radius: 20px;
-    font-weight: bold; font-size: 25px;
-    text-align: center;
-    color: white; background-color: #8021bb; border: none;
-    cursor: pointer;
-    transition: all 0.3s ease 0s;
+.elementInfo h3{
+    color: var(--letratitulo1);
+    margin: 0; padding: 0;
+    font-size: 20px;
 }
 
-.btn:hover{
-    background-color: #560581; color: #2e0346;
-}
-
-@media screen and (max-width:1000px) {
-    #marcoCont{
-        width: 80%;
-    }
-
-    #volver{
-        height: 30px; width: 30px;
-    }
-
-    h1{
-        font-size: 12px;
-    }
-
-    h2{
-        font-size: 15px;
-    }
-
-    .btn{
-        font-size: 15px;
-    }
+.elementInfo p{
+    color: var(--letra1);
+    margin: 0; padding: 0;
+    font-size: 18px;
 }
