@@ -29,3 +29,15 @@ class Empresa(models.Model):
     def __str__(self):
         return self.nom_empresa
 
+class OfertaEmpleo(models.Model):
+    id_oferta = models.DecimalField(primary_key=True, max_digits=10, decimal_places=0)
+    nit = models.ForeignKey(Empresa, on_delete=models.CASCADE, db_column='nit')
+    nombre_oferta = models.CharField(max_length=50)
+    salario = models.DecimalField(max_digits=15, decimal_places=2)
+    descripcion = models.TextField(max_length=1000)
+
+    class Meta:
+        db_table = 'ofertas_empleos'  # Nombre exacto de la tabla en la base de datos
+
+    def __str__(self):
+        return self.nombre_oferta
