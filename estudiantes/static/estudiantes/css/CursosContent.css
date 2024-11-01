@@ -1,0 +1,53 @@
+#MarcoContentCursos{
+    display: flex;
+    flex-direction: column;
+}
+
+#MarcoContentCursos iframe{
+    background-color: black;
+    border: 3px solid var(--borde1);
+    margin: 10px auto;
+    width: 962px; 
+    height: 565px;
+}
+
+#MarcoContentCursos a{
+    width: 962px;
+    text-decoration: none;
+    color: var(--letraBotones1); background-color: var(--fondoBotones1);
+    text-align: center;
+    margin: 0 auto;
+    font-size: 30px;
+    margin-bottom: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease 0s;
+}
+
+#MarcoContentCursos a:hover{
+    background-color: var(--hFondoBotones1); color: var(--hLetraBotones1);
+}
+
+#btn1{
+    border-radius: 10px 10px 0 0;
+}
+
+#btn2{
+    border-radius: 0 0 10px 10px;
+}
+
+@media screen and (max-width:1000px) {
+    #MarcoContentCursos iframe{
+        width: 100%; 
+        height: 500px;
+    }
+
+    #MarcoContentCursos{
+        width: 100%; 
+    }
+}
+
+@media screen and (max-width:600px) {
+    #MarcoContentCursos iframe{
+        height: 300px;
+    }
+}

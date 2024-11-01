@@ -1,13 +1,35 @@
 /* ESTO ES PARA EL MENU DE INFORMACIÓN */
-function activarInfo() {
+function activarInfo(elemento) {
     /* Verifica si la resolución de la pantalla es igual o menor a 1100px */
     const esMovil = window.matchMedia("(max-width: 1100px)").matches;
 
     if(esMovil){
-        window.location.href = ofertasInfoUrl;
+        const idOferta = elemento.querySelector('h5').innerText;
+        const idParametro = encodeURIComponent(idOferta);
+
+        window.location.href = `${ofertasInfoUrl}?idOferta=${idParametro}`;
     }else{
+        extraerInfo(elemento);
         sliderInfo();
     }
+}
+
+function extraerInfo(elemento){
+    const slideOfertas = document.getElementById("elementsOferta");
+
+    const titulo = elemento.querySelector('h1').innerText;
+    const descripcion = elemento.querySelector('p').innerText;
+    const aplicados = elemento.querySelector('.bi-person').innerText;
+    const conocimientos = elemento.querySelector('.bi-terminal').innerText;
+    const salario = elemento.querySelector('.bi-cash').innerText;
+    const contrato = elemento.querySelector('.bi-briefcase').innerText;
+
+    slideOfertas.querySelector('h1').innerText = titulo;
+    slideOfertas.querySelector('p').innerText = descripcion;
+    slideOfertas.querySelector('.bi-person').innerText = aplicados;
+    slideOfertas.querySelector('.bi-terminal').innerText = conocimientos;
+    slideOfertas.querySelector('.bi-cash').innerText = salario;
+    slideOfertas.querySelector('.bi-briefcase').innerText = contrato;
 }
 
 function sliderInfo(){
@@ -30,39 +52,6 @@ function cerrarInfo(){
         slideOfertas.style.padding = "0";
         slideOfertas.style.border = "none";
         slideOfertas.style.overflow = "hidden";
-    }
-}
-
-/* ACTIVAR O DESACTIVAR LOS FILTROS */
-function filtro_lenguaje(Lenguaje) {
-    let checkButton;
-
-    /* Mediante un string que recibimos comprobamos cual boton es*/
-    if(Lenguaje === 'Html'){
-        checkButton = document.getElementById('HtmlFilter');
-    }else if(Lenguaje === 'CSS'){
-        checkButton = document.getElementById('CSSFilter');
-    }else if(Lenguaje === 'Java'){
-        checkButton = document.getElementById('JavaFilter');
-    }else if(Lenguaje === 'JavaScript'){
-        checkButton = document.getElementById('JavaScriptFilter');
-    }else if(Lenguaje === 'Python'){
-        checkButton = document.getElementById('PythonFilter');
-    }else if(Lenguaje === 'SQL'){
-        checkButton = document.getElementById('SQLFilter');
-    }
-    
-    /* Verificamos si el boton se encuentra activado o no mediante el font del Bootstrap*/
-    if (checkButton) {
-        if (checkButton.classList.contains('bi-check-square')) {
-            checkButton.classList.remove('bi-check-square');
-            checkButton.style.color = "var(--letra1)";
-            checkButton.classList.add('bi-square');
-        } else {
-            checkButton.classList.remove('bi-square');
-            checkButton.style.color = "#8021bb";
-            checkButton.classList.add('bi-check-square');
-        }
     }
 }
 

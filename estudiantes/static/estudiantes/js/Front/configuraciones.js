@@ -1,27 +1,3 @@
-function cambiarHV(tipoHV){
-    const adjuntar = document.getElementById("hvElect1");
-    const plantilla = document.getElementById("hvElect2");
-    const btnAdjuntar = document.getElementById("btnAdjuntar");
-    const btnPlantilla = document.getElementById("btnPlantilla");
-
-    adjuntar.classList.remove("bi-circle", "bi-circle-fill");
-    plantilla.classList.remove("bi-circle", "bi-circle-fill");
-
-    if(tipoHV === "adjuntar"){ 
-        adjuntar.classList.add("bi-circle-fill");
-        plantilla.classList.add("bi-circle");
-
-        btnAdjuntar.style.display = "inline";
-        btnPlantilla.style.display = "none";
-    }else if(tipoHV === "plantilla"){
-        plantilla.classList.add("bi-circle-fill");
-        adjuntar.classList.add("bi-circle");
-
-        btnAdjuntar.style.display = "none";
-        btnPlantilla.style.display = "inline";
-    }
-}
-
 function cambiarTema(tipoTema){
     if(tipoTema === "claro"){ 
         numTema = 1;
@@ -54,23 +30,21 @@ function seleccionTema(){
 
 function modalConfig(tipo){
     const mFondo = document.getElementById("modalConfig");
-    const mUsu = document.getElementById("modalUsu");
     const mContra = document.getElementById("modalContra");
     const mHV = document.getElementById("modalHV");
     const mNoDocument = document.getElementById("modalNoDocument");
     const mHVM = document.getElementById("modalHVM");
+    const old_contra_input = document.getElementById("old_contra");
+    const nuv_contra1_input = document.getElementById("nuv_contra1");
+    const nuv_contra2_input = document.getElementById("nuv_contra2");
 
     mFondo.style.display = "none";
-    mUsu.style.display = "none";
     mContra.style.display = "none";
     mHV.style.display = "none";
     mNoDocument.style.display = "none";
     mHVM.style.display = "none";
 
-    if (tipo === "usuDesactive"){
-        mFondo.style.display = "none";
-        mUsu.style.display = "none";
-    }else if (tipo === "contraDesactive"){
+    if (tipo === "contraDesactive"){
         mFondo.style.display = "none";
         mContra.style.display = "none";
     }else if (tipo === "hvDesactive"){
@@ -86,12 +60,13 @@ function modalConfig(tipo){
     
     
     
-    else if (tipo === "usuActive"){
-        mFondo.style.display = "flex";
-        mUsu.style.display = "flex";
-    }else if (tipo === "contraActive"){
+    if (tipo === "contraActive"){
         mFondo.style.display = "flex";
         mContra.style.display = "flex";
+
+        old_contra_input.value = "";
+        nuv_contra1_input.value = "";
+        nuv_contra2_input.value = "";
     }else if (tipo === "hvActive"){
         mFondo.style.display = "flex";
         mHV.style.display = "flex";

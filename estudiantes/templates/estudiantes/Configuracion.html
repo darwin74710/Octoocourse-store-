@@ -8,15 +8,14 @@
     <title>Configuración</title>
 
     <!-- Scripts css -->
-    <link rel="stylesheet" href="{% static 'estudiantes/css/Colores.css' %}" />
     <link rel="stylesheet" href="{% static 'estudiantes/css/navBar.css' %}" />
     <link rel="stylesheet" href="{% static 'estudiantes/css/footer.css' %}" />
     <link rel="stylesheet" href="{% static 'estudiantes/css/Configuracion.css' %}" />
-    <link rel="stylesheet" href="{% static 'estudiantes/css/ModalConfig.css' %}" />
+    <link rel="stylesheet" href="{% static 'estudiantes/css/modalConfig.css' %}" />
     <link rel="stylesheet" href="{% static 'estudiantes/css/hojaVida.css' %}" />
 
     <!-- Cargar tema -->
-    <script src="{% static 'estudiantes/js/Temas.js' %}"></script>
+    <script src="{% static 'estudiantes/js/Front/Temas.js' %}"></script>
 
     <!-- Imagenes -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -69,17 +68,11 @@
     <!-- Configuración Interfaz -->
     <div id="MarcoConfig">
         <h1>INFORMACIÓN PERSONAL</h1>
-        <div onclick="modalConfig('usuActive')" class="marcoOpcion"><i id="document" class="bi bi-person"></i><h2>MODIFICAR USUARIO</h2></div>
         <div onclick="modalConfig('contraActive')" class="marcoOpcion"><i id="document" class="bi bi-person-lock"></i><h2>MODIFICAR CONTRASEÑA</h2></div>
 
         <h1>HOJA DE VIDA</h1>
-            <div class="marcoOpcion" onclick="cambiarHV('adjuntar')"><i id="document" class="bi bi-file-earmark-text"></i><h2>ADJUNTAR DOCUMENTO</h2><i id="hvElect1" class="bi bi-circle-fill"></i></div>
-            <div class="marcoOpcion" onclick="cambiarHV('plantilla')"><i id="document" class="bi bi-file-earmark-person"></i><h2>UTILIZAR PLANTILLA</h2><i id="hvElect2" class="bi bi-circle"></i></div>
-            <div id="botonesHV">
-                <div id="btnAdjuntar"><a>Adjuntar</a><a onclick="modalConfig('NoDocumentActive')">Visualizar</a></div>
-                <div id="btnPlantilla"><a onclick="modalConfig('hvMActive')">Modificar</a><a onclick="modalConfig('hvActive')">Visualizar</a></div>
-            </div>
-        
+        <div class="marcoOpcion" onclick="modalConfig('hvMActive')"><i id="document" class="bi bi-file-earmark-text"></i><h2>MODIFICAR HV</h2></div>
+        <div class="marcoOpcion" onclick="modalConfig('hvActive')"><i id="document" class="bi bi-file-earmark-person"></i><h2>VISUALIZAR HV</h2></div>
         <h1>TEMA</h1>
         <div class="marcoOpcion" onclick="cambiarTema('claro')"><i id="document" class="bi bi-brightness-high"></i><h2>CLARO</h2><i id="temaElect1"></i></div>
         <div class="marcoOpcion" onclick="cambiarTema('oscuro')"><i id="document" class="bi bi-moon"></i><h2>OSCURO</h2><i id="temaElect2"></i></div>
@@ -87,45 +80,29 @@
 
     <!-- Modal -->
     <div id="modalConfig">
-        <!-- MODAL CAMBIAR USUARIO -->
-        <div id="modalUsu">
-            <h1>CAMBIAR USUARIO</h1>
-            <p>
-                No repitas el mismo usuario y procura evitar caracteres extraños.
-                <br>
-                Nuevo usuario:
-            </p>
-            <input type="text">
-            <div class="botones">
-                <a onclick="modalConfig('usuDesactive')" class="btnIzquierda">Regresar</a>
-                <a>Aplicar</a>
-            </div>
-
-        </div>
-
         <!-- MODAL CAMBIAR CONTRASEÑA -->
-        <div id="modalContra">
+        <form id="modalContra" method="POST" action="{% url 'guardarContra' %}">
             <h1>CAMBIAR CONTRASEÑA</h1>
             <p>
                 No repitas la misma contraseña y procura evitar caracteres extraños.
                 <br>
                 Antigua contraseña:
             </p>
-            <input type="text">
+            <input type="text" name="old_contra" id="old_contra">
             <p>
                 Nueva contraseña:
             </p>
-            <input type="text">
+            <input type="text" name="nuv_contra1" id="nuv_contra1">
             <p>
                 Repite nueva contraseña:
             </p>
-            <input type="text">
+            <input type="text" name="nuv_contra2" id="nuv_contra2">
 
             <div class="botones">
                 <a onclick="modalConfig('contraDesactive')" class="btnIzquierda">Regresar</a>
-                <a>Aplicar</a>
+                <button type="submit">Aplicar</button>
             </div>
-        </div>
+        </form>
 
         <!-- HOJA DE VIDA -->
         <div id="modalHV">
@@ -137,93 +114,109 @@
                         <h1>DATOS PERSONALES</h1>
                         <div class="minContent">
                             <i class="fab fa-whatsapp"></i>
-                            <h2>+57 333 333 33 33</h2>
+                            {% if hojasDeVida %}
+                                <h2>{{ hojasDeVida.telefono }}</h2>
+                            {% else %}
+                                <h2>Not Found</h2>
+                            {% endif %}
+                            
                         </div>
                         <div class="minContent">
                             <i class="bi bi-envelope"></i>
-                            <h2>correo_master121212@correo.edu.co</h2>
+                            <!-- De esta forma encontramos los datos de la tabla -->
+                            {% if estudiantes %}
+                                <h2>{{ estudiantes.correo_estudiante.strip }}</h2>
+                            {% else %}
+                                <h2>Not Found</h2>
+                            {% endif %}
                         </div>
                         <div class="minContent">
                             <i class="bi bi-geo-alt"></i>
-                            <h2>Cra 33 #33-33</h2>
+                            {% if hojasDeVida %}
+                                <h2>{{ hojasDeVida.direccion.strip }}</h2>
+                            {% else %}
+                                <h2>Not Found</h2>
+                            {% endif %}
                         </div>
         
                         <h1>APTITUDES</h1>
                         <div class="lista">
-                            <h2>APTITUD</h2>
-                            <h2>APTITUD</h2>
-                            <h2>APTITUD</h2>
-                            <h2>APTITUD</h2>
-                            <h2>APTITUD</h2>
+                            {% if aptitudes %}
+                                {% for aptitud in aptitudes %}
+                                    <h2>{{ aptitud.nombre_apt.strip }}</h2>
+                                {% endfor %}
+                            {% else %}
+                                <h2>Not Found</h2>
+                            {% endif %}
                         </div>
         
                         <h1>IDIOMAS</h1>
-                        <div class="minContent">
-                            <i class="bi bi-emoji-laughing"></i>
-                            <h2>C2</h2>
-                            <h2>ESPAÑOL</h2>
-                        </div>
-                        <div class="minContent">
-                            <i class="bi bi-emoji-neutral"></i>
-                            <h2>B1</h2>
-                            <h2>INGLES</h2>
-                        </div>
-                        <div class="minContent">
-                            <i class="bi bi-emoji-frown"></i>
-                            <h2>A1</h2>
-                            <h2>CATALAN</h2>
-                        </div>
+                        {% if idiomas %}
+                            {% for idioma in idiomas %}
+                                <div class="minContent">
+                                    <i class="bi bi-emoji-laughing"></i>
+                                    <h2>{{ idioma.nivel.strip }}</h2>
+                                    <h2>{{ idioma.idioma.strip }}</h2>
+                                </div>
+                            {% endfor %}
+                        {% else %}
+                            <h2>Not Found</h2>
+                        {% endif %}
         
-                        <h1>CONOCIMIENTOS</h1>
+                        <h1>LENGUAJES</h1>
                         <div class="lista">
-                            <h2>JAVA</h2>
-                            <h2>C++</h2>
-                            <h2>PYTHON</h2>
+                            {% if lenguajesProg %}
+                                {% for lenguaje in lenguajesProg %}
+                                    <h2>{{ lenguaje.nombre_leng.strip }}</h2>
+                                {% endfor %}
+                            {% else %}
+                                <h2>Not Found</h2>
+                            {% endif %}
                         </div>
         
                     </div>
                     <div class="derecha">
-                        <h3>JOSE IGNACIO GUADALUPE TERCERO</h3>
+                        {% if estudiantes %}
+                            <h3>{{ estudiantes.nom_estudiante.strip|upper }} {{ estudiantes.apellido.strip|upper }}</h3>
+                        {% else %}
+                            <h3>Not Found</h3>
+                        {% endif %}
         
                         <h1>EXPERIENCIA LABORAL</h1>
-                        <div class="infoExp">
-                            <h2>NOMBRE_CARGO</h2>
-                            <h4>NOMBRE_EMPRESA</h4>
-                            <h4>TIEMPO_INICIO / TIEMPO_FINAL</h4>
-                            <p>DESCRIPCION: Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero odio repudiandae
-                                porro eveniet odit laudantium laborum a quasi corporis, dolores nostrum! Inventore natus dolore
-                                autem? Ut tempora labore quisquam. Dolor, quae eligendi unde earum, itaque commodi corrupti
-                                minima quisquam fuga est voluptate ipsum error, id soluta saepe reiciendis sequi quis ut! Quas
-                                dolore commodi repudiandae beatae excepturi incidunt voluptate impedit, libero nulla numquam
-                                natus alias nisi cupiditate debitis, deserunt id, et porro. Itaque ex enim, aliquid facilis
-                                dolor nesciunt sed est? Quidem, magnam minima nihil dolores sed accusantium in adipisci eius?
-                                Excepturi fugit dignissimos nam error, aliquam tempora velit libero.</p>
-                        </div>
-                        <div class="infoExp">
-                            <h2>NOMBRE_CARGO</h2>
-                            <h4>NOMBRE_EMPRESA</h4>
-                            <h4>TIEMPO_INICIO / TIEMPO_FINAL</h4>
-                            <p>DESCRIPCION: Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero odio repudiandae
-                                porro eveniet odit laudantium laborum a quasi corporis, dolores nostrum! Inventore natus dolore
-                                autem? Ut tempora labore quisquam. Dolor, quae eligendi unde earum, itaque commodi corrupti
-                                minima quisquam fuga est voluptate ipsum error, id soluta saepe reiciendis sequi quis ut! Quas
-                                dolore commodi repudiandae beatae excepturi incidunt voluptate impedit, libero nulla numquam
-                                natus alias nisi cupiditate debitis, deserunt id, et porro. Itaque ex enim, aliquid facilis
-                                dolor nesciunt sed est? Quidem, magnam minima nihil dolores sed accusantium in adipisci eius?
-                                Excepturi fugit dignissimos nam error, aliquam tempora velit libero.</p>
-                        </div>
+                        {% if expLaborales %}
+                            {% for expLaboral in expLaborales %}
+                                <div class="infoExp">
+                                    <h2>{{ expLaboral.cargo.strip }}</h2>
+                                    <h4>{{ expLaboral.nombre_leng.strip }}</h4>
+                                    <h4>{{ expLaboral.tiempo_inicio }} / {{ expLaboral.tiempo_final }}</h4>
+                                    <p>DESCRIPCION:{{ expLaboral.descripcion.strip }}</p>
+                                </div>
+                            {% endfor %}
+                        {% else %}
+                            <div class="infoExp">
+                                <h2>NOMBRE_CARGO</h2>
+                                <h4>NOMBRE_EMPRESA</h4>
+                                <h4>TIEMPO_INICIO / TIEMPO_FINAL</h4>
+                                <p>DESCRIPCION:</p>
+                            </div>
+                        {% endif %}
         
                         <h1>FORMACIÓN ACADÉMICA</h1>
-                        <div class="infoExp">
-                            <h2>NOMBRE_TITULO</h2>
-                            <h4>NOMBRE_INSTITUCIÓN</h4>
-                            <h4>TIEMPO_INICIO / TIEMPO_FINAL</h4>
-                        </div>
-                        <div class="infoExp">
-                            <h2>NOMBRE_TITULO</h2>
-                            <h4>NOMBRE_INSTITUCIÓN</h4>
-                            <h4>TIEMPO_INICIO / TIEMPO_FINAL</h4>
-                        </div>
+                        {% if formaciones %}
+                            {% for formacion in formaciones %}
+                                <div class="infoExp">
+                                    <h2>{{ formacion.titulo.strip }}</h2>
+                                    <h4>{{ formacion.nom_institucion.strip }}</h4>
+                                    <h4>{{ formacion.fecha_inicio }} / {{ formacion.fecha_final }}</h4>
+                                </div>
+                            {% endfor %}
+                        {% else %}
+                            <div class="infoExp">
+                                <h2>NOMBRE_TITULO</h2>
+                                <h4>NOMBRE_INSTITUCIÓN</h4>
+                                <h4>TIEMPO_INICIO / TIEMPO_FINAL</h4>
+                            </div>
+                        {% endif %}
                     </div>
                 </div>
             </div>
@@ -243,180 +236,354 @@
         </div>
 
         <!-- MODIFICAR HOJA DE VIDA -->
-        <div id="modalHVM">
+        <form id="modalHVM" method="POST" action="{% url 'guardarHV' %}">
             <h1>MODIFICAR HOJA DE VIDA</h1>
             <h3>Datos Personales</h3>
             <div class="elementsModify">
                 <div class="oneElementModify">
                     <p>Celular</p>
-                    <input type="text">
-                </div>
-                <div class="oneElementModify">
-                    <p>Correo</p>
-                    <input type="text">
+                    {% if hojasDeVida %}
+                        <input type="number" value="{{ hojasDeVida.telefono }}" name="telefono">
+                    {% else %}
+                        <input type="number" name="telefono">
+                    {% endif %}
                 </div>
                 <div class="oneElementModify">
                     <p>Dirección</p>
-                    <input type="text">
+                    {% if hojasDeVida %}
+                        <input type="text" value="{{ hojasDeVida.direccion.strip }}" name="direccion">
+                    {% else %}
+                        <input type="text" name="direccion">
+                    {% endif %}
                 </div>
             </div>
 
             <h3>Aptitudes</h3>
             <p>Dejar algún campo vacío implica reducir la cantidad de aptitudes a mostrar.</p>
             <div class="elementsModify">
-                <div class="oneElementModify">
-                    <p>1</p>
-                    <input type="text">
-                </div>
-                <div class="oneElementModify">
-                    <p>2</p>
-                    <input type="text">
-                </div>
-                <div class="oneElementModify">
-                    <p>3</p>
-                    <input type="text">
-                </div>
+                {% if aptitudes %}
+                    <!-- Con este ciclo recorro la 3 primera aptitudes -->
+                    {% for aptitud in aptitudes|slice:":3" %}
+                        <div class="oneElementModify">
+                            <!-- Con esta variable contamos las veces que se a iterado el ciclo -->
+                            <p>{{ forloop.counter }}</p>
+                            <input type="text" value="{{ aptitud.nombre_apt.strip }}" name="aptitud_{{ forloop.counter }}">
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <div class="oneElementModify">
+                        <p>1</p>
+                        <input type="text">
+                    </div>
+                    <div class="oneElementModify">
+                        <p>2</p>
+                        <input type="text">
+                    </div>
+                    <div class="oneElementModify">
+                        <p>3</p>
+                        <input type="text">
+                    </div>
+                {% endif %}
             </div>
+
             <div class="elementsModify">
-                <div class="oneElementModify">
-                    <p>4</p>
-                    <input type="text">
-                </div>
-                <div class="oneElementModify">
-                    <p>5</p>
-                    <input type="text">
-                </div>
+                {% if aptitudes %}
+                    <!-- Con este ciclo recorro luego de la tercera aptitud -->
+                    {% for aptitud in aptitudes|slice:"3:" %}
+                        <div class="oneElementModify">
+                            <!-- Con esta variable contamos las veces que se a iterado el ciclo -->
+                            <p>{{ forloop.counter|add:"3" }}</p>
+                            <input type="text" value="{{ aptitud.nombre_apt.strip }}" name="aptitud_{{ forloop.counter|add:'3' }}">
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <div class="oneElementModify">
+                        <p>4</p>
+                        <input type="text">
+                    </div>
+                    <div class="oneElementModify">
+                        <p>5</p>
+                        <input type="text">
+                    </div>
+                {% endif %}
             </div>
 
             <h3>Idiomas</h3>
             <p>Dejar algún campo vacío implica reducir la cantidad de idiomas a mostrar.</p>
             <div class="elementsModify">
-                <div class="oneElementModify">
-                    <p>1</p>
-                    <input type="text">
-                </div>
-                <div class="oneElementModify">
-                    <p>2</p>
-                    <input type="text">
-                </div>
-                <div class="oneElementModify">
-                    <p>3</p>
-                    <input type="text">
-                </div>
+                {% if idiomas %}
+                    <!-- Con este ciclo recorro las 3 primera aptitudes -->
+                    {% for idioma in idiomas|slice:":3" %}
+                        <div class="oneElementModify">
+                            <!-- Con esta variable contamos las veces que se a iterado el ciclo -->
+                            <p>{{ forloop.counter }}</p>
+                            <input type="text" value="{{ idioma.idioma.strip }}" name="idioma_{{ forloop.counter }}">
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <div class="oneElementModify">
+                        <p>1</p>
+                        <input type="text">
+                    </div>
+                    <div class="oneElementModify">
+                        <p>2</p>
+                        <input type="text">
+                    </div>
+                    <div class="oneElementModify">
+                        <p>3</p>
+                        <input type="text">
+                    </div>
+                {% endif %}
             </div>
 
-            <h3>Conocimimentos</h3>
+            <p>Nivel de los idiomas (A1, A2, B1, B2, C1, C2, NATIVO)</p>
+            <div class="elementsModify">
+                {% if idiomas %}
+                    <!-- Con este ciclo recorro las 3 primera aptitudes -->
+                    {% for idioma in idiomas|slice:":3" %}
+                        <div class="oneElementModify">
+                            <!-- Con esta variable contamos las veces que se a iterado el ciclo -->
+                            <p>{{ forloop.counter }}</p>
+                            <input type="text" value="{{ idioma.nivel.strip }}" name="nivel_{{ forloop.counter }}">
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <div class="oneElementModify">
+                        <p>1</p>
+                        <input type="text">
+                    </div>
+                    <div class="oneElementModify">
+                        <p>2</p>
+                        <input type="text">
+                    </div>
+                    <div class="oneElementModify">
+                        <p>3</p>
+                        <input type="text">
+                    </div>
+                {% endif %}
+            </div>
+
+            <h3>Lenguajes_Programación</h3>
             <p>Dejar algún campo vacío implica reducir la cantidad de conocimientos a mostrar.</p>
             <div class="elementsModify">
-                <div class="oneElementModify">
-                    <p>1</p>
-                    <input type="text">
-                </div>
-                <div class="oneElementModify">
-                    <p>2</p>
-                    <input type="text">
-                </div>
-                <div class="oneElementModify">
-                    <p>3</p>
-                    <input type="text">
-                </div>
+                {% if lenguajesProg %}
+                    <!-- Con este ciclo recorro las 3 primera aptitudes -->
+                    {% for lenguaje in lenguajesProg|slice:":3" %}
+                        <div class="oneElementModify">
+                            <!-- Con esta variable contamos las veces que se a iterado el ciclo -->
+                            <p>{{ forloop.counter }}</p>
+                            <input type="text" value="{{ lenguaje.nombre_leng.strip }}" name="lenguajeProg_{{ forloop.counter }}">
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <div class="oneElementModify">
+                        <p>1</p>
+                        <input type="text">
+                    </div>
+                    <div class="oneElementModify">
+                        <p>2</p>
+                        <input type="text">
+                    </div>
+                    <div class="oneElementModify">
+                        <p>3</p>
+                        <input type="text">
+                    </div>
+                {% endif %}
             </div>
             <div class="elementsModify">
-                <div class="oneElementModify">
-                    <p>4</p>
-                    <input type="text">
-                </div>
-                <div class="oneElementModify">
-                    <p>5</p>
-                    <input type="text">
-                </div>
-                <div class="oneElementModify">
-                    <p>6</p>
-                    <input type="text">
-                </div>
+                {% if lenguajesProg %}
+                    <!-- Con este ciclo recorro las 3 primera aptitudes -->
+                    {% for lenguaje in lenguajesProg|slice:"3:" %}
+                        <div class="oneElementModify">
+                            <!-- Con esta variable contamos las veces que se a iterado el ciclo -->
+                            <p>{{ forloop.counter|add:"3" }}</p>
+                            <input type="text" value="{{ lenguaje.nombre_leng.strip }}" name="lenguajeProg_{{ forloop.counter|add:'3' }}">
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <div class="oneElementModify">
+                        <p>4</p>
+                        <input type="text">
+                    </div>
+                    <div class="oneElementModify">
+                        <p>5</p>
+                        <input type="text">
+                    </div>
+                    <div class="oneElementModify">
+                        <p>6</p>
+                        <input type="text">
+                    </div>
+                {% endif %}
             </div>
 
-            <h3>Experiencia laboral 1</h3>
-            <div class="elementsModify">
-                <div class="oneElementModify">
-                    <p>Cargo</p>
-                    <input type="text">
+            <!-- EXPERIENCIAS LABORALES -->
+            {% if expLaborales %}
+                <!-- Con este ciclo recorro las 3 primera aptitudes -->
+                {% for expLaboral in expLaborales %}
+                    <H3>Experiencia laboral {{ forloop.counter }}</H3>
+                    <div class="elementsModify">
+                        <div class="oneElementModify">
+                            <p>Cargo</p>
+                            <input type="text" value="{{ expLaboral.cargo.strip }}" name="exp_cargo_{{ forloop.counter }}">
+                        </div>
+                        <div class="oneElementModify">
+                            <p>Empresa</p>
+                            <input type="text" value="{{ expLaboral.nom_empresas.strip }}" name="exp_empresa_{{ forloop.counter }}">
+                        </div>
+                    </div>
+                    <div class="elementsModify">
+                        <div class="oneElementModify">
+                            <p>Fecha inicio</p>
+                            <input type="date" value="{{ expLaboral.tiempo_inicio|date:'Y-m-d' }}" name="exp_tiempoIni_{{ forloop.counter }}">
+                        </div>
+                        <div class="oneElementModify">
+                            <p>Fecha final</p>
+                            <input type="date" value="{{ expLaboral.tiempo_final|date:'Y-m-d' }}" name="exp_tiempoFin_{{ forloop.counter }}">
+                        </div>
+                    </div>
+                    <div class="elementsModify">
+                        <div class="oneElementModify">
+                            <p>Descripción</p>
+                            <textarea name="exp_description_{{ forloop.counter }}">{{ expLaboral.descripcion.strip }}</textarea>
+                        </div>
+                    </div>
+                    
+                {% endfor %}
+            {% else %}
+                <h3>Experiencia laboral 1</h3>
+                <div class="elementsModify">
+                    <div class="oneElementModify">
+                        <p>Cargo</p>
+                        <input type="text" value="ola">
+                    </div>
+                    <div class="oneElementModify">
+                        <p>Empresa</p>
+                        <input type="text">
+                    </div>
                 </div>
-                <div class="oneElementModify">
-                    <p>Empresa</p>
-                    <input type="text">
+                <div class="elementsModify">
+                    <div class="oneElementModify">
+                        <p>Fecha inicio</p>
+                        <input type="date">
+                    </div>
+                    <div class="oneElementModify">
+                        <p>Fecha final</p>
+                        <input type="date">
+                    </div>
                 </div>
-                <div class="oneElementModify">
-                    <p>Fecha inicio/final</p>
-                    <input type="text">
+                <div class="elementsModify">
+                    <div class="oneElementModify">
+                        <p>Descripción</p>
+                        <textarea></textarea>
+                    </div>
                 </div>
-            </div>
-            <div class="elementsModify">
-                <div class="oneElementModify">
-                    <p>Descripción</p>
-                    <textarea></textarea>
-                </div>
-            </div>
 
-            <h3>Experiencia laboral 2</h3>
-            <div class="elementsModify">
-                <div class="oneElementModify">
-                    <p>Cargo</p>
-                    <input type="text">
+                <h3>Experiencia laboral 2</h3>
+                <div class="elementsModify">
+                    <div class="oneElementModify">
+                        <p>Cargo</p>
+                        <input type="text">
+                    </div>
+                    <div class="oneElementModify">
+                        <p>Empresa</p>
+                        <input type="text">
+                    </div>
                 </div>
-                <div class="oneElementModify">
-                    <p>Empresa</p>
-                    <input type="text">
+                <div class="elementsModify">
+                    <div class="oneElementModify">
+                        <p>Fecha inicio</p>
+                        <input type="date">
+                    </div>
+                    <div class="oneElementModify">
+                        <p>Fecha final</p>
+                        <input type="date">
+                    </div>
                 </div>
-                <div class="oneElementModify">
-                    <p>Fecha inicio/final</p>
-                    <input type="text">
+                <div class="elementsModify">
+                    <div class="oneElementModify">
+                        <p>Descripción</p>
+                        <textarea></textarea>
+                    </div>
                 </div>
-            </div>
-            <div class="elementsModify">
-                <div class="oneElementModify">
-                    <p>Descripción</p>
-                    <textarea></textarea>
-                </div>
-            </div>
+            {% endif %}
 
-            <h3>Formación Académica 1</h3>
-            <div class="elementsModify">
-                <div class="oneElementModify">
-                    <p>Título</p>
-                    <input type="text">
+            <!-- FORMACIONES ACADEMICAS -->
+            {% if formaciones %}
+                <!-- Con este ciclo recorro las 3 primera aptitudes -->
+                {% for formacion in formaciones %}
+                    <h3>Formación Académica {{ forloop.counter }}</h3>
+                    <div class="elementsModify">
+                        <div class="oneElementModify">
+                            <p>Título</p>
+                            <input type="text" value="{{ formacion.titulo.strip }}" name="academ_titulo_{{ forloop.counter }}">
+                        </div>
+                        <div class="oneElementModify">
+                            <p>Institución</p>
+                            <input type="text" value="{{ formacion.nom_institucion.strip }}" name="academ_institu_{{ forloop.counter }}">
+                        </div>
+                    </div>
+                    <div class="elementsModify">
+                        <div class="oneElementModify">
+                            <p>Fecha inicio</p>
+                            <input type="date" value="{{ formacion.fecha_inicio|date:'Y-m-d' }}" name="academ_fechaIni_{{ forloop.counter }}">
+                        </div>
+                        <div class="oneElementModify">
+                            <p>Fecha final</p>
+                            <input type="date" value="{{ formacion.fecha_final|date:'Y-m-d' }}" name="academ_fechaFin_{{ forloop.counter }}">
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <h3>Formación Académica 1</h3>
+                <div class="elementsModify">
+                    <div class="oneElementModify">
+                        <p>Título</p>
+                        <input type="text">
+                    </div>
+                    <div class="oneElementModify">
+                        <p>Institución</p>
+                        <input type="text">
+                    </div>
                 </div>
-                <div class="oneElementModify">
-                    <p>Institución</p>
-                    <input type="text">
+                <div class="elementsModify">
+                    <div class="oneElementModify">
+                        <p>Fecha inicio</p>
+                        <input type="date">
+                    </div>
+                    <div class="oneElementModify">
+                        <p>Fecha final</p>
+                        <input type="date">
+                    </div>
                 </div>
-                <div class="oneElementModify">
-                    <p>Fecha inicio/final</p>
-                    <input type="text">
-                </div>
-            </div>
 
-            <h3>Formación Académica 2</h3>
-            <div class="elementsModify">
-                <div class="oneElementModify">
-                    <p>Título</p>
-                    <input type="text">
+                <h3>Formación Académica 2</h3>
+                <div class="elementsModify">
+                    <div class="oneElementModify">
+                        <p>Título</p>
+                        <input type="text">
+                    </div>
+                    <div class="oneElementModify">
+                        <p>Institución</p>
+                        <input type="text">
+                    </div>
                 </div>
-                <div class="oneElementModify">
-                    <p>Institución</p>
-                    <input type="text">
+                <div class="elementsModify">
+                    <div class="oneElementModify">
+                        <p>Fecha inicio</p>
+                        <input type="date">
+                    </div>
+                    <div class="oneElementModify">
+                        <p>Fecha final</p>
+                        <input type="date">
+                    </div>
                 </div>
-                <div class="oneElementModify">
-                    <p>Fecha inicio/final</p>
-                    <input type="text">
-                </div>
-            </div>
+            {% endif %}
 
             <div class="botones">
                 <a onclick="modalConfig('hvMDesactive')" class="btnIzquierda">Regresar</a>
-                <a>Aplicar</a>
+                <button type="submit">Aplicar</button>
             </div>
-        </div>
+        </form>
      </div>
 
     <!-- Footer -->
@@ -445,9 +612,15 @@
     <!-- Scripts jsPDF -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
+    <!-- Scripts AJAX -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
     <!-- Scripts js -->
-    <script src="{% static 'estudiantes/js/navBar.js' %}"></script>
-    <script src="{% static 'estudiantes/js/Configuraciones.js' %}"></script>
+    <script src="{% static 'estudiantes/js/Front/navBar.js' %}"></script>
+    <script src="{% static 'estudiantes/js/Front/Configuraciones.js' %}"></script>
+
+    
+    <script src="{% static 'estudiantes/js/DataBase/ConfigData.js' %}"></script>
     <script>seleccionTema();</script>
 
     <!-- Scripts Botstrap -->

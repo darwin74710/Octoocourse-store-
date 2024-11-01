@@ -8,13 +8,12 @@
     <title>CursosInfo</title>
 
     <!-- Scripts css -->
-    <link rel="stylesheet" href="{% static 'estudiantes/css/Colores.css' %}" />
     <link rel="stylesheet" href="{% static 'estudiantes/css/navBar.css' %}" />
     <link rel="stylesheet" href="{% static 'estudiantes/css/footer.css' %}" />
     <link rel="stylesheet" href="{% static 'estudiantes/css/CursosInfo.css' %}" />
 
     <!-- Cargar tema -->
-    <script src="{% static 'estudiantes/js/Temas.js' %}"></script>
+    <script src="{% static 'estudiantes/js/Front/Temas.js' %}"></script>
 
     <!-- Imagenes -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -72,13 +71,13 @@
 
     <!-- INTERFAZ INFOCURSOS -->
     <div id="MarcoInfoCursos">
-        <h1>Titulo del curso loremlorem100</h1>
-        <img src="" alt="">
-        <i class="bi bi-cash"> : Gratis</i>
-        <i class="bi bi-terminal"> : Html</i>
-        <i class="bi bi-bar-chart-fill"> : Básico</i>
-        <i class="bi bi-clock"> : 1-5 Horas</i>
-        <i class="bi bi-file-earmark-text"> : Sin certificado</i>
+        <h1>{{ curso.1 }}</h1>
+        <img src="{% static curso.8 %}" alt="">
+        <i class="bi bi-cash"> : {{ curso.7 }}</i>
+        <i class="bi bi-terminal"> : {{ curso.3 }}</i>
+        <i class="bi bi-bar-chart-fill"> : {{ curso.4 }}</i>
+        <i class="bi bi-clock"> : {{ curso.5 }}</i>
+        <i class="bi bi-file-earmark-text"> : {{ curso.6 }}</i>
 
         <div id="btnesNavs">
             <a>Aplicar</a>
@@ -87,37 +86,30 @@
         
 
         <h2>Descripción</h2>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste sunt placeat a, officiis dolorem autem eum veniam vel accusamus ab ut nemo voluptatem animi ad excepturi voluptatum quasi, ullam blanditiis sequi eius. Quaerat alias voluptate sunt debitis, vel soluta dolorem libero blanditiis vero tempore, necessitatibus iusto rem fuga exercitationem nobis adipisci architecto velit quidem harum eius ab atque illum ad. Minus quasi ad facere magni molestiae eius corporis magnam quam autem, consectetur nulla recusandae deleniti voluptatum exercitationem, explicabo ea et non nam rem eaque? Accusantium quam nam numquam perspiciatis, aliquid molestias. Molestias dicta dolore odit. Optio officiis soluta error voluptas.</p>
+        <p>{{ curso.2 }}</p>
         
+
+        <!-- CONTENIDO DE CURSOS (ME VOY A VOLVER LOCO CON TANTOS ARRAYS) -->
         <h2>Contenido</h2>
-        <div class="contentCursos">
-            <div id="superior" onclick="ContenidoCursos(this)">
-                <p>Indice</p>
-                <i class="bi bi-arrow-bar-down"></i>
-            </div>
-            <div id="inferior">
-                <div class="contenido" onclick="abrirContent(urlCursos)">
-                    <p>Primer tema a visualizar</p>
+        {% for content in contentCursos %}
+            <div class="contentCursos">
+                <div id="superior" onclick="ContenidoCursos(this)">
+                    <p>{{ content.nombre }}</p>
+                    <i class="bi bi-arrow-bar-down"></i>
                 </div>
-                <div class="contenido" onclick="abrirContent(urlCursos)">
-                    <p>Segundo tema a visualizar</p>
+                <div id="inferior">
+                    {% for tema in content.temas %}
+                    <div class="contenido" onclick="abrirContent(urlCursos, this)">
+                        <p>{{ tema.tema }}</p>
+                        <h5>{{ tema.enlace }}</h5>
+                        <h6>{{ curso.0 }}</h6>
+                    </div>
+                    {% endfor %}
                 </div>
             </div>
-        </div>
+        {% endfor %}
 
         <p id="bloqueoContent">Aplica al curso para desbloquear el contenido.</p>
-
-        <div class="contentCursos">
-            <div id="superior" onclick="ContenidoCursos(this)">
-                <p>Elementos funcionales</p>
-                <i class="bi bi-arrow-bar-down"></i>
-            </div>
-            <div id="inferior">
-                <div class="contenido" onclick="abrirContent(urlCursos)">
-                    <p>Primer tema a visualizar</p>
-                </div>
-            </div>
-        </div>
     </div>
     
     <!-- Footer -->
@@ -144,9 +136,9 @@
     </footer>
 
     <!-- Scripts js -->
-    <script src="{% static 'estudiantes/js/navBar.js' %}"></script>
-    <script src="{% static 'estudiantes/js/cursos.js' %}"></script>
-    <script src="{% static 'estudiantes/js/CursosContent.js' %}"></script>
+    <script src="{% static 'estudiantes/js/Front/navBar.js' %}"></script>
+    <script src="{% static 'estudiantes/js/Front/cursos.js' %}"></script>
+    <script src="{% static 'estudiantes/js/Front/CursosContent.js' %}"></script>
 
     <!-- Scripts Botstrap -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
