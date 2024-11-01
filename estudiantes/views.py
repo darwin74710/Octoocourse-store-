@@ -6,6 +6,8 @@ import os
 from django.conf import settings
 from urllib.parse import unquote
 
+
+@login_required 
 def Inicio(request):
     return render(request, 'estudiantes/Inicio.html')
 

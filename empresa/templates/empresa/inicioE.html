@@ -11,7 +11,9 @@
     <link rel="stylesheet" href="{% static 'empresa/css/navBarE.css' %}" />
     <link rel="stylesheet" href="{% static 'empresa/css/footerE.css' %}" />
     <link rel="stylesheet" href="{% static 'empresa/css/InicioE.css' %}" />
-    <link rel="stylesheet" href="{% static 'empresa/css/fondo.css' %}" /> 
+    <link rel="stylesheet" href="{% static 'empresa/css/fondo.css' %}" />
+    <link rel="stylesheet" href="{% static 'empresa/css/mensaje.css' %}" />
+
 
 
     <!-- Imagenes -->
@@ -23,14 +25,26 @@
 </head>
 
 <body>
+
+    <!-- Mensajes de éxito o error -->
+    {% if messages %}
+    <div id="alert-container">
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }} alert-dismissible fade show alert-custom" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
     <!-- NavBar -->
     <header id="navBar">
         <img id="logo" src="{% static 'estudiantes/img/navBar/Logo2.png' %}" alt="">
 
         <!-- MENU PC -->
         <div id="derecha">
-            <a href="{% url 'inicioE' %}"class="options_active">Inicio</a>
-            <a href="{% url 'estudiantesE' %}" class="options">Estudiantes</a> 
+            <a href="{% url 'inicioE' %}" class="options_active">Inicio</a>
+            <a href="{% url 'estudiantesE' %}" class="options">Estudiantes</a>
             <a href="{% url 'publicaro' %}" class="options">Publicar</a>
             <a href="{% url 'ofertasE' %}" class="options">Ofertas</a>
 
@@ -39,7 +53,7 @@
             <div class="linea"></div>
 
             <a id="btn_icono" href="{% url 'configE' %}"><i class="fas fa-cog"></i></a>
-            <a id="btn_icono" href="{% url 'home' %}"><i class="fa-solid fa-arrow-right-from-bracket"></i></a>
+            <a id="btn_icono" href="{% url 'logout' %}"><i class="fa-solid fa-arrow-right-from-bracket"></i></a>
         </div>
 
         <!-- MENU MOVIL -->
@@ -52,14 +66,14 @@
                 <div class="linea"></div>
 
                 <h1>Navegación</h1>
-                <a href="{% url 'inicioE' %}"class="options_active">Inicio</a>
-                <a href="{% url 'estudiantesE' %}" class="options">Estudiantes</a> 
+                <a href="{% url 'inicioE' %}" class="options_active">Inicio</a>
+                <a href="{% url 'estudiantesE' %}" class="options">Estudiantes</a>
                 <a href="{% url 'Ofertas' %}" class="options">Ofertas</a>
                 <a href="{% url 'configE' %}" class="options">Configuración</a>
 
                 <div class="linea"></div>
-                
-                <a href="{% url 'home' %}" class="logOut">Log out</a>
+
+                <a href="{% url 'logout' %}" class="logOut">Log out</a>
 
             </div>
         </div>

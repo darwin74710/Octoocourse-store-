@@ -8,8 +8,7 @@ urlpatterns = [
     path('Cursos/Content/', views.CursosContent, name='CursosContent'),
     path('Ofertas/', views.Ofertas, name='Ofertas'),
     path('Ofertas/Info/', views.OfertasInfo, name='OfertasInfo'),
-    path('Configuración/', views.Configuracion, name='Configuracion'),
-
+    path('Configuración/', views.Configuracion, name='Configuracion'), 
     path('guardarContra/', views_data.guardarContra, name='guardarContra'),
     path('guardarHV/', views_data.guardarHV, name='guardarHV'),
 ]

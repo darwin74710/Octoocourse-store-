@@ -23,9 +23,9 @@ temporary tablespace temp
 account unlock;     
 
 --privilegios
-grant connect, resource,dba to ts_octoocourse; 
+grant connect, resource,dba to us_admin_octoo; 
 
-connect ts_octoocourse/123
+connect us_admin_octoo/123
 
 show user
 
