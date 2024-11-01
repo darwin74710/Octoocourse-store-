@@ -5,11 +5,22 @@ from django.core.paginator import Paginator
 import os
 from django.conf import settings
 from urllib.parse import unquote
+from django.contrib import messages
+from django.contrib.auth import logout
+from django.contrib.auth.decorators import login_required
+
 
 
 @login_required 
 def Inicio(request):
     return render(request, 'estudiantes/Inicio.html')
+
+
+
+def logout_view(request):
+    logout(request)  
+    messages.success(request, "Sesión cerrada correctamente.")
+    return redirect('home')  
 
 
 
