@@ -83,6 +83,8 @@ CREATE TABLE OFERTAS_EMPLEOS (
 alter table ofertas_empleos
 add ( ESTADO NUMBER(1));
 
+alter table ofertas_empleos
+add ( FECHA_PUB DATE);
 -------------------------------
 
 CREATE TABLE CONOCIMIENTOS(

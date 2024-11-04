@@ -1,26 +1,180 @@
-.custom-button {
-    display: inline-block;
-    padding: 12px 24px; /* Aumenta el tamaño del botón */
-    font-size: 16px;
-    font-weight: bold;
+:root {
+    --color-primary: #6a0dad;
+    --color-secondary: #9b59b6;
+    --color-background: #f0e6f6;
+    --color-text: #4a235a;
+}
+
+body {
+    font-family: 'Roboto', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: var(--color-text);
+    background-color: var(--color-background);
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: white;
+    box-shadow: 0 10px 30px rgba(106, 13, 173, 0.1);
+    border-radius: 8px;
+}
+
+header {
+    background-color: var(--color-primary);
     color: white;
-    background-color: #007bff;
     text-align: center;
-    text-decoration: none;
-    border-radius: 8px; /* Bordes más redondeados */
-    border: 2px solid transparent; /* Asegura que el botón tenga un borde definido */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Añade una sombra para darle más profundidad */
+    padding: 2rem;
+    margin: -2rem -2rem 2rem -2rem;
+    border-radius: 8px 8px 0 0;
+}
+
+h1, h2 {
+    color: var(--color-primary);
+    margin-bottom: 1rem;
+}
+
+.profile-img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid var(--color-secondary);
+    margin-bottom: 1rem;
+}
+
+.section {
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid var(--color-secondary);
+}
+
+.info-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.info-item img {
+    width: 20px;
+    margin-right: 10px;
+}
+
+.skills, .languages, .knowledge {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.skill-tag, .language-tag, .knowledge-tag {
+    background-color: var(--color-secondary);
+    color: white;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    transition: background-color 0.3s ease;
+}
+
+.skill-tag:hover, .language-tag:hover, .knowledge-tag:hover {
+    background-color: var(--color-primary);
+}
+
+.experience-item {
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+    background-color: rgba(155, 89, 182, 0.1);
+    border-radius: 8px;
+    transition: transform 0.3s ease;
+}
+
+.experience-item:hover {
+    transform: translateY(-5px);
+}
+
+.experience-item h3 {
+    color: var(--color-primary);
+    margin-bottom: 0.25rem;
+}
+
+.experience-item p {
+    margin: 0.25rem 0;
+}
+
+footer {
+    background-color: var(--color-primary);
+    color: white;
+    text-align: center;
+    padding: 1rem;
+    margin-top: 2rem;
+    border-radius: 0 0 8px 8px;
+}
+
+.back-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: var(--color-primary);
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    transition: background-color 0.3s ease;
 }
 
-.custom-button:hover {
-    background-color: #0056b3; /* Color más oscuro en hover */
-    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15); /* Aumenta la sombra en hover */
+.back-button:hover {
+    background-color: var(--color-secondary);
 }
 
-.custom-button:active {
-    background-color: #00408a; /* Color más oscuro al hacer clic */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Reduce la sombra en el clic */
-    transform: translateY(2px); /* Le da un pequeño efecto de "presionado" */
+
+.cv-button {
+    display: inline-block;
+    background-color: var(--color-primary);
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 1rem;
+    text-decoration: none;
 }
+
+.cv-button:hover {
+    background-color: var(--color-secondary);
+}
+
+.hire-button {
+    background-color: var(--color-secondary);
+}
+
+.hire-button:hover {
+    background-color: var(--color-primary);
+}
+
+@media print {
+    .button-container, .back-button {
+        display: none;
+    }
+}
+
+.print-button {
+    display: inline-block;
+    background-color: var(--color-primary);
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 1rem;
+    margin-top: 1rem;
+}
+
+.print-button:hover {
+    background-color: var(--color-secondary);
+}
+

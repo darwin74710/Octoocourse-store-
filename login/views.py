@@ -7,6 +7,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.hashers import check_password
 
 
+
 def home(request):
     if request.user.is_authenticated:
         user_type = request.session.get('user_type')  
@@ -55,6 +56,7 @@ def inicioS(request):
 
             if user_type == 'empresa':
                 request.session['nit'] = nit_empresa
+                
 
             if user_type == 'estudiante':
                 messages.success(request, "Inicio de sesión exitoso para estudiante")

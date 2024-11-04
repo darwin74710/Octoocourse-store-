@@ -7,6 +7,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Publicar ofertas empresa</title>
 
+
+
+
+
     <!-- Scripts css -->
     <link rel="stylesheet" href="{% static 'empresa/css/navBarE.css' %}" />
     <link rel="stylesheet" href="{% static 'empresa/css/footerE.css' %}" />
@@ -44,7 +48,7 @@
         <div id="derecha">
             <a href="{% url 'inicioE' %}" class="options">Inicio</a>
             <a href="{% url 'estudiantesE' %}" class="options">Estudiantes</a>
-            <a href="{% url 'publicaro' %}" class="options_active">Publicar</a>
+            <a href="{% url 'crearOferta' %}" class="options_active">Publicar</a>
             <a href="{% url 'ofertasE' %}" class="options">Ofertas</a>
 
             <div class="linea"></div>
@@ -59,6 +63,7 @@
         <h1 class="text-center mb-4">Publicar Oferta de Trabajo</h1>
         <form id="oferta-form" action="{% url 'crearOferta' %}" method="POST" novalidate>
             {% csrf_token %}
+            {{ form.as_p }}
             <div class="row">
                 <div class="col-md-6 mb-3">
                     <label for="nombre" class="form-label">Nombre de la oferta:</label>
