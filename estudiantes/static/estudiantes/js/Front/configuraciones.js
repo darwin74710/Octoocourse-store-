@@ -32,7 +32,6 @@ function modalConfig(tipo){
     const mFondo = document.getElementById("modalConfig");
     const mContra = document.getElementById("modalContra");
     const mHV = document.getElementById("modalHV");
-    const mNoDocument = document.getElementById("modalNoDocument");
     const mHVM = document.getElementById("modalHVM");
     const old_contra_input = document.getElementById("old_contra");
     const nuv_contra1_input = document.getElementById("nuv_contra1");
@@ -41,7 +40,6 @@ function modalConfig(tipo){
     mFondo.style.display = "none";
     mContra.style.display = "none";
     mHV.style.display = "none";
-    mNoDocument.style.display = "none";
     mHVM.style.display = "none";
 
     if (tipo === "contraDesactive"){
@@ -50,9 +48,6 @@ function modalConfig(tipo){
     }else if (tipo === "hvDesactive"){
         mFondo.style.display = "none";
         mHV.style.display = "none";
-    }else if (tipo === "NoDocumentDesactive"){
-        mFondo.style.display = "none";
-        mNoDocument.style.display = "none";
     }else if (tipo === "hvMDesactive"){
         mFondo.style.display = "none";
         mHVM.style.display = "none";
@@ -70,9 +65,6 @@ function modalConfig(tipo){
     }else if (tipo === "hvActive"){
         mFondo.style.display = "flex";
         mHV.style.display = "flex";
-    }else if (tipo === "NoDocumentActive"){
-        mFondo.style.display = "flex";
-        mNoDocument.style.display = "flex";
     }else if (tipo === "hvMActive"){
         mFondo.style.display = "flex";
         mHVM.style.display = "flex";

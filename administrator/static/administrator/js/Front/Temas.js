@@ -27,22 +27,22 @@ function aplicarEstilos() {
     }else if (numTema === 2){
         style.innerHTML = `
         :root {
-            /*Tema Claro*/
-            --fondo1: #1b0229;
+            /*Tema Oscuro*/
+            --fondo1: #0a0523;
         
             --borde1: #540f79;
             --letra1: #dbdbdb;
         
             --letratitulo1: #8021bb;
             --fondoTitulo2: #3c0d55;
-            --letraTitulo2: #8021bb;
+            --letraTitulo2: #b84ffa;
             
             --fondoBotones1: #8021bb;
             --letraBotones1: #dbdbdb;
             --hFondoBotones1: #560581;
             --hLetraBotones1: #2e0346;
         
-            --fondoBotones2: #1b0229;
+            --fondoBotones2: #29063d;
         }
         `;
     }

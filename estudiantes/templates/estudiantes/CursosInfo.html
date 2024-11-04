@@ -25,11 +25,6 @@
 </head>
 
 <body style="background-color: var(--fondo1);">
-    <script>
-        const urlCursos = "{% url 'CursosContent' %}";
-    </script>
-
-
     <!-- NavBar -->
     <header id="navBar">
         <img id="logo" src="{% static 'estudiantes/img/navBar/Logo2.png' %}" alt="">
@@ -43,7 +38,7 @@
             <div class="linea"></div>
 
             <a id="btn_icono" href="{% url 'Configuracion' %}"><i class="fas fa-cog"></i></a>
-            <a id="btn_icono" href="{% url 'home' %}"><i class="fa-solid fa-arrow-right-from-bracket"></i></a>
+            <a id="btn_icono" href="{% url 'logout' %}"><i class="fa-solid fa-arrow-right-from-bracket"></i></a>
         </div>
 
         <!-- MENU MOVIL -->
@@ -63,7 +58,7 @@
 
                 <div class="linea"></div>
 
-                <a href="{% url 'home' %}" class="logOut">Log out</a>
+                <a href="{% url 'logout' %}" class="logOut">Log out</a>
 
             </div>
         </div>
@@ -71,45 +66,76 @@
 
     <!-- INTERFAZ INFOCURSOS -->
     <div id="MarcoInfoCursos">
-        <h1>{{ curso.1 }}</h1>
-        <img src="{% static curso.8 %}" alt="">
-        <i class="bi bi-cash"> : {{ curso.7 }}</i>
-        <i class="bi bi-terminal"> : {{ curso.3 }}</i>
-        <i class="bi bi-bar-chart-fill"> : {{ curso.4 }}</i>
-        <i class="bi bi-clock"> : {{ curso.5 }}</i>
-        <i class="bi bi-file-earmark-text"> : {{ curso.6 }}</i>
+        <h1>{{ curso.nom_curso }}</h1>
+        <img src="{% static 'estudiantes/img/Cursos/' %}{{ curso.url_imagen }}" alt="">
+        <i class="bi bi-cash"> : 
+            {% if curso.precio == 0 %}
+                Gratis
+            {% else %}
+                {{ curso.precio }}
+            {% endif %}
+        </i>
+        <i class="bi bi-terminal"> : {{ curso.lenguaje }}</i>
+        <i class="bi bi-bar-chart-fill"> : {{ curso.dificultad }}</i>
+        <i class="bi bi-clock"> : {{ curso.tiempo }}</i>
+        <i class="bi bi-file-earmark-text"> : 
+            {% if curso.certificado == 0 %}
+                Sin Certificado
+            {% elif curso.certificado == 1 %}
+                Con Certificado
+            {% endif %}
+        </i>
 
         <div id="btnesNavs">
             <a>Aplicar</a>
+            <a>Realizar Prueba</a>
             <a href="{% url 'Cursos' %}">Regresar</a>
         </div>
         
 
         <h2>Descripción</h2>
-        <p>{{ curso.2 }}</p>
+        <p>{{ curso.descripcion }}</p>
         
+        <!-- Ver Información de contenido del curso y guardar el id en la url -->
+        <script>
+            function abrirContent(elemento){
+                const idCurso = elemento.querySelector('h5').innerText;
+                const idSubContent = elemento.querySelector('h6').innerText;
 
-        <!-- CONTENIDO DE CURSOS (ME VOY A VOLVER LOCO CON TANTOS ARRAYS) -->
+                const idCursoParametro = encodeURIComponent(idCurso);
+                const idSubContentParametro = encodeURIComponent(idSubContent)
+
+                var cursoInfoUrl = "{% url 'CursosContent' %}";
+    
+                window.location.href = `${cursoInfoUrl}?idCurso=${idCursoParametro}&idSubContent=${idSubContentParametro}`;
+            }
+        </script>
+
+        <!-- CONTENIDO DE CURSOS -->
         <h2>Contenido</h2>
-        {% for content in contentCursos %}
-            <div class="contentCursos">
-                <div id="superior" onclick="ContenidoCursos(this)">
-                    <p>{{ content.nombre }}</p>
-                    <i class="bi bi-arrow-bar-down"></i>
-                </div>
-                <div id="inferior">
-                    {% for tema in content.temas %}
-                    <div class="contenido" onclick="abrirContent(urlCursos, this)">
-                        <p>{{ tema.tema }}</p>
-                        <h5>{{ tema.enlace }}</h5>
-                        <h6>{{ curso.0 }}</h6>
+        {% if contenidos %}
+            {% for contenido in contenidos %}
+                <div class="contentCursos">
+                    <div id="superior" onclick="ContenidoCursos(this)">
+                        <p>{{ contenido.nom_contenido }}</p>
+                        <i class="bi bi-arrow-bar-down"></i>
                     </div>
-                    {% endfor %}
+                    <div id="inferior">
+                        {% for subcontenido in subcontenidos %}
+                            {% if subcontenido.id_contenido == contenido %}
+                                <div class="contenido" onclick="abrirContent(this)">
+                                    <p>{{ subcontenido.nom_subcont }}</p>
+                                    <h5>{{ curso.id_curso }}</h5>
+                                    <h6>{{ subcontenido.id_subcont }}</h6>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
                 </div>
-            </div>
-        {% endfor %}
-
-        <p id="bloqueoContent">Aplica al curso para desbloquear el contenido.</p>
+            {% endfor %}
+        {% else %}
+            <p>APLICA A ESTE CURSO PARA DESBLOQUEAR SU CONTENIDO</p>
+        {% endif %}
     </div>
     
     <!-- Footer -->
@@ -138,7 +164,6 @@
     <!-- Scripts js -->
     <script src="{% static 'estudiantes/js/Front/navBar.js' %}"></script>
     <script src="{% static 'estudiantes/js/Front/cursos.js' %}"></script>
-    <script src="{% static 'estudiantes/js/Front/CursosContent.js' %}"></script>
 
     <!-- Scripts Botstrap -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"

@@ -25,11 +25,6 @@
 </head>
 
 <body style="background-color: var(--fondo1);">
-    <script>
-        const urlCursos = "{% url 'CursosContent' %}";
-    </script>
-
-
     <!-- NavBar -->
     <header id="navBar">
         <img id="logo" src="{% static 'estudiantes/img/navBar/Logo2.png' %}" alt="">
@@ -43,7 +38,7 @@
             <div class="linea"></div>
 
             <a id="btn_icono" href="{% url 'Configuracion' %}"><i class="fas fa-cog"></i></a>
-            <a id="btn_icono" href="{% url 'home' %}"><i class="fa-solid fa-arrow-right-from-bracket"></i></a>
+            <a id="btn_icono" href="{% url 'logout' %}"><i class="fa-solid fa-arrow-right-from-bracket"></i></a>
         </div>
 
         <!-- MENU MOVIL -->
@@ -63,18 +58,35 @@
 
                 <div class="linea"></div>
 
-                <a href="{% url 'home' %}" class="logOut">Log out</a>
+                <a href="{% url 'logout' %}" class="logOut">Log out</a>
 
             </div>
         </div>
     </header>
 
+    <!-- Utilizar el id de la url para regresar a la info del curso correspondiente al contenido -->
+    <script>
+        function volverInfoCurso(elemento){
+            const idCurso = elemento.querySelector('h5').innerText;
+
+            const idCursoParametro = encodeURIComponent(idCurso);
+
+            var cursoInfoUrl = "{% url 'CursosInfo' %}";
+
+            window.location.href = `${cursoInfoUrl}?idCurso=${idCursoParametro}`;
+        }
+    </script>
+
     <!-- INTERFAZ CONTENTCURSOS -->
     <div id="MarcoContentCursos">
-        <iframe src="{{ urlPower }}" frameborder="0" scrolling="no"></iframe>
-        <a id="btn1">Realizar Prueba</a>
+        <h1>{{ subcontent.nom_subcont|upper }}</h1>
+        <iframe src="{{ subcontent.url_cont }}" frameborder="0" scrolling="no"></iframe>
+        
         <!-- le añado a la url el curso en donde estoy parado. -->
-        <a id="btn2" href="{% url 'CursosInfo' %}?idCurso={{ idCurso }}">Volver</a>
+        <a onclick="volverInfoCurso(this)">
+            Volver
+            <h5>{{ id_curso }}</h5>
+        </a>
     </div>
     
     <!-- Footer -->

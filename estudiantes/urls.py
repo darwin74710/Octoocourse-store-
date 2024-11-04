@@ -1,16 +1,16 @@
 from django.urls import path
-from . import views, views_data
+from . import views_cursos, views_data, views_ofertas, views_config
 
 urlpatterns = [
-    path('', views.Inicio, name='Inicio'),
-    path('Cursos/', views.Cursos, name='Cursos'),
-    path('Cursos/Info/', views.CursosInfo, name='CursosInfo'),
-    path('Cursos/Content/', views.CursosContent, name='CursosContent'),
-    path('Ofertas/', views.Ofertas, name='Ofertas'),
-    path('Ofertas/Info/', views.OfertasInfo, name='OfertasInfo'),
-    path('Configuración/', views.Configuracion, name='Configuracion'), 
+    path('', views_cursos.Inicio, name='Inicio'),
+    path('Cursos/', views_cursos.CursosPrincipal, name='Cursos'),
+    path('Cursos/Info/', views_cursos.CursosInfo, name='CursosInfo'),
+    path('Cursos/Content/', views_cursos.CursosContent, name='CursosContent'),
+    path('Ofertas/', views_ofertas.Ofertas, name='Ofertas'),
+    path('Ofertas/Info/', views_ofertas.OfertasInfo, name='OfertasInfo'),
+    path('Configuración/', views_config.Configuracion, name='Configuracion'), 
     path('guardarContra/', views_data.guardarContra, name='guardarContra'),
     path('guardarHV/', views_data.guardarHV, name='guardarHV'),
-    path('logout/', views.logout_view, name='logout'),  
+    path('logout/', views_cursos.logout_view, name='logout'),  
 
 ]

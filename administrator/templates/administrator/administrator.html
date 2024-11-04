@@ -31,38 +31,9 @@
 
         <!-- MENU PC -->
         <div id="derecha">
-            <a class="options_active">Inicio</a>
-            <a class="options">Cursos</a>
-            <a class="options">Ofertas</a>
-            <a class="options">Perfiles</a>
-
+            <a id="btn_icono" onclick="changeTema('oscuro')" style="cursor: pointer;"><i class="bi bi-brightness-high"></i></a>
             <div class="linea"></div>
-
-            <a id="btn_icono"><i class="fas fa-cog"></i></a>
-            <a id="btn_icono" href="{% url 'home' %}"><i class="fa-solid fa-arrow-right-from-bracket"></i></a>
-        </div>
-
-        <!-- MENU MOVIL -->
-        <div id="menuMovil" onclick="activarMenu()">&#9776;</div>
-        <div id="menuHamburguersa">
-            <div id="Elementos">
-                <div id="btnCerrar" onclick="activarMenu()">&times;</div>
-                <img id="logo" src="{% static 'administrator/img/navBar/Logo2.png' %}" alt="">
-
-                <div class="linea"></div>
-
-                <h1>Navegación</h1>
-                <a class="options_active">Inicio</a>
-                <a class="options">Cursos</a>
-                <a class="options">Ofertas</a>
-                <a class="options">Perfiles</a>
-                <a class="options">Configuración</a>
-
-                <div class="linea"></div>
-                
-                <a href="{% url 'home' %}" class="logOut">Log out</a>
-
-            </div>
+            <a id="btn_icono" href="{% url 'logout' %}"><i class="fa-solid fa-arrow-right-from-bracket"></i></a>
         </div>
     </header>
 
@@ -72,19 +43,24 @@
             <h2>Información general</h2>
             <div class="elementInfo">
                 <div class="minElement">
-                    <h3>Usuarios registrados</h3>
-                    <p>0</p>
+                    <h3>Estudiantes registrados</h3>
+                    <p>{{ numEstud }}</p>
                 </div>
                 <div class="minElement">
-                    <h3>Ofertas registradas</h3>
-                    <p>0</p>
+                    <h3>Empresas registradas</h3>
+                    <p>{{ numEmpresas }}</p>
                 </div>
                 <div class="minElement">
-                    <h3>Cantidad Cursos</h3>
-                    <p>0</p>
+                    <h3>Cursos registrados</h3>
+                    <p>{{ numCursos }}</p>
                 </div>
             </div>
-        </div>
+
+            <h2>Modificar Información</h2>
+            <a href="{% url 'estudiantesAdmin' %}" class="marcoOpcion"><i id="document" class="bi bi-backpack"></i><h3>ESTUDIANTES</h3></a>
+            <a href="{% url 'empresaAdmin' %}" class="marcoOpcion"><i id="document" class="bi bi-briefcase"></i><h3>EMPRESAS</h3></a>
+            <a href="{% url 'cursoAdmin' %}" class="marcoOpcion"><i id="document" class="bi bi-file-earmark-text"></i><h3>CURSOS</h3></a>
+        </div> 
     </div>
 
     <!-- Footer -->
@@ -112,6 +88,7 @@
 
     <!-- Scripts js -->
     <script src="{% static 'administrator/js/Front/navBar.js' %}"></script>
+    <script src="{% static 'administrator/js/Front/cambiarTema.js' %}"></script>
 
     <!-- Scripts Botstrap -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"

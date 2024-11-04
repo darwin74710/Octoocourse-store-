@@ -5,15 +5,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Oferta Info</title>
+    <title>Modificar Cursos</title>
 
     <!-- Scripts css -->
-    <link rel="stylesheet" href="{% static 'estudiantes/css/navBar.css' %}" />
-    <link rel="stylesheet" href="{% static 'estudiantes/css/footer.css' %}" />
-    <link rel="stylesheet" href="{% static 'estudiantes/css/OfertasInfo.css' %}" />
+    <link rel="stylesheet" href="{% static 'administrator/css/navBar.css' %}" />
+    <link rel="stylesheet" href="{% static 'administrator/css/footer.css' %}" />
+    <link rel="stylesheet" href="{% static 'administrator/css/cursos.css' %}" />
+    <link rel="stylesheet" href="{% static 'administrator/css/modal.css' %}" />
 
     <!-- Cargar tema -->
-    <script src="{% static 'estudiantes/js/Front/Temas.js' %}"></script>
+    <script src="{% static 'administrator/js/Front/Temas.js' %}"></script>
 
     <!-- Imagenes -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -27,71 +28,55 @@
 <body style="background-color: var(--fondo1);">
     <!-- NavBar -->
     <header id="navBar">
-        <img id="logo" src="{% static 'estudiantes/img/navBar/Logo2.png' %}" alt="">
+        <img id="logo" src="{% static 'administrator/img/navBar/Logo2.png' %}" alt="">
 
         <!-- MENU PC -->
         <div id="derecha">
-            <a href="{% url 'Inicio' %}" class="options">Inicio</a>
-            <a href="{% url 'Cursos' %}" class="options">Cursos</a>
-            <a class="options_active">Ofertas</a>
-
             <div class="linea"></div>
 
-            <a id="btn_icono" href="{% url 'Configuracion' %}"><i class="fas fa-cog"></i></a>
             <a id="btn_icono" href="{% url 'logout' %}"><i class="fa-solid fa-arrow-right-from-bracket"></i></a>
-        </div>
-
-        <!-- MENU MOVIL -->
-        <div id="menuMovil" onclick="activarMenu()">&#9776;</div>
-        <div id="menuHamburguersa">
-            <div id="Elementos">
-                <div id="btnCerrar" onclick="activarMenu()">&times;</div>
-                <img id="logo" src="{% static 'estudiantes/img/navBar/Logo2.png' %}" alt="">
-
-                <div class="linea"></div>
-
-                <h1>Navegación</h1>
-                <a href="{% url 'Inicio' %}" class="options">Inicio</a>
-                <a href="{% url 'Cursos' %}" class="options">Cursos</a>
-                <a class="options_active">Ofertas</a>
-                <a href="{% url 'Configuracion' %}" class="options">Configuración</a>
-
-                <div class="linea"></div>
-
-                <a href="{% url 'logout' %}" class="logOut">Log out</a>
-            </div>
         </div>
     </header>
 
-    <!-- Ofertas interfaz -->
-    <div id="MarcoOfertasInfo">
-    <h1>{{ ofertasEmpleos.nombre_oferta }}</h1>
+    <div id="marcoCursos">
+        <a id="volverBoton" href="{% url 'administratorAdmin' %}"><i class="bi bi-house"></i></a>
+        <div id="listaOpciones">
+            {% if cursos %}
+                {% for curso in cursos %}
+                    <div class="marcoOpcion" onclick="modalOpenExit('active', 'cursos', this)">
+                        <h3 id="nombreInfo">{{ curso.nom_curso.strip|upper }}</h3>
+                        <p id="precioInfo">{{ curso.precio }}</p>
+                        <p id="lenguajeInfo">{{ curso.lenguaje }}</p>
+                        <p id="nivelInfo">{{ curso.dificultad }}</p>
+                        <p id="tiempoInfo">{{ curso.tiempo }}</p>
+                        <p id="certificadoInfo">
+                            {% if curso.certificado == 0 %}
+                                Sin Certificado
+                            {% elif curso.certificado == 1 %}
+                                Con Certificado
+                            {% endif %}
+                        </p>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+    </div>
 
-    <i class="bi bi-person"> : 10 Aplicados</i>
-    <i class="bi bi-terminal"> : 
-        {% for conocimiento in conocimientos %}
-        {{ conocimiento.nom_con }}{% if not forloop.last %}, {% endif %}
-        {% endfor %}
-    </i>
-    <i class="bi bi-cash"> : {{ ofertasEmpleos.salario }}</i>
-    <i class="bi bi-briefcase"> : 
-        {% if contrato.id_tipo_cont == 1 %}
-            Término Fijo
-        {% elif contrato.id_tipo_cont == 2 %}
-            Término Indefinido
-        {% elif contrato.id_tipo_cont == 3 %}
-            Obra o Labor
-        {% elif contrato.id_tipo_cont == 4 %}
-            Aprendizaje
-        {% else %}
-            Tipo de contrato desconocido
-        {% endif %}
-    </i>
-    <h2>Descripción</h2>
-    <p>{{ ofertasEmpleos.descripcion }}</p>
+    <div id="modalOpciones">
+        <div id="marcoModal">
+            <h1 id="nombreRecib"></h1>
+            <div class="minInfo"><h2>Precio: </h2><h2 id="precioRecib"></h2></div>
+            <div class="minInfo"><h2>Lenguaje: </h2><h2 id="lenguajeRecib"></h2></div>
+            <div class="minInfo"><h2>Nivel: </h2><h2 id="nivelRecib"></h2></div>
+            <div class="minInfo"><h2>Tiempo: </h2><h2 id="tiempoRecib"></h2></div>
+            <div class="minInfo"><h2>Certificado: </h2><h2 id="certificadoRecib"></h2></div>
 
-    <a>Aplicar</a>
-    <a href="{% url 'Ofertas' %}">Regresar</a>
+            <div id="botonesOpciones">
+                <a>Modificar curso</a>
+                <a>Eliminar curso</a>
+                <a onclick="modalOpenExit('desactive', 'cursos', this)">Salir</a>
+            </div>
+        </div>
     </div>
 
     <!-- Footer -->
@@ -118,7 +103,8 @@
     </footer>
 
     <!-- Scripts js -->
-    <script src="{% static 'estudiantes/js/Front/navBar.js' %}"></script>
+    <script src="{% static 'administrator/js/Front/navBar.js' %}"></script>
+    <script src="{% static 'administrator/js/Front/modal.js' %}"></script>
 
     <!-- Scripts Botstrap -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"

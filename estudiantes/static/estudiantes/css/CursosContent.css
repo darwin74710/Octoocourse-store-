@@ -3,10 +3,18 @@
     flex-direction: column;
 }
 
+#MarcoContentCursos h1{
+    margin: 10px;
+    text-align: center;
+    font-size: 30px;
+    color: var(--letratitulo1);
+}
+
 #MarcoContentCursos iframe{
     background-color: black;
     border: 3px solid var(--borde1);
-    margin: 10px auto;
+    margin: 0 auto;
+    margin-bottom: 10px;
     width: 962px; 
     height: 565px;
 }
@@ -20,6 +28,7 @@
     font-size: 30px;
     margin-bottom: 5px;
     cursor: pointer;
+    border-radius: 10px;
     transition: all 0.3s ease 0s;
 }
 
@@ -27,12 +36,8 @@
     background-color: var(--hFondoBotones1); color: var(--hLetraBotones1);
 }
 
-#btn1{
-    border-radius: 10px 10px 0 0;
-}
-
-#btn2{
-    border-radius: 0 0 10px 10px;
+#MarcoContentCursos a h5{
+    display: none;
 }
 
 @media screen and (max-width:1000px) {
