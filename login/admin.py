@@ -1,8 +1,7 @@
 from django.contrib import admin
+from .models import Estudiante, Empresa, OfertaEmpleo, TipoCont, Conocimiento, HojasDeVida, LenguajesProg, Aptitudes, Idiomas, FormacionesAcademicas, ExpLaborales
 
-# Register your models here.
-from django.contrib import admin
-from .models import Estudiante, Empresa, OfertaEmpleo
+
 
 @admin.register(Estudiante)
 class EstudianteAdmin(admin.ModelAdmin):
@@ -17,4 +16,49 @@ class EmpresaAdmin(admin.ModelAdmin):
 @admin.register(OfertaEmpleo)
 class OfertaEmpleoAdmin(admin.ModelAdmin):
     list_display = ('id_oferta', 'nombre_oferta', 'salario', 'nit')
-    search_fields = ('nombre_oferta', 'nit__nom_empresa')
+    search_fields = ('nombre_oferta', 'nit')
+
+@admin.register(TipoCont)
+class TipoContAdmin(admin.ModelAdmin):
+    list_display = ('id_tipo_cont', 'id_oferta', 'tipo_cont')
+    search_fields = ('tipo_cont', 'id_oferta__nombre_oferta')
+
+@admin.register(Conocimiento)
+class ConocimientoAdmin(admin.ModelAdmin):
+    list_display = ('id_conocimiento', 'id_oferta', 'nom_con')
+    search_fields = ('nom_con', 'id_oferta__nombre_oferta')
+
+@admin.register(HojasDeVida)
+class HojasDeVidaAdmin(admin.ModelAdmin):
+    list_display = ('id_hoja_vida', 'id_estudiante', 'telefono', 'direccion')
+    search_fields = ('id_estudiante__nom_estudiante', 'direccion')
+
+
+@admin.register(LenguajesProg)
+class LenguajesProgAdmin(admin.ModelAdmin):
+    list_display = ('id_lenguaje', 'id_hoja_vida', 'nombre_leng')
+    search_fields = ('nombre_leng', 'id_hoja_vida__id_estudiante__nom_estudiante')
+
+
+@admin.register(Aptitudes)
+class AptitudesAdmin(admin.ModelAdmin):
+    list_display = ('id_aptitudes', 'id_hoja_vida', 'nombre_apt')
+    search_fields = ('nombre_apt', 'id_hoja_vida__id_estudiante__nom_estudiante')
+
+
+@admin.register(Idiomas)
+class IdiomasAdmin(admin.ModelAdmin):
+    list_display = ('id_idioma', 'id_hoja_vida', 'idioma', 'nivel')
+    search_fields = ('idioma', 'nivel', 'id_hoja_vida__id_estudiante__nom_estudiante')
+
+
+@admin.register(FormacionesAcademicas)
+class FormacionesAcademicasAdmin(admin.ModelAdmin):
+    list_display = ('id_formacion', 'id_hoja_vida', 'nom_institucion', 'titulo', 'fecha_inicio', 'fecha_final')
+    search_fields = ('nom_institucion', 'titulo', 'id_hoja_vida__id_estudiante__nom_estudiante')
+
+
+@admin.register(ExpLaborales)
+class ExpLaboralesAdmin(admin.ModelAdmin):
+    list_display = ('id_exp', 'id_hoja_vida', 'nom_empresas', 'cargo', 'tiempo_inicio', 'tiempo_final')
+    search_fields = ('nom_empresas', 'cargo', 'id_hoja_vida__id_estudiante__nom_estudiante')

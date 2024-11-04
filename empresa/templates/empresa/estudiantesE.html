@@ -36,7 +36,7 @@
         <div id="derecha">
             <a href="{% url 'inicioE' %}" class="options_active">Inicio</a>
             <a href="{% url 'estudiantesE' %}" class="options">Estudiantes</a>
-            <a href="{% url 'publicaro' %}" class="options">Publicar</a>
+            <a href="{% url 'crearOferta' %}" class="options">Publicar</a>
             <a href="{% url 'ofertasE' %}" class="options">Ofertas</a>
 
             <div class="linea"></div>
@@ -98,7 +98,7 @@
                                 <i class="far fa-star"></i>
                             </div>
                             <div class="button">
-                                <a href="#" class="aboutMe">About Me</a>
+                                <a href="{% url 'detalle_estudiante' estudiante.id %}" class="aboutMe">About Me</a>
                                 <a href="" class="hireMe">Hire Me</a>
                             </div>
                         </div>

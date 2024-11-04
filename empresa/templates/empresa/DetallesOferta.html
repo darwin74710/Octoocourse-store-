@@ -31,7 +31,7 @@
         <div id="derecha">
             <a href="{% url 'inicioE' %}"class="options_active">Inicio</a>
             <a href="{% url 'estudiantesE' %}" class="options">Estudiantes</a> 
-            <a href="{% url 'publicaro' %}" class="options">Publicar</a>
+            <a href="{% url 'crearOferta' %}" class="options">Publicar</a>
             <a href="{% url 'ofertasE' %}" class="options">Ofertas</a>
 
             <div class="linea"></div>
@@ -64,25 +64,29 @@
 
     <main class="container">
         <div class="detalles">
-            <h1 class="titulo">{{ oferta.nombre }}</h1>
+            <h1 class="titulo">{{ oferta.nombre_oferta }}</h1>
             <div class="job-info">
-                <p><strong>Salario:</strong> {{ oferta.salario }}</p>
-                <p><strong>Tipo de Contrato:</strong> {{ oferta.tipo_contrato }}</p>
-                <div>
-                    <strong>Conocimientos Requeridos:</strong>
-                    <div class="mt-2">
-                        {% for conocimiento in oferta.conocimientos.split|slice:":5" %}
-                            <span class="etiquetas-tag">{{ conocimiento }}</span>
-                        {% endfor %}
-                    </div>
-                </div>
+    <p><strong>Salario:</strong> {{ oferta.salario }}</p>
+    <p><strong>Tipo de Contrato:</strong> {{ tipo_contrato }}</p> 
+    <div>
+        <strong>Conocimientos Requeridos:</strong>
+        <ul>
+            {% for conocimiento in conocimientos %}
+                <li>{{ conocimiento }}</li> 
+            {% empty %}
+                <li>No se requieren conocimientos específicos.</li> 
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+
             </div>
             <div class="job-descripcion">
                 <h3>Descripción de la Oferta</h3>
                 <p>{{ oferta.descripcion }}</p>
             </div>
             <div class="aplicados-info mt-4 d-flex justify-content-between align-items-center">
-                <p class="mb-0">Personas Aplicadas: {{ oferta.personas_aplicadas }}</p>
+                <p class="mb-0">Personas Aplicadas: </p>
                 <a href="#" class="botonAplicados">Ver Aplicantes</a>
             </div>
         </div>

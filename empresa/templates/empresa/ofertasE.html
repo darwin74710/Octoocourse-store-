@@ -34,7 +34,7 @@
         <div id="derecha">
             <a href="{% url 'inicioE' %}" class="options">Inicio</a>
             <a href="{% url 'estudiantesE' %}" class="options">Estudiantes</a>
-            <a href="{% url 'publicaro' %}" class="options">Publicar</a>
+            <a href="{% url 'crearOferta' %}" class="options">Publicar</a>
             <a href="{% url 'ofertasE' %}" class="options_active">Ofertas</a>
 
             <div class="linea"></div>
@@ -70,18 +70,19 @@
         <h1 class="text-center mb-4">Mis Ofertas Publicadas</h1>
         
         <div class="row">
+            {% for oferta in ofertas %}
             <div class="col-md-4 mb-4">
                 <div class="oferta-card">
                     <div class="oferta-header">
-                        <h2 class="h5 mb-0">Desarrollador Full Stack</h2>
+                        <h2 class="h5 mb-0">{{ oferta.nombre_oferta }}</h2>
                     </div>
                     <div class="oferta-body">
-                        <p><strong>Fecha de publicación:</strong> 15/03/2024</p>
-                        <p><strong>Aplicantes:</strong> 12</p>
-                        <p><strong>Estado:</strong> <span class="estado-activa">Activa</span></p>
+                        <p><strong>Fecha de publicación:</strong> {{ oferta.fecha_pub }}</p>
+                        <p><strong>Aplicantes:</strong> 0 </p>
+                        <p><strong>Estado:</strong> <span class="{% if oferta.estado == 'Activa' %}estado-activa{% else %}estado-inactiva{% endif %}">{{ oferta.estado }}</span></p>
                     </div>
                     <div class="oferta-footer d-flex justify-content-between align-items-center">
-                        <a href="{% url 'DetallesOferta' %}" class="btn-detalles">Ver detalles</a>
+                        <a href="{% url 'detalle_oferta' oferta.id_oferta %}" class="btn-detalles">Ver detalles</a>
                         <div>
                             <a href="#" class="btn-editar me-2">Editar</a>
                             <a href="#" class="btn-eliminar">Eliminar</a>
@@ -89,48 +90,14 @@
                     </div>
                 </div>
             </div>
-            
-            <div class="col-md-4 mb-4">
-                <div class="oferta-card">
-                    <div class="oferta-header">
-                        <h2 class="h5 mb-0">Diseñador UX/UI</h2>
-                    </div>
-                    <div class="oferta-body">
-                        <p><strong>Fecha de publicación:</strong> 10/03/2024</p>
-                        <p><strong>Aplicantes:</strong> 8</p>
-                        <p><strong>Estado:</strong> <span class="estado-activa">Activa</span></p>
-                    </div>
-                    <div class="oferta-footer d-flex justify-content-between align-items-center">
-                        <a href="{% url 'DetallesOferta' %}" class="btn-detalles">Ver detalles</a>
-                        <div>
-                            <a href="#" class="btn-editar me-2">Editar</a>
-                            <a href="#" class="btn-eliminar">Eliminar</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="col-md-4 mb-4">
-                <div class="oferta-card">
-                    <div class="oferta-header">
-                        <h2 class="h5 mb-0">Ingeniero DevOps</h2>
-                    </div>
-                    <div class="oferta-body">
-                        <p><strong>Fecha de publicación:</strong> 05/03/2024</p>
-                        <p><strong>Aplicantes:</strong> 6</p>
-                        <p><strong>Estado:</strong> <span class="estado-inactiva">Inactiva</span></p>
-                    </div>
-                    <div class="oferta-footer d-flex justify-content-between align-items-center">
-                        <a href="{% url 'DetallesOferta' %}" class="btn-detalles">Ver detalles</a>
-                        <div>
-                            <a href="#" class="btn-editar me-2">Editar</a>
-                            <a href="#" class="btn-eliminar">Eliminar</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            {% empty %}
+            <p class="text-center">No tienes ofertas publicadas.</p>
+            {% endfor %}
         </div>
     </div>
+    <!-- Fin oferta -->
+
+        
 
     <!-- Footer -->
     <footer class="piePag">

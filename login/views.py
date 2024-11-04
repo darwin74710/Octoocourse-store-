@@ -7,6 +7,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.hashers import check_password
 
 
+
 def home(request):
     if request.user.is_authenticated:
         user_type = request.session.get('user_type')  
@@ -25,15 +26,17 @@ def inicioS(request):
         password = request.POST['password']
 
         user_type = None
+        id_estudiante = None
+        nit_empresa = None
         cursor = connection.cursor()
 
-        cursor.execute("SELECT password_estudiante FROM estudiantes WHERE correo_estudiante = %s", [correo])
+        cursor.execute("SELECT id_estudiante, password_estudiante FROM estudiantes WHERE correo_estudiante = %s", [correo])
         estudiante = cursor.fetchone()
 
         if estudiante:
             user_type = 'estudiante'
-            stored_password = estudiante[0]  
-
+            id_estudiante = estudiante[0]  
+            stored_password = estudiante[1]  
         else:
             cursor.execute("SELECT password_emp, nit FROM empresas WHERE correo_emp = %s", [correo])
             empresa = cursor.fetchone()
@@ -53,15 +56,18 @@ def inicioS(request):
 
             request.session['user_type'] = user_type
 
+            if user_type == 'estudiante':
+                request.session['id_estudiante'] = id_estudiante
+
             if user_type == 'empresa':
                 request.session['nit'] = nit_empresa
 
             if user_type == 'estudiante':
                 messages.success(request, "Inicio de sesión exitoso para estudiante")
-                return redirect(reverse('Inicio'))  
+                return redirect(reverse('Inicio'))
             elif user_type == 'empresa':
                 messages.success(request, "Inicio de sesión exitoso para empresa")
-                return redirect(reverse('inicioE'))  
+                return redirect(reverse('inicioE'))
         else:
             messages.error(request, "Correo o contraseña incorrectos")
 
