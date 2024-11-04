@@ -38,8 +38,8 @@
     display: flex;
 }
 
-#MarcoInfoCursos a{
-    width: 125px;
+#MarcoInfoCursos #btnesNavs a{
+    width: auto;
     text-align: center;
     margin: 0 5px;
     margin-top: 10px;
@@ -52,7 +52,7 @@
     transition: all 0.3s ease 0s;
 }
 
-#MarcoInfoCursos a:hover{
+#MarcoInfoCursos #btnesNavs a:hover{
     background-color: var(--hFondoBotones1); color: var(--hLetraBotones1);
 }
 
@@ -66,10 +66,6 @@
     margin: 5px 0;
     display: flex;
     flex-direction: column;
-}
-
-#MarcoInfoCursos #bloqueoContent{
-    display: none;
 }
 
 #MarcoInfoCursos .contentCursos #superior{
@@ -130,5 +126,12 @@
     #MarcoInfoCursos img{
         margin: 0 auto;
         width: 300px; height: 200px;
+    }
+
+    #btnesNavs{
+        display: flex;
+        flex-direction: column;
+        align-content: center;
+        justify-content: center;
     }
 }

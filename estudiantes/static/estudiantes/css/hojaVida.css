@@ -46,13 +46,26 @@
     border-radius: 10px;
 }
 
-#hojaVida .marco h3{
+#hojaVida .marco .derecha #derechaTitle{
     word-break: break-word; text-align: center;
     padding: 10px;
-    font-size: 20px;
     width: 100%;
-    color: #8021bb; background-color: #2e0346;
+    background-color: #2e0346;
     margin-bottom: 5px;
+}
+
+#hojaVida .marco .derecha h3{
+    font-size: 20px;
+    margin: 0; padding: 0;
+    color: #8021bb;
+    border: none;
+}
+
+#hojaVida .marco .derecha h2{
+    font-size: 15px;
+    margin: 0; padding: 0;
+    color: #8021bb;
+    border: none;
 }
 
 #hojaVida .marco .izquierda .minContent{

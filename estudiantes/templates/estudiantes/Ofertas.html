@@ -39,7 +39,7 @@
             <div class="linea"></div>
 
             <a id="btn_icono" href="{% url 'Configuracion' %}"><i class="fas fa-cog"></i></a>
-            <a id="btn_icono" href="{% url 'home' %}"><i class="fa-solid fa-arrow-right-from-bracket"></i></a>
+            <a id="btn_icono" href="{% url 'logout' %}"><i class="fa-solid fa-arrow-right-from-bracket"></i></a>
         </div>
 
         <!-- MENU MOVIL -->
@@ -59,7 +59,7 @@
 
                 <div class="linea"></div>
 
-                <a href="{% url 'home' %}" class="logOut">Log out</a>
+                <a href="{% url 'logout' %}" class="logOut">Log out</a>
             </div>
         </div>
     </header>
@@ -68,15 +68,18 @@
     <div id="MarcoOfertas">
         <div id="CerrarInfo" onclick="cerrarInfo()"></div>
         <div id="filtros">
+            <h5 id="filtrado"></h5>
+            
             <h1>Filtros</h1>
             <label class="linea"></label>
 
             <div class="seccionFiltros">
                 <h2>Salario:</h2>
                 <div class="numFiltros">
-                    <div class="contentFiltro"><i id="5_1Filter" onclick="filtro_salario('5_1')" class="bi bi-square"></i>500.000 / 1.000.000</div>
-                    <div class="contentFiltro"><i id="1_2Filter" onclick="filtro_salario('1_2')" class="bi bi-square"></i>1.100.000 / 2.000.000</div>
-                    <div class="contentFiltro"><i id="2_3Filter" onclick="filtro_salario('2_3')" class="bi bi-square"></i>2.100.000 / 3.000.000</div>
+                    <div class="contentFiltro"><i id="0_1Filter" onclick="filtro_salario('0_1')" class="bi bi-square"></i>0 / 1.000.000</div>
+                    <div class="contentFiltro"><i id="1_2Filter" onclick="filtro_salario('1_2')" class="bi bi-square"></i>1.000.000 / 2.000.000</div>
+                    <div class="contentFiltro"><i id="2_3Filter" onclick="filtro_salario('2_3')" class="bi bi-square"></i>2.000.000 / 3.000.000</div>
+                    <div class="contentFiltro"><i id="3+Filter" onclick="filtro_salario('3+')" class="bi bi-square"></i>3.000.000 o mas</div>
                 </div>
             </div>
 
@@ -92,7 +95,7 @@
                 </div>
             </div>
 
-            <a>Aplicar Filtros</a>
+            <a onclick="aplicarFiltros()">Aplicar Filtros</a>
         </div>
 
         <div id="listOfertas">
@@ -127,11 +130,11 @@
             <div id="ordenOfertas">
                 <ul>
                     {% if ofertas_data.has_previous %}
-                        <li><a class="nav" class="direccion" href="?page={{ ofertas_data.previous_page_number }}">&lt;</a></li>
+                        <li><a class="nav" class="direccion" href="?page={{ ofertas_data.previous_page_number }}&filtros={{ filtros|urlencode }}">&lt;</a></li>
                     {% endif %}
                     <li><p class="nav_active">{{ ofertas_data.number }}</p></li>
                     {% if ofertas_data.has_next %}
-                        <li><a class="nav" class="direccion" href="?page={{ ofertas_data.next_page_number }}">&gt;</a></li>
+                        <li><a class="nav" class="direccion" href="?page={{ ofertas_data.next_page_number }}&filtros={{ filtros|urlencode }}">&gt;</a></li>
                     {% endif %}
                 </ul>
             </div>

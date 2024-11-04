@@ -1,21 +1,22 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth import logout
+from administrator.models_estudiantes import Estudiantes
+from administrator.models_empresas import Empresas
+from administrator.models_cursos import Cursos
 
 def administratorAdmin(request):
-    return render(request, 'administrator/administrator.html')
+    numEstud = Estudiantes.objects.count()
+    numEmpresas = Empresas.objects.count()
+    numCursos = Cursos.objects.count()
+    
+    Datos = {
+        'numEstud': numEstud,
+        'numEmpresas': numEmpresas,
+        'numCursos': numCursos,
+    }
 
-def estudiantesAdmin(request):
-    return render(request, 'administrator/estudiantes.html')
-
-def cursoAdmin(request):
-    return render(request, 'administrator/curso.html')
-
-def empresaAdmin(request):
-    return render(request, 'administrator/empresa.html')
-
-def aboutMeAdmin(request):
-    return render(request, 'administrator/aboutMeStudent.html')
+    return render(request, 'administrator/administrator.html', Datos)
 
 def logout_view(request):
     logout(request)  

@@ -40,7 +40,7 @@
             <div class="linea"></div>
 
             <a id="btn_icono_active"><i class="fas fa-cog"></i></a>
-            <a id="btn_icono" href="{% url 'home' %}"><i class="fa-solid fa-arrow-right-from-bracket"></i></a>
+            <a id="btn_icono" href="{% url 'logout' %}"><i class="fa-solid fa-arrow-right-from-bracket"></i></a>
         </div>
 
         <!-- MENU MOVIL -->
@@ -60,7 +60,7 @@
 
                 <div class="linea"></div>
 
-                <a href="{% url 'home' %}" class="logOut">Log out</a>
+                <a href="{% url 'logout' %}" class="logOut">Log out</a>
             </div>
         </div>
     </header>
@@ -114,21 +114,13 @@
                         <h1>DATOS PERSONALES</h1>
                         <div class="minContent">
                             <i class="fab fa-whatsapp"></i>
+                            <!-- De esta forma encontramos los datos de la tabla -->
                             {% if hojasDeVida %}
                                 <h2>{{ hojasDeVida.telefono }}</h2>
                             {% else %}
                                 <h2>Not Found</h2>
                             {% endif %}
                             
-                        </div>
-                        <div class="minContent">
-                            <i class="bi bi-envelope"></i>
-                            <!-- De esta forma encontramos los datos de la tabla -->
-                            {% if estudiantes %}
-                                <h2>{{ estudiantes.correo_estudiante.strip }}</h2>
-                            {% else %}
-                                <h2>Not Found</h2>
-                            {% endif %}
                         </div>
                         <div class="minContent">
                             <i class="bi bi-geo-alt"></i>
@@ -176,11 +168,19 @@
         
                     </div>
                     <div class="derecha">
-                        {% if estudiantes %}
-                            <h3>{{ estudiantes.nom_estudiante.strip|upper }} {{ estudiantes.apellido.strip|upper }}</h3>
-                        {% else %}
-                            <h3>Not Found</h3>
-                        {% endif %}
+                        <div id="derechaTitle">
+                            {% if estudiantes %}
+                                <h3>{{ estudiantes.nom_estudiante.strip|upper }} {{ estudiantes.apellido.strip|upper }}</h3>
+                            {% else %}
+                                <h3>Not Found</h3>
+                            {% endif %}
+                            {% if estudiantes %}
+                                <h2>{{ estudiantes.correo_estudiante.strip }}</h2>
+                            {% else %}
+                                <h2>Not Found</h2>
+                            {% endif %}
+                        </div>
+                        
         
                         <h1>EXPERIENCIA LABORAL</h1>
                         {% if expLaborales %}
@@ -223,15 +223,6 @@
             <div class="botones">
                 <a onclick="modalConfig('hvDesactive')" class="btnIzquierda">Regresar</a>
                 <a onclick="descargarPDF()">Descargar</a>
-            </div>
-        </div>
-        
-        <!-- AVISO DE NO HAY DOCUMENTO -->
-        <div id="modalNoDocument">
-            <h1>ERROR</h1>
-            <p>No existe documento adjunto.</p>
-            <div class="botones">
-                <a onclick="modalConfig('NoDocumentDesactive')" class="btnIzquierda">Regresar</a>
             </div>
         </div>
 
@@ -609,8 +600,8 @@
         <div id="Marco2">&copy; 2024 OctooCourse - Todos los Derechos Reservados.</div>
     </footer>
 
-    <!-- Scripts jsPDF -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <!-- Scripts html2pdf -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
     <!-- Scripts AJAX -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

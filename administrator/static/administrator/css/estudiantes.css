@@ -1,0 +1,72 @@
+#marcoEstudiantes{
+    margin: 10px auto;
+    padding: 10px;
+    height: auto; width: 800px;
+    border: 1px solid var(--borde1);
+    border-radius: 10px;
+}
+
+#marcoEstudiantes #volverBoton{
+    width: 45px;
+    display: block;
+    color: var(--letraBotones1); background-color: var(--fondoBotones1);
+    margin: 0;
+    margin-bottom: 10px;
+    margin-left: auto;
+    padding: 0 5px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease 0s;
+}
+
+#marcoEstudiantes #volverBoton:hover{
+    background-color: var(--hFondoBotones1); color: var(--hLetraBotones1);
+}
+
+#marcoEstudiantes #volverBoton i{
+    font-size: 35px;
+}
+
+#listaOpciones{
+    height: 700px;
+    overflow: auto;
+    border: 1px solid var(--borde1);
+    border-radius: 10px;
+}
+
+.marcoOpcion{
+    height: auto;
+    margin: 10px;
+    border-radius: 10px;
+    border: 1px solid var(--borde1);
+    background-color: var(--fondoBotones2);
+    cursor: pointer;
+    display: flex;
+}
+
+.marcoOpcion p{
+    display: none;
+}
+
+.marcoOpcion:hover, #plantillaHV:hover{
+    filter: brightness(85%);
+    transition: filter 0.3s ease;
+}
+
+.marcoOpcion h3{
+    color: var(--letra1);
+    margin: 20px 5px;
+    margin-left: 5px;
+    font-size: 20px;
+    font-weight: normal;
+}
+
+@media screen and (max-width:800px) {
+    #marcoEstudiantes{
+        width: 100%;
+    }
+
+    #marcoModal{
+        width: 100%;
+    }
+}

@@ -56,53 +56,74 @@ function cerrarInfo(){
 }
 
 function filtro_salario(salario) {
+    const filtrado = document.getElementById("filtrado");
+    var dato;
     let checkButton;
 
-    if(salario === '5_1'){
-        checkButton = document.getElementById('5_1Filter');
+    if(salario === '0_1'){
+        checkButton = document.getElementById('0_1Filter');
+        dato = "|0_1";
     }else if(salario === '1_2'){
         checkButton = document.getElementById('1_2Filter');
+        dato = "|1_2";
     }else if(salario === '2_3'){
         checkButton = document.getElementById('2_3Filter');
+        dato = "|2_3";
+    }else if(salario === '3+'){
+        checkButton = document.getElementById('3+Filter');
+        dato = "|3+";
     }
     
-    if (checkButton) {
-        if (checkButton.classList.contains('bi-check-square')) {
-            checkButton.classList.remove('bi-check-square');
-            checkButton.style.color = "var(--letra1)";
-            checkButton.classList.add('bi-square');
-        } else {
-            checkButton.classList.remove('bi-square');
-            checkButton.style.color = "#8021bb";
-            checkButton.classList.add('bi-check-square');
-        }
-    }
+    change_filtros(checkButton, dato, filtrado);
 }
 
 function filtro_contrato(contrato) {
+    const filtrado = document.getElementById("filtrado");
+    var dato;
     let checkButton;
 
     if(contrato === 'Fijo'){
         checkButton = document.getElementById('FijoFilter');
+        dato = "|fijo";
     }else if(contrato === 'Indefinido'){
         checkButton = document.getElementById('IndefinidoFilter');
+        dato = "|indefinido";
     }else if(contrato === 'ObraLabor'){
         checkButton = document.getElementById('ObraLaborFilter');
+        dato = "|obra";
     }else if(contrato === 'Aprendizaje'){
         checkButton = document.getElementById('AprendizajeFilter');
+        dato = "|aprendizaje";
     }
-    
+
+    change_filtros(checkButton, dato, filtrado);
+}
+
+function change_filtros(checkButton, dato, filtrado){
     if (checkButton) {
         if (checkButton.classList.contains('bi-check-square')) {
             checkButton.classList.remove('bi-check-square');
             checkButton.style.color = "var(--letra1)";
             checkButton.classList.add('bi-square');
+
+            filtrado.innerHTML = filtrado.innerHTML.replace(dato, "");
         } else {
             checkButton.classList.remove('bi-square');
             checkButton.style.color = "#8021bb";
             checkButton.classList.add('bi-check-square');
+
+            filtrado.innerHTML += dato;
         }
     }
+}
+
+function aplicarFiltros() {
+    const filtrado = document.getElementById("filtrado").textContent;
+    const filtros = filtrado.split("|").filter(f => f);
+
+    const url = new URL(window.location.href);
+    url.searchParams.set("filtros", JSON.stringify(filtros));
+    window.location.href = url;
 }
 
 /* Activar Modal Pago */

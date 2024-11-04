@@ -29,6 +29,10 @@
     margin-left: auto;
 }
 
+#filtros #filtrado{
+    display: none;
+}
+
 #filtros h1{
     background-color: var(--fondoTitulo2);
     color: var(--letraTitulo2);

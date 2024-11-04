@@ -9,7 +9,7 @@
     background-color: rgba(34, 34, 34, 0.712);
 }
 
-#modalContra, #modalHV, #modalNoDocument, #modalHVM{
+#modalContra, #modalHV, #modalHVM{
     display: none;
     border-radius: 10px;
     padding: 10px;
@@ -21,10 +21,6 @@
 
 #modalContra{
     width: 450px; height: 360px;
-}
-
-#modalNoDocument{
-    width: 290px; height: 140px;
 }
 
 #modalHV{
@@ -137,7 +133,7 @@
 }
 
 @media screen and (max-width:500px) {
-    #modalContra, #modalNoDocument{
+    #modalContra{
         width: 100%; height: auto;
         border-radius: 10px;
         padding: 10px;

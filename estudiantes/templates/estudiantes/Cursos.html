@@ -38,7 +38,7 @@
             <div class="linea"></div>
 
             <a id="btn_icono" href="{% url 'Configuracion' %}"><i class="fas fa-cog"></i></a>
-            <a id="btn_icono" href="{% url 'home' %}"><i class="fa-solid fa-arrow-right-from-bracket"></i></a>
+            <a id="btn_icono" href="{% url 'logout' %}"><i class="fa-solid fa-arrow-right-from-bracket"></i></a>
         </div>
 
         <!-- MENU MOVIL -->
@@ -58,7 +58,7 @@
 
                 <div class="linea"></div>
 
-                <a href="{% url 'home' %}" class="logOut">Log out</a>
+                <a href="{% url 'logout' %}" class="logOut">Log out</a>
 
             </div>
         </div>
@@ -68,6 +68,8 @@
     <div id="MarcoCursos">
         <!-- Filtros -->
         <div id="filtros">
+            <h5 id="filtrado"></h5>
+            
             <h1>Filtros</h1>
             <label class="linea"></label>
  
@@ -111,36 +113,50 @@
                     <div class="contentFiltro"><i id="SinCertificado" onclick="filtro_Certificado('SinCertificado')" class="bi bi-square"></i>Sin certificado</div>
                 </div>
             </div>
+
+            <a onclick="aplicarFiltros()">Aplicar Filtros</a>
         </div>
 
         <!-- Cursos -->
         <div id="listaCursos">
-            {% for curso in page_obj %}
-            <div class="contentCurso" onclick="InfoCursos(this)">
-                <h5>{{ curso.0 }}</h5>
-                <img src="{% static curso.8 %}" alt="">
-                <div class="infoCurso">
-                    <h1>{{ curso.1 }}</h1>
-                    <p>{{ curso.2 }}</p>
-                    <i class="bi bi-terminal"> : {{ curso.3 }}</i>
-                    <i class="bi bi-bar-chart-fill"> : {{ curso.4 }}</i>
-                    <i class="bi bi-clock"> : {{ curso.5 }}</i>
-                    <i class="bi bi-file-earmark-text"> : {{ curso.6 }}</i>
-                </div>
-                <div class="precioCurso">{{ curso.7 }}</div>
-            </div>
-            {% endfor %}
-
+            {% if cursos_data %}
+                {% for data in cursos_data %}
+                    <div class="contentCurso" onclick="InfoCursos(this)">
+                        <h5>{{ data.id_curso }}</h5>
+                        <img src="{% static 'estudiantes/img/Cursos/' %}{{ data.url_imagen }}" alt="">
+                        <div class="infoCurso">
+                            <h1>{{ data.nom_curso }}</h1>
+                            <p>{{ data.descripcion }}</p>
+                            <i class="bi bi-terminal"> : {{ data.lenguaje }}</i>
+                            <i class="bi bi-bar-chart-fill"> : {{ data.dificultad }}</i>
+                            <i class="bi bi-clock"> : {{ data.tiempo }}</i>
+                            <i class="bi bi-file-earmark-text"> : 
+                                {% if data.certificado == 0 %}
+                                    Sin Certificado
+                                {% elif data.certificado == 1 %}
+                                    Con Certificado
+                                {% endif %}
+                            </i>
+                        </div>
+                        <div class="precioCurso">
+                            {% if data.precio == 0 %}
+                                Gratis
+                            {% else %}
+                                {{ data.precio }}
+                            {% endif %}
+                        </div>
+                    </div>
+                {% endfor %}
+            {% endif %}
+            
             <div id="ordenCursos">
                 <ul>
-                    {% if page_obj.has_previous %}
-                        <li><a class="nav" class="direccion" href="?page={{ page_obj.previous_page_number }}">&lt;</a></li>
+                    {% if cursos_data.has_previous %}
+                        <li><a class="nav" class="direccion" href="?page={{ cursos_data.previous_page_number }}&filtros={{ filtros|urlencode }}">&lt;</a></li>
                     {% endif %}
-                    
-                    <li><p class="nav_active">{{ page_obj.number }}</p></li>
-                    
-                    {% if page_obj.has_next %}
-                        <li><a class="nav" class="direccion" href="?page={{ page_obj.next_page_number }}">&gt;</a></li>
+                    <li><p class="nav_active">{{ cursos_data.number }}</p></li>
+                    {% if cursos_data.has_next %}
+                        <li><a class="nav" class="direccion" href="?page={{ cursos_data.next_page_number }}&filtros={{ filtros|urlencode }}">&gt;</a></li>
                     {% endif %}
                 </ul>
             </div>
@@ -170,7 +186,7 @@
         <div id="Marco2">&copy; 2024 OctooCourse - Todos los Derechos Reservados.</div>
     </footer>
 
-    <!-- Ver Información de oferta -->
+    <!-- Ver Información de curso y guardar el id en la url -->
     <script>
         function InfoCursos(elemento){
             const idCurso = elemento.querySelector('h5').innerText;

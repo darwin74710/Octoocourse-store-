@@ -6,16 +6,17 @@
 
 #marcoInicio h1{
     width: 700px;
-    margin: 10px auto;
+    margin: 0 auto;
     text-align: center;
     font-size: 40px;
     color: var(--letratitulo1);
 }
 
 #infoAdmin{
-    width: 700px; height: 700px;
+    width: 700px; height: 600px;
     margin: 10px auto;
-    box-shadow: 0px 1px 5px black;
+    border: 1px solid var(--borde1);
+    border-radius: 10px;
     padding: 10px;
 }
 
@@ -51,4 +52,82 @@
     color: var(--letra1);
     margin: 0; padding: 0;
     font-size: 18px;
+}
+
+
+.marcoOpcion{
+    height: 100px;
+    margin: 10px;
+    text-decoration: none;
+    border-radius: 10px;
+    border: 1px solid var(--borde1);
+    background-color: var(--fondoBotones2);
+    cursor: pointer;
+    display: flex;
+}
+
+.marcoOpcion:hover, #plantillaHV:hover{
+    filter: brightness(85%);
+    transition: filter 0.3s ease;
+}
+
+.marcoOpcion i{
+    color: var(--fondoBotones1);
+    margin: 25px 10px;
+    margin-left: auto;
+    font-size: 30px;
+    font-weight: normal;
+}
+
+.marcoOpcion #document{
+    color: var(--letra1);
+    margin: 0 10px;
+    font-size: 65px;
+    font-weight: normal;
+}
+
+.marcoOpcion h3{
+    color: var(--letra1);
+    margin: 30px;
+    margin-left: 5px;
+    font-size: 30px;
+    font-weight: normal;
+}
+
+@media screen and (max-width:800px) {
+    #marcoInicio h1{
+        width: 100%;
+        font-size: 25px;
+    }
+
+    #infoAdmin, .minElement{
+        width: 100%;
+    }
+
+    .elementInfo{
+        display: flex;
+        flex-direction: column;
+    }
+
+
+    .marcoOpcion{
+        height: auto;
+    }
+        
+    .marcoOpcion #document{
+        font-size: 35px;
+    }
+
+    .marcoOpcion h3{
+        margin: auto;
+        font-size: 15px;
+        font-weight: normal;
+    }
+
+    .marcoOpcion i{
+        margin: auto 5px;
+        margin-left: auto;
+        font-size: 15px;
+        font-weight: normal;
+    }
 }

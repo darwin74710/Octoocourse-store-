@@ -23,6 +23,10 @@
     margin-left: auto;
 }
 
+#filtros #filtrado{
+    display: none;
+}
+
 #filtros h1{
     background-color: var(--fondoTitulo2);
     color: var(--letraTitulo2);
@@ -42,6 +46,23 @@
     padding: 5px;
     margin: 0;
     margin-left: 10px;
+}
+
+#filtros a{
+    text-decoration: none;
+    text-align: center;
+    margin: 10px auto;
+    padding: 0 10px;
+    display: block;
+    font-size: 18px;
+    color: var(--letraBotones1); background-color: var(--fondoBotones1);
+    border-radius: 100px;
+    cursor: pointer;
+    transition: all 0.3s ease 0s;
+}
+
+#filtros a:hover{
+    background-color: var(--hFondoBotones1); color: var(--hLetraBotones1);
 }
 
 #MensajeLenguajes{
