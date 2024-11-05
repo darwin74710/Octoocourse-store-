@@ -26,6 +26,19 @@
 </head>
 
 <body>
+
+    {% if messages %}
+    <div id="alert-container">
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }} alert-dismissible fade show alert-custom" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+
     <!-- NavBar -->
     <header id="navBar">
         <img id="logo" src="{% static 'estudiantes/img/navBar/Logo2.png' %}" alt="">
@@ -68,7 +81,7 @@
     <!-- Principal Interfaz -->
     <div class="ofertas-container">
         <h1 class="text-center mb-4">Mis Ofertas Publicadas</h1>
-        
+
         <div class="row">
             {% for oferta in ofertas %}
             <div class="col-md-4 mb-4">
@@ -80,12 +93,52 @@
                         <p><strong>Fecha de publicación:</strong> {{ oferta.fecha_pub }}</p>
                         <p><strong>Aplicantes:</strong> 0 </p>
                         <p><strong>Estado:</strong> <span class="{% if oferta.estado == 'Activa' %}estado-activa{% else %}estado-inactiva{% endif %}">{{ oferta.estado }}</span></p>
+
                     </div>
                     <div class="oferta-footer d-flex justify-content-between align-items-center">
                         <a href="{% url 'detalle_oferta' oferta.id_oferta %}" class="btn-detalles">Ver detalles</a>
                         <div>
-                            <a href="#" class="btn-editar me-2">Editar</a>
-                            <a href="#" class="btn-eliminar">Eliminar</a>
+                            <button class="btn-editar me-2" data-bs-toggle="modal"
+                                data-bs-target="#editarModal{{ oferta.id_oferta }}">Editar</button>
+                            <a href="{% url 'eliminar_oferta' oferta.id_oferta %}" class="btn-eliminar">Eliminar</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal editar oferta -->
+            <div class="modal fade" id="editarModal{{ oferta.id_oferta }}" tabindex="-1"
+                aria-labelledby="editarModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="editarModalLabel">Editar Oferta: {{ oferta.nombre_oferta }}</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form method="post" action="{% url 'editar_oferta' oferta.id_oferta %}">
+                                {% csrf_token %}
+                                <div class="mb-3">
+                                    <label for="nombre_oferta" class="form-label">Nombre de la Oferta</label>
+                                    <input type="text" class="form-control" id="nombre_oferta" name="nombre_oferta"
+                                        value="{{ oferta.nombre_oferta }}" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="salario" class="form-label">Salario</label>
+                                    <input type="number" class="form-control" id="salario" name="salario"
+                                        value="{{ oferta.salario }}" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="descripcion" class="form-label">Descripción</label>
+                                    <textarea class="form-control" id="descripcion" name="descripcion"
+                                        required>{{ oferta.descripcion }}</textarea>
+                                </div>
+                                <div class="mb-3 form-check">
+                                    <input type="checkbox" class="form-check-input" id="estado" name="estado" value="1" {% if oferta.estado == '1' %}checked{% endif %}>
+                                    <label class="form-check-label" for="estado">Activo</label>
+                                </div>
+                                <button type="submit" class="btn-cambios">Guardar cambios</button>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -97,7 +150,8 @@
     </div>
     <!-- Fin oferta -->
 
-        
+
+
 
     <!-- Footer -->
     <footer class="piePag">

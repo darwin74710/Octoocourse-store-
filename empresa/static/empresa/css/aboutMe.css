@@ -1,12 +1,14 @@
 :root {
-    --color-primary: #6a0dad;
-    --color-secondary: #9b59b6;
-    --color-background: #f0e6f6;
-    --color-text: #4a235a;
+    --color-primary: #6200ea;
+    --color-secondary: #b388ff;
+    --color-background: #f3e5f5;
+    --color-text: #311b92;
+    --color-text-light: #ffffff;
+    --color-border: #d1c4e9;
 }
 
 body {
-    font-family: 'Roboto', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Roboto', 'Segoe UI', Arial, sans-serif;
     line-height: 1.6;
     color: var(--color-text);
     background-color: var(--color-background);
@@ -17,24 +19,17 @@ body {
 .container {
     max-width: 800px;
     margin: 2rem auto;
-    padding: 2rem;
-    background-color: white;
-    box-shadow: 0 10px 30px rgba(106, 13, 173, 0.1);
-    border-radius: 8px;
+    background-color: var(--color-text-light);
+    box-shadow: 0 10px 30px rgba(98, 0, 234, 0.1);
+    border-radius: 12px;
+    overflow: hidden;
 }
 
 header {
     background-color: var(--color-primary);
-    color: white;
+    color: var(--color-text-light);
     text-align: center;
     padding: 2rem;
-    margin: -2rem -2rem 2rem -2rem;
-    border-radius: 8px 8px 0 0;
-}
-
-h1, h2 {
-    color: var(--color-primary);
-    margin-bottom: 1rem;
 }
 
 .profile-img {
@@ -46,135 +41,189 @@ h1, h2 {
     margin-bottom: 1rem;
 }
 
-.section {
-    margin-bottom: 2rem;
-    padding-bottom: 1rem;
+h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+}
+
+h2 {
+    color: var(--color-primary);
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
     border-bottom: 2px solid var(--color-secondary);
+    padding-bottom: 0.5rem;
+}
+
+.section {
+    padding: 2rem;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.section:last-child {
+    border-bottom: none;
 }
 
 .info-item {
     display: flex;
     align-items: center;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.75rem;
 }
 
 .info-item img {
-    width: 20px;
+    width: 24px;
     margin-right: 10px;
 }
 
 .skills, .languages, .knowledge {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.5rem;
+    gap: 0.75rem;
 }
 
 .skill-tag, .language-tag, .knowledge-tag {
     background-color: var(--color-secondary);
-    color: white;
-    padding: 0.25rem 0.75rem;
+    color: var(--color-text-light);
+    padding: 0.5rem 1rem;
     border-radius: 20px;
     font-size: 0.9rem;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .skill-tag:hover, .language-tag:hover, .knowledge-tag:hover {
     background-color: var(--color-primary);
+    transform: translateY(-2px);
 }
 
-.experience-item {
+.experience-item, .infoExp {
     margin-bottom: 1.5rem;
-    padding: 1rem;
-    background-color: rgba(155, 89, 182, 0.1);
+    padding: 1.5rem;
+    background-color: rgba(179, 136, 255, 0.1);
     border-radius: 8px;
-    transition: transform 0.3s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.experience-item:hover {
+.experience-item:hover, .infoExp:hover {
     transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(98, 0, 234, 0.1);
 }
 
-.experience-item h3 {
+.experience-item h3, .infoExp h2 {
     color: var(--color-primary);
-    margin-bottom: 0.25rem;
+    margin-bottom: 0.5rem;
+    border-bottom: none;
 }
 
-.experience-item p {
+.experience-item p, .infoExp h4 {
     margin: 0.25rem 0;
 }
 
 footer {
     background-color: var(--color-primary);
-    color: white;
+    color: var(--color-text-light);
     text-align: center;
     padding: 1rem;
-    margin-top: 2rem;
-    border-radius: 0 0 8px 8px;
+    font-size: 0.9rem;
+}
+
+.back-button {
+    background-color: var(--color-primary);
+    color: var(--color-text-light);
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    font-size: 1rem;
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 1rem;
 }
 
 .back-button {
     position: fixed;
     bottom: 20px;
     right: 20px;
-    background-color: var(--color-primary);
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
 }
 
 .back-button:hover {
     background-color: var(--color-secondary);
+    transform: translateY(-2px);
 }
 
 
-.cv-button {
-    display: inline-block;
-    background-color: var(--color-primary);
-    color: white;
-    padding: 10px 20px;
+.button-container {
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    gap: 5rem; 
+}
+
+.print-button, .hire-button {
+    width: 150px; 
+    height: 40px; 
+    text-align: center;
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    background-color: var(--color-primary); 
+    color: var(--color-text-light);
+    padding: 0; 
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
-    font-size: 1rem;
-    text-decoration: none;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    font-size: 1rem; 
 }
 
-.cv-button:hover {
-    background-color: var(--color-secondary);
-}
-
+/* Contratar */
 .hire-button {
-    background-color: var(--color-secondary);
+    background-color: #4a0072;
 }
 
+/* Imprimir CV */
 .hire-button:hover {
-    background-color: var(--color-primary);
+    background-color: #3700b3;
 }
+
+
+.print-button:hover {
+    background-color: #4a0072;
+}
+
+
+
+
+
+
 
 @media print {
-    .button-container, .back-button {
+    .back-button, .print-button, .cv-button {
         display: none;
+    }
+
+    body {
+        background-color: var(--color-text-light);
+    }
+
+    .container {
+        box-shadow: none;
     }
 }
 
-.print-button {
-    display: inline-block;
-    background-color: var(--color-primary);
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    font-size: 1rem;
-    margin-top: 1rem;
-}
+@media (max-width: 600px) {
+    .container {
+        margin: 1rem;
+    }
 
-.print-button:hover {
-    background-color: var(--color-secondary);
-}
+    .section {
+        padding: 1.5rem;
+    }
 
+    h1 {
+        font-size: 2rem;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+    }
+}

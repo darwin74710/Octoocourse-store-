@@ -53,27 +53,6 @@
             border: 3px solid #fff;
         }
 
-        .card .media-icons {
-            position: absolute;
-            top: 12px;
-            right: 95px;
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-        }
-
-        .card .media-icons i {
-            color: #7d2ae8;
-            opacity: 0.6;
-            margin-top: 10px;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            margin: 10px;
-        }
-
-        .card .media-icons i:hover {
-            opacity: 1;
-        }
 
         .card .name-profession {
             display: flex;
@@ -91,18 +70,6 @@
         .name-profession .profession {
             font-size: 15px;
             font-weight: 500;
-        }
-
-        .card .rating {
-            display: flex;
-            align-items: center;
-            margin-top: 18px;
-        }
-
-        .card .rating i {
-            font-size: 18px;
-            margin: 0 2px;
-            color: #7d2ae8;
         }
 
 
@@ -225,23 +192,6 @@
             margin-top: 20px;
         }
     
-        .card .media-icons {
-            position: absolute;
-            top: 20px; 
-            left: 45%;
-            transform: translateX(-60%); 
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-        }
-    
-        .card .media-icons i {
-            color: #7d2ae8;
-            opacity: 0.6;
-            margin: 0 5px; 
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
     
         .card .name-profession {
             text-align: center;
@@ -256,19 +206,6 @@
         .card .name-profession .profession {
             font-size: 18px;
             color: #666;
-        }
-    
-        .card .rating {
-            display: flex;
-            align-items: center;
-            margin-top: 18px;
-            margin-bottom: 10px;
-        }
-    
-        .card .rating i {
-            font-size: 18px;
-            margin: 0 2px;
-            color: #7d2ae8;
         }
     
         .card .button {

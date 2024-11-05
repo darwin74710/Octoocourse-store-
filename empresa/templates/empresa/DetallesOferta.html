@@ -13,13 +13,12 @@
     <link rel="stylesheet" href="{% static 'empresa/css/InicioE.css' %}" />
     <link rel="stylesheet" href="{% static 'empresa/css/desOferta.css' %}" /> 
 
-    <!-- Imagenes -->
+    <!-- Iconos -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
     <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-
 </head>
 
 <body>
@@ -64,22 +63,22 @@
 
     <main class="container">
         <div class="detalles">
+            <a href="{% url 'ofertasE' %}" class="btn-regresar"><i class="fas fa-arrow-left"></i> Regresar</a>
+            
             <h1 class="titulo">{{ oferta.nombre_oferta }}</h1>
             <div class="job-info">
-    <p><strong>Salario:</strong> {{ oferta.salario }}</p>
-    <p><strong>Tipo de Contrato:</strong> {{ tipo_contrato }}</p> 
-    <div>
-        <strong>Conocimientos Requeridos:</strong>
-        <ul>
-            {% for conocimiento in conocimientos %}
-                <li>{{ conocimiento }}</li> 
-            {% empty %}
-                <li>No se requieren conocimientos específicos.</li> 
-            {% endfor %}
-        </ul>
-    </div>
-</div>
-
+                <p><strong>Salario:</strong> {{ oferta.salario }}</p>
+                <p><strong>Tipo de Contrato:</strong> {{ tipo_contrato }}</p> 
+                <div>
+                    <strong>Conocimientos Requeridos:</strong>
+                    <ul>
+                        {% for conocimiento in conocimientos %}
+                            <li>{{ conocimiento }}</li> 
+                        {% empty %}
+                            <li>No se requieren conocimientos específicos.</li> 
+                        {% endfor %}
+                    </ul>
+                </div>
             </div>
             <div class="job-descripcion">
                 <h3>Descripción de la Oferta</h3>
