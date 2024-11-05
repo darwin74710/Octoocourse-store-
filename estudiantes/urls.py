@@ -11,6 +11,8 @@ urlpatterns = [
     path('Configuración/', views_config.Configuracion, name='Configuracion'), 
     path('guardarContra/', views_data.guardarContra, name='guardarContra'),
     path('aplicarCurso/', views_data.aplicarCurso, name='aplicarCurso'),
+    path('aplicarOferta/', views_data.aplicarOferta, name='aplicarOferta'),
+    path('Ofertas/Pruebas/<int:idEstudiante>/<int:idOferta>/', views_ofertas.Pruebas, name='Pruebas'),
     path('guardarHV/', views_data.guardarHV, name='guardarHV'),
     path('logout/', views_cursos.logout_view, name='logout'),  
 

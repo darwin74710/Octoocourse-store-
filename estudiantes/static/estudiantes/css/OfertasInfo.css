@@ -43,9 +43,11 @@
 }
 
 #MarcoOfertasInfo a{
+    width: 100%;
+    display: block;
     text-decoration: none;
     text-align: center;
-    margin: 10px auto;
+    margin: 5px auto;
     padding: 0 80px;
     font-size: 25px;
     font-weight: 500;

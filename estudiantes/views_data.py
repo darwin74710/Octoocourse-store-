@@ -1,8 +1,10 @@
 from estudiantes.models import Estudiantes, HojasDeVida, Idiomas, Aptitudes, FormacionesAcademicas, LenguajesProg, ExpLaborales
 from estudiantes.models_cursos import CursosDisponibles
+from estudiantes.models_Empresas import OfertasDisponibles, OfertasEmpleos
 from django.contrib.auth.hashers import check_password, make_password
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
+from django.urls import reverse
 
 #Con esto quitamos la seguridad de tokens por csrf
 @csrf_exempt
@@ -224,13 +226,47 @@ def aplicarCurso(request):
             return JsonResponse({'status': 'error', 'message': 'Curso no encontrado.'})
 
         try:
-            # Guardamos la nueva contraseña de forma encriptada
+            # Guardamos la activación
             cursoDisponible.activacion = 1
             cursoDisponible.save()
             return JsonResponse({'status': 'success', 'message': 'Aplicaste al curso correctamente.'})
         except Exception as e:
             # Error por el cual no se pudo guardar
             return JsonResponse({'status': 'error', 'message': str(e)})
+    
+    # En caso de que no se este realizando un post
+    return JsonResponse({'status': 'error', 'message': 'Método no permitido.'})
+
+# Esta función es para aplicar a las ofertas
+@csrf_exempt
+def aplicarOferta(request):
+    if request.method == 'POST':
+        # Busco la tabla de ofertasDisponibles
+        idOferta = request.POST.get('idOferta')
+        idEstudiante = request.POST.get('idEstudiante')
+
+        ofertasDisponibles = OfertasDisponibles.objects.filter(id_estudiante=idEstudiante, id_oferta=idOferta)
+        if ofertasDisponibles.exists():
+            ofertaDisponible = ofertasDisponibles[0]
+        else:
+            estudiantes = Estudiantes.objects.filter(id_estudiante = idEstudiante)[0]
+            ofertasEmpleos = OfertasEmpleos.objects.filter(id_oferta = idOferta)[0]
+
+            ofertaDisponible = OfertasDisponibles.objects.create(id_estudiante=estudiantes, id_oferta=ofertasEmpleos, activacion = 0)
+
+        if ofertaDisponible.activacion == 0:
+            try:
+                # Guardamos la activación
+                ofertaDisponible.activacion = 1
+                ofertaDisponible.save()
+                return JsonResponse({'status': 'success', 'message': 'Aplicaste a la oferta correctamente.'})
+            except Exception as e:
+                # Error por el cual no se pudo guardar
+                return JsonResponse({'status': 'error', 'message': str(e)})
+        else:
+            # Lo dirijimos a pruebas en caso de que ya este aplicado a la oferta junto al id del estudiante y de la oferta.
+            url_pruebas = reverse('Pruebas', kwargs={'idEstudiante': idEstudiante, 'idOferta': idOferta})
+            return JsonResponse({'status': 'redirect', 'url': url_pruebas})
     
     # En caso de que no se este realizando un post
     return JsonResponse({'status': 'error', 'message': 'Método no permitido.'})
