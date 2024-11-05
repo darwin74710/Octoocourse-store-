@@ -38,9 +38,10 @@
     display: flex;
 }
 
-#MarcoInfoCursos #btnesNavs a{
+#MarcoInfoCursos #btnesNavs a,#MarcoInfoCursos #btnesNavs button{
     width: auto;
     text-align: center;
+    border: none;
     margin: 0 5px;
     margin-top: 10px;
     text-decoration: none;
@@ -52,7 +53,7 @@
     transition: all 0.3s ease 0s;
 }
 
-#MarcoInfoCursos #btnesNavs a:hover{
+#MarcoInfoCursos #btnesNavs a:hover, #MarcoInfoCursos #btnesNavs button:hover{
     background-color: var(--hFondoBotones1); color: var(--hLetraBotones1);
 }
 
@@ -133,5 +134,10 @@
         flex-direction: column;
         align-content: center;
         justify-content: center;
+    }
+
+    #MarcoInfoCursos #btnesNavs a,#MarcoInfoCursos #btnesNavs button{
+        margin: 5px 0;
+        width: 100%;
     }
 }

@@ -25,7 +25,7 @@ class Cursos(models.Model):
 
 
 class CursosDisponibles(models.Model):
-    id_cur_disponible = models.IntegerField(primary_key=True)
+    id_cur_disponible = models.AutoField(primary_key=True)
     activacion = models.BooleanField(blank=True, null=True)
     id_estudiante = models.ForeignKey('Estudiantes', models.DO_NOTHING, db_column='id_estudiante', blank=True, null=True)
     id_curso = models.ForeignKey(Cursos, models.DO_NOTHING, db_column='id_curso', blank=True, null=True)
