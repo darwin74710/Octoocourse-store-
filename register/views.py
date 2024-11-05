@@ -3,8 +3,7 @@ from django.contrib import messages
 from django.contrib.auth.hashers import make_password
 from django.db import connection
 from django.utils.dateparse import parse_date
-
-
+import re  # Importa el módulo re para expresiones regulares
 
 def register(request):
     if request.method == 'POST':
@@ -15,9 +14,13 @@ def register(request):
                 email = request.POST['email']
                 id_estudiante = request.POST.get('id_estudiante')
                 fecha_nacimiento = parse_date(request.POST['fecha_nacimiento'])
-                tipo_id = request.POST['tipo_id']
+                tipo_id = request.POST['tipo_id']  
                 password = request.POST['password_estudiante']
                 password2 = request.POST['password2']
+
+                if not email.endswith('@elpoli.edu.co'):
+                    messages.error(request, "El correo electrónico debe terminar en '@elpoli.edu.co'.")
+                    return render(request, 'register.html')
 
                 if password != password2:
                     messages.error(request, "Las contraseñas no coinciden.")

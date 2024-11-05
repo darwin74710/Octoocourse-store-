@@ -8,4 +8,3 @@ function activarMenu() {
         sideMenu.style.width = "250px";
     }
 }
-

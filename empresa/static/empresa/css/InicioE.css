@@ -3,3 +3,116 @@
     margin: 0px; padding: 0px;
     font-family: "Quicksand", sans-serif; font-size: 20px;
 }
+
+#carouselExampleDark{
+    border: 5px solid var(--letratitulo1);
+    display: block;
+}
+
+#imgCarousel{
+    width: 100%; height: auto;
+    display: none;
+}
+
+.contImg{
+    padding: 5px;
+    width: 100%;
+}
+
+.contImg img{
+    border: 3px solid var(--letratitulo1);
+    width: 100%; height: 100%;
+}
+
+.infoCont .izquierda, .infoCont .derecha{
+    margin: 10px;
+    display: flex;
+    flex-direction: row;
+}
+
+#ultimoCont{
+    margin-bottom: 30px;
+}
+
+.infoCont .izquierda img, .infoCont .derecha img{
+    border: 5px solid var(--letratitulo1);
+    border-radius: 500px;
+}
+
+.infoMensaje{
+    margin: auto 50px;
+    text-align: center;
+}
+
+.infoMensaje h1{
+    color: var(--letratitulo1); height: auto;
+    border-bottom: 1px solid var(--borde1);
+    font-size: 30px;
+}
+
+.infoMensaje p{
+    color: var(--letra1);
+    width: 500px; height: auto;
+    font-size: 25px;
+}
+
+.izquierda img{
+    margin-left: 5%;
+    order: 1;
+}
+
+.izquierda .infoMensaje{
+    margin-right: auto;
+    order: 2;
+}
+
+.derecha img{
+    margin-right: 5%;
+    order: 2;
+}
+
+.derecha .infoMensaje{
+    margin-left: auto;
+    order: 1;
+}
+
+
+@media screen and (max-width:1200px) {
+    .infoCont .izquierda, .infoCont .derecha{
+        display: flex;
+        flex-direction: column;
+    }
+
+    .infoCont img, .infoCont img{
+        margin: auto;
+        margin-top: 10px;
+        width: 50%; height: 50%;
+        order: 1;
+    }
+
+    .infoMensaje{
+        margin: auto;
+        margin-top: 10px;
+        order: 2;
+    }
+    
+    .infoMensaje h1{
+        font-size: 150%;
+    }
+
+    .infoMensaje p{
+        width: auto;
+        font-size: 120%;
+    }
+}
+
+@media screen and (max-width:1000px) {
+    #carouselExampleDark{
+        display: none;
+    }
+
+    #imgCarousel{
+        display: block;
+        padding-bottom: 10px;
+    }
+}

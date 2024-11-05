@@ -1,130 +1,146 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registrarse</title>
     <!--CSS-->
     <link rel="stylesheet" href="{% static 'register/css/styler.css' %}">
+    <link rel="stylesheet" href="{% static 'empresa/css/mensaje.css' %}" />
     <link rel="icon" href="{% static 'empresa/img/logo.png' %}">
 
 </head>
+
 <body>
-   <div class="container">
-     <h1 id="titulo-principal" class="estudiante-empresa"><span>¿Estudiante</span> ó <span>Empresa?</span></h1>
-     <div id="imagen-seleccionada" class="imagen-seleccionada">
-        <img id="img-estudiante" src="{% static 'register/img/estudiante.jpg' %}" alt="Estudiante" style="display: none;">
-        <img id="img-empresa" src="{% static 'register/img/empresa.jpg' %}" alt="Empresa" style="display: none;">
-     </div>
-     <div class="botones">
-        <button type="button" class="btn-estudiante" onclick="mostrarFormulario('estudiante')">
-            <img src="{% static 'register/img/estudiante.jpg' %}" alt="Estudiante">
-            Estudiante
-        </button>
-        <button type="button" class="btn-empresa" onclick="mostrarFormulario('empresa')">
-            <img src="{% static 'register/img/empresa.jpg' %}" alt="Empresa">
-            Empresa
-        </button>
-     </div>
-     <div id="form-estudiante" class="input-form-estudiante" style="display: none;">
-        <form action="{% url 'register' %}" method="post">  
-            {% csrf_token %}
-            <div class="form-row">
+    <!-- Mensajes de éxito o error -->
+    {% if messages %}
+    <div id="alert-container">
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }} alert-dismissible fade show alert-custom" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+    <div class="container">
+        <h1 id="titulo-principal" class="estudiante-empresa"><span>¿Estudiante</span> ó <span>Empresa?</span></h1>
+        <div id="imagen-seleccionada" class="imagen-seleccionada">
+            <img id="img-estudiante" src="{% static 'register/img/estudiante.jpg' %}" alt="Estudiante"
+                style="display: none;">
+            <img id="img-empresa" src="{% static 'register/img/empresa.jpg' %}" alt="Empresa" style="display: none;">
+        </div>
+        <div class="botones">
+            <button type="button" class="btn-estudiante" onclick="mostrarFormulario('estudiante')">
+                <img src="{% static 'register/img/estudiante.jpg' %}" alt="Estudiante">
+                Estudiante
+            </button>
+            <button type="button" class="btn-empresa" onclick="mostrarFormulario('empresa')">
+                <img src="{% static 'register/img/empresa.jpg' %}" alt="Empresa">
+                Empresa
+            </button>
+        </div>
+        <div id="form-estudiante" class="input-form-estudiante" style="display: none;">
+            <form action="{% url 'register' %}" method="post">
+                {% csrf_token %}
+                <div class="form-row">
+                    <p>
+                        <label for="nombre">Nombre</label>
+                        <input type="text" id="nombre" name="nombre">
+                    </p>
+                    <p>
+                        <label for="apellido">Apellido</label>
+                        <input type="text" id="apellido" name="apellido">
+                    </p>
+                </div>
+                <div class="form-row">
+                    <p>
+                        <label for="email">Correo Electrónico</label>
+                        <input type="email" name="email" id="email">
+                    </p>
+                    <p>
+                        <label for="id_estudiante">Documento</label>
+                        <input type="text" name="id_estudiante" id="id_estudiante">
+                    </p>
+                </div>
+                <div class="form-row">
+                    <p>
+                        <label for="fecha_nacimiento">Fecha de nacimiento</label>
+                        <input type="date" name="fecha_nacimiento" id="fecha_nacimiento">
+                    </p>
+                    <p>
+                        <label for="tipo_id">Tipo de Documento</label>
+                        <select name="tipo_id" id="tipo_id">
+                            <option value="Cédula Ciudadanía">Cédula Ciudadanía</option>
+                            <option value="Pasaporte">Pasaporte</option>
+                            <option value="Tarjeta Identidad">Tarjeta Identidad</option>
+                        </select>
+                    </p>
+                </div>
+                <div class="form-row">
+                    <p>
+                        <label for="password_estudiante">Contraseña</label>
+                        <input type="password" name="password_estudiante" id="password_estudiante">
+                    </p>
+                    <p>
+                        <label for="password2">Confirmar Contraseña</label>
+                        <input type="password" name="password2" id="password2">
+                    </p>
+                </div>
                 <p>
-                    <label for="nombre">Nombre</label>
-                    <input type="text" id="nombre" name="nombre">
+                    <button type="submit">CREAR CUENTA</button>
                 </p>
+                <a href="{% url 'inicioS' %}">Iniciar Sesión</a>
+            </form>
+        </div>
+        <div id="form-empresa" class="input-form-empresa" style="display: none;">
+            <form action="{% url 'register' %}" method="post">
+                {% csrf_token %}
+                <div class="form-row">
+                    <p>
+                        <label for="nombre_empresa">Nombre de la Empresa</label>
+                        <input type="text" id="nombre_empresa" name="nombre_empresa">
+                    </p>
+                    <p>
+                        <label for="nit_empresa">Nit</label>
+                        <input type="text" id="nit_empresa" name="nit_empresa">
+                    </p>
+                    <p>
+                        <label for="email_empresa">Correo Electrónico</label>
+                        <input type="email" name="email_empresa" id="email_empresa">
+                    </p>
+                </div>
+                <div class="form-row">
+                    <p>
+                        <label for="telefono_empresa">Teléfono</label>
+                        <input type="number" name="telefono_empresa" id="telefono_empresa">
+                    </p>
+                    <p>
+                        <label for="direccion_empresa">Dirección</label>
+                        <input type="text" name="direccion_empresa" id="direccion_empresa">
+                    </p>
+                </div>
+                <div class="form-row">
+                    <p>
+                        <label for="password_empresa">Contraseña</label>
+                        <input type="password" name="password_empresa" id="password_empresa">
+                    </p>
+                    <p>
+                        <label for="password2_empresa">Confirmar Contraseña</label>
+                        <input type="password" name="password2_empresa" id="password2_empresa">
+                    </p>
+                </div>
                 <p>
-                    <label for="apellido">Apellido</label>
-                    <input type="text" id="apellido" name="apellido">
+                    <button type="submit">CREAR CUENTA</button>
                 </p>
-            </div>
-            <div class="form-row">
-                <p>
-                    <label for="email">Correo Electrónico</label>
-                    <input type="email" name="email" id="email">
-                </p>
-                <p>
-                    <label for="id_estudiante">Documento</label>
-                    <input type="text" name="id_estudiante" id="id_estudiante">
-                </p>
-            </div>
-            <div class="form-row">
-                <p>
-                    <label for="fecha_nacimiento">Fecha de nacimiento</label>
-                    <input type="date" name="fecha_nacimiento" id="fecha_nacimiento">
-                </p>
-                <p>
-                    <label for="tipo_id">Tipo de Documento</label>
-                    <select type="text" name="tipo_id" id="tipo_id">
-                        <option value="dni">Cédula Ciudadanía</option>
-                        <option value="passport">Pasaporte</option>
-                        <option value="license">Tarjeta Identidad</option>
-                    </select>
-                </p>
-            </div>
-            <div class="form-row">
-                <p>
-                    <label for="password_estudiante">Contraseña</label>
-                    <input type="password" name="password_estudiante" id="password_estudiante">
-                </p>
-                <p>
-                    <label for="password2">Confirmar Contraseña</label>
-                    <input type="password" name="password2" id="password2">
-                </p>
-            </div>
-            <p>
-                <button type="submit">CREAR CUENTA</button>
-            </p>
-            <a href="{% url 'inicioS' %}">Iniciar Sesión</a>
-        </form>        
-     </div>
-     <div id="form-empresa" class="input-form-empresa" style="display: none;">
-        <form action="{% url 'register' %}" method="post">
-            {% csrf_token %}
-            <div class="form-row">
-                <p>
-                    <label for="nombre_empresa">Nombre de la Empresa</label>
-                    <input type="text" id="nombre_empresa" name="nombre_empresa">
-                </p>
-                <p>
-                    <label for="nit_empresa">Nit</label>
-                    <input type="text" id="nit_empresa" name="nit_empresa">
-                </p>
-                <p>
-                    <label for="email_empresa">Correo Electrónico</label>
-                    <input type="email" name="email_empresa" id="email_empresa">
-                </p>
-            </div>
-            <div class="form-row">
-                <p>
-                    <label for="telefono_empresa">Teléfono</label>
-                    <input type="number" name="telefono_empresa" id="telefono_empresa">
-                </p>
-                <p>
-                    <label for="direccion_empresa">Dirección</label>
-                    <input type="text" name="direccion_empresa" id="direccion_empresa">
-                </p>
-            </div>
-            <div class="form-row">
-                <p>
-                    <label for="password_empresa">Contraseña</label>
-                    <input type="password" name="password_empresa" id="password_empresa">
-                </p>
-                <p>
-                    <label for="password2_empresa">Confirmar Contraseña</label>
-                    <input type="password" name="password2_empresa" id="password2_empresa">
-                </p>
-            </div>
-            <p>
-                <button type="submit">CREAR CUENTA</button>
-            </p>
-            <a href="{% url 'inicioS' %}">Iniciar Sesión</a>
-        </form>
-     </div>
-   </div>
+                <a href="{% url 'inicioS' %}">Iniciar Sesión</a>
+            </form>
+        </div>
+    </div>
     <!-- JavaScript -->
-   <script src="{% static 'register/js/seleccion.js' %}"></script>
+    <script src="{% static 'register/js/seleccion.js' %}"></script>
 </body>
+
 </html>
