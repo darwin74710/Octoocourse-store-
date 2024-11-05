@@ -11,7 +11,6 @@
     <link rel="stylesheet" href="{% static 'estudiantes/css/navBar.css' %}" />
     <link rel="stylesheet" href="{% static 'estudiantes/css/footer.css' %}" />
     <link rel="stylesheet" href="{% static 'estudiantes/css/oferta.css' %}" />
-    <link rel="stylesheet" href="{% static 'estudiantes/css/OfertasPago.css' %}" />
 
     <!-- Cargar tema -->
     <script src="{% static 'estudiantes/js/Front/Temas.js' %}"></script>
@@ -124,6 +123,16 @@
                     </i>
                     <p>{{ data.descripcion }}</p>
                     <h5>{{ data.id_oferta }}</h5>
+                    
+                    {% if ofertasDisponibles %}
+                        {% for ofertaDisponible in ofertasDisponibles %}
+                            {% if ofertaDisponible.id_oferta.id_oferta == data.id_oferta %}
+                                {% if ofertaDisponible.activacion == 1 %}
+                                    <h6>Realizar Prueba</h6>
+                                {% endif %}
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
                 </div>   
             {% endfor %}
         
@@ -144,7 +153,11 @@
             <i onclick="cerrarInfo()" id="cerrar" class="bi bi-x-lg"></i>
             <div id="elementsOferta">
                 <h1></h1>
-                <a onclick="modal_Pag('activado')">Aplicar</a>
+                <form id="metAplicarOferta" method="POST" action="{% url 'aplicarOferta' %}">
+                    <input type="hidden" id="inputIdOferta" name="idOferta">
+                    <input type="hidden" name="idEstudiante" value="{{ idEstudiante }}">
+                    <button id="opcionPrincipal" type="submit"></button>
+                </form>
                 <i class="bi bi-person"></i>
                 <i class="bi bi-terminal"></i>
                 <i class="bi bi-cash"></i>
@@ -155,26 +168,7 @@
             </div>
         </div>
     </div>
-
-    <div id="modalPago">
-        <div id="contentModal">
-            <div id="superior">
-                <div id="pagos">
-                        <h1>Tarjetas de crédito o débito</h1>
-                        <div id="pagoImg">
-
-                        </div>
-                </div>
-
-            </div>
-
-            <div id="inferior">
-                <a onclick="modal_Pag('desactivado')">Atras</a>
-                <a>Pagar</a>
-            </div>
-        </div>
-    </div>
-
+    
     <script>
         /* Con este codigo la ventana de información se re ajuta a la ventana de lista*/
         const listOfertas = document.getElementById('listOfertas');
@@ -219,6 +213,11 @@
         /* ESTO ES PARA HACER DIFERENTES FUNCIONES DEPENDIENDO DE LA RESOLUCIÓN DE LA PANTALLA*/
         var ofertasInfoUrl = "{% url 'OfertasInfo' %}";
     </script>
+
+    <!-- Scripts AJAX -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script src="{% static 'estudiantes/js/DataBase/ConfigData.js' %}"></script>
 
     <!-- Scripts js -->
     <script src="{% static 'estudiantes/js/Front/navBar.js' %}"></script>

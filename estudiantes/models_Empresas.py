@@ -46,9 +46,28 @@ class Conocimientos(models.Model):
 
 class TipoCont(models.Model):
     id_tipo_cont = models.IntegerField(primary_key=True)  # The composite primary key (id_tipo_cont, id_oferta) found, that is not supported. The first column is selected.
-    id_oferta = models.ForeignKey(OfertasEmpleos, models.DO_NOTHING, db_column='id_oferta', related_name='tipo_cont')
+    id_oferta = models.ForeignKey(OfertasEmpleos, models.DO_NOTHING, db_column='id_oferta')
 
     class Meta:
         managed = False
         db_table = 'TIPO_CONT'
         unique_together = (('id_tipo_cont', 'id_oferta'),)
+
+
+class Respuestas(models.Model):
+    id_docs_admin = models.IntegerField(primary_key=True)
+
+    class Meta:
+        managed = False
+        db_table = 'RESPUESTAS'
+
+
+class OfertasDisponibles(models.Model):
+    id_ofer_disponible = models.AutoField(primary_key=True)
+    activacion = models.BooleanField(blank=True, null=True)
+    id_estudiante = models.ForeignKey('Estudiantes', models.DO_NOTHING, db_column='id_estudiante', blank=True, null=True)
+    id_oferta = models.ForeignKey(OfertasEmpleos, models.DO_NOTHING, db_column='id_oferta', blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'OFERTAS_DISPONIBLES'

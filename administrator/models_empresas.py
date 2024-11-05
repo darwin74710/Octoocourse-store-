@@ -52,3 +52,14 @@ class TipoCont(models.Model):
         managed = False
         db_table = 'TIPO_CONT'
         unique_together = (('id_tipo_cont', 'id_oferta'),)
+
+
+class OfertasDisponibles(models.Model):
+    id_ofer_disponible = models.AutoField(primary_key=True)
+    activacion = models.BooleanField(blank=True, null=True)
+    id_estudiante = models.ForeignKey('Estudiantes', models.DO_NOTHING, db_column='id_estudiante', blank=True, null=True)
+    id_oferta = models.ForeignKey(OfertasEmpleos, models.DO_NOTHING, db_column='id_oferta', blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'OFERTAS_DISPONIBLES'

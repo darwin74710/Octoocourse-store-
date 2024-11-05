@@ -9,6 +9,11 @@ function activarInfo(elemento) {
 
         window.location.href = `${ofertasInfoUrl}?idOferta=${idParametro}`;
     }else{
+        /* Le paso el id al input para aplicar al curso */
+        const idOferta = elemento.querySelector('h5').innerText;
+        const inputIdOferta = document.getElementById('inputIdOferta');
+        inputIdOferta.value =  idOferta;
+
         extraerInfo(elemento);
         sliderInfo();
     }
@@ -24,12 +29,19 @@ function extraerInfo(elemento){
     const salario = elemento.querySelector('.bi-cash').innerText;
     const contrato = elemento.querySelector('.bi-briefcase').innerText;
 
+    if (elemento.querySelector('h6')) {
+        opcionPrincipal = "Realizar Prueba"
+    } else {
+        opcionPrincipal = "Aplicar"
+    }
+    
     slideOfertas.querySelector('h1').innerText = titulo;
     slideOfertas.querySelector('p').innerText = descripcion;
     slideOfertas.querySelector('.bi-person').innerText = aplicados;
     slideOfertas.querySelector('.bi-terminal').innerText = conocimientos;
     slideOfertas.querySelector('.bi-cash').innerText = salario;
     slideOfertas.querySelector('.bi-briefcase').innerText = contrato;
+    slideOfertas.querySelector('#opcionPrincipal').textContent = opcionPrincipal;
 }
 
 function sliderInfo(){
@@ -124,15 +136,4 @@ function aplicarFiltros() {
     const url = new URL(window.location.href);
     url.searchParams.set("filtros", JSON.stringify(filtros));
     window.location.href = url;
-}
-
-/* Activar Modal Pago */
-function modal_Pag(activador){
-    const modal = document.getElementById("modalPago");
-
-    if(activador === "activado"){
-        modalPago.style.display = "flex";
-    }else if (activador === "desactivado"){
-        modalPago.style.display = "none";
-    }
 }

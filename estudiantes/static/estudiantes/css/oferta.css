@@ -127,7 +127,7 @@
     padding: 5px;
 }
 
-.ofertaElement p, .ofertaElement h5{
+.ofertaElement p, .ofertaElement h5, .ofertaElement h6{
     display: none;
 }
 
@@ -233,8 +233,9 @@
     border-bottom: 1px solid var(--borde1);
 }
 
-#elementsOferta a{
-    width: 95px;
+#elementsOferta a, #elementsOferta button{
+    border: none;
+    width: auto;
     text-decoration: none;
     display: block;
     padding: 5px 15px;
@@ -246,7 +247,7 @@
     transition: all 0.3s ease 0s;
 }
 
-#elementsOferta a:hover{
+#elementsOferta a:hover, #elementsOferta button:hover{
     background-color: var(--hFondoBotones1); color: var(--hLetraBotones1);
 }
 

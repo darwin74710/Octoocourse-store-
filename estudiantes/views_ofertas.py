@@ -1,5 +1,6 @@
 import json
-from estudiantes.models_Empresas import Conocimientos, OfertasEmpleos, TipoCont
+from estudiantes.models_Empresas import Conocimientos, OfertasEmpleos, TipoCont, OfertasDisponibles
+from estudiantes.models import Estudiantes
 from django.core.paginator import Paginator
 from django.shortcuts import render
 from django.db.models import Q
@@ -24,13 +25,13 @@ def Ofertas(request):
 
         # Agrego condiciones según los filtros seleccionados.
         if "fijo" in lista_filtros:
-            q_objects |= Q(tipo_cont__id_tipo_cont=1)  # Utilizamos OR para multiples filtros.
+            q_objects |= Q(tipocont__id_tipo_cont=1)  # Utilizamos OR para multiples filtros.
         if "indefinido" in lista_filtros:
-            q_objects |= Q(tipo_cont__id_tipo_cont=2)
+            q_objects |= Q(tipocont__id_tipo_cont=2)
         if "obra" in lista_filtros:
-            q_objects |= Q(tipo_cont__id_tipo_cont=3)
+            q_objects |= Q(tipocont__id_tipo_cont=3)
         if "aprendizaje" in lista_filtros:
-            q_objects |= Q(tipo_cont__id_tipo_cont=4)
+            q_objects |= Q(tipocont__id_tipo_cont=4)
         
         # Filtramos los salarios.
         salario_q_objects = Q()
@@ -66,9 +67,23 @@ def Ofertas(request):
 
     filtros_java = json.dumps(lista_filtros) if filtros else ""
 
+    idStudent = request.session.get('id_estudiante')
+
+    # Obtenemos las tablas de ofertas disponibles
+    estudiantes = Estudiantes.objects.filter(id_estudiante = idStudent)[0]
+    # Extraemos las ofertas de la pagina
+    ofertasPag = ofertas_data.object_list
+
+    ofertasDisponibles = OfertasDisponibles.objects.filter(id_estudiante=estudiantes, id_oferta__in=ofertasPag)
+
+    if not ofertasDisponibles.exists():
+        ofertasDisponibles = None
+
     Datos = {
         'ofertas_data': ofertas_data,
         'filtros': filtros_java,
+        'idEstudiante': idStudent,
+        'ofertasDisponibles': ofertasDisponibles,
     }
 
     return render(request, 'estudiantes/Ofertas.html', Datos)
@@ -97,3 +112,25 @@ def OfertasInfo(request):
     }
 
     return render(request, 'estudiantes/OfertasInfo.html', Datos)
+
+@login_required
+def Pruebas(request, idEstudiante, idOferta):
+    estudiantes = Estudiantes.objects.filter(id_estudiante = idEstudiante)[0]
+    ofertasEmpleos = OfertasEmpleos.objects.filter(id_oferta = idOferta)[0]
+
+    ofertasDisponibles = OfertasDisponibles.objects.filter(id_estudiante=estudiantes, id_oferta=ofertasEmpleos)
+
+    if ofertasDisponibles.exists():
+        ofertaActiva = 1
+    else:
+        ofertaActiva = 0
+
+    idStudent = request.session.get('id_estudiante')
+
+    Datos = {
+        'ofertaActiva': ofertaActiva,
+        'usuarioActual': idStudent,
+        'usuarioURL': idEstudiante,
+    }
+
+    return render(request, 'estudiantes/Pruebas.html', Datos)

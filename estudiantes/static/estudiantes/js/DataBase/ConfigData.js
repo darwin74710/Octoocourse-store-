@@ -63,4 +63,27 @@ $(document).ready(function() { /* Esperamos a que el DOM se cargue por completo 
             }
         });
     });
+
+    $('#metAplicarOferta').on('submit', function(event) {
+        event.preventDefault();
+        
+        $.ajax({
+            type: 'POST',
+            url: $(this).attr('action'),
+            data: $(this).serialize(),
+            success: function(response) {
+                if (response.status === 'success') {
+                    alert(response.message);
+                    location.reload();
+                } else if (response.status === 'redirect') {
+                    window.location.href = response.url;
+                }else {
+                    alert(response.message);
+                }
+            },
+            error: function(xhr, status, error) {
+                alert('Ha ocurrido un error: ' + error);
+            }
+        });
+    });
 });
