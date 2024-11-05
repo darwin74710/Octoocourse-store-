@@ -42,37 +42,6 @@ class Certificados(models.Model):
         managed = False
         db_table = 'CERTIFICADOS'
 
-
-class Cursos(models.Model):
-    id_curso = models.IntegerField(primary_key=True)
-    nom_curso = models.CharField(max_length=50, blank=True, null=True)
-    dificultad = models.CharField(max_length=10, blank=True, null=True)
-    descripcion = models.CharField(max_length=1000, blank=True, null=True)
-    id_estudiante = models.ForeignKey(Estudiantes, models.DO_NOTHING, db_column='id_estudiante', blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'CURSOS'
-
-
-class CursosAprobados(models.Model):
-    id_aprobado = models.IntegerField(primary_key=True)
-    id_curso = models.ForeignKey(Cursos, models.DO_NOTHING, db_column='id_curso', blank=True, null=True)
-    id_estudiante = models.ForeignKey(Estudiantes, models.DO_NOTHING, db_column='id_estudiante', blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'CURSOS_APROBADOS'
-
-
-class DocAdmin(models.Model):
-    id_docs_admin = models.IntegerField(primary_key=True)
-
-    class Meta:
-        managed = False
-        db_table = 'DOC_ADMIN'
-
-
 class ExpLaborales(models.Model):
     id_exp = models.IntegerField(primary_key=True)
     id_hojavida = models.ForeignKey('HojasDeVida', models.DO_NOTHING, db_column='id_hojavida', blank=True, null=True)

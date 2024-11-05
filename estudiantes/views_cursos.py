@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.core.paginator import Paginator
-from administrator.models_cursos import Cursos, Contenidos, SubContenidos
+from estudiantes.models_cursos import Cursos, Contenidos, SubContenidos, CursosDisponibles, CursosAprobados
+from estudiantes.models import Estudiantes
 from django.contrib import messages
 from django.db.models import Q
 import json
@@ -67,6 +68,8 @@ def CursosPrincipal(request):
 @login_required
 def CursosInfo(request):
     id_curso = request.GET.get('idCurso')
+    idStudent = request.session.get('id_estudiante')
+
     cursos = Cursos.objects.filter(id_curso=id_curso)
 
     if cursos.exists():
@@ -76,19 +79,35 @@ def CursosInfo(request):
 
     contenidos = Contenidos.objects.filter(id_curso=curso.id_curso)
 
+    # Al utilizar in estoy haciendo referencia a todas las tablas de contenidos
     if contenidos.exists():
         subcontenidos = SubContenidos.objects.filter(id_contenido__in=contenidos)
     else:
         contenidos = None
         subcontenidos = None
-
-    # Al utilizar in estoy haciendo referencia a todas las tablas de contenidos
     
+    cursosDisponibles = CursosDisponibles.objects.filter(id_curso=curso.id_curso, id_estudiante=idStudent)
+    if cursosDisponibles.exists():
+        cursoDisponible = cursosDisponibles[0]
+    else:
+        if curso:
+            estudiante = Estudiantes.objects.get(id_estudiante=idStudent)
+            cursoDisponible = CursosDisponibles.objects.create(id_curso=curso, id_estudiante=estudiante, activacion = 0)
+        else:
+            cursoDisponible = None
+
+    cursosAprobados = CursosAprobados.objects.filter(id_curso=curso.id_curso, id_estudiante=idStudent)
+    if cursosAprobados.exists():
+        cursoAprobado = cursosAprobados[0]
+    else:
+        cursoAprobado = None
 
     Datos = {
         'curso': curso,
         'contenidos': contenidos,
         'subcontenidos': subcontenidos,
+        'cursoDisponible': cursoDisponible,
+        'cursoAprobado': cursoAprobado,
     }
 
     return render(request, 'estudiantes/CursosInfo.html', Datos)

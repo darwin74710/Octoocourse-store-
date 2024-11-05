@@ -87,8 +87,19 @@
         </i>
 
         <div id="btnesNavs">
-            <a>Aplicar</a>
-            <a>Realizar Prueba</a>
+            {% if cursoDisponible.activacion == 0 %}
+                <form id="metAplicarCurso" method="POST" action="{% url 'aplicarCurso' %}">
+                    <input type="hidden" name="idCurso" value="{{ cursoDisponible.id_curso.id_curso }}">
+                    <input type="hidden" name="idEstudiante" value="{{ cursoDisponible.id_estudiante.id_estudiante }}">
+                    <button type="submit">Aplicar</button>
+                </form>
+            {% else %}
+                {% if cursoAprobado %}
+                    <a>Descargar Certificado</a>
+                {% else %}
+                    <a>Realizar Prueba</a>
+                {% endif %}
+            {% endif %}
             <a href="{% url 'Cursos' %}">Regresar</a>
         </div>
         
@@ -113,29 +124,34 @@
 
         <!-- CONTENIDO DE CURSOS -->
         <h2>Contenido</h2>
-        {% if contenidos %}
-            {% for contenido in contenidos %}
-                <div class="contentCursos">
-                    <div id="superior" onclick="ContenidoCursos(this)">
-                        <p>{{ contenido.nom_contenido }}</p>
-                        <i class="bi bi-arrow-bar-down"></i>
+        {% if cursoDisponible.activacion == 1 %}
+            {% if contenidos %}
+                {% for contenido in contenidos %}
+                    <div class="contentCursos">
+                        <div id="superior" onclick="ContenidoCursos(this)">
+                            <p>{{ contenido.nom_contenido }}</p>
+                            <i class="bi bi-arrow-bar-down"></i>
+                        </div>
+                        <div id="inferior">
+                            {% for subcontenido in subcontenidos %}
+                                {% if subcontenido.id_contenido == contenido %}
+                                    <div class="contenido" onclick="abrirContent(this)">
+                                        <p>{{ subcontenido.nom_subcont }}</p>
+                                        <h5>{{ curso.id_curso }}</h5>
+                                        <h6>{{ subcontenido.id_subcont }}</h6>
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
                     </div>
-                    <div id="inferior">
-                        {% for subcontenido in subcontenidos %}
-                            {% if subcontenido.id_contenido == contenido %}
-                                <div class="contenido" onclick="abrirContent(this)">
-                                    <p>{{ subcontenido.nom_subcont }}</p>
-                                    <h5>{{ curso.id_curso }}</h5>
-                                    <h6>{{ subcontenido.id_subcont }}</h6>
-                                </div>
-                            {% endif %}
-                        {% endfor %}
-                    </div>
-                </div>
-            {% endfor %}
+                {% endfor %}
+            {% else %}
+                <p>ESTE CURSO NO TIENE CONTENIDO</p>
+            {% endif %}
         {% else %}
-            <p>APLICA A ESTE CURSO PARA DESBLOQUEAR SU CONTENIDO</p>
+            <p>APLICA AL CURSO PARA ACCEDER AL CONTENIDO</p>
         {% endif %}
+        
     </div>
     
     <!-- Footer -->
@@ -164,6 +180,11 @@
     <!-- Scripts js -->
     <script src="{% static 'estudiantes/js/Front/navBar.js' %}"></script>
     <script src="{% static 'estudiantes/js/Front/cursos.js' %}"></script>
+
+    <!-- Scripts AJAX -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script src="{% static 'estudiantes/js/DataBase/ConfigData.js' %}"></script>
 
     <!-- Scripts Botstrap -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"

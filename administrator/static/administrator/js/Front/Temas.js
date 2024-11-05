@@ -2,7 +2,7 @@ var numTema = localStorage.getItem('numTema') ? parseInt(localStorage.getItem('n
 
 function aplicarEstilos() {
     var style = document.createElement('style');
-
+    
     if (numTema === 1){
         style.innerHTML = `
         :root {

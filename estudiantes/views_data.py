@@ -1,4 +1,5 @@
 from estudiantes.models import Estudiantes, HojasDeVida, Idiomas, Aptitudes, FormacionesAcademicas, LenguajesProg, ExpLaborales
+from estudiantes.models_cursos import CursosDisponibles
 from django.contrib.auth.hashers import check_password, make_password
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
@@ -8,8 +9,9 @@ from django.views.decorators.csrf import csrf_exempt
 def guardarContra(request):
     # Preguntamos si el metodo llamado es de tipo POST
     if request.method == 'POST':
+        id_Estudiante = request.session.get('id_estudiante')
         # Busco la tabla de estudiantes
-        estudiantes = Estudiantes.objects.filter(id_estudiante=1)
+        estudiantes = Estudiantes.objects.filter(id_estudiante=id_Estudiante)
         if estudiantes.exists():
             estudiante = estudiantes[0]
         else:
@@ -57,8 +59,10 @@ def guardarHV(request):
     
     # Preguntamos si el metodo llamado es de tipo POST
     if request.method == 'POST':
+        id_Estudiante = request.session.get('id_estudiante')
+
         #OBTENEMOS TODAS LAS TABLAS QUE VAMOS A ACTUALIZAR
-        hojasDeVida = HojasDeVida.objects.filter(id_estudiante=1)
+        hojasDeVida = HojasDeVida.objects.filter(id_estudiante=id_Estudiante)
 
         if hojasDeVida.exists():
             hojaDeVida = hojasDeVida[0]
@@ -197,6 +201,33 @@ def guardarHV(request):
                 expLaboral.save()
 
             return JsonResponse({'status': 'success', 'message': 'Su hoja de vida se actualizo correctamente.'})
+        except Exception as e:
+            # Error por el cual no se pudo guardar
+            return JsonResponse({'status': 'error', 'message': str(e)})
+    
+    # En caso de que no se este realizando un post
+    return JsonResponse({'status': 'error', 'message': 'Método no permitido.'})
+
+
+# Esta función es para aplicar a los cursos
+@csrf_exempt
+def aplicarCurso(request):
+    if request.method == 'POST':
+        # Busco la tabla de cursosDisponibles
+        idCurso = request.POST.get('idCurso')
+        idEstudiante = request.POST.get('idEstudiante')
+
+        cursosDisponibles = CursosDisponibles.objects.filter(id_estudiante=idEstudiante, id_curso=idCurso)
+        if cursosDisponibles.exists():
+            cursoDisponible = cursosDisponibles[0]
+        else:
+            return JsonResponse({'status': 'error', 'message': 'Curso no encontrado.'})
+
+        try:
+            # Guardamos la nueva contraseña de forma encriptada
+            cursoDisponible.activacion = 1
+            cursoDisponible.save()
+            return JsonResponse({'status': 'success', 'message': 'Aplicaste al curso correctamente.'})
         except Exception as e:
             # Error por el cual no se pudo guardar
             return JsonResponse({'status': 'error', 'message': str(e)})
