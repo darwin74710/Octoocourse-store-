@@ -24,15 +24,15 @@
                 <p>{{ estudiante.tipo_id }}</p>
             </div>
             <div class="info-item">
-                <img src="{% static 'estudiantes/img/icon-correo2.svg' %}" alt="id">
+                <img src="{% static 'empresa/img/doc.jpg' %}" alt="id">
                 <p>{{ estudiante.id_estudiante }}</p>
             </div>
             <div class="info-item">
-                <img src="{% static 'estudiantes/img/icon-correo2.svg' %}" alt="Correo">
+                <img src="{% static 'empresa/img/mail.png' %}" alt="Correo">
                 <p>{{ estudiante.correo_estudiante }}</p>
             </div>
             <div class="info-item">
-                <img src="{% static 'estudiantes/img/icon-ubicacion.svg' %}" alt="fecha">
+                <img src="{% static 'empresa/img/fechanac.png' %}" alt="fecha">
                 <p>{{ estudiante.fecha_nac }}</p>
             </div>
         </section>
@@ -113,12 +113,11 @@
                 <p>No se encontró experiencia laboral.</p>
             {% endif %}
         </section>
-        <button class="print-button" onclick="window.print()">Imprimir CV</button>
-        {% if nit_empresa %}
-            <a href="mailto:{{ estudiante.correo_estudiante }}?subject=Oferta%20de%20trabajo" class="cv-button hire-button">Contratar</a>
-        {% else %}
-            <p>Debes estar logueado como empresa para enviar un correo.</p>
-        {% endif %}
+        <div class="button-container">
+            <button class="print-button">Imprimir CV</button>
+            <button class="hire-button">Contratar</button>
+        </div>
+
         </div>
 
     <footer>

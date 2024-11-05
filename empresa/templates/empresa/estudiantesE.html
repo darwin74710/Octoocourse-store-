@@ -81,21 +81,9 @@
                             <div class="image">
                                 <img src="{% static 'empresa/img/user.png' %}" alt="{{ estudiante.nombre }}">
                             </div>
-                            <div class="media-icons">
-                                <i class="fab fa-facebook"></i>
-                                <i class="fab fa-twitter"></i>
-                                <i class="fab fa-github"></i>
-                            </div>
                             <div class="name-profession">
                                 <span class="name">{{ estudiante.nombre }} {{ estudiante.apellido }}</span>
                                 <span class="profession">Estudiante</span>
-                            </div>
-                            <div class="rating">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="far fa-star"></i>
                             </div>
                             <div class="button">
                                 <a href="{% url 'detalle_estudiante' estudiante.id %}" class="aboutMe">About Me</a>

@@ -1,0 +1,21 @@
+<form method="post" action="{% url 'editar_oferta' oferta.id_oferta %}">
+    {% csrf_token %}
+    <div class="mb-3">
+        <label for="nombre_oferta" class="form-label">Nombre de la Oferta</label>
+        <input type="text" class="form-control" id="nombre_oferta" name="nombre_oferta" value="{{ oferta.nombre_oferta }}" required>
+    </div>
+    <div class="mb-3">
+        <label for="salario" class="form-label">Salario</label>
+        <input type="number" class="form-control" id="salario" name="salario" value="{{ oferta.salario }}" required>
+    </div>
+    <div class="mb-3">
+        <label for="descripcion" class="form-label">Descripción</label>
+        <textarea class="form-control" id="descripcion" name="descripcion" required>{{ oferta.descripcion }}</textarea>
+    </div>
+    <div class="mb-3 form-check">
+        <input type="checkbox" class="form-check-input" id="estado" name="estado" value="1" {% if oferta.estado == '1' %}checked{% endif %}>
+        <label class="form-check-label" for="estado">Activo</label>
+    </div>
+    <button type="submit" class="btn btn-primary">Guardar cambios</button>
+    <a href="{% url 'ofertasE' %}" class="btn btn-secondary">Cancelar</a>
+</form>

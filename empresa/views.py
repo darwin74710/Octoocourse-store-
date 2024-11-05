@@ -3,9 +3,11 @@ from django.db import connection
 from django.contrib import messages
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
-from login.models import Conocimiento, TipoCont, OfertaEmpleo,  Estudiante
+from login.models import Conocimiento, TipoCont, OfertaEmpleo, Empresa, Estudiante
 from estudiantes.models import Estudiantes, HojasDeVida, Idiomas, Aptitudes, LenguajesProg, FormacionesAcademicas, ExpLaborales
 from datetime import date
+
+
 
 
 
@@ -73,7 +75,7 @@ def logout_view(request):
 @login_required
 def detalle_estudiante(request, id_estudiante):
     estudiante = get_object_or_404(Estudiantes, id_estudiante=id_estudiante)  
-    Tablas = obtenerTablasHV()
+    Tablas = obtenerTablasHV(id_estudiante)  
     
     nit_empresa = request.session.get('nit')
     
@@ -85,12 +87,9 @@ def detalle_estudiante(request, id_estudiante):
     
     return render(request, 'empresa/aboutMeStudent.html', context)
 
+def obtenerTablasHV(id_estudiante):
+    estudiantes = Estudiantes.objects.filter(id_estudiante=id_estudiante)
 
-def obtenerTablasHV():
-    # Elijo las tablas que quiero enviar al render filtrándola.
-    estudiantes = Estudiantes.objects.filter(id_estudiante=1)
-
-    # Condicional para encontrar el primer resultado o no enviar nada en caso de que no lo encuentre.
     if estudiantes.exists():
         estudiante = estudiantes[0]
     else:
@@ -112,8 +111,6 @@ def obtenerTablasHV():
     else:
         idiomas = aptitudes = lenguajesProg = formaciones = expLaborales = []
 
-
-    # Esto es un diccionario para enviarle varias tablas a la vista
     Datos = {
         'estudiante': estudiante,
         'hojasDeVida': hojaDeVida,
@@ -162,6 +159,8 @@ def detalle_oferta(request, id_oferta):
     
     datos_adicionales = obtener_tablas_tc(id_oferta)
 
+    nit_empresa = request.session.get('nit')
+
     context = {
         'oferta': oferta,
         'tipo_contrato': datos_adicionales.get('tipo_contrato'),
@@ -170,6 +169,31 @@ def detalle_oferta(request, id_oferta):
     
     return render(request, 'empresa/DetallesOferta.html', context)
 
+@login_required
+def eliminar_oferta(request, id_oferta):
+    oferta = get_object_or_404(OfertaEmpleo, id_oferta=id_oferta)
+    
+    oferta.delete()
+    
+    return redirect('ofertasE')  
+
+@login_required
+def editar_oferta(request, id_oferta):
+    oferta = get_object_or_404(OfertaEmpleo, id_oferta=id_oferta)
+    
+    if request.method == 'POST':
+        oferta.nombre_oferta = request.POST.get('nombre_oferta', oferta.nombre_oferta)
+        oferta.salario = request.POST.get('salario', oferta.salario)
+        oferta.descripcion = request.POST.get('descripcion', oferta.descripcion)
+
+        oferta.estado = '1' if 'estado' in request.POST else '0'
+        
+        
+        oferta.save()
+        
+        return redirect('ofertasE')  
+    
+    return render(request, 'empresa/editar_oferta.html', {'oferta': oferta})
 
 def obtener_tablas_tc(id_oferta):
     oferta = get_object_or_404(OfertaEmpleo, id_oferta=id_oferta)
