@@ -1,0 +1,157 @@
+#modalConfig{
+    width: 100%; height: 100%;
+    position: fixed;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    z-index: 6;
+    background-color: rgba(34, 34, 34, 0.712);
+}
+
+#modalContra, #modalHVM{
+    display: none;
+    border-radius: 10px;
+    padding: 10px;
+    margin: auto;
+    background-color: var(--fondo1);
+    position: fixed;
+    flex-direction: column;
+}
+
+#modalContra{
+    width: 450px; height: 360px;
+}
+
+#modalHVM{
+    overflow-y: auto; overflow-x: hidden;
+    width: 800px; height: 90%;
+}
+
+#modalConfig h1{
+    color: var(--letratitulo1);
+    font-size: 30px;
+}
+
+#modalConfig h3{
+    color: var(--letra1);
+    font-size: 20px;
+    text-align: center;
+    border-bottom: 1px solid var(--borde1);
+    margin: 10px 0;
+}
+
+#modalConfig p{
+    font-size: 18px;
+    margin: 0;
+    color: var(--letra1);
+}
+
+
+#modalConfig input{
+    margin-bottom: 5px;
+    width: 250px;
+    border-radius: 10px;
+    border: 1px solid var(--borde1);
+}
+
+#modalConfig textarea{
+    resize: none;
+    width: 700px; height: 300px;
+    border-radius: 10px;
+    border: 1px solid var(--borde1);
+}
+
+#modalConfig .botones{
+    margin: 15px;
+    margin-left: auto;
+    text-align: right;
+    display: flex;
+}
+
+#modalConfig .botones a, #modalConfig .botones button{
+    border: none;
+    padding: 0 15px;
+    text-decoration: none;
+    margin: 0 5px;
+    font-size: 20px;
+    color: var(--letraBotones1); background-color: var(--fondoBotones1);
+    border-radius: 100px;
+    cursor: pointer;
+    transition: all 0.3s ease 0s;
+}
+
+#modalConfig .botones a:hover, #modalConfig .botones button:hover{
+    background-color: var(--hFondoBotones1); color: var(--hLetraBotones1);
+}
+
+#modalHVM p{
+    text-align: center;
+}
+
+#modalHVM input{
+    margin: 5px;
+    text-align: center;
+}
+
+.elementsModify{
+    margin: 0 auto;
+    display: flex;
+}
+
+.oneElementModify{
+    text-align: center;
+}
+
+.oneElementModify input{
+    text-align: center;
+}
+
+@media screen and (max-width:1000px) {
+    .elementsModify{
+        width: 100%;
+    }
+
+    #modalHVM{
+        margin: 0;
+        width: 100%;
+    }
+
+    #modalConfig textarea{
+        width: 100%;
+    }
+
+    .elementsModify{
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+@media screen and (max-width:500px) {
+    #modalContra{
+        width: 100%; height: auto;
+        border-radius: 10px;
+        padding: 10px;
+        margin: auto;
+        background-color: var(--fondo1);
+        position: fixed;
+        display: flex;
+        flex-direction: column;
+    }
+
+    #modalConfig input{
+        width: 100%;
+    }
+
+    #modalConfig .botones{
+        margin: 15px;
+        text-align: right;
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+    }
+
+    #modalConfig .botones a, #modalConfig .botones button{
+        margin: 5px;
+    }
+}

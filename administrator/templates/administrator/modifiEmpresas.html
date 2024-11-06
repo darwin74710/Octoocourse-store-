@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Modificar Empresas</title>
+    <title>Empresas</title>
 
     <!-- Scripts css -->
     <link rel="stylesheet" href="{% static 'administrator/css/navBar.css' %}" />
@@ -62,13 +62,23 @@
             <div class="minInfo"><h2>Telefono: </h2><h2 id="telefonoRecib"></h2></div>
 
             <div id="botonesOpciones">
-                <a>Ofertas</a>
-                <a>Modificar Empresa</a>
+                <a onclick="editInformation()">Modificar Empresa</a>
                 <a>Eliminar Empresa</a>
                 <a onclick="modalOpenExit('desactive', 'empresas', this)">Salir</a>
             </div>
         </div>
     </div>
+
+    <script>
+        function editInformation(){
+            const idEmpresa = document.getElementById('documentoRecib').innerText;
+            const idParametro = encodeURIComponent(idEmpresa);
+
+            var cursoInfoUrl = "{% url 'empresaEditar' %}";
+
+            window.location.href = `${cursoInfoUrl}?idEmpresa=${idParametro}`;
+        }
+    </script>
 
     <!-- Footer -->
     <footer class="piePag">

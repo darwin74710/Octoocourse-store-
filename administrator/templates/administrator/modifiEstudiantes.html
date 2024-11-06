@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Modificar Estudiantes</title>
+    <title>Estudiantes</title>
 
     <!-- Scripts css -->
     <link rel="stylesheet" href="{% static 'administrator/css/navBar.css' %}" />
@@ -39,7 +39,9 @@
     </header>
 
     <div id="marcoEstudiantes">
-        <a id="volverBoton" href="{% url 'administratorAdmin' %}"><i class="bi bi-house"></i></a>
+        <div id="botonesConfig">
+            <a id="btnIzquierda" href="{% url 'administratorAdmin' %}"><i class="bi bi-house"></i></a>
+        </div>
         <div id="listaOpciones">
             {% if estudiantes %}
                 {% for estudiante in estudiantes %}
@@ -62,13 +64,30 @@
             <div class="minInfo"><h2>Fecha Nacimiento: </h2><h2 id="fechaRecib"></h2></div>
 
             <div id="botonesOpciones">
-                <a>Hoja de Vida</a>
-                <a>Modificar Usuario</a>
+                <a onclick="editInformation('hojaVida')">Hoja de Vida</a>
+                <a onclick="editInformation('estudiante')">Modificar Estudiante</a>
                 <a>Eliminar Usuario</a>
                 <a onclick="modalOpenExit('desactive', 'estudiantes', this)">Salir</a>
             </div>
         </div>
     </div>
+
+    <!-- Editar información de estudiante y guardar el id en la url -->
+    <script>
+        function editInformation(tipoEdicion){
+            const idEstudiante = document.getElementById('documentoRecib').innerText;
+            const idParametro = encodeURIComponent(idEstudiante);
+
+            if (tipoEdicion === "estudiante"){
+                var cursoInfoUrl = "{% url 'estudianteEditar' %}";
+            }else if(tipoEdicion === "hojaVida"){
+                var cursoInfoUrl = "{% url 'hojaVidaVisualizar' %}";
+            }
+            
+
+            window.location.href = `${cursoInfoUrl}?idEstudiante=${idParametro}`;
+        }
+    </script>
 
     <!-- Footer -->
     <footer class="piePag">

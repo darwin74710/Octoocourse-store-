@@ -20,6 +20,8 @@ function modalOpenExit(tipo, ventana, elemento){
             empresas(elemento);
         }else if(ventana === 'cursos'){
             cursos(elemento);
+        }else if(ventana === 'ofertas'){
+            ofertas(elemento);
         }
     }
 }
@@ -64,6 +66,7 @@ function empresas(elemento){
 
 function cursos(elemento){
     var nombreInfo = elemento.querySelector("#nombreInfo");
+    var documentoInfo = elemento.querySelector("#documentoInfo");
     var precioInfo = elemento.querySelector("#precioInfo");
     var lenguajeInfo = elemento.querySelector("#lenguajeInfo");
     var nivelInfo = elemento.querySelector("#nivelInfo");
@@ -71,18 +74,39 @@ function cursos(elemento){
     var certificadoInfo = elemento.querySelector("#certificadoInfo");
     
     var nombreRecib = document.getElementById("nombreRecib");
+    var documentoRecib = document.getElementById("documentoRecib");
     var precioRecib = document.getElementById("precioRecib");
     var lenguajeRecib = document.getElementById("lenguajeRecib");
     var nivelRecib = document.getElementById("nivelRecib");
     var tiempoRecib = document.getElementById("tiempoRecib");
     var certificadoRecib = document.getElementById("certificadoRecib");
 
-    if (nombreInfo && precioInfo && lenguajeInfo && nivelInfo && tiempoInfo && certificadoInfo) {
+    if (nombreInfo && documentoInfo && precioInfo && lenguajeInfo && nivelInfo && tiempoInfo && certificadoInfo) {
         nombreRecib.textContent = nombreInfo.textContent;
+        documentoRecib.textContent = documentoInfo.textContent;
         precioRecib.textContent = precioInfo.textContent;
         lenguajeRecib.textContent = lenguajeInfo.textContent;
         nivelRecib.textContent = nivelInfo.textContent;
         tiempoRecib.textContent = tiempoInfo.textContent;
         certificadoRecib.textContent = certificadoInfo.textContent;
+    }
+}
+
+function ofertas(elemento){
+    var nombreInfo = elemento.querySelector("#nombreInfo");
+    var documentoInfo = elemento.querySelector("#documentoInfo");
+    var salarioInfo = elemento.querySelector("#salarioInfo");
+    var estadoInfo = elemento.querySelector("#estadoInfo");
+    
+    var nombreRecib = document.getElementById("nombreRecib");
+    var documentoRecib = document.getElementById("documentoRecib");
+    var salarioRecib = document.getElementById("salarioRecib");
+    var estadoRecib = document.getElementById("estadoRecib");
+
+    if (nombreInfo && documentoInfo && salarioInfo && estadoInfo) {
+        nombreRecib.textContent = nombreInfo.textContent;
+        documentoRecib.textContent = documentoInfo.textContent;
+        salarioRecib.textContent = salarioInfo.textContent;
+        estadoRecib.textContent = estadoInfo.textContent;
     }
 }

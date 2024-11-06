@@ -1,0 +1,131 @@
+#hojaVida{
+    overflow: auto;
+}
+
+#hojaVida .marco {
+    display: flex;
+    width: 780px; height: auto;
+    border: 3px solid #560581;
+    background-color: #8021bb;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+/*IZQUIERDA*/
+#hojaVida .marco .izquierda{
+    background-color: #f3d9ff;
+    border: 3px solid #560581;
+    padding: 5px;
+    border-radius: 5px;
+    margin-right: 5px;
+    width: 200px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+#hojaVida .marco .izquierda i{
+    color: #2e0346;
+    font-size: 25px;
+    margin: 0;
+}
+
+#hojaVida .marco .izquierda #imgPerfil{
+    font-size: 80px;
+    margin: 0;
+    padding: 0;
+}
+
+#hojaVida .marco h1{
+    word-break: break-word; text-align: center;
+    padding: 10px;
+    margin: 0;
+    font-size: 15px;
+    width: 100%;
+    color: white; background-color: #8021bb;
+    border-radius: 10px;
+}
+
+#hojaVida .marco .derecha #derechaTitle{
+    word-break: break-word; text-align: center;
+    padding: 10px;
+    width: 100%;
+    background-color: #2e0346;
+    margin-bottom: 5px;
+}
+
+#hojaVida .marco .derecha h3{
+    font-size: 20px;
+    margin: 0; padding: 0;
+    color: #8021bb;
+    border: none;
+}
+
+#hojaVida .marco .derecha h2{
+    font-size: 15px;
+    margin: 0; padding: 0;
+    color: #8021bb;
+    border: none;
+}
+
+#hojaVida .marco .izquierda .minContent{
+    display: flex;
+    height: auto;
+    margin: 5px;
+}
+
+#hojaVida .marco .izquierda .minContent h2{
+    word-break: break-word;
+    margin: auto;
+    padding: 5px;
+    text-align: right;
+    font-size: 14px;
+    flex: 1;
+}
+
+#hojaVida .marco .izquierda .lista{
+    margin: 5px;
+}
+
+#hojaVida .marco .izquierda .lista h2{
+    font-size: 14px;
+    margin: 0;
+}
+
+/*DERECHA*/
+#hojaVida .marco .derecha{
+    background-color: #f3d9ff;
+    border: 3px solid #560581;
+    padding: 5px;
+    border-radius: 5px;
+    margin-left: 5px;
+    width: 570px;
+    display: flex;
+    flex-direction: column;
+}
+
+#hojaVida .marco .derecha h1{
+    margin: 5px 0;
+}
+
+.infoExp{
+    margin: 5px;
+}
+
+.infoExp h2{
+    color: #8021bb;
+    font-size: 15px;
+    margin: 0;
+}
+
+.infoExp h4{
+    margin: 0;
+    color: #560581;
+    font-size: 15px;
+}
+
+#hojaVida .marco .derecha .infoExp p{
+    color: black;
+    font-size: 15px;
+    font-weight: bold;
+}
