@@ -48,13 +48,35 @@
         <div id="derecha">
             <a href="{% url 'inicioE' %}" class="options">Inicio</a>
             <a href="{% url 'estudiantesE' %}" class="options">Estudiantes</a>
-            <a href="{% url 'crearOferta' %}" class="options_active">Publicar</a>
+            <a class="options_active">Publicar oferta</a>
             <a href="{% url 'ofertasE' %}" class="options">Ofertas</a>
 
             <div class="linea"></div>
 
             <a id="btn_icono" href="{% url 'configE' %}"><i class="fas fa-cog"></i></a>
             <a id="btn_icono" href="{% url 'logout' %}"><i class="fa-solid fa-arrow-right-from-bracket"></i></a>
+        </div>
+        
+        <!-- MENU MOVIL -->
+        <div id="menuMovil" onclick="activarMenu()">&#9776;</div>
+        <div id="menuHamburguersa">
+            <div id="Elementos">
+                <div id="btnCerrar" onclick="activarMenu()">&times;</div>
+                <img id="logo" src="{% static 'estudiantes/img/navBar/Logo2.png' %}" alt="">
+
+                <div class="linea"></div>
+
+                <h1>Navegación</h1>
+                <a href="{% url 'inicioE' %}" class="options">Inicio</a>
+                <a href="{% url 'estudiantesE' %}" class="options">Estudiantes</a>
+                <a class="options_active">Publicar oferta</a>
+                <a href="{% url 'ofertasE' %}" class="options">Ofertas</a>
+
+                <div class="linea"></div>
+
+                <a href="{% url 'logout' %}" class="logOut">Log out</a>
+
+            </div>
         </div>
     </header>
 
@@ -138,7 +160,7 @@
     </footer>
 
     <!-- Scripts js -->
-    <script src="{% static 'empresas/js/navBarE.js' %}"></script>
+    <script src="{% static 'empresa/js/navBarE.js' %}"></script>
 
     <!-- Scripts Bootstrap -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"

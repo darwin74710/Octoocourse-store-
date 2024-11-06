@@ -1,12 +1,21 @@
 from django.contrib import admin
+from django.core.exceptions import ValidationError
+from django.utils.translation import gettext_lazy as _
 from .models import Estudiante, Empresa, OfertaEmpleo, TipoCont, Conocimiento, HojasDeVida, LenguajesProg, Aptitudes, Idiomas, FormacionesAcademicas, ExpLaborales
 
 
 
-@admin.register(Estudiante)
 class EstudianteAdmin(admin.ModelAdmin):
     list_display = ('id_estudiante', 'nom_estudiante', 'apellido', 'correo_estudiante', 'fecha_nac')
     search_fields = ('nom_estudiante', 'apellido', 'correo_estudiante')
+
+    def save_model(self, request, obj, form, change):
+        if not obj.correo_estudiante.endswith('@elpoli.edu.co'):
+            raise ValidationError(_("El correo electrónico debe terminar en '@elpoli.edu.co'."))
+        
+        super().save_model(request, obj, form, change)
+
+admin.site.register(Estudiante, EstudianteAdmin)
 
 @admin.register(Empresa)
 class EmpresaAdmin(admin.ModelAdmin):

@@ -1,33 +1,37 @@
-#MarcoConfig{
-    width: 800px; height: auto;
+#MarcoConfig {
+    width: 800px;
+    height: auto;
     margin: 10px auto;
     display: flex;
     flex-direction: column;
 }
 
-#MarcoConfig h1{
+#MarcoConfig h1 {
     padding: 10px 0;
     font-size: 25px;
-    background-color: var(--fondoTitulo2); color: var(--letraTitulo2);
+    background-color: var(--fondoTitulo2);
+    color: var(--letraTitulo2);
     text-align: center;
 }
 
-#MarcoConfig a{
+#MarcoConfig a {
     text-decoration: none;
     margin: 10px auto;
     padding: 5px 15px;
     font-size: 20px;
-    color: var(--letraBotones1); background-color: var(--fondoBotones1);
+    color: var(--letraBotones1);
+    background-color: var(--fondoBotones1);
     border-radius: 100px;
     cursor: pointer;
     transition: all 0.3s ease 0s;
 }
 
-#MarcoConfig a:hover{
-    background-color: var(--hFondoBotones1); color: var(--hLetraBotones1);
+#MarcoConfig a:hover {
+    background-color: var(--hFondoBotones1);
+    color: var(--hLetraBotones1);
 }
 
-.marcoOpcion{
+.marcoOpcion {
     height: 100px;
     margin: 10px;
     border-radius: 10px;
@@ -37,12 +41,12 @@
     display: flex;
 }
 
-.marcoOpcion:hover, #plantillaHV:hover{
+.marcoOpcion:hover, #plantillaHV:hover {
     filter: brightness(85%);
     transition: filter 0.3s ease;
 }
 
-.marcoOpcion i{
+.marcoOpcion i {
     color: var(--fondoBotones1);
     margin: 25px 10px;
     margin-left: auto;
@@ -50,14 +54,14 @@
     font-weight: normal;
 }
 
-.marcoOpcion #document{
+.marcoOpcion #document {
     color: var(--letra1);
     margin: 0 10px;
     font-size: 65px;
     font-weight: normal;
 }
 
-.marcoOpcion h2{
+.marcoOpcion h2 {
     color: var(--letra1);
     margin: 30px;
     margin-left: 5px;
@@ -65,53 +69,127 @@
     font-weight: normal;
 }
 
-.seleccionador{
+.seleccionador {
     font-size: 65px;
 }
 
-#botonesHV{
-    margin: 10px;
-    padding: auto;
-    text-align: center;
+#btnAdjuntar {
+    display: inline;
 }
 
-#botonesHV a{
-    margin: 0 5px;
+#btnPlantilla {
+    display: none;
 }
 
 @media screen and (max-width:800px) {
-    #MarcoConfig{
+    #MarcoConfig {
         width: auto;
     }
 
-    #MarcoConfig a{
+    #MarcoConfig a {
         margin: 5px auto;
         font-size: 20px;
     }
 
-    .marcoOpcion{
+    .marcoOpcion {
         height: auto;
     }
-        
-    .marcoOpcion #document{
+
+    .marcoOpcion #document {
         font-size: 35px;
     }
 
-    .marcoOpcion h2{
+    .marcoOpcion h2 {
         margin: auto;
         font-size: 15px;
         font-weight: normal;
     }
 
-    .marcoOpcion i{
+    .marcoOpcion i {
         margin: auto 5px;
         margin-left: auto;
         font-size: 15px;
         font-weight: normal;
     }
+}
 
-    #botonesHV{
-        display: flex;
-        flex-direction: column;
-    }
+#modalMisDatos {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    flex-direction: column;
+    align-items: center;
+    padding: 30px;
+    background-color: #fff;
+    border-radius: 16px;
+    box-shadow: 0px 10px 30px rgba(138, 43, 226, 0.2);
+    width: 90%;
+    max-width: 500px;
+    z-index: 9999;
+    transition: all 0.3s ease;
+}
+
+#modalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(138, 43, 226, 0.4);
+    backdrop-filter: blur(5px);
+    z-index: 9998;
+    display: none;
+    transition: all 0.3s ease;
+}
+
+.contenidoModal {
+    width: 100%;
+    margin-top: 25px;
+}
+
+.campo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 15px 0;
+    padding: 10px;
+    background-color: #f8f4ff;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+}
+
+.campo:hover {
+    background-color: #f0e6ff;
+}
+
+.campo label {
+    font-weight: 600;
+    color: #5e35b1;
+}
+
+.campo span {
+    font-size: 1rem;
+    color: #4a148c;
+}
+
+#modalMisDatos h2 {
+    color: #4a148c;
+    margin-bottom: 20px;
+}
+
+#modalMisDatos button {
+    background-color: #7e57c2;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 20px;
+}
+
+#modalMisDatos button:hover {
+    background-color: #5e35b1;
 }

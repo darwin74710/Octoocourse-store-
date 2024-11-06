@@ -8,13 +8,13 @@
     <title>Configuración</title>
 
     <!-- Scripts css -->
-    <link rel="stylesheet" href="{% static 'estudiantes/css/Colores.css' %}" />
     <link rel="stylesheet" href="{% static 'estudiantes/css/navBar.css' %}" />
     <link rel="stylesheet" href="{% static 'estudiantes/css/footer.css' %}" />
-    <link rel="stylesheet" href="{% static 'estudiantes/css/Configuracion.css' %}" />
+    <link rel="stylesheet" href="{% static 'empresa/css/configs.css' %}" />
+    <link rel="stylesheet" href="{% static 'estudiantes/css/modalConfig.css' %}" />
 
     <!-- Cargar tema -->
-    <script src="{% static 'estudiantes/js/Temas.js' %}"></script>
+    <script src="{% static 'estudiantes/js/Front/Temas.js' %}"></script>
 
     <!-- Imagenes -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -32,15 +32,15 @@
 
         <!-- MENU PC -->
         <div id="derecha">
-            <a href="{% url 'inicioE' %}"class="options_active">Inicio</a>
-            <a href="{% url 'estudiantesE' %}" class="options">Estudiantes</a> 
+            <a href="{% url 'inicioE' %}" class="options">Inicio</a>
+            <a href="{% url 'estudiantesE' %}" class="options">Estudiantes</a>
             <a href="{% url 'crearOferta' %}" class="options">Publicar</a>
             <a href="{% url 'ofertasE' %}" class="options">Ofertas</a>
 
             <div class="linea"></div>
 
             <a id="btn_icono_active"><i class="fas fa-cog"></i></a>
-            <a id="btn_icono" href="{% url 'home' %}"><i class="fa-solid fa-arrow-right-from-bracket"></i></a>
+            <a id="btn_icono" href="{% url 'logout' %}"><i class="fa-solid fa-arrow-right-from-bracket"></i></a>
         </div>
 
         <!-- MENU MOVIL -->
@@ -53,14 +53,15 @@
                 <div class="linea"></div>
 
                 <h1>Navegación</h1>
-                <a href="{% url 'Inicio' %}" class="options">Inicio</a>
-                <a href="{% url 'Cursos' %}" class="options">Cursos</a>
-                <a href="{% url 'Ofertas' %}" class="options">Ofertas</a>
+                <a href="{% url 'inicioE' %}" class="options">Inicio</a>
+                <a href="{% url 'estudiantesE' %}" class="options">Estudiantes</a>
+                <a href="{% url 'crearOferta' %}" class="options">Publicar</a>
+                <a href="{% url 'ofertasE' %}" class="options">Ofertas</a>
                 <a class="options_active">Configuración</a>
 
                 <div class="linea"></div>
 
-                <a href="{% url 'home' %}" class="logOut">Log out</a>
+                <a href="{% url 'logout' %}" class="logOut">Log out</a>
             </div>
         </div>
     </header>
@@ -68,18 +69,97 @@
     <!-- Configuración Interfaz -->
     <div id="MarcoConfig">
         <h1>INFORMACIÓN PERSONAL</h1>
-        <div class="marcoOpcion"><i id="document" class="bi bi-person"></i><h2>MODIFICAR USUARIO</h2></div>
-        <div class="marcoOpcion"><i id="document" class="bi bi-person-lock"></i><h2>MODIFICAR CONTRASEÑA</h2></div>
+        <div onclick="modalConfig('contraActive')" class="marcoOpcion">
+            <i id="document" class="bi bi-person-lock"></i>
+            <h2>MODIFICAR CONTRASEÑA</h2>
+        </div>
+        <div onclick="modalConfig('misDatosActive')" class="marcoOpcion">
+            <i id="document" class="bi bi-person"></i>
+            <h2>MIS DATOS</h2>
+        </div>
 
-        <h1>HOJA DE VIDA</h1>
-            <div class="marcoOpcion" onclick="cambiarHV('adjuntar')"><i id="document" class="bi bi-file-earmark-text"></i><h2>ADJUNTAR DOCUMENTO</h2><i id="hvElect1" class="bi bi-circle-fill"></i></div>
-            <div class="marcoOpcion" onclick="cambiarHV('plantilla')"><i id="document" class="bi bi-file-earmark-person"></i><h2>UTILIZAR PLANTILLA</h2><i id="hvElect2" class="bi bi-circle"></i></div>
-            <div id="botonesHV"><a id="btnAdjuntar">Adjuntar</a><a>Visualizar</a></div>
-        
         <h1>TEMA</h1>
-        <div class="marcoOpcion" onclick="cambiarTema('claro')"><i id="document" class="bi bi-brightness-high"></i><h2>CLARO</h2><i id="temaElect1" class="bi bi-circle-fill"></i></div>
-        <div class="marcoOpcion" onclick="cambiarTema('oscuro')"><i id="document" class="bi bi-moon"></i><h2>OSCURO</h2><i id="temaElect2" class="bi bi-circle"></i></div>
+        <div class="marcoOpcion" onclick="cambiarTema('claro')">
+            <i id="document" class="bi bi-brightness-high"></i>
+            <h2>CLARO</h2>
+            <i id="temaElect1"></i>
+        </div>
+        <div class="marcoOpcion" onclick="cambiarTema('oscuro')">
+            <i id="document" class="bi bi-moon"></i>
+            <h2>OSCURO</h2>
+            <i id="temaElect2"></i>
+        </div>
     </div>
+
+    <div id="modalOverlay" onclick="cerrarModal()"></div> <!-- Fondo oscuro detrás del modal -->
+
+    <div id="modalMisDatos">
+        <h1>MIS DATOS</h1>
+        <div class="contenidoModal">
+            <div class="campo">
+                <label>Nombre:</label>
+                <span>{{ nombre }}</span>
+            </div>
+            <div class="campo">
+                <label>Correo:</label>
+                <span>{{ correo }}</span>
+            </div>
+            <div class="campo">
+                <label>NIT:</label>
+                <span>{{ nit }}</span>
+            </div>
+            <div class="campo">
+                <label>Ofertas Creadas:</label>
+                <span>{{ ofertas_creadas }}</span>
+            </div>
+            <div class="campo">
+                <label>Ofertas Activas:</label>
+                <span>{{ ofertas_activas }}</span>
+            </div>
+            <div class="campo">
+                <label>Ofertas Desactivadas:</label>
+                <span>{{ ofertas_desactivadas }}</span>
+            </div>
+        </div>
+        <div class="botones">
+            <a onclick="cerrarModal()" class="btnIzquierda">Regresar</a>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div id="modalConfig">
+        <!-- MODAL CAMBIAR CONTRASEÑA -->
+        <form id="modalContra" method="POST" action="{% url 'guardarContra' %}">
+            <h1>CAMBIAR CONTRASEÑA</h1>
+            <p>
+                No repitas la misma contraseña y procura evitar caracteres extraños.
+                <br>
+                Antigua contraseña:
+            </p>
+            <input type="text" name="old_contra" id="old_contra">
+            <p>
+                Nueva contraseña:
+            </p>
+            <input type="text" name="nuv_contra1" id="nuv_contra1">
+            <p>
+                Repite nueva contraseña:
+            </p>
+            <input type="text" name="nuv_contra2" id="nuv_contra2">
+
+            <div class="botones">
+                <a onclick="modalConfig('contraDesactive')" class="btnIzquierda">Regresar</a>
+                <button type="submit">Aplicar</button>
+            </div>
+        </form>
+
+
+        <div class="botones">
+            <a onclick="modalConfig('hvMDesactive')" class="btnIzquierda">Regresar</a>
+            <button type="submit">Aplicar</button>
+        </div>
+        </form>
+    </div>
+    <!--Fin modal cambiar contraseña-->
 
     <!-- Footer -->
     <footer class="piePag">
@@ -95,18 +175,29 @@
                 <h1>SÍGUENOS</h1>
                 <div id="redes">
                     <a href="https://whatsapp.com" target="_blank"><i class="fab fa-whatsapp"></i></a>
-                    <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook-f"></i></a>
-                    <a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
-                    <a href="https://youtube.com" target="_blank"><i class="fab fa-youtube"></i></a>
+                    <a href="https://www.facebook.com/profile.php?id=61567434383968" target="_blank"><i
+                            class="fab fa-facebook-f"></i></a>
+                    <a href="https://www.instagram.com/octoocourse/" target="_blank"><i
+                            class="fab fa-instagram"></i></a>
+                    <a href="https://www.youtube.com/@OctooCourse" target="_blank"><i class="fab fa-youtube"></i></a>
                 </div>
             </div>
         </div>
         <div id="Marco2">&copy; 2024 OctooCourse - Todos los Derechos Reservados.</div>
     </footer>
 
+    <!-- Scripts html2pdf -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+    <!-- Scripts AJAX -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
     <!-- Scripts js -->
-    <script src="{% static 'estudiantes/js/navBar.js' %}"></script>
-    <script src="{% static 'estudiantes/js/Configuraciones.js' %}"></script>
+    <script src="{% static 'estudiantes/js/Front/navBar.js' %}"></script>
+    <script src="{% static 'empresa/js/configE.js' %}"></script>
+
+
+    <script src="{% static 'estudiantes/js/DataBase/ConfigData.js' %}"></script>
     <script>seleccionTema();</script>
 
     <!-- Scripts Botstrap -->

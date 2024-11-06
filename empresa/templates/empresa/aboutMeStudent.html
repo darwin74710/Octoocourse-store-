@@ -20,12 +20,8 @@
         <section class="section">
             <h2>Datos Personales</h2>
             <div class="info-item">
-                <img src="{% static 'estudiantes/img/icon-correo2.svg' %}" alt="tipodoc">
-                <p>{{ estudiante.tipo_id }}</p>
-            </div>
-            <div class="info-item">
-                <img src="{% static 'empresa/img/doc.jpg' %}" alt="id">
-                <p>{{ estudiante.id_estudiante }}</p>
+                <img src="{% static 'empresa/img/doc.png' %}" alt="id">
+                <p>{{ estudiante.tipo_id }}:  {{ estudiante.id_estudiante }} </p>
             </div>
             <div class="info-item">
                 <img src="{% static 'empresa/img/mail.png' %}" alt="Correo">

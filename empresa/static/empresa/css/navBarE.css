@@ -5,7 +5,7 @@
 }
 
 #navBar{
-    background-color: #2e0346;
+    background-color: #2e0346 !important; 
     width: auto; height: 70px;
     padding: 0px 20px;
     box-shadow: 0px 1px 5px black;

@@ -6,6 +6,8 @@ from django.contrib.auth.decorators import login_required
 from login.models import Conocimiento, TipoCont, OfertaEmpleo, Empresa, Estudiante
 from estudiantes.models import Estudiantes, HojasDeVida, Idiomas, Aptitudes, LenguajesProg, FormacionesAcademicas, ExpLaborales
 from datetime import date
+from django.http import JsonResponse
+
 
 
 
@@ -174,26 +176,50 @@ def eliminar_oferta(request, id_oferta):
     oferta = get_object_or_404(OfertaEmpleo, id_oferta=id_oferta)
     
     oferta.delete()
-    
+    messages.success(request, "Oferta eliminada con éxito.")
+
     return redirect('ofertasE')  
 
 @login_required
 def editar_oferta(request, id_oferta):
     oferta = get_object_or_404(OfertaEmpleo, id_oferta=id_oferta)
-    
+
     if request.method == 'POST':
         oferta.nombre_oferta = request.POST.get('nombre_oferta', oferta.nombre_oferta)
         oferta.salario = request.POST.get('salario', oferta.salario)
         oferta.descripcion = request.POST.get('descripcion', oferta.descripcion)
 
+        tipo_contrato = request.POST.get('tipo_contrato')
+        if tipo_contrato:
+            tipo_cont, created = TipoCont.objects.update_or_create(
+                id_oferta=oferta,
+                defaults={'tipo_cont': tipo_contrato}
+            )
+
+        conocimientos_existentes = list(Conocimiento.objects.filter(id_oferta=oferta).values_list('nom_con', flat=True))
+
+        nuevos_conocimientos = request.POST.getlist('conocimientos')  
+
+        for nom_con in nuevos_conocimientos:
+            if nom_con and nom_con not in conocimientos_existentes: 
+                Conocimiento.objects.create(id_oferta=oferta, nom_con=nom_con)
+
         oferta.estado = '1' if 'estado' in request.POST else '0'
-        
-        
         oferta.save()
-        
+        messages.success(request, "Oferta actualizada con éxito.")
         return redirect('ofertasE')  
-    
-    return render(request, 'empresa/editar_oferta.html', {'oferta': oferta})
+
+    conocimientos_existentes = Conocimiento.objects.filter(id_oferta=oferta).values_list('nom_con', flat=True)
+    tipo_contrato_existente = TipoCont.objects.filter(id_oferta=oferta).first()
+
+    return render(request, 'empresa/editar_oferta.html', {
+        'oferta': oferta,
+        'conocimientos_existentes': conocimientos_existentes,
+        'tipo_contrato_existente': tipo_contrato_existente,
+    })
+
+
+
 
 def obtener_tablas_tc(id_oferta):
     oferta = get_object_or_404(OfertaEmpleo, id_oferta=id_oferta)
@@ -218,5 +244,21 @@ def listEAp(request):
 
 
 
-
-
+def mis_datos(request):
+    nit_empresa = request.session.get('nit')
+    if nit_empresa:
+        try:
+            empresa = Empresa.objects.get(nit=nit_empresa)
+            data = {
+                'nombre': empresa.nom_empresa,
+                'correo': empresa.correo_emp,
+                'nit': empresa.nit,
+                'ofertas_creadas': empresa.ofertas_creadas.count(),
+                'ofertas_activas': empresa.ofertas_activas.count(),
+                'ofertas_desactivadas': empresa.ofertas_desactivadas.count(),
+            }
+            print(data)
+            return JsonResponse(data)
+        except Empresa.DoesNotExist:
+            return JsonResponse({'error': 'Empresa no encontrada'}, status=404)
+    return JsonResponse({'error': 'No autenticado'}, status=401)
