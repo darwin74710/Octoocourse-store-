@@ -1,4 +1,4 @@
-#marcoEstudiantes{
+#marcoOfertas{
     margin: 10px auto;
     padding: 10px;
     height: auto; width: 800px;
@@ -6,32 +6,24 @@
     border-radius: 10px;
 }
 
-#marcoEstudiantes #botonesConfig{
-    display: flex;
-}
-
-#marcoEstudiantes #botonesConfig #btnIzquierda{
-    margin-left: auto;
-}
-
-#marcoEstudiantes #botonesConfig a{
+#marcoOfertas #volverBoton{
     width: 45px;
     display: block;
     color: var(--letraBotones1); background-color: var(--fondoBotones1);
     margin: 0;
-    margin-left: 5px;
     margin-bottom: 10px;
+    margin-left: auto;
     padding: 0 5px;
     border-radius: 10px;
     cursor: pointer;
     transition: all 0.3s ease 0s;
 }
 
-#marcoEstudiantes #botonesConfig a:hover{
+#marcoOfertas #volverBoton:hover{
     background-color: var(--hFondoBotones1); color: var(--hLetraBotones1);
 }
 
-#marcoEstudiantes #botonesConfig a i{
+#marcoOfertas #volverBoton i{
     font-size: 35px;
 }
 
@@ -70,11 +62,7 @@
 }
 
 @media screen and (max-width:800px) {
-    #marcoEstudiantes{
-        width: 100%;
-    }
-
-    #marcoModal{
+    #marcoCursos{
         width: 100%;
     }
 }

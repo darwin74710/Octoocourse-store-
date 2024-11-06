@@ -5,12 +5,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Administrador</title>
+    <title>Ofertas</title>
 
     <!-- Scripts css -->
     <link rel="stylesheet" href="{% static 'administrator/css/navBar.css' %}" />
     <link rel="stylesheet" href="{% static 'administrator/css/footer.css' %}" />
-    <link rel="stylesheet" href="{% static 'administrator/css/administrador.css' %}" />
+    <link rel="stylesheet" href="{% static 'administrator/css/ofertas.css' %}" />
+    <link rel="stylesheet" href="{% static 'administrator/css/modal.css' %}" />
 
     <!-- Cargar tema -->
     <script src="{% static 'administrator/js/Front/Temas.js' %}"></script>
@@ -37,36 +38,53 @@
         </div>
     </header>
 
-    <div id="marcoInicio">
-        <h1>ADMINISTRADOR</h1>
-        <div id="infoAdmin">
-            <h2>Información general</h2>
-            <div class="elementInfo">
-                <div class="minElement">
-                    <h3>Estudiantes registrados</h3>
-                    <p>{{ numEstud }}</p>
-                </div>
-                <div class="minElement">
-                    <h3>Empresas registradas</h3>
-                    <p>{{ numEmpresas }}</p>
-                </div>
-                <div class="minElement">
-                    <h3>Cursos registrados</h3>
-                    <p>{{ numCursos }}</p>
-                </div>
-                <div class="minElement">
-                    <h3>Ofertas registradas</h3>
-                    <p>{{ numOfertas }}</p>
-                </div>
-            </div>
-
-            <h2>Modificar Información</h2>
-            <a href="{% url 'estudiantesAdmin' %}" class="marcoOpcion"><i id="document" class="bi bi-backpack"></i><h3>ESTUDIANTES</h3></a>
-            <a href="{% url 'empresaAdmin' %}" class="marcoOpcion"><i id="document" class="bi bi-briefcase"></i><h3>EMPRESAS</h3></a>
-            <a href="{% url 'cursoAdmin' %}" class="marcoOpcion"><i id="document" class="bi bi-file-earmark-text"></i><h3>CURSOS</h3></a>
-            <a href="{% url 'ofertaAdmin' %}" class="marcoOpcion"><i id="document" class="bi bi-cash-stack"></i><h3>OFERTAS</h3></a>
-        </div> 
+    <div id="marcoOfertas">
+        <a id="volverBoton" href="{% url 'administratorAdmin' %}"><i class="bi bi-house"></i></a>
+        <div id="listaOpciones">
+            {% if ofertas %}
+                {% for oferta in ofertas %}
+                    <div class="marcoOpcion" onclick="modalOpenExit('active', 'ofertas', this)">
+                        <h3 id="nombreInfo">{{ oferta.nombre_oferta.strip|upper }}</h3>
+                        <p id="documentoInfo">{{ oferta.id_oferta }}</p>
+                        <p id="salarioInfo">{{ oferta.salario }}</p>
+                        <p id="estadoInfo">
+                            {% if oferta.estado == 0 %}
+                                Inactivo
+                            {% elif oferta.estado == 1 %}
+                                Activo
+                            {% endif %}
+                        </p>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </div>
     </div>
+
+    <div id="modalOpciones">
+        <div id="marcoModal">
+            <h1 id="nombreRecib"></h1>
+            <div class="minInfo"><h2>ID: </h2><h2 id="documentoRecib"></h2></div>
+            <div class="minInfo"><h2>Salario: </h2><h2 id="salarioRecib"></h2></div>
+            <div class="minInfo"><h2>Estado: </h2><h2 id="estadoRecib"></h2></div>
+
+            <div id="botonesOpciones">
+                <a onclick="editInformation()">Modificar oferta</a>
+                <a>Eliminar oferta</a>
+                <a onclick="modalOpenExit('desactive', 'ofertas', this)">Salir</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function editInformation(){
+            const idOferta = document.getElementById('documentoRecib').innerText;
+            const idParametro = encodeURIComponent(idOferta);
+
+            var cursoInfoUrl = "{% url 'ofertaEditar' %}";
+
+            window.location.href = `${cursoInfoUrl}?idOferta=${idParametro}`;
+        }
+    </script>
 
     <!-- Footer -->
     <footer class="piePag">
@@ -93,6 +111,7 @@
 
     <!-- Scripts js -->
     <script src="{% static 'administrator/js/Front/navBar.js' %}"></script>
+    <script src="{% static 'administrator/js/Front/modal.js' %}"></script>
     <script src="{% static 'administrator/js/Front/cambiarTem.js' %}"></script>
 
     <!-- Scripts Botstrap -->

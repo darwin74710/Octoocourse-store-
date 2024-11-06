@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Modificar Cursos</title>
+    <title>Cursos</title>
 
     <!-- Scripts css -->
     <link rel="stylesheet" href="{% static 'administrator/css/navBar.css' %}" />
@@ -45,6 +45,7 @@
                 {% for curso in cursos %}
                     <div class="marcoOpcion" onclick="modalOpenExit('active', 'cursos', this)">
                         <h3 id="nombreInfo">{{ curso.nom_curso.strip|upper }}</h3>
+                        <p id="documentoInfo">{{ curso.id_curso }}</p>
                         <p id="precioInfo">{{ curso.precio }}</p>
                         <p id="lenguajeInfo">{{ curso.lenguaje }}</p>
                         <p id="nivelInfo">{{ curso.dificultad }}</p>
@@ -65,6 +66,7 @@
     <div id="modalOpciones">
         <div id="marcoModal">
             <h1 id="nombreRecib"></h1>
+            <div class="minInfo"><h2>ID: </h2><h2 id="documentoRecib"></h2></div>
             <div class="minInfo"><h2>Precio: </h2><h2 id="precioRecib"></h2></div>
             <div class="minInfo"><h2>Lenguaje: </h2><h2 id="lenguajeRecib"></h2></div>
             <div class="minInfo"><h2>Nivel: </h2><h2 id="nivelRecib"></h2></div>
@@ -72,12 +74,23 @@
             <div class="minInfo"><h2>Certificado: </h2><h2 id="certificadoRecib"></h2></div>
 
             <div id="botonesOpciones">
-                <a>Modificar curso</a>
+                <a onclick="editInformation()">Modificar curso</a>
                 <a>Eliminar curso</a>
                 <a onclick="modalOpenExit('desactive', 'cursos', this)">Salir</a>
             </div>
         </div>
     </div>
+
+    <script>
+        function editInformation(){
+            const idCurso = document.getElementById('documentoRecib').innerText;
+            const idParametro = encodeURIComponent(idCurso);
+
+            var cursoInfoUrl = "{% url 'cursoEditar' %}";
+
+            window.location.href = `${cursoInfoUrl}?idCurso=${idParametro}`;
+        }
+    </script>
 
     <!-- Footer -->
     <footer class="piePag">

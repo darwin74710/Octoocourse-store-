@@ -1,5 +1,5 @@
 #marcoInicio{
-    margin: 10px;
+    margin: 10px; height: auto;
     display: flex;
     flex-direction: column;
 }
@@ -13,7 +13,7 @@
 }
 
 #infoAdmin{
-    width: 700px; height: 600px;
+    width: 700px; height: auto;
     margin: 10px auto;
     border: 1px solid var(--borde1);
     border-radius: 10px;

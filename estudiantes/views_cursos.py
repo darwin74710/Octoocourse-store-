@@ -24,29 +24,42 @@ def CursosPrincipal(request):
 
     if filtros:
         lista_filtros = json.loads(filtros)
+        print("Filtros recibidos:", lista_filtros)
         q_objects = Q()  # Creamos un objeto Q para filtrar varias condiciones.
+        q_objects_nivel = Q()
+        q_objects_tiempo = Q()
+        q_objects_certificado = Q()
+
 
         # Agrego condiciones según los filtros seleccionados.
         if "HTML" in lista_filtros:
             q_objects |= Q(lenguaje="HTML")  # Utilizamos OR para multiples filtros.
         if "Básico" in lista_filtros:
-            q_objects |= Q(dificultad="Básico")
+            q_objects_nivel |= Q(dificultad="Básico")
         if "Medio" in lista_filtros:
-            q_objects |= Q(dificultad="Medio")
+            q_objects_nivel |= Q(dificultad="Medio")
         if "Avanzado" in lista_filtros:
-            q_objects |= Q(dificultad="Avanzado")
+            q_objects_nivel |= Q(dificultad="Avanzado")
         if "0-5 Horas" in lista_filtros:
-            q_objects |= Q(tiempo="0-5 Horas")
+            q_objects_tiempo |= Q(tiempo="0-5 Horas")
         if "6-10 Horas" in lista_filtros:
-            q_objects |= Q(tiempo="6-10 Horas")
+            q_objects_tiempo |= Q(tiempo="6-10 Horas")
         if "11-15 Horas" in lista_filtros:
-            q_objects |= Q(tiempo="11-15 Horas")
+            q_objects_tiempo |= Q(tiempo="11-15 Horas")
         if "15+ Horas" in lista_filtros:
-            q_objects |= Q(tiempo="15+ Horas")
+            q_objects_tiempo |= Q(tiempo="15+ Horas")
         if "Con Certificado" in lista_filtros:
-            q_objects |= Q(certificado=1)
+            q_objects_certificado |= Q(certificado=1)
         if "Sin Certificado" in lista_filtros:
-            q_objects |= Q(certificado=0)
+            q_objects_certificado |= Q(certificado=0)
+
+        # Añadimos cada sub conjunto de condiciones
+        if q_objects_nivel:
+            q_objects &= q_objects_nivel
+        if q_objects_tiempo:
+            q_objects &= q_objects_tiempo
+        if q_objects_certificado:
+            q_objects &= q_objects_certificado
 
         # Aplicamos los filtros a la consulta.
         cursos = cursos.filter(q_objects)
