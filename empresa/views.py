@@ -3,7 +3,7 @@ from django.db import connection
 from django.contrib import messages
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
-from login.models import Conocimiento, TipoCont, OfertaEmpleo, Empresa, Estudiante
+from login.models import Conocimiento, TipoCont, OfertaEmpleo, Empresa, Estudiante, OfertaDisponible
 from estudiantes.models import Estudiantes, HojasDeVida, Idiomas, Aptitudes, LenguajesProg, FormacionesAcademicas, ExpLaborales
 from datetime import date
 from django.http import JsonResponse
@@ -148,10 +148,16 @@ def estudiantesE(request):
 def configE(request):
     return render(request, 'empresa/configE.html')
 
-@login_required 
+@login_required
 def ofertasE(request):
     nit_empresa = request.session.get('nit')
+    
     ofertas = OfertaEmpleo.objects.filter(nit=nit_empresa)
+    
+    for oferta in ofertas:
+        conteo_aplicantes = OfertaDisponible.objects.filter(id_oferta=oferta.id_oferta).count()
+        oferta.conteo_aplicantes = conteo_aplicantes  
+    
     return render(request, 'empresa/ofertasE.html', {'ofertas': ofertas})
 
 
@@ -162,6 +168,9 @@ def detalle_oferta(request, id_oferta):
     datos_adicionales = obtener_tablas_tc(id_oferta)
 
     nit_empresa = request.session.get('nit')
+
+    # Guarda el `id_oferta` en la sesión
+    request.session['current_id_oferta'] = id_oferta
 
     context = {
         'oferta': oferta,
@@ -239,9 +248,20 @@ def obtener_tablas_tc(id_oferta):
 def des_ofertas(request):
     return render(request, 'empresa/des_ofertas.html')
 
+@login_required
 def listEAp(request):
-    return render(request, 'empresa/listEAp.html')
-
+    nit_empresa = request.session.get('nit')
+    id_oferta = request.session.get('current_id_oferta')  
+    
+    oferta_actual = OfertaEmpleo.objects.filter(nit=nit_empresa, id_oferta=id_oferta).first()
+    estudiantes_aplicados = OfertaDisponible.objects.filter(id_oferta=id_oferta).values_list('id_estudiante', flat=True)
+    
+    estudiantes = Estudiante.objects.filter(id_estudiante__in=estudiantes_aplicados).values('nom_estudiante', 'apellido', 'id_estudiante')
+    
+    return render(request, 'empresa/listEAp.html', {
+        'oferta_actual': oferta_actual,
+        'estudiantes': estudiantes
+    })
 
 
 def mis_datos(request):

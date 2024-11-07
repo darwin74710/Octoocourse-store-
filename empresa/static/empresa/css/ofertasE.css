@@ -195,16 +195,16 @@ body{
 .btn-cambios:hover {
     background-color: #4e1c6d; 
 }
-/* Modal detalles oferta */
+
 .modal-content {
-    background-color: #f3f0fa; /* Fondo suave lavanda */
+    background-color: #f3f0fa; 
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    color: #4c3a71; /* Texto en tono morado oscuro */
+    color: #4c3a71; 
 }
 
 .modal-header {
-    background-color: #6a4b9e; /* Fondo morado oscuro */
+    background-color: #6a4b9e; 
     color: #ffffff;
     border-bottom: none;
     display: flex;

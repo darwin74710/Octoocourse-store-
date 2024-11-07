@@ -93,10 +93,9 @@
                     </div>
                     <div class="oferta-body">
                         <p><strong>Fecha de publicación:</strong> {{ oferta.fecha_pub }}</p>
-                        <p><strong>Aplicantes:</strong> 0 </p>
+                        <p><strong>Aplicantes:</strong> {{ oferta.conteo_aplicantes }}</p>
                         <p><strong>Estado:</strong> <span
-                                class="{% if oferta.estado == 'Activa' %}estado-activa{% else %}estado-inactiva{% endif %}">{{oferta.estado}}</span>
-                        </p>
+                                class="{% if oferta.estado == 'Activa' %}estado-activa{% else %}estado-inactiva{% endif %}">{{ oferta.estado }}</span></p>
                     </div>
                     <div class="oferta-footer d-flex justify-content-between align-items-center">
                         <a href="{% url 'detalle_oferta' oferta.id_oferta %}" class="btn-detalles">Ver detalles</a>

@@ -58,6 +58,20 @@ class OfertaEmpleo(models.Model):
     def __str__(self):
         return self.nombre_oferta
     
+class OfertaDisponible(models.Model):
+    id_ofer_disponible = models.AutoField(primary_key=True)  
+    activacion = models.IntegerField()  
+    id_oferta = models.IntegerField()  
+    id_estudiante = models.IntegerField()  
+
+    class Meta:
+        db_table = 'ofertas_disponibles'  
+        verbose_name = 'Oferta Disponible'
+        verbose_name_plural = 'Ofertas Disponibles'
+
+    def __str__(self):
+        return f"OfertaDisponible {self.id_ofer_disponible} - Activación: {self.activacion}"
+    
 
 class TipoCont(models.Model):
     id_tipo_cont = models.AutoField(primary_key=True)
