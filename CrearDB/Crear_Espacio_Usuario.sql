@@ -8,7 +8,7 @@ ALTER DATABASE OPEN;
 DROP TABLESPACE ts_octoocourse INCLUDING CONTENTS and DATAFILES;
     
 CREATE TABLESPACE ts_octoocourse LOGGING
-DATAFILE 'C:\OracleOctooCourse\DF_octoocourse.dbf' size 1M
+DATAFILE 'C:\OracleOctooCourse\DF_octoocourse.dbf' size 100M
 extent management local segment space management auto; 
  
 alter session set "_ORACLE_SCRIPT"=true; 

@@ -24,10 +24,10 @@ class Estudiantes(models.Model):
 
 class HojasDeVida(models.Model):
     id_hoja_vida = models.IntegerField(primary_key=True)
-    id_estudiante = models.ForeignKey(Estudiantes, models.DO_NOTHING, db_column='id_estudiante', blank=True, null=True)
     descripcion = models.CharField(max_length=1000, blank=True, null=True)
     telefono = models.IntegerField(blank=True, null=True)
     direccion = models.CharField(max_length=60, blank=True, null=True)
+    id_estudiante = models.ForeignKey(Estudiantes, models.DO_NOTHING, db_column='id_estudiante', blank=True, null=True)
 
     class Meta:
         managed = False
@@ -36,8 +36,8 @@ class HojasDeVida(models.Model):
 
 class LenguajesProg(models.Model):
     id_lenguaje = models.IntegerField(primary_key=True)
-    id_hojavida = models.ForeignKey(HojasDeVida, models.DO_NOTHING, db_column='id_hojavida', blank=True, null=True)
     nombre_leng = models.CharField(max_length=50, blank=True, null=True)
+    id_hojavida = models.ForeignKey(HojasDeVida, models.DO_NOTHING, db_column='id_hojavida', blank=True, null=True)
 
     class Meta:
         managed = False
@@ -46,8 +46,8 @@ class LenguajesProg(models.Model):
 
 class Aptitudes(models.Model):
     id_aptitudes = models.IntegerField(primary_key=True)
-    id_hojavida = models.ForeignKey(HojasDeVida, models.DO_NOTHING, db_column='id_hojavida', blank=True, null=True)
     nombre_apt = models.CharField(max_length=50, blank=True, null=True)
+    id_hojavida = models.ForeignKey(HojasDeVida, models.DO_NOTHING, db_column='id_hojavida', blank=True, null=True)
 
     class Meta:
         managed = False
@@ -56,9 +56,9 @@ class Aptitudes(models.Model):
 
 class Idiomas(models.Model):
     id_idioma = models.IntegerField(primary_key=True)
-    id_hojavida = models.ForeignKey(HojasDeVida, models.DO_NOTHING, db_column='id_hojavida', blank=True, null=True)
     idioma = models.CharField(max_length=20, blank=True, null=True)
     nivel = models.CharField(max_length=20, blank=True, null=True)
+    id_hojavida = models.ForeignKey(HojasDeVida, models.DO_NOTHING, db_column='id_hojavida', blank=True, null=True)
 
     class Meta:
         managed = False
@@ -67,12 +67,12 @@ class Idiomas(models.Model):
 
 class ExpLaborales(models.Model):
     id_exp = models.IntegerField(primary_key=True)
-    id_hojavida = models.ForeignKey(HojasDeVida, models.DO_NOTHING, db_column='id_hojavida', blank=True, null=True)
     nom_empresas = models.CharField(max_length=50, blank=True, null=True)
     tiempo_inicio = models.DateField(blank=True, null=True)
     tiempo_final = models.DateField(blank=True, null=True)
     cargo = models.CharField(max_length=30, blank=True, null=True)
     descripcion = models.CharField(max_length=1000, blank=True, null=True)
+    id_hojavida = models.ForeignKey(HojasDeVida, models.DO_NOTHING, db_column='id_hojavida', blank=True, null=True)
 
     class Meta:
         managed = False
@@ -81,20 +81,12 @@ class ExpLaborales(models.Model):
 
 class FormacionesAcademicas(models.Model):
     id_formacion = models.IntegerField(primary_key=True)
-    id_hojavida = models.ForeignKey(HojasDeVida, models.DO_NOTHING, db_column='id_hojavida', blank=True, null=True)
     nom_institucion = models.CharField(max_length=50, blank=True, null=True)
     titulo = models.CharField(max_length=50, blank=True, null=True)
     fecha_inicio = models.DateField(blank=True, null=True)
     fecha_final = models.DateField(blank=True, null=True)
+    id_hojavida = models.ForeignKey(HojasDeVida, models.DO_NOTHING, db_column='id_hojavida', blank=True, null=True)
 
     class Meta:
         managed = False
         db_table = 'FORMACIONES_ACADEMICAS'
-
-
-class Respuestas(models.Model):
-    id_docs_admin = models.IntegerField(primary_key=True)
-
-    class Meta:
-        managed = False
-        db_table = 'RESPUESTAS'
