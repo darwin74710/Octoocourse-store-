@@ -23,11 +23,12 @@ class Empresas(models.Model):
 
 class OfertasEmpleos(models.Model):
     id_oferta = models.IntegerField(primary_key=True)
-    nit = models.ForeignKey(Empresas, models.DO_NOTHING, db_column='nit', blank=True, null=True)
     nombre_oferta = models.CharField(max_length=50, blank=True, null=True)
     salario = models.DecimalField(max_digits=15, decimal_places=2, blank=True, null=True)
     descripcion = models.CharField(max_length=1000, blank=True, null=True)
     estado = models.BooleanField(blank=True, null=True)
+    fecha_pub = models.DateField(blank=True, null=True)
+    nit = models.ForeignKey(Empresas, models.DO_NOTHING, db_column='nit', blank=True, null=True)
 
     class Meta:
         managed = False
@@ -36,8 +37,8 @@ class OfertasEmpleos(models.Model):
 
 class Conocimientos(models.Model):
     id_conocimiento = models.IntegerField(primary_key=True)
-    id_oferta = models.ForeignKey(OfertasEmpleos, models.DO_NOTHING, db_column='id_oferta')
     nom_con = models.CharField(max_length=100, blank=True, null=True)
+    id_oferta = models.ForeignKey(OfertasEmpleos, models.DO_NOTHING, db_column='id_oferta', blank=True, null=True)
 
     class Meta:
         managed = False
@@ -46,6 +47,7 @@ class Conocimientos(models.Model):
 
 class TipoCont(models.Model):
     id_tipo_cont = models.IntegerField(primary_key=True)  # The composite primary key (id_tipo_cont, id_oferta) found, that is not supported. The first column is selected.
+    tipo_cont = models.CharField(max_length=50, blank=True, null=True)
     id_oferta = models.ForeignKey(OfertasEmpleos, models.DO_NOTHING, db_column='id_oferta')
 
     class Meta:
@@ -54,11 +56,21 @@ class TipoCont(models.Model):
         unique_together = (('id_tipo_cont', 'id_oferta'),)
 
 
-class OfertasDisponibles(models.Model):
-    id_ofer_disponible = models.AutoField(primary_key=True)
-    activacion = models.BooleanField(blank=True, null=True)
-    id_estudiante = models.ForeignKey('Estudiantes', models.DO_NOTHING, db_column='id_estudiante', blank=True, null=True)
+class RespuestasOfertas(models.Model):
+    id_respuestas_ofertas = models.IntegerField(primary_key=True)
     id_oferta = models.ForeignKey(OfertasEmpleos, models.DO_NOTHING, db_column='id_oferta', blank=True, null=True)
+    id_estudiante = models.ForeignKey('Estudiantes', models.DO_NOTHING, db_column='id_estudiante', blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'RESPUESTAS_OFERTAS'
+
+
+class OfertasDisponibles(models.Model):
+    id_ofer_disponible = models.IntegerField(primary_key=True)
+    activacion = models.BooleanField(blank=True, null=True)
+    id_oferta = models.ForeignKey(OfertasEmpleos, models.DO_NOTHING, db_column='id_oferta', blank=True, null=True)
+    id_estudiante = models.ForeignKey('Estudiantes', models.DO_NOTHING, db_column='id_estudiante', blank=True, null=True)
 
     class Meta:
         managed = False

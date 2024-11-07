@@ -11,13 +11,13 @@ from django.db import models
 class Cursos(models.Model):
     id_curso = models.IntegerField(primary_key=True)
     nom_curso = models.CharField(max_length=50, blank=True, null=True)
-    dificultad = models.CharField(max_length=10, blank=True, null=True)
-    descripcion = models.CharField(max_length=1000, blank=True, null=True)
-    url_imagen = models.CharField(max_length=1000, blank=True, null=True)
     precio = models.BigIntegerField(blank=True, null=True)
+    dificultad = models.CharField(max_length=10, blank=True, null=True)
     lenguaje = models.CharField(max_length=25, blank=True, null=True)
     tiempo = models.CharField(max_length=15, blank=True, null=True)
     certificado = models.BooleanField(blank=True, null=True)
+    descripcion = models.CharField(max_length=1000, blank=True, null=True)
+    url_imagen = models.CharField(max_length=20, blank=True, null=True)
 
     class Meta:
         managed = False
@@ -25,10 +25,10 @@ class Cursos(models.Model):
 
 
 class CursosDisponibles(models.Model):
-    id_cur_disponible = models.AutoField(primary_key=True)
+    id_cur_disponible = models.IntegerField(primary_key=True)
     activacion = models.BooleanField(blank=True, null=True)
-    id_estudiante = models.ForeignKey('Estudiantes', models.DO_NOTHING, db_column='id_estudiante', blank=True, null=True)
     id_curso = models.ForeignKey(Cursos, models.DO_NOTHING, db_column='id_curso', blank=True, null=True)
+    id_estudiante = models.ForeignKey('Estudiantes', models.DO_NOTHING, db_column='id_estudiante', blank=True, null=True)
 
     class Meta:
         managed = False
