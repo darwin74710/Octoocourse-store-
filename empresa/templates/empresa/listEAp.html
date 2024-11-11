@@ -5,10 +5,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Estudiantes aplicados nombreOferta</title>
+    <title>Estudiantes aplicados - {{ ofertas.nombre_oferta }}</title>
 
     <!-- Scripts css -->
-    <link rel="stylesheet" href="{% static 'empresa/css/navBarE.css' %}" />
     <link rel="stylesheet" href="{% static 'empresa/css/footerE.css' %}" />
     <link rel="stylesheet" href="{% static 'empresa/css/InicioE.css' %}" />
     <link rel="stylesheet" href="{% static 'empresa/css/listasE.css' %}" />
@@ -26,7 +25,7 @@
     <!-- Inicio Lista Estudiantes -->
     <div class="marcoCV">
         <div class="listas">
-            <h3>Estudiantes Aplicados</h3>
+            <h3>Estudiantes Aplicados - {{ ofertas.nombre_oferta }}</h3>
 
             {% for estudiante in estudiantes %}
             <li class="interact">

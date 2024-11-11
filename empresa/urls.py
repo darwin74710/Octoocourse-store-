@@ -14,5 +14,6 @@ urlpatterns = [
     path('logout/', views.logout_view, name='logout'),  
     path('estudiantes_lista/', views.estudiantesE, name='lista_estudiantes'),
     path('empresa/estudiante/<int:id_estudiante>/', views.detalle_estudiante, name='detalle_estudiante'),    
+    path('guardarContra/', views.guardarContra, name='guardarContra'),
 
 ]

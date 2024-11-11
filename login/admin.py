@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _
-from .models import Estudiante, Empresa, OfertaEmpleo, TipoCont, Conocimiento, HojasDeVida, LenguajesProg, Aptitudes, Idiomas, FormacionesAcademicas, ExpLaborales
+from .models import Estudiante, Empresa, OfertaEmpleo, TipoCont, Conocimiento, HojasDeVida, LenguajesProg, Aptitudes, Idiomas, FormacionesAcademicas, ExpLaborales, OfertaDisponible
 
 
 
@@ -27,10 +27,15 @@ class OfertaEmpleoAdmin(admin.ModelAdmin):
     list_display = ('id_oferta', 'nombre_oferta', 'salario', 'nit')
     search_fields = ('nombre_oferta', 'nit')
 
+    def delete_model(self, request, obj):
+        OfertaDisponible.objects.filter(id_oferta=obj.id_oferta).delete()
+        super().delete_model(request, obj)
+
 @admin.register(TipoCont)
 class TipoContAdmin(admin.ModelAdmin):
-    list_display = ('id_tipo_cont', 'id_oferta', 'tipo_cont')
-    search_fields = ('tipo_cont', 'id_oferta__nombre_oferta')
+    list_display = ('id_tipo_cont', 'nombre_tipo')  
+    search_fields = ('nombre_tipo',)  
+
 
 @admin.register(Conocimiento)
 class ConocimientoAdmin(admin.ModelAdmin):

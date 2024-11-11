@@ -23,8 +23,8 @@ body {
     box-shadow: 0 4px 6px var(--shadow-color);
 }
 
-.listas h3 {
-    color: #3F2A8C;
+h3 {
+    color: #3F2A8C !important;
     font-size: 1.8rem;
     margin-bottom: 1.5rem;
     text-align: center;
@@ -45,6 +45,7 @@ body {
     border-radius: 8px;
     transition: all 0.3s ease;
     box-shadow: 0 2px 4px var(--shadow-color);
+    background-color: #DEDEDE;
 }
 
 .interact:hover {
@@ -56,13 +57,9 @@ body {
     margin: 0;
     font-weight: bold;
     color: var(--text-color);
+    padding-right: 25px;
 }
 
-.crudLista {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
 
 .visualizar {
     width: 24px;
@@ -114,48 +111,17 @@ body {
     transform: translateY(-2px);
 }
 
-
-#Marco1 {
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
+.btn-close{
+    background-color: #8021bb !important;
 }
 
-.Elementos {
-    max-width: 300px;
-    margin-bottom: 1rem;
-}
 
-.Elementos h1 {
-    font-size: 1.2rem;
-    margin-bottom: 1rem;
-}
 
-#redes a {
-    color: white;
-    font-size: 1.5rem;
-    margin-right: 1rem;
-    transition: color 0.3s ease;
-}
 
-#redes a:hover {
-    color: var(--secondary-color);
-}
-
-#Marco2 {
-    text-align: center;
-    padding-top: 1rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.2);
-}
 
 @media (max-width: 768px) {
     .marcoCV {
         padding: 1rem;
-    }
-
-    .Elementos {
-        max-width: 100%;
-        padding: 0 1rem;
     }
 
     .interact {
@@ -163,7 +129,4 @@ body {
         align-items: flex-start;
     }
 
-    .crudLista {
-        margin-top: 10px;
-    }
 }

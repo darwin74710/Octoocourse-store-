@@ -100,8 +100,8 @@
                 {% for experiencia in expLaborales %}
                     <div class="experience-item">
                         <h3>{{ experiencia.cargo }}</h3>
-                        <p><strong>{{ experiencia.empresa }}</strong></p>
-                        <p>{{ experiencia.fecha_inicio }} - {{ experiencia.fecha_fin }}</p>
+                        <p><strong>{{ experiencia.nom_empresas }}</strong></p>
+                        <p>{{ experiencia.tiempo_inicio }} - {{ experiencia.tiempo_final }}</p>
                         <p>{{ experiencia.descripcion }}</p>
                     </div>
                 {% endfor %}

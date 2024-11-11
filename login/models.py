@@ -34,16 +34,29 @@ class Empresa(models.Model):
         return self.nom_empresa
 
 
+class TipoCont(models.Model):
+    id_tipo_cont = models.DecimalField(primary_key=True, max_digits=10, decimal_places=0)
+    nombre_tipo = models.CharField(max_length=50)  
+
+    class Meta:
+        db_table = 'tipo_cont'
+        constraints = [
+            models.UniqueConstraint(fields=['id_tipo_cont'], name='pk_tipo_contrato')
+        ]
+
+    def __str__(self):
+        return self.nombre_tipo  
+
 
 class OfertaEmpleo(models.Model):
-    id_oferta = models.DecimalField(primary_key=True, max_digits=10, decimal_places=0)
-    nit = models.DecimalField(max_digits=25, decimal_places=0)
-    nombre_oferta = models.CharField(max_length=50)
-    salario = models.DecimalField(max_digits=15, decimal_places=2)
-    descripcion = models.CharField(max_length=1000)
-    estado = models.IntegerField()
+    id_oferta = models.DecimalField(primary_key=True, max_digits=10, decimal_places=0)  
+    nit = models.DecimalField(max_digits=25, decimal_places=0)  
+    nombre_oferta = models.CharField(max_length=50)  
+    salario = models.DecimalField(max_digits=15, decimal_places=2) 
+    descripcion = models.CharField(max_length=1000)  
+    estado = models.IntegerField()  
     fecha_pub = models.DateField(auto_now_add=True)  
-
+    id_tipo_cont = models.ForeignKey(TipoCont, on_delete=models.CASCADE, db_column='ID_TIPO_CONT')  
 
     class Meta:
         db_table = 'ofertas_empleos'
@@ -51,12 +64,13 @@ class OfertaEmpleo(models.Model):
     def save(self, *args, **kwargs):
         if not self.id_oferta:  
             with connection.cursor() as cursor:
-                cursor.execute("SELECT oferta_id_seq.NEXTVAL FROM dual")
+                cursor.execute("SELECT oferta_id_seq.NEXTVAL FROM dual")  
                 self.id_oferta = cursor.fetchone()[0]
         super(OfertaEmpleo, self).save(*args, **kwargs)
 
     def __str__(self):
         return self.nombre_oferta
+
     
 class OfertaDisponible(models.Model):
     id_ofer_disponible = models.AutoField(primary_key=True)  
@@ -72,18 +86,6 @@ class OfertaDisponible(models.Model):
     def __str__(self):
         return f"OfertaDisponible {self.id_ofer_disponible} - Activación: {self.activacion}"
     
-
-class TipoCont(models.Model):
-    id_tipo_cont = models.AutoField(primary_key=True)
-    id_oferta = models.ForeignKey(OfertaEmpleo, on_delete=models.CASCADE, db_column='ID_OFERTA')
-    tipo_cont = models.CharField(max_length=50)  
-
-
-    class Meta:
-        db_table = 'tipo_cont'
-        constraints = [
-            models.UniqueConstraint(fields=['id_tipo_cont', 'id_oferta'], name='pk_tipo_contrato')
-        ]
 
 
 class Conocimiento(models.Model):

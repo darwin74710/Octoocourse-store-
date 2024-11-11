@@ -7,10 +7,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Publicar ofertas empresa</title>
 
-
-
-
-
     <!-- Scripts css -->
     <link rel="stylesheet" href="{% static 'empresa/css/navBarE.css' %}" />
     <link rel="stylesheet" href="{% static 'empresa/css/footerE.css' %}" />
@@ -18,6 +14,8 @@
     <link rel="stylesheet" href="{% static 'empresa/css/publicarO.css' %}" />
     <link rel="stylesheet" href="{% static 'empresa/css/mensaje.css' %}" />
 
+
+    <script src="{% static 'empresa/js/Temas.js' %}"></script>
 
     <!-- Imagenes -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -56,7 +54,7 @@
             <a id="btn_icono" href="{% url 'configE' %}"><i class="fas fa-cog"></i></a>
             <a id="btn_icono" href="{% url 'logout' %}"><i class="fa-solid fa-arrow-right-from-bracket"></i></a>
         </div>
-        
+
         <!-- MENU MOVIL -->
         <div id="menuMovil" onclick="activarMenu()">&#9776;</div>
         <div id="menuHamburguersa">
@@ -106,15 +104,47 @@
 
                 <div class="col-md-6 mb-3">
                     <label for="contrato" class="form-label">Tipo de Contrato:</label>
-                    <select class="form-select" id="contrato" name="tipo_cont" required>
+                    <select class="form-select" id="contrato" name="tipo_cont" required
+                        onchange="checkForNewContract()">
                         <option value="">Seleccione un tipo de contrato</option>
-                        <option value="indefinido">Contrato a término indefinido</option>
-                        <option value="fijo">Contrato a término fijo</option>
-                        <option value="obra">Contrato por obra o labor</option>
-                        <option value="servicios">Contrato de prestación de servicios</option>
-                        <option value="temporal">Contrato temporal</option>
+                        <option value="1">Contrato a término indefinido</option>
+                        <option value="2">Contrato a término fijo</option>
+                        <option value="3">Contrato por obra o labor</option>
+                        <option value="4">Contrato de prestación de servicios</option>
+                        <option value="5">Contrato temporal</option>
+                        <option value="new">Agregar nuevo tipo de contrato...</option>
                     </select>
                 </div>
+                <div id="newContractContainer" style="display: none;">
+                    <input class="form-control" type="text" id="nuevoContrato" placeholder="Ingrese el nuevo tipo de contrato">
+                    <button class="button" type="button" onclick="addNewContract()">Agregar</button>
+                </div>
+                <script>
+                    function checkForNewContract() {
+                        const contratoSelect = document.getElementById("contrato");
+                        const newContractContainer = document.getElementById("newContractContainer");
+
+                        newContractContainer.style.display = contratoSelect.value === "new" ? "block" : "none";
+                    }
+
+                    function addNewContract() {
+                        const nuevoContrato = document.getElementById("nuevoContrato").value.trim();
+                        const contratoSelect = document.getElementById("contrato");
+
+                        if (nuevoContrato) {
+                            const nuevaOpcion = document.createElement("option");
+                            nuevaOpcion.value = "new_contract"; 
+                            nuevaOpcion.textContent = nuevoContrato;
+
+                            contratoSelect.insertBefore(nuevaOpcion, contratoSelect.querySelector('option[value="new"]'));
+                            contratoSelect.value = "new_contract";
+                            newContractContainer.style.display = "none";
+                            document.getElementById("nuevoContrato").value = "";
+
+                            guardarNuevoContratoEnDB(nuevoContrato);
+                        }
+                    }
+                </script>
 
                 <div class="col-12 mb-3">
                     <label for="descripcion" class="form-label">Descripción:</label>
