@@ -5,11 +5,15 @@ from django.core.paginator import Paginator
 from django.shortcuts import render
 from django.db.models import Q
 from django.contrib.auth.decorators import login_required
+from django.urls import reverse_lazy
 
-@login_required
+@login_required(login_url=reverse_lazy('inicioS'))
 def Ofertas(request):
     filtros = request.GET.get('filtros')
     ofertasEmpleos = OfertasEmpleos.objects.all()
+
+    # Obtenemos los contratos
+    contratos = TipoCont.objects.all()
     
     # Rangos de salarios según el dato recibido de filtros.
     salario_ranges = {
@@ -23,15 +27,10 @@ def Ofertas(request):
         lista_filtros = json.loads(filtros)
         q_objects = Q()  # Creamos un objeto Q para filtrar varias condiciones.
 
+        for contrato in contratos:
         # Agrego condiciones según los filtros seleccionados.
-        if "fijo" in lista_filtros:
-            q_objects |= Q(tipocont__id_tipo_cont=1)  # Utilizamos OR para multiples filtros.
-        if "indefinido" in lista_filtros:
-            q_objects |= Q(tipocont__id_tipo_cont=2)
-        if "obra" in lista_filtros:
-            q_objects |= Q(tipocont__id_tipo_cont=3)
-        if "aprendizaje" in lista_filtros:
-            q_objects |= Q(tipocont__id_tipo_cont=4)
+            if contrato.nombre_tipo in lista_filtros:
+                q_objects |= Q(id_tipo_cont_id=contrato.id_tipo_cont)  # Utilizamos OR para multiples filtros.
         
         # Filtramos los salarios.
         salario_q_objects = Q()
@@ -54,8 +53,7 @@ def Ofertas(request):
         # Aplicamos los filtros a la consulta.
         ofertasEmpleos = ofertasEmpleos.filter(q_objects)
 
-        
-    
+
     # Utilizo paginator para divitir 5 tablas por pagina.
     paginator = Paginator(ofertasEmpleos, 5) #Especifico que solo quiero 5 tablas en la pagina.
     num_pag = request.GET.get('page') #Obtengo el numero de pagina.
@@ -63,17 +61,15 @@ def Ofertas(request):
 
     for oferta in ofertas_data:
         oferta.conocimientos = Conocimientos.objects.filter(id_oferta=oferta.id_oferta)
-        oferta.tipoCont = TipoCont.objects.filter(id_oferta=oferta.id_oferta).first()
 
     filtros_java = json.dumps(lista_filtros) if filtros else ""
 
     idStudent = request.session.get('id_estudiante')
-
-    # Obtenemos las tablas de ofertas disponibles
     estudiantes = Estudiantes.objects.filter(id_estudiante = idStudent)[0]
     # Extraemos las ofertas de la pagina
     ofertasPag = ofertas_data.object_list
 
+    # Obtenemos las tablas de ofertas disponibles
     ofertasDisponibles = OfertasDisponibles.objects.filter(id_estudiante=estudiantes, id_oferta__in=ofertasPag)
 
     if not ofertasDisponibles.exists():
@@ -81,6 +77,7 @@ def Ofertas(request):
 
     Datos = {
         'ofertas_data': ofertas_data,
+        'contratos': contratos,
         'filtros': filtros_java,
         'idEstudiante': idStudent,
         'ofertasDisponibles': ofertasDisponibles,
@@ -88,7 +85,7 @@ def Ofertas(request):
 
     return render(request, 'estudiantes/Ofertas.html', Datos)
 
-@login_required
+@login_required(login_url=reverse_lazy('inicioS'))
 def OfertasInfo(request):
     idOferta = request.GET.get('idOferta')
 
@@ -98,22 +95,15 @@ def OfertasInfo(request):
         ofertasEmpleo = ofertasEmpleos[0]
     
     conocimientos = Conocimientos.objects.filter(id_oferta=idOferta)
-    tipoCont = TipoCont.objects.filter(id_oferta=idOferta)
-
-    if tipoCont.exists():
-        contrato = tipoCont[0]
-    else:
-        contrato = None
-
+    
     Datos = {
         'ofertasEmpleos': ofertasEmpleo,
         'conocimientos': conocimientos,
-        'contrato': contrato,
     }
 
     return render(request, 'estudiantes/OfertasInfo.html', Datos)
 
-@login_required
+@login_required(login_url=reverse_lazy('inicioS'))
 def Pruebas(request, idEstudiante, idOferta):
     estudiantes = Estudiantes.objects.filter(id_estudiante = idEstudiante)[0]
     ofertasEmpleos = OfertasEmpleos.objects.filter(id_oferta = idOferta)[0]

@@ -35,7 +35,7 @@ class HojasDeVida(models.Model):
 
 
 class LenguajesProg(models.Model):
-    id_lenguaje = models.IntegerField(primary_key=True)
+    id_lenguaje = models.AutoField(primary_key=True)
     nombre_leng = models.CharField(max_length=50, blank=True, null=True)
     id_hojavida = models.ForeignKey(HojasDeVida, models.DO_NOTHING, db_column='id_hojavida', blank=True, null=True)
 
@@ -45,7 +45,7 @@ class LenguajesProg(models.Model):
 
 
 class Aptitudes(models.Model):
-    id_aptitudes = models.IntegerField(primary_key=True)
+    id_aptitudes = models.AutoField(primary_key=True)
     nombre_apt = models.CharField(max_length=50, blank=True, null=True)
     id_hojavida = models.ForeignKey(HojasDeVida, models.DO_NOTHING, db_column='id_hojavida', blank=True, null=True)
 
@@ -55,7 +55,7 @@ class Aptitudes(models.Model):
 
 
 class Idiomas(models.Model):
-    id_idioma = models.IntegerField(primary_key=True)
+    id_idioma = models.AutoField(primary_key=True)
     idioma = models.CharField(max_length=20, blank=True, null=True)
     nivel = models.CharField(max_length=20, blank=True, null=True)
     id_hojavida = models.ForeignKey(HojasDeVida, models.DO_NOTHING, db_column='id_hojavida', blank=True, null=True)
@@ -66,7 +66,7 @@ class Idiomas(models.Model):
 
 
 class ExpLaborales(models.Model):
-    id_exp = models.IntegerField(primary_key=True)
+    id_exp = models.AutoField(primary_key=True)
     nom_empresas = models.CharField(max_length=50, blank=True, null=True)
     tiempo_inicio = models.DateField(blank=True, null=True)
     tiempo_final = models.DateField(blank=True, null=True)
@@ -80,7 +80,7 @@ class ExpLaborales(models.Model):
 
 
 class FormacionesAcademicas(models.Model):
-    id_formacion = models.IntegerField(primary_key=True)
+    id_formacion = models.AutoField(primary_key=True)
     nom_institucion = models.CharField(max_length=50, blank=True, null=True)
     titulo = models.CharField(max_length=50, blank=True, null=True)
     fecha_inicio = models.DateField(blank=True, null=True)

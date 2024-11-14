@@ -39,7 +39,9 @@
     </header>
 
     <div id="marcoCursos">
-        <a id="volverBoton" href="{% url 'cursoAdmin' %}"><i class="bi bi-house"></i></a>
+        <div id="botonesConfig">
+            <a id="btnIzquierda" href="{% url 'cursoAdmin' %}"><i class="bi bi-house"></i></a>
+        </div>
 
         <form class="FormAjax" method="POST" action="{% url 'guardarCursoAdmin' idCurse=curso.id_curso %}">
             <h1>MODIFICAR CURSO</h1>
@@ -61,29 +63,36 @@
             <div class="ContFilaInputs">
                 <div class="minContInputs">
                     <p>Dificultad</p>
-
+                    
                     <select name="dificultad">
-                        <option value="Básico" {% if curso.dificultad == "Básico" %}selected{% endif %}>Básico</option>
-                        <option value="Medio" {% if curso.dificultad == "Medio" %}selected{% endif %}>Medio</option>
-                        <option value="Avanzado" {% if curso.dificultad == "Avanzado" %}selected{% endif %}>Avanzado</option>
+                        {% for dificultad in tipoDificultad %}
+                            <option value="{{ dificultad.id_tipo_dificultad }}" {% if curso.id_tipo_dificultad.nombre_tipo == dificultad.nombre_tipo %}selected{% endif %}>
+                                {{ dificultad.nombre_tipo }}
+                            </option>
+                        {% endfor %}
                     </select>
                 </div>
 
                 <div class="minContInputs">
-                    <p>Lenguaje</p>
+                    <p>Contenido</p>
 
                     <select name="lenguaje">
-                        <option value="HTML" {% if curso.lenguaje == "HTML" %}selected{% endif %}>HTML</option>
+                        {% for contenido in tipoContenido %}
+                            <option value="{{ contenido.id_tipo_contenido }}" {% if curso.id_tipo_contenido.nombre_tipo == contenido.nombre_tipo %}selected{% endif %}>
+                                {{ contenido.nombre_tipo }}
+                            </option>
+                        {% endfor %}
                     </select>
                 </div>
                 <div class="minContInputs">
                     <p>Tiempo</p>
 
                     <select name="tiempo">
-                        <option value="0-5 Horas" {% if curso.tiempo == "0-5 Horas" %}selected{% endif %}>0-5 Horas</option>
-                        <option value="6-10 Horas" {% if curso.tiempo == "6-10 Horas" %}selected{% endif %}>6-10 Horas</option>
-                        <option value="11-15 Horas" {% if curso.tiempo == "11-15 Horas" %}selected{% endif %}>11-15 Horas</option>
-                        <option value="15+ Horas" {% if curso.tiempo == "15+ Horas" %}selected{% endif %}>15+ Horas</option>
+                        {% for duracion in tipoDuracion %}
+                            <option value="{{ duracion.id_tipo_duracion }}" {% if curso.id_tipo_duracion.nombre_tipo == duracion.nombre_tipo %}selected{% endif %}>
+                                {{ duracion.nombre_tipo }}
+                            </option>
+                        {% endfor %}
                     </select>
                 </div>
             </div>
@@ -92,8 +101,11 @@
                     <p>Certificado</p>
 
                     <select name="certificado">
-                        <option value=1 {% if curso.certificado == 1 %}selected{% endif %}>Con certificado</option>
-                        <option value=0 {% if curso.certificado == 0 %}selected{% endif %}>Sin certificado</option>
+                        {% for certificado in tipoCertificado %}
+                            <option value="{{ certificado.id_tipo_certificado }}" {% if curso.id_tipo_certificado.nombre_tipo == certificado.nombre_tipo %}selected{% endif %}>
+                                {{ certificado.nombre_tipo }}
+                            </option>
+                        {% endfor %}
                     </select>
                 </div>
             </div>
@@ -106,11 +118,27 @@
 
             <div class="botones">
                 <button type="submit">Guardar</button>
-                <a id="btnAdicional">Modificar Contenidos</a>
+                <a id="btnAdicional" onclick="editInformation('contenidos')">Contenidos</a>
+                <a id="btnAdicional" onclick="editInformation('preguntas')">Preguntas</a>
             </div>
         </form>
     </div>
 
+    <script>
+        function editInformation(dato){
+            const idCurso = document.getElementById('textBlock').value;
+            const idParametro = encodeURIComponent(idCurso);
+            
+            if (dato == "contenidos"){
+                var cursoInfoUrl = "{% url 'cursoContenidos' %}";
+            }else if(dato == "preguntas"){
+                var cursoInfoUrl = "{% url 'cursoPreguntas' %}";
+            }
+
+            window.location.href = `${cursoInfoUrl}?idCurso=${idParametro}`;
+        }
+    </script>
+    
     <!-- Footer -->
     <footer class="piePag">
         <div id="Marco1">

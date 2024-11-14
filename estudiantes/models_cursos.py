@@ -12,16 +12,52 @@ class Cursos(models.Model):
     id_curso = models.IntegerField(primary_key=True)
     nom_curso = models.CharField(max_length=50, blank=True, null=True)
     precio = models.BigIntegerField(blank=True, null=True)
-    dificultad = models.CharField(max_length=10, blank=True, null=True)
-    lenguaje = models.CharField(max_length=25, blank=True, null=True)
-    tiempo = models.CharField(max_length=15, blank=True, null=True)
-    certificado = models.BooleanField(blank=True, null=True)
     descripcion = models.CharField(max_length=1000, blank=True, null=True)
     url_imagen = models.CharField(max_length=20, blank=True, null=True)
+    id_tipo_contenido = models.ForeignKey('TipoContenido', models.DO_NOTHING, db_column='id_tipo_contenido', blank=True, null=True)
+    id_tipo_dificultad = models.ForeignKey('TipoDificultad', models.DO_NOTHING, db_column='id_tipo_dificultad', blank=True, null=True)
+    id_tipo_duracion = models.ForeignKey('TipoDuracion', models.DO_NOTHING, db_column='id_tipo_duracion', blank=True, null=True)
+    id_tipo_certificado = models.ForeignKey('TipoCertificado', models.DO_NOTHING, db_column='id_tipo_certificado', blank=True, null=True)
 
     class Meta:
         managed = False
         db_table = 'CURSOS'
+
+
+class TipoContenido(models.Model):
+    id_tipo_contenido = models.IntegerField(primary_key=True)
+    nombre_tipo = models.CharField(max_length=50)
+
+    class Meta:
+        managed = False
+        db_table = 'TIPO_CONTENIDO'
+
+
+class TipoDificultad(models.Model):
+    id_tipo_dificultad = models.IntegerField(primary_key=True)
+    nombre_tipo = models.CharField(max_length=50)
+
+    class Meta:
+        managed = False
+        db_table = 'TIPO_DIFICULTAD'
+
+
+class TipoDuracion(models.Model):
+    id_tipo_duracion = models.IntegerField(primary_key=True)
+    nombre_tipo = models.CharField(max_length=50)
+
+    class Meta:
+        managed = False
+        db_table = 'TIPO_DURACION'
+
+
+class TipoCertificado(models.Model):
+    id_tipo_certificado = models.IntegerField(primary_key=True)
+    nombre_tipo = models.CharField(max_length=50)
+
+    class Meta:
+        managed = False
+        db_table = 'TIPO_CERTIFICADO'
 
 
 class CursosDisponibles(models.Model):

@@ -87,10 +87,12 @@
             <div class="seccionFiltros">
                 <h2>Contrato:</h2>
                 <div class="numFiltros">
-                    <div class="contentFiltro"><i id="FijoFilter" onclick="filtro_contrato('Fijo')" class="bi bi-square"></i>Fijo</div>
-                    <div class="contentFiltro"><i id="IndefinidoFilter" onclick="filtro_contrato('Indefinido')" class="bi bi-square"></i>Indefinido</div>
-                    <div class="contentFiltro"><i id="ObraLaborFilter" onclick="filtro_contrato('ObraLabor')" class="bi bi-square"></i>Obra o Labor</div>
-                    <div class="contentFiltro"><i id="AprendizajeFilter" onclick="filtro_contrato('Aprendizaje')" class="bi bi-square"></i>Aprendizaje</div>
+                    {% for contrato in contratos %}
+                        <div class="contentFiltro">
+                            <i id="{{ contrato.nombre_tipo }}Filter" onclick="filtro_contrato('{{ contrato.nombre_tipo }}')" class="bi bi-square"></i>
+                            {{ contrato.nombre_tipo }}
+                        </div>
+                    {% endfor %}
                 </div>
             </div>
 
@@ -101,7 +103,9 @@
             {% for data in ofertas_data %}
                 <div class="ofertaElement" onclick="activarInfo(this)">
                     <h1>{{ data.nombre_oferta }}</h1>
+                    
                     <i class="bi bi-person"> : 1 Aplicados</i>
+
                     <i class="bi bi-terminal"> : 
                         {% for conocimiento in data.conocimientos %}
                             {{ conocimiento.nom_con }}{% if not forloop.last %}, {% endif %}
@@ -109,17 +113,7 @@
                     </i>
                     <i class="bi bi-cash"> : {{ data.salario }}</i>
                     <i class="bi bi-briefcase"> : 
-                        {% if data.tipoCont.id_tipo_cont == 1 %}
-                            Término Fijo
-                        {% elif data.tipoCont.id_tipo_cont == 2 %}
-                            Término Indefinido
-                        {% elif data.tipoCont.id_tipo_cont == 3 %}
-                            Obra o Labor
-                        {% elif data.tipoCont.id_tipo_cont == 4 %}
-                            Aprendizaje
-                        {% else %}
-                            Tipo de contrato desconocido
-                        {% endif %}
+                        {{ data.id_tipo_cont.nombre_tipo }}
                     </i>
                     <p>{{ data.descripcion }}</p>
                     <h5>{{ data.id_oferta }}</h5>

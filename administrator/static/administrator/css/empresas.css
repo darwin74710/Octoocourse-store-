@@ -6,24 +6,32 @@
     border-radius: 10px;
 }
 
-#marcoEmpresas #volverBoton{
+#marcoEmpresas #botonesConfig{
+    display: flex;
+}
+
+#marcoEmpresas #botonesConfig #btnIzquierda{
+    margin-left: auto;
+}
+
+#marcoEmpresas #botonesConfig a{
     width: 45px;
     display: block;
     color: var(--letraBotones1); background-color: var(--fondoBotones1);
     margin: 0;
+    margin-left: 5px;
     margin-bottom: 10px;
-    margin-left: auto;
     padding: 0 5px;
     border-radius: 10px;
     cursor: pointer;
     transition: all 0.3s ease 0s;
 }
 
-#marcoEmpresas #volverBoton:hover{
+#marcoEmpresas #botonesConfig a:hover{
     background-color: var(--hFondoBotones1); color: var(--hLetraBotones1);
 }
 
-#marcoEmpresas #volverBoton i{
+#marcoEmpresas #botonesConfig a i{
     font-size: 35px;
 }
 
@@ -36,6 +44,7 @@
 
 .marcoOpcion{
     height: auto;
+    overflow: hidden;
     margin: 10px;
     border-radius: 10px;
     border: 1px solid var(--borde1);
@@ -63,6 +72,10 @@
 
 @media screen and (max-width:800px) {
     #marcoEmpresas{
+        width: 100%;
+    }
+
+    #marcoModal{
         width: 100%;
     }
 }

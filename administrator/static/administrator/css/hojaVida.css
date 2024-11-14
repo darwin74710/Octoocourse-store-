@@ -1,5 +1,6 @@
 #hojaVida{
-    overflow: auto;
+    margin: auto;
+    overflow-y: auto; overflow-x: hidden;
 }
 
 #hojaVida .marco {
@@ -128,4 +129,5 @@
     color: black;
     font-size: 15px;
     font-weight: bold;
+    word-wrap: break-word;
 }

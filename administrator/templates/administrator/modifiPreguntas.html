@@ -1,0 +1,234 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Preguntas</title>
+
+    <!-- Scripts css -->
+    <link rel="stylesheet" href="{% static 'administrator/css/navBar.css' %}" />
+    <link rel="stylesheet" href="{% static 'administrator/css/footer.css' %}" />
+    <link rel="stylesheet" href="{% static 'administrator/css/cursos.css' %}" />
+    <link rel="stylesheet" href="{% static 'administrator/css/modal.css' %}" />
+    <link rel="stylesheet" href="{% static 'administrator/css/miniContModal.css' %}" />
+
+    <!-- Cargar tema -->
+    <script src="{% static 'administrator/js/Front/Temas.js' %}"></script>
+
+    <!-- Imagenes -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <!-- Botstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+</head>
+
+<body style="background-color: var(--fondo1);">
+    <!-- NavBar -->
+    <header id="navBar">
+        <img id="logo" src="{% static 'administrator/img/navBar/Logo2.png' %}" alt="">
+
+        <!-- MENU PC -->
+        <div id="derecha">
+            <a id="btn_icono" onclick="cambiarTema()" style="cursor: pointer;"><i class="bi bi-brilliance"></i></a>
+            <div class="linea"></div>
+            <a id="btn_icono" href="{% url 'logout' %}"><i class="fa-solid fa-arrow-right-from-bracket"></i></a>
+        </div>
+    </header>
+
+    <div id="marcoCursos">
+        <div id="botonesConfig">
+            <a id="btnIzquierda" onclick="agregarPregunta()"><i class="bi bi-plus-lg"></i></a>
+            <a onclick="volverMinContent()"><i class="bi bi-house"></i></a>
+        </div>
+        <div id="cursoRecib" style="display: none;">{{ curso.id_curso }}</div>
+        <!-- Metodo para volver a la edición de cursos dandole el id -->
+        <script>
+            function volverMinContent(){
+                const idCurso = document.getElementById('cursoRecib').innerText;
+                const idParametro = encodeURIComponent(idCurso);
+                
+                var cursoInfoUrl = "{% url 'cursoEditar' %}";
+    
+                window.location.href = `${cursoInfoUrl}?idCurso=${idParametro}`;
+            }
+        </script>
+
+        <div id="listaOpciones">
+            {% for pregunta in preguntas %}
+                <div class="marcoOpcion" onclick="modalRespuestas(this, '{{ pregunta.pregunta_text }}')">
+                    <h3 id="nomPreguntaInfo">{{ pregunta.pregunta_text|slice:":50" }}</h3>
+                    <p id="idPreguntaInfo">{{ pregunta.id_pregunta }}</p>
+                    {% for respuesta in respuestas %}
+                        {% if respuesta.id_pregunta.id_pregunta == pregunta.id_pregunta %}
+                            <p class="respuestas">{{ respuesta.id_respuesta }}|{{ respuesta.respuesta_text }}|{{ respuesta.validacion }}</p>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div id="fondoModals">
+        <div id="modal1">        
+            <form class="nombreEditar FormAjax" method="POST" action="{% url 'editarPregunta' %}">
+            <!-- Modal para ver Preguntas -->
+                <input id="tituloPregunta" type="text" name="contentPregunta">
+                <input  type="hidden" id="idPreguntaEdit" name="idPreguntaInput">
+                <button type="submit">Guardar Pregunta</button>
+            </form>
+
+            <h1>Respuestas</h1>
+            
+            <div id="listaOpciones" class="respuestasList">
+                <!-- Aquí se agregan elementos desde la función -->
+            </div>
+
+            <div id="botonesOpciones">
+                <button onclick="crearRespuesta()">Añadir</button>
+                <a onclick="eliminarPregunta()">Eliminar Pregunta</a>
+                <a onclick="cerrarModals()">Salir</a>
+            </div>
+        </div>
+
+        <script>
+            function eliminarPregunta(){
+                const idPregunta = document.getElementById("idPreguntaEdit").value;
+                const idParametro = encodeURIComponent(idPregunta);
+
+                const idCurso = document.getElementById("cursoRecib").innerText;
+                
+                var InfoUrl = "{% url 'eliminarPregunta' %}";
+
+                window.location.href = `${InfoUrl}?idPregunta=${idParametro}&idCurso=${idCurso}`;
+            }
+        </script>
+
+        <form id="modal2" class="FormAjax" method="POST" action="{% url 'crearPregunta' %}">
+            <!-- Modal para agregar un contenido -->
+             <h1>Agregar Pregunta</h1>
+
+             <div class="inputsContentsInfo">
+                <div class="miniInputContent">
+                    <p>Pregunta</p>
+                    <textarea name="contentPregunta"></textarea>
+                    <input type="hidden" name="cursoIdCrearContent" value="{{ curso.id_curso }}">
+                </div>
+             </div>
+
+            <div id="botonesOpciones">
+                <button type="submit">Crear</button>
+                <a onclick="cerrarModals()">Salir</a>
+            </div>
+        </form>
+
+        <form id="modal3" class="FormAjax" method="POST" action="{% url 'crearRespuesta' %}">
+            <!-- Modal para agregar un subContenido -->
+            <h1>Crear Respuesta</h1>
+            <p>Tiene que haber una respuesta correcta o de lo contrario el curso no tendrá solución.</p>
+            <input type="hidden" id="idPreguntaCrearResp" name="idPregunta">
+
+            <div class="inputsContentsInfo">
+            <div class="miniInputContent">
+                <p>Respuesta</p>
+                <textarea name="textRespuesta"></textarea>
+            </div>
+            <div class="miniInputContent">
+                <p>Validación</p>
+                <select name="validacionRespuesta"> 
+                    <option value=1>Correcta</option>
+                    <option value=0>Incorrecta</option>
+                </select>
+            </div>
+            </div>
+
+            <div id="botonesOpciones">
+                <button type="submit">Crear</button>
+                <a onclick="cerrarModals()">Salir</a>
+            </div>
+        </form>
+
+        <form id="modal4" class="FormAjax" method="POST" action="{% url 'editarRespuesta' %}">
+            <!-- Modal para modificar Sub Contenido -->
+            <h1>Modificar Respuesta</h1>
+            <p>Tiene que haber una respuesta correcta o de lo contrario el curso no tendrá solución.</p>
+            <input type="hidden" id="modifiRespuestaId" name="idRespuesta">
+             <div class="inputsContentsInfo">
+                <div class="miniInputContent">
+                    <p>Respuesta</p>
+                    <textarea id="modifiRespuestaText" name="textoRespuesta"></textarea>
+                </div>
+                <div class="miniInputContent">
+                    <p>Validación</p>
+                    <select id="modifiRespuestaValidacion" name="validacionRespuesta"> 
+                        <option value=1>Correcta</option>
+                        <option value=0>Incorrecta</option>
+                    </select>
+                </div>
+             </div>
+
+            <div id="botonesOpciones">
+                <button type="submit">Guardar</button>
+                <a onclick="eliminarRespuesta()">Eliminar</a>
+                <a onclick="cerrarModals()">Salir</a>
+            </div>
+        </form>
+
+        <script>
+            function eliminarRespuesta(){
+                const idRespuesta = document.getElementById("modifiRespuestaId").value;
+                const idParametro = encodeURIComponent(idRespuesta);
+
+                const idCurso = document.getElementById("cursoRecib").innerText;
+                
+                var InfoUrl = "{% url 'eliminarRespuesta' %}";
+
+                window.location.href = `${InfoUrl}?idRespuesta=${idParametro}&idCurso=${idCurso}`;
+            }
+        </script>
+    </div>
+
+    <!-- Footer -->
+    <footer class="piePag">
+        <div id="Marco1">
+            <div class="Elementos">
+                <h1>SOBRE NOSOTROS</h1>
+                <p>Somos OctooCourse, ofrecemos cursos para reforzar el aprendizaje de amantes a la programación,
+                    también contamos con ofertas de empleo para generar
+                    oportunidades y llegar al camino del éxito.
+                </p>
+            </div>
+            <div class="Elementos">
+                <h1>SÍGUENOS</h1>
+                <div id="redes">
+                    <a href="https://whatsapp.com" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                    <a href="https://www.facebook.com/profile.php?id=61567434383968" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://www.instagram.com/octoocourse/" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.youtube.com/@OctooCourse" target="_blank"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+        <div id="Marco2">&copy; 2024 OctooCourse - Todos los Derechos Reservados.</div>
+    </footer>
+
+    <!-- Scripts AJAX -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- Scripts js -->
+    <script src="{% static 'administrator/js/Front/navBar.js' %}"></script>
+    <script src="{% static 'administrator/js/Front/modal.js' %}"></script>
+    <script src="{% static 'administrator/js/Front/cambiarTem.js' %}"></script>
+    <script src="{% static 'administrator/js/Front/miniModalPregunt.js' %}"></script>
+
+    <script src="{% static 'administrator/js/DataBase/ConfigData.js' %}"></script>
+
+    <!-- Scripts Botstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

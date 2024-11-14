@@ -66,92 +66,89 @@
 
     <!-- INTERFAZ INFOCURSOS -->
     <div id="MarcoInfoCursos">
-        <h1>{{ curso.nom_curso }}</h1>
-        <img src="{% static 'estudiantes/img/Cursos/' %}{{ curso.url_imagen }}" alt="">
-        <i class="bi bi-cash"> : 
-            {% if curso.precio == 0 %}
-                Gratis
-            {% else %}
-                {{ curso.precio }}
-            {% endif %}
-        </i>
-        <i class="bi bi-terminal"> : {{ curso.lenguaje }}</i>
-        <i class="bi bi-bar-chart-fill"> : {{ curso.dificultad }}</i>
-        <i class="bi bi-clock"> : {{ curso.tiempo }}</i>
-        <i class="bi bi-file-earmark-text"> : 
-            {% if curso.certificado == 0 %}
-                Sin Certificado
-            {% elif curso.certificado == 1 %}
-                Con Certificado
-            {% endif %}
-        </i>
-
-        <div id="btnesNavs">
-            {% if cursoDisponible.activacion == 0 %}
-                <form id="metAplicarCurso" method="POST" action="{% url 'aplicarCurso' %}">
-                    <input type="hidden" name="idCurso" value="{{ cursoDisponible.id_curso.id_curso }}">
-                    <input type="hidden" name="idEstudiante" value="{{ cursoDisponible.id_estudiante.id_estudiante }}">
-                    <button type="submit">Aplicar</button>
-                </form>
-            {% else %}
-                {% if cursoAprobado %}
-                    <a>Descargar Certificado</a>
+        {% if curso %}
+            <h1>{{ curso.nom_curso }}</h1>
+            <img src="{% static 'estudiantes/img/Cursos/' %}{{ curso.url_imagen }}" alt="">
+            <i class="bi bi-cash"> : 
+                {% if curso.precio == 0 %}
+                    Sin Costo
                 {% else %}
-                    <a>Realizar Prueba</a>
+                    {{ curso.precio }}
                 {% endif %}
-            {% endif %}
-            <a href="{% url 'Cursos' %}">Regresar</a>
-        </div>
+            </i>
+            <i class="bi bi-terminal"> : {{ curso.id_tipo_contenido.nombre_tipo }}</i>
+            <i class="bi bi-bar-chart-fill"> : {{ curso.id_tipo_dificultad.nombre_tipo }}</i>
+            <i class="bi bi-clock"> : {{ curso.id_tipo_duracion.nombre_tipo }}</i>
+            <i class="bi bi-file-earmark-text"> : {{ curso.id_tipo_certificado.nombre_tipo }}</i>
+
+            <div id="btnesNavs">
+                {% if cursoDisponible.activacion == 0 %}
+                    <form id="metAplicarCurso" method="POST" action="{% url 'aplicarCurso' %}">
+                        <input type="hidden" name="idCurso" value="{{ cursoDisponible.id_curso.id_curso }}">
+                        <input type="hidden" name="idEstudiante" value="{{ cursoDisponible.id_estudiante.id_estudiante }}">
+                        <button type="submit">Aplicar</button>
+                    </form>
+                {% else %}
+                    {% if cursoAprobado %}
+                        <a>Descargar Certificado</a>
+                    {% else %}
+                        <a>Realizar Prueba</a>
+                    {% endif %}
+                {% endif %}
+                <a href="{% url 'Cursos' %}">Regresar</a>
+            </div>
+            
+
+            <h2>Descripción</h2>
+            <p>{{ curso.descripcion }}</p>
+            
+            <!-- Ver Información de contenido del curso y guardar el id en la url -->
+            <script>
+                function abrirContent(elemento){
+                    const idCurso = elemento.querySelector('h5').innerText;
+                    const idSubContent = elemento.querySelector('h6').innerText;
+
+                    const idCursoParametro = encodeURIComponent(idCurso);
+                    const idSubContentParametro = encodeURIComponent(idSubContent)
+
+                    var cursoInfoUrl = "{% url 'CursosContent' %}";
         
+                    window.location.href = `${cursoInfoUrl}?idCurso=${idCursoParametro}&idSubContent=${idSubContentParametro}`;
+                }
+            </script>
 
-        <h2>Descripción</h2>
-        <p>{{ curso.descripcion }}</p>
-        
-        <!-- Ver Información de contenido del curso y guardar el id en la url -->
-        <script>
-            function abrirContent(elemento){
-                const idCurso = elemento.querySelector('h5').innerText;
-                const idSubContent = elemento.querySelector('h6').innerText;
-
-                const idCursoParametro = encodeURIComponent(idCurso);
-                const idSubContentParametro = encodeURIComponent(idSubContent)
-
-                var cursoInfoUrl = "{% url 'CursosContent' %}";
-    
-                window.location.href = `${cursoInfoUrl}?idCurso=${idCursoParametro}&idSubContent=${idSubContentParametro}`;
-            }
-        </script>
-
-        <!-- CONTENIDO DE CURSOS -->
-        <h2>Contenido</h2>
-        {% if cursoDisponible.activacion == 1 %}
-            {% if contenidos %}
-                {% for contenido in contenidos %}
-                    <div class="contentCursos">
-                        <div id="superior" onclick="ContenidoCursos(this)">
-                            <p>{{ contenido.nom_contenido }}</p>
-                            <i class="bi bi-arrow-bar-down"></i>
+            <!-- CONTENIDO DE CURSOS -->
+            <h2>Contenido</h2>
+            {% if cursoDisponible.activacion == 1 %}
+                {% if contenidos %}
+                    {% for contenido in contenidos %}
+                        <div class="contentCursos">
+                            <div id="superior" onclick="ContenidoCursos(this)">
+                                <p>{{ contenido.nom_contenido }}</p>
+                                <i class="bi bi-arrow-bar-down"></i>
+                            </div>
+                            <div id="inferior">
+                                {% for subcontenido in subcontenidos %}
+                                    {% if subcontenido.id_contenido == contenido %}
+                                        <div class="contenido" onclick="abrirContent(this)">
+                                            <p>{{ subcontenido.nom_subcont }}</p>
+                                            <h5>{{ curso.id_curso }}</h5>
+                                            <h6>{{ subcontenido.id_subcont }}</h6>
+                                        </div>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
                         </div>
-                        <div id="inferior">
-                            {% for subcontenido in subcontenidos %}
-                                {% if subcontenido.id_contenido == contenido %}
-                                    <div class="contenido" onclick="abrirContent(this)">
-                                        <p>{{ subcontenido.nom_subcont }}</p>
-                                        <h5>{{ curso.id_curso }}</h5>
-                                        <h6>{{ subcontenido.id_subcont }}</h6>
-                                    </div>
-                                {% endif %}
-                            {% endfor %}
-                        </div>
-                    </div>
-                {% endfor %}
+                    {% endfor %}
+                {% else %}
+                    <p>ESTE CURSO NO TIENE CONTENIDO</p>
+                {% endif %}
             {% else %}
-                <p>ESTE CURSO NO TIENE CONTENIDO</p>
+                <p>APLICA AL CURSO PARA ACCEDER AL CONTENIDO</p>
             {% endif %}
         {% else %}
-            <p>APLICA AL CURSO PARA ACCEDER AL CONTENIDO</p>
+            <h4>Este curso no existe.</h4>
         {% endif %}
-        
     </div>
     
     <!-- Footer -->

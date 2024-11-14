@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="{% static 'estudiantes/css/navBar.css' %}" />
     <link rel="stylesheet" href="{% static 'estudiantes/css/footer.css' %}" />
     <link rel="stylesheet" href="{% static 'estudiantes/css/Configuracion.css' %}" />
+    <link rel="stylesheet" href="{% static 'estudiantes/css/navEleccionesConfig.css' %}" />
     <link rel="stylesheet" href="{% static 'estudiantes/css/modalConfig.css' %}" />
     <link rel="stylesheet" href="{% static 'estudiantes/css/hojaVida.css' %}" />
 
@@ -110,113 +111,76 @@
                 <div class="marco">
                     <div class="izquierda">
                         <i id="imgPerfil" class="bi bi-person-circle"></i>
-        
+
                         <h1>DATOS PERSONALES</h1>
                         <div class="minContent">
                             <i class="fab fa-whatsapp"></i>
-                            <!-- De esta forma encontramos los datos de la tabla -->
-                            {% if hojasDeVida %}
+                            {% if hojasDeVida.telefono != Nulo %}
                                 <h2>{{ hojasDeVida.telefono }}</h2>
-                            {% else %}
-                                <h2>Not Found</h2>
                             {% endif %}
-                            
                         </div>
                         <div class="minContent">
                             <i class="bi bi-geo-alt"></i>
-                            {% if hojasDeVida %}
-                                <h2>{{ hojasDeVida.direccion.strip }}</h2>
-                            {% else %}
-                                <h2>Not Found</h2>
-                            {% endif %}
+                            <h2>{{ hojasDeVida.direccion.strip }}</h2>
                         </div>
         
                         <h1>APTITUDES</h1>
                         <div class="lista">
-                            {% if aptitudes %}
-                                {% for aptitud in aptitudes %}
-                                    <h2>{{ aptitud.nombre_apt.strip }}</h2>
-                                {% endfor %}
-                            {% else %}
-                                <h2>Not Found</h2>
-                            {% endif %}
+                            {% for aptitud in aptitudes %}
+                                <h2>{{ aptitud.nombre_apt.strip }}</h2>
+                            {% endfor %}
                         </div>
         
                         <h1>IDIOMAS</h1>
-                        {% if idiomas %}
+                        <div class="lista">
                             {% for idioma in idiomas %}
                                 <div class="minContent">
-                                    <i class="bi bi-emoji-laughing"></i>
-                                    <h2>{{ idioma.nivel.strip }}</h2>
+                                    {% if idioma.nivel == "C1" or idioma.nivel == "C2" %}
+                                        <i class="bi bi-emoji-laughing"></i>
+                                    {% elif idioma.nivel == "B1" or idioma.nivel == "B2" %}
+                                        <i class="bi bi-emoji-neutral"></i>
+                                    {% elif idioma.nivel == "A1" or idioma.nivel == "A2" %}
+                                        <i class="bi bi-emoji-frown"></i>
+                                    {% endif %}
+                                    
+                                    <h2>{{ idioma.nivel }}</h2>
                                     <h2>{{ idioma.idioma.strip }}</h2>
                                 </div>
                             {% endfor %}
-                        {% else %}
-                            <h2>Not Found</h2>
-                        {% endif %}
-        
-                        <h1>LENGUAJES</h1>
-                        <div class="lista">
-                            {% if lenguajesProg %}
-                                {% for lenguaje in lenguajesProg %}
-                                    <h2>{{ lenguaje.nombre_leng.strip }}</h2>
-                                {% endfor %}
-                            {% else %}
-                                <h2>Not Found</h2>
-                            {% endif %}
                         </div>
+                            
         
+                        <h1>CONOCIMIENTOS</h1>
+                        <div class="lista">
+                            {% for lenguaje in lenguajesProg %}
+                                <h2>{{ lenguaje.nombre_leng.strip }}</h2>
+                            {% endfor %}
+                        </div>
                     </div>
                     <div class="derecha">
                         <div id="derechaTitle">
-                            {% if estudiantes %}
-                                <h3>{{ estudiantes.nom_estudiante.strip|upper }} {{ estudiantes.apellido.strip|upper }}</h3>
-                            {% else %}
-                                <h3>Not Found</h3>
-                            {% endif %}
-                            {% if estudiantes %}
-                                <h2>{{ estudiantes.correo_estudiante.strip }}</h2>
-                            {% else %}
-                                <h2>Not Found</h2>
-                            {% endif %}
+                            <h3>{{ estudiantes.nom_estudiante.strip|upper }} {{ estudiantes.apellido.strip|upper }}</h3>
+                            <h2>{{ estudiantes.correo_estudiante.strip }}</h2>
                         </div>
-                        
         
                         <h1>EXPERIENCIA LABORAL</h1>
-                        {% if expLaborales %}
-                            {% for expLaboral in expLaborales %}
-                                <div class="infoExp">
-                                    <h2>{{ expLaboral.cargo.strip }}</h2>
-                                    <h4>{{ expLaboral.nombre_leng.strip }}</h4>
-                                    <h4>{{ expLaboral.tiempo_inicio }} / {{ expLaboral.tiempo_final }}</h4>
-                                    <p>DESCRIPCION:{{ expLaboral.descripcion.strip }}</p>
-                                </div>
-                            {% endfor %}
-                        {% else %}
+                        {% for expLaboral in expLaborales %}
                             <div class="infoExp">
-                                <h2>NOMBRE_CARGO</h2>
-                                <h4>NOMBRE_EMPRESA</h4>
-                                <h4>TIEMPO_INICIO / TIEMPO_FINAL</h4>
-                                <p>DESCRIPCION:</p>
+                                <h2>{{ expLaboral.cargo.strip }}</h2>
+                                <h4>{{ expLaboral.nombre_leng.strip }}</h4>
+                                <h4>{{ expLaboral.tiempo_inicio }} / {{ expLaboral.tiempo_final }}</h4>
+                                <p>DESCRIPCIÓN:{{ expLaboral.descripcion.strip }}</p>
                             </div>
-                        {% endif %}
+                        {% endfor %}
         
                         <h1>FORMACIÓN ACADÉMICA</h1>
-                        {% if formaciones %}
-                            {% for formacion in formaciones %}
-                                <div class="infoExp">
-                                    <h2>{{ formacion.titulo.strip }}</h2>
-                                    <h4>{{ formacion.nom_institucion.strip }}</h4>
-                                    <h4>{{ formacion.fecha_inicio }} / {{ formacion.fecha_final }}</h4>
-                                </div>
-                            {% endfor %}
-                        {% else %}
+                        {% for formacion in formaciones %}
                             <div class="infoExp">
-                                <h2>NOMBRE_TITULO</h2>
-                                <h4>NOMBRE_INSTITUCIÓN</h4>
-                                <h4>TIEMPO_INICIO / TIEMPO_FINAL</h4>
+                                <h2>{{ formacion.titulo.strip }}</h2>
+                                <h4>{{ formacion.nom_institucion.strip }}</h4>
+                                <h4>{{ formacion.fecha_inicio }} / {{ formacion.fecha_final }}</h4>
                             </div>
-                        {% endif %}
+                        {% endfor %}
                     </div>
                 </div>
             </div>
@@ -228,31 +192,33 @@
 
         <!-- MODIFICAR HOJA DE VIDA -->
         <form id="modalHVM" method="POST" action="{% url 'guardarHV' %}">
-            <h1>MODIFICAR HOJA DE VIDA</h1>
-            <h3>Datos Personales</h3>
-            <div class="elementsModify">
-                <div class="oneElementModify">
-                    <p>Celular</p>
-                    {% if hojasDeVida %}
+            <div class="navEleccionesSuperior">
+                <div class="eleccionNav" onclick="navSuperior('datosPersonales')">Datos Personales</div>
+                <div class="eleccionNav" onclick="navSuperior('aptitudes')">Aptitudes</div>
+                <div class="eleccionNav" onclick="navSuperior('idiomas')">Idiomas</div>
+                <div class="eleccionNav" onclick="navSuperior('lenguajesProg')">Conocimientos</div>
+                <div class="eleccionNav" onclick="navSuperior('expLaboral')">Experiencias Laborales</div>
+                <div class="eleccionNav" onclick="navSuperior('formAcademica')">Formaciones Academicas</div>
+            </div>
+            
+            <div id="datosPersonales">
+                <h3>Datos Personales</h3>
+                <div class="elementsModify">            
+                    <div class="oneElementModify">
+                        <p>Celular</p>
                         <input type="number" value="{{ hojasDeVida.telefono }}" name="telefono">
-                    {% else %}
-                        <input type="number" name="telefono">
-                    {% endif %}
-                </div>
-                <div class="oneElementModify">
-                    <p>Dirección</p>
-                    {% if hojasDeVida %}
+                    </div>
+                    <div class="oneElementModify">
+                        <p>Dirección</p>
                         <input type="text" value="{{ hojasDeVida.direccion.strip }}" name="direccion">
-                    {% else %}
-                        <input type="text" name="direccion">
-                    {% endif %}
+                    </div>
                 </div>
             </div>
-
-            <h3>Aptitudes</h3>
-            <p>Dejar algún campo vacío implica reducir la cantidad de aptitudes a mostrar.</p>
-            <div class="elementsModify">
-                {% if aptitudes %}
+            
+            <div id="aptitudes">
+                <h3>Aptitudes</h3>
+                <p>Dejar algún campo vacío implica reducir la cantidad de aptitudes a mostrar.</p>
+                <div class="elementsModify">
                     <!-- Con este ciclo recorro la 3 primera aptitudes -->
                     {% for aptitud in aptitudes|slice:":3" %}
                         <div class="oneElementModify">
@@ -261,24 +227,8 @@
                             <input type="text" value="{{ aptitud.nombre_apt.strip }}" name="aptitud_{{ forloop.counter }}">
                         </div>
                     {% endfor %}
-                {% else %}
-                    <div class="oneElementModify">
-                        <p>1</p>
-                        <input type="text">
-                    </div>
-                    <div class="oneElementModify">
-                        <p>2</p>
-                        <input type="text">
-                    </div>
-                    <div class="oneElementModify">
-                        <p>3</p>
-                        <input type="text">
-                    </div>
-                {% endif %}
-            </div>
-
-            <div class="elementsModify">
-                {% if aptitudes %}
+                </div>
+                <div class="elementsModify">
                     <!-- Con este ciclo recorro luego de la tercera aptitud -->
                     {% for aptitud in aptitudes|slice:"3:" %}
                         <div class="oneElementModify">
@@ -287,129 +237,54 @@
                             <input type="text" value="{{ aptitud.nombre_apt.strip }}" name="aptitud_{{ forloop.counter|add:'3' }}">
                         </div>
                     {% endfor %}
-                {% else %}
-                    <div class="oneElementModify">
-                        <p>4</p>
-                        <input type="text">
-                    </div>
-                    <div class="oneElementModify">
-                        <p>5</p>
-                        <input type="text">
-                    </div>
-                {% endif %}
+                </div>
             </div>
-
-            <h3>Idiomas</h3>
-            <p>Dejar algún campo vacío implica reducir la cantidad de idiomas a mostrar.</p>
-            <div class="elementsModify">
-                {% if idiomas %}
-                    <!-- Con este ciclo recorro las 3 primera aptitudes -->
+            
+            <div id="idiomas">
+                <h3>Idiomas</h3>
+                <p>Dejar algún campo vacío implica reducir la cantidad de idiomas a mostrar.</p>
+                <div class="elementsModify">
                     {% for idioma in idiomas|slice:":3" %}
                         <div class="oneElementModify">
-                            <!-- Con esta variable contamos las veces que se a iterado el ciclo -->
                             <p>{{ forloop.counter }}</p>
                             <input type="text" value="{{ idioma.idioma.strip }}" name="idioma_{{ forloop.counter }}">
                         </div>
                     {% endfor %}
-                {% else %}
-                    <div class="oneElementModify">
-                        <p>1</p>
-                        <input type="text">
-                    </div>
-                    <div class="oneElementModify">
-                        <p>2</p>
-                        <input type="text">
-                    </div>
-                    <div class="oneElementModify">
-                        <p>3</p>
-                        <input type="text">
-                    </div>
-                {% endif %}
-            </div>
-
-            <p>Nivel de los idiomas (A1, A2, B1, B2, C1, C2, NATIVO)</p>
-            <div class="elementsModify">
-                {% if idiomas %}
-                    <!-- Con este ciclo recorro las 3 primera aptitudes -->
+                </div>
+                <p>Nivel de los idiomas (A1, A2, B1, B2, C1, C2)</p>
+                <div class="elementsModify">
                     {% for idioma in idiomas|slice:":3" %}
                         <div class="oneElementModify">
-                            <!-- Con esta variable contamos las veces que se a iterado el ciclo -->
                             <p>{{ forloop.counter }}</p>
                             <input type="text" value="{{ idioma.nivel.strip }}" name="nivel_{{ forloop.counter }}">
                         </div>
                     {% endfor %}
-                {% else %}
-                    <div class="oneElementModify">
-                        <p>1</p>
-                        <input type="text">
-                    </div>
-                    <div class="oneElementModify">
-                        <p>2</p>
-                        <input type="text">
-                    </div>
-                    <div class="oneElementModify">
-                        <p>3</p>
-                        <input type="text">
-                    </div>
-                {% endif %}
+                </div>
             </div>
-
-            <h3>Lenguajes_Programación</h3>
-            <p>Dejar algún campo vacío implica reducir la cantidad de conocimientos a mostrar.</p>
-            <div class="elementsModify">
-                {% if lenguajesProg %}
-                    <!-- Con este ciclo recorro las 3 primera aptitudes -->
+            
+            <div id="lenguajesProg">
+                <h3>Conocimientos</h3>
+                <p>Dejar algún campo vacío implica reducir la cantidad de conocimientos a mostrar.</p>
+                <div class="elementsModify">
                     {% for lenguaje in lenguajesProg|slice:":3" %}
                         <div class="oneElementModify">
-                            <!-- Con esta variable contamos las veces que se a iterado el ciclo -->
                             <p>{{ forloop.counter }}</p>
                             <input type="text" value="{{ lenguaje.nombre_leng.strip }}" name="lenguajeProg_{{ forloop.counter }}">
                         </div>
                     {% endfor %}
-                {% else %}
-                    <div class="oneElementModify">
-                        <p>1</p>
-                        <input type="text">
-                    </div>
-                    <div class="oneElementModify">
-                        <p>2</p>
-                        <input type="text">
-                    </div>
-                    <div class="oneElementModify">
-                        <p>3</p>
-                        <input type="text">
-                    </div>
-                {% endif %}
-            </div>
-            <div class="elementsModify">
-                {% if lenguajesProg %}
-                    <!-- Con este ciclo recorro las 3 primera aptitudes -->
+                </div>
+                <div class="elementsModify">
                     {% for lenguaje in lenguajesProg|slice:"3:" %}
                         <div class="oneElementModify">
-                            <!-- Con esta variable contamos las veces que se a iterado el ciclo -->
                             <p>{{ forloop.counter|add:"3" }}</p>
                             <input type="text" value="{{ lenguaje.nombre_leng.strip }}" name="lenguajeProg_{{ forloop.counter|add:'3' }}">
                         </div>
                     {% endfor %}
-                {% else %}
-                    <div class="oneElementModify">
-                        <p>4</p>
-                        <input type="text">
-                    </div>
-                    <div class="oneElementModify">
-                        <p>5</p>
-                        <input type="text">
-                    </div>
-                    <div class="oneElementModify">
-                        <p>6</p>
-                        <input type="text">
-                    </div>
-                {% endif %}
+                </div>
             </div>
-
+            
             <!-- EXPERIENCIAS LABORALES -->
-            {% if expLaborales %}
-                <!-- Con este ciclo recorro las 3 primera aptitudes -->
+            <div id="expLaboral">
                 {% for expLaboral in expLaborales %}
                     <H3>Experiencia laboral {{ forloop.counter }}</H3>
                     <div class="elementsModify">
@@ -437,73 +312,15 @@
                             <p>Descripción</p>
                             <textarea name="exp_description_{{ forloop.counter }}">{{ expLaboral.descripcion.strip }}</textarea>
                         </div>
-                    </div>
-                    
+                    </div> 
                 {% endfor %}
-            {% else %}
-                <h3>Experiencia laboral 1</h3>
-                <div class="elementsModify">
-                    <div class="oneElementModify">
-                        <p>Cargo</p>
-                        <input type="text" value="ola">
-                    </div>
-                    <div class="oneElementModify">
-                        <p>Empresa</p>
-                        <input type="text">
-                    </div>
-                </div>
-                <div class="elementsModify">
-                    <div class="oneElementModify">
-                        <p>Fecha inicio</p>
-                        <input type="date">
-                    </div>
-                    <div class="oneElementModify">
-                        <p>Fecha final</p>
-                        <input type="date">
-                    </div>
-                </div>
-                <div class="elementsModify">
-                    <div class="oneElementModify">
-                        <p>Descripción</p>
-                        <textarea></textarea>
-                    </div>
-                </div>
-
-                <h3>Experiencia laboral 2</h3>
-                <div class="elementsModify">
-                    <div class="oneElementModify">
-                        <p>Cargo</p>
-                        <input type="text">
-                    </div>
-                    <div class="oneElementModify">
-                        <p>Empresa</p>
-                        <input type="text">
-                    </div>
-                </div>
-                <div class="elementsModify">
-                    <div class="oneElementModify">
-                        <p>Fecha inicio</p>
-                        <input type="date">
-                    </div>
-                    <div class="oneElementModify">
-                        <p>Fecha final</p>
-                        <input type="date">
-                    </div>
-                </div>
-                <div class="elementsModify">
-                    <div class="oneElementModify">
-                        <p>Descripción</p>
-                        <textarea></textarea>
-                    </div>
-                </div>
-            {% endif %}
-
+            </div>
+            
             <!-- FORMACIONES ACADEMICAS -->
-            {% if formaciones %}
-                <!-- Con este ciclo recorro las 3 primera aptitudes -->
+            <div id="formAcademica">
                 {% for formacion in formaciones %}
                     <h3>Formación Académica {{ forloop.counter }}</h3>
-                    <div class="elementsModify">
+                    <div class="elementsModify ">
                         <div class="oneElementModify">
                             <p>Título</p>
                             <input type="text" value="{{ formacion.titulo.strip }}" name="academ_titulo_{{ forloop.counter }}">
@@ -524,52 +341,8 @@
                         </div>
                     </div>
                 {% endfor %}
-            {% else %}
-                <h3>Formación Académica 1</h3>
-                <div class="elementsModify">
-                    <div class="oneElementModify">
-                        <p>Título</p>
-                        <input type="text">
-                    </div>
-                    <div class="oneElementModify">
-                        <p>Institución</p>
-                        <input type="text">
-                    </div>
-                </div>
-                <div class="elementsModify">
-                    <div class="oneElementModify">
-                        <p>Fecha inicio</p>
-                        <input type="date">
-                    </div>
-                    <div class="oneElementModify">
-                        <p>Fecha final</p>
-                        <input type="date">
-                    </div>
-                </div>
-
-                <h3>Formación Académica 2</h3>
-                <div class="elementsModify">
-                    <div class="oneElementModify">
-                        <p>Título</p>
-                        <input type="text">
-                    </div>
-                    <div class="oneElementModify">
-                        <p>Institución</p>
-                        <input type="text">
-                    </div>
-                </div>
-                <div class="elementsModify">
-                    <div class="oneElementModify">
-                        <p>Fecha inicio</p>
-                        <input type="date">
-                    </div>
-                    <div class="oneElementModify">
-                        <p>Fecha final</p>
-                        <input type="date">
-                    </div>
-                </div>
-            {% endif %}
-
+            </div>
+            
             <div class="botones">
                 <a onclick="modalConfig('hvMDesactive')" class="btnIzquierda">Regresar</a>
                 <button type="submit">Aplicar</button>

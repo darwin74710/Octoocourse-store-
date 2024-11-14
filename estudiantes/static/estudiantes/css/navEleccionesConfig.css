@@ -1,0 +1,32 @@
+.navEleccionesSuperior{
+    width: 90%; height: auto;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+    padding: 2px;
+}
+
+.eleccionNav{
+    width: auto; height: 40px;
+    margin: 5px;
+    text-align: center;
+    padding: 5px;
+    color: var(--letraBotones1); background-color: var(--fondoBotones1);
+    cursor: pointer;
+    white-space: nowrap; /* Con esto se evitan los saltos de linea */
+    transition: all 0.3s ease 0s;
+}
+
+.eleccionNav:hover{
+    background-color: var(--hFondoBotones1); color: var(--hLetraBotones1);
+}
+
+#modalHVM #datosPersonales{
+    display: block;
+}
+
+#modalHVM #aptitudes, #modalHVM #idiomas, #modalHVM #lenguajesProg, #modalHVM #expLaboral, #modalHVM #formAcademica{
+    display: none;
+}

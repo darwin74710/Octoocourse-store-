@@ -74,11 +74,15 @@
             <label class="linea"></label>
  
             <div class="seccionFiltros">
-                <h2>Lenguaje:</h2>
+                <h2>Contenido:</h2>
                 <div class="numFiltros">
-                    <div class="contentFiltro"><i id="HtmlFilter" onclick="filtro_lenguaje('Html')" class="bi bi-square"></i>Html</div>
+                    {% for contenido in tipoContenido %}
+                        <div class="contentFiltro">
+                            <i id="{{ contenido.nombre_tipo }}Filter" onclick="encontrar_filtros('{{ contenido.nombre_tipo }}')" class="bi bi-square"></i>
+                            {{ contenido.nombre_tipo }}
+                        </div>
+                    {% endfor %}
                 </div>
-                <div id="MensajeLenguajes">SE PLANEA AÑADIR MÁS CONTENIDO...</div>
             </div>
 
             <label class="linea"></label>
@@ -86,9 +90,12 @@
             <div class="seccionFiltros">
                 <h2>Dificultad:</h2>
                 <div class="numFiltros">
-                    <div class="contentFiltro"><i id="BasicoFilter" onclick="filtro_dificultad('Basico')" class="bi bi-square"></i>Básico</div>
-                    <div class="contentFiltro"><i id="MedioFilter" onclick="filtro_dificultad('Medio')" class="bi bi-square"></i>Medio</div>
-                    <div class="contentFiltro"><i id="AvanzadoFilter" onclick="filtro_dificultad('Avanzado')" class="bi bi-square"></i>Avanzado</div>
+                    {% for dificultad in tipoDificultad %}
+                        <div class="contentFiltro">
+                            <i id="{{ dificultad.nombre_tipo }}Filter" onclick="encontrar_filtros('{{ dificultad.nombre_tipo }}')" class="bi bi-square"></i>
+                            {{ dificultad.nombre_tipo }}
+                        </div>
+                    {% endfor %}
                 </div>
             </div>
 
@@ -97,10 +104,12 @@
             <div class="seccionFiltros">
                 <h2>Duración:</h2>
                 <div class="numFiltros">
-                    <div class="contentFiltro"><i id="0-5Filter" onclick="filtro_tiempo('0-5Filter')" class="bi bi-square"></i>0-5 Horas</div>
-                    <div class="contentFiltro"><i id="6-10Filter" onclick="filtro_tiempo('6-10Filter')" class="bi bi-square"></i>6-10 Horas</div>
-                    <div class="contentFiltro"><i id="11-15Filter" onclick="filtro_tiempo('11-15Filter')" class="bi bi-square"></i>11-15 Horas</div>
-                    <div class="contentFiltro"><i id="15+Filter" onclick="filtro_tiempo('15+Filter')" class="bi bi-square"></i>15+ Horas</div>
+                    {% for duracion in tipoDuracion %}
+                        <div class="contentFiltro">
+                            <i id="{{ duracion.nombre_tipo }}Filter" onclick="encontrar_filtros('{{ duracion.nombre_tipo }}')" class="bi bi-square"></i>
+                            {{ duracion.nombre_tipo }}
+                        </div>
+                    {% endfor %}
                 </div>
             </div>
 
@@ -109,8 +118,12 @@
             <div class="seccionFiltros">
                 <h2>Certificados:</h2>
                 <div class="numFiltros">
-                    <div class="contentFiltro"><i id="ConCertificado" onclick="filtro_Certificado('ConCertificado')" class="bi bi-square"></i>Con certificado</div>
-                    <div class="contentFiltro"><i id="SinCertificado" onclick="filtro_Certificado('SinCertificado')" class="bi bi-square"></i>Sin certificado</div>
+                    {% for certificado in tipoCertificado %}
+                        <div class="contentFiltro">
+                            <i id="{{ certificado.nombre_tipo }}Filter" onclick="encontrar_filtros('{{ certificado.nombre_tipo }}')" class="bi bi-square"></i>
+                            {{ certificado.nombre_tipo }}
+                        </div>
+                    {% endfor %}
                 </div>
             </div>
 
@@ -127,20 +140,14 @@
                         <div class="infoCurso">
                             <h1>{{ data.nom_curso }}</h1>
                             <p>{{ data.descripcion }}</p>
-                            <i class="bi bi-terminal"> : {{ data.lenguaje }}</i>
-                            <i class="bi bi-bar-chart-fill"> : {{ data.dificultad }}</i>
-                            <i class="bi bi-clock"> : {{ data.tiempo }}</i>
-                            <i class="bi bi-file-earmark-text"> : 
-                                {% if data.certificado == 0 %}
-                                    Sin Certificado
-                                {% elif data.certificado == 1 %}
-                                    Con Certificado
-                                {% endif %}
-                            </i>
+                            <i class="bi bi-terminal"> : {{ data.id_tipo_contenido.nombre_tipo }}</i>
+                            <i class="bi bi-bar-chart-fill"> : {{ data.id_tipo_dificultad.nombre_tipo }}</i>
+                            <i class="bi bi-clock"> : {{ data.id_tipo_duracion.nombre_tipo }}</i>
+                            <i class="bi bi-file-earmark-text"> : {{ data.id_tipo_certificado.nombre_tipo }}</i>
                         </div>
                         <div class="precioCurso">
                             {% if data.precio == 0 %}
-                                Gratis
+                                Sin Costo
                             {% else %}
                                 {{ data.precio }}
                             {% endif %}

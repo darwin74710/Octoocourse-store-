@@ -1,17 +1,18 @@
-from estudiantes.models import Estudiantes, HojasDeVida, Idiomas, Aptitudes, FormacionesAcademicas, LenguajesProg, ExpLaborales
-from estudiantes.models_cursos import Cursos
-from estudiantes.models_Empresas import OfertasEmpleos, Empresas, TipoCont
+from administrator.models_estudiantes import Estudiantes, HojasDeVida, Idiomas, Aptitudes, FormacionesAcademicas, LenguajesProg, ExpLaborales
+from administrator.models_cursos import Cursos
+from administrator.models_empresas import OfertasEmpleos, Empresas, TipoCont
 from django.contrib.auth.hashers import make_password
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
+from django.db import connection, transaction
 
 #Con esto quitamos la seguridad de tokens por csrf
 @csrf_exempt
 def guardarHVAdmin(request):
-    
     # Preguntamos si el metodo llamado es de tipo POST
     if request.method == 'POST':
-        id_Estudiante = request.session.get('id_estudiante')
+        id_Estudiante = request.POST.get('idEstudianteInput')
+        
 
         #OBTENEMOS TODAS LAS TABLAS QUE VAMOS A ACTUALIZAR
         hojasDeVida = HojasDeVida.objects.filter(id_estudiante=id_Estudiante)
@@ -21,11 +22,11 @@ def guardarHVAdmin(request):
         else:
             hojaDeVida = None
         
-        idiomas = Idiomas.objects.filter(id_hojavida=hojaDeVida.id_hoja_vida)
         aptitudes = Aptitudes.objects.filter(id_hojavida=hojaDeVida.id_hoja_vida)
+        idiomas = Idiomas.objects.filter(id_hojavida=hojaDeVida.id_hoja_vida)
         lenguajesProg = LenguajesProg.objects.filter(id_hojavida=hojaDeVida.id_hoja_vida)
-        formaciones = FormacionesAcademicas.objects.filter(id_hojavida=hojaDeVida.id_hoja_vida)
         expLaborales = ExpLaborales.objects.filter(id_hojavida=hojaDeVida.id_hoja_vida)
+        formaciones = FormacionesAcademicas.objects.filter(id_hojavida=hojaDeVida.id_hoja_vida)
 
         # Guardo los datos de los inputs en nuevas variables
         #--- DATOS PERSONALES ---
@@ -33,124 +34,140 @@ def guardarHVAdmin(request):
         direccionDato = request.POST.get('direccion').strip()
 
         #--- APTITUDES ---
-        aptitud1 = request.POST.get('aptitud_1').strip()
-        aptitud2 = request.POST.get('aptitud_2').strip()
-        aptitud3 = request.POST.get('aptitud_3').strip()
-        aptitud4 = request.POST.get('aptitud_4').strip()
-        aptitud5 = request.POST.get('aptitud_5').strip()
-        aptitudesArray = [aptitud1, aptitud2, aptitud3, aptitud4, aptitud5]
+        aptitudesArray = []
+        i = 1
+        for _ in range(aptitudes.count()):
+            aptitud = request.POST.get('aptitud_' + str(i)).strip()
+            aptitudesArray.append(aptitud)
+            i = i + 1
 
         #--- IDIOMAS ---
-        idioma1 = request.POST.get('idioma_1').strip()
-        idioma2 = request.POST.get('idioma_2').strip()
-        idioma3 = request.POST.get('idioma_3').strip()
-        nivel1 = request.POST.get('nivel_1').strip()
-        nivel2 = request.POST.get('nivel_2').strip()
-        nivel3 = request.POST.get('nivel_3').strip()
-        idiomasArray = [idioma1, idioma2, idioma3]
-        nivelArray = [nivel1, nivel2, nivel3]
+        idiomasArray = []
+        nivelArray = []
+        i = 1
+        for _ in range(idiomas.count()):
+            idioma = request.POST.get('idioma_' + str(i)).strip()
+            nivel = request.POST.get('nivel_' + str(i)).strip()
+            idiomasArray.append(idioma)
+            nivelArray.append(nivel)
+            i = i + 1
 
         #--- LENGUAJES PROG ---
-        lenguaje1 = request.POST.get('lenguajeProg_1').strip()
-        lenguaje2 = request.POST.get('lenguajeProg_2').strip()
-        lenguaje3 = request.POST.get('lenguajeProg_3').strip()
-        lenguaje4 = request.POST.get('lenguajeProg_4').strip()
-        lenguaje5 = request.POST.get('lenguajeProg_5').strip()
-        lenguaje6 = request.POST.get('lenguajeProg_6').strip()
-        lenguajeArray = [lenguaje1, lenguaje2, lenguaje3, lenguaje4, lenguaje5, lenguaje6]
+        lenguajeArray = []
+        i = 1
+        for _ in range(lenguajesProg.count()):
+            lenguaje = request.POST.get('lenguajeProg_' + str(i)).strip()
+            lenguajeArray.append(lenguaje)
+            i = i + 1
 
         #--- EXP PROFESIONALES ---
-        #exp 1
-        cargo1 = request.POST.get('exp_cargo_1').strip()
-        empresa1 = request.POST.get('exp_empresa_1').strip()
-        tiempoIni1 = request.POST.get('exp_tiempoIni_1').strip()
-        tiempoFin1 = request.POST.get('exp_tiempoFin_1').strip()
-        description1 = request.POST.get('exp_description_1').strip()
+        cargoArray = []
+        empresaArray = []
+        tiempoIniArray = []
+        tiempoFinArray = []
+        descriptionArray = []
 
-        #exp 2
-        cargo2 = request.POST.get('exp_cargo_2').strip()
-        empresa2 = request.POST.get('exp_empresa_2').strip()
-        tiempoIni2 = request.POST.get('exp_tiempoIni_2').strip()
-        tiempoFin2 = request.POST.get('exp_tiempoFin_2').strip()
-        description2 = request.POST.get('exp_description_2').strip()
+        i = 1
+        for _ in range(expLaborales.count()):
+            cargo = request.POST.get('exp_cargo_' + str(i)).strip()
+            empresa = request.POST.get('exp_empresa_' + str(i)).strip()
+            tiempoIni = request.POST.get('exp_tiempoIni_' + str(i)).strip()
+            tiempoFin = request.POST.get('exp_tiempoFin_' + str(i)).strip()
+            description = request.POST.get('exp_description_' + str(i)).strip()
 
-        cargoArray = [cargo1, cargo2]
-        empresaArray = [empresa1, empresa2]
-        tiempoIniArray = [tiempoIni1, tiempoIni2]
-        tiempoFinArray = [tiempoFin1, tiempoFin2]
-        descriptionArray = [description1, description2]
+            cargoArray.append(cargo)
+            empresaArray.append(empresa)
+            tiempoIniArray.append(tiempoIni)
+            tiempoFinArray.append(tiempoFin)
+            descriptionArray.append(description)
+            i = i + 1
+        
+        i = 0
+        for _ in range(expLaborales.count()):
+            if tiempoIniArray[i] == "":
+                tiempoIniArray[i] = None
+            if tiempoFinArray[i] == "":
+                tiempoFinArray[i] = None
+            i = i + 1
         
         #--- FORMACIÓN ACADEMICA ---
-        #form 1
-        titulo1 = request.POST.get('academ_titulo_1').strip()
-        instituto1 = request.POST.get('academ_institu_1').strip()
-        fechaIni1 = request.POST.get('academ_fechaIni_1').strip()
-        fechaFin1 = request.POST.get('academ_fechaFin_1').strip()
+        tituloArray = []
+        institutoArray = []
+        fechaIniArray = []
+        fechaFinArray = []
+        i = 1
 
-        #form 2
-        titulo2 = request.POST.get('academ_titulo_2').strip()
-        instituto2 = request.POST.get('academ_institu_2').strip()
-        fechaIni2 = request.POST.get('academ_fechaIni_2').strip()
-        fechaFin2 = request.POST.get('academ_fechaFin_2').strip()
+        for _ in range(formaciones.count()):
+            titulo = request.POST.get('academ_titulo_' + str(i)).strip()
+            instituto = request.POST.get('academ_institu_' + str(i)).strip()
+            fechaIni = request.POST.get('academ_fechaIni_' + str(i)).strip()
+            fechaFin = request.POST.get('academ_fechaFin_' + str(i)).strip()
 
-        tituloArray = [titulo1, titulo2]
-        institutoArray = [instituto1, instituto2]
-        fechaIniArray = [fechaIni1, fechaIni2]
-        fechaFinArray = [fechaFin1, fechaFin2]
+            tituloArray.append(titulo)
+            institutoArray.append(instituto)
+            fechaIniArray.append(fechaIni)
+            fechaFinArray.append(fechaFin)
+            i = i + 1
 
-        #VALIDACIONES
-        
+        i = 0
+        for _ in range(formaciones.count()):
+            if fechaIniArray[i] == "":
+                fechaIniArray[i] = None
+            if fechaFinArray[i] == "":
+                fechaFinArray[i] = None
+            i = i + 1
 
         try:
-            # Actualizamos los datos
-            hojaDeVida.telefono = telefonoDato
-            hojaDeVida.direccion = direccionDato
+            with transaction.atomic():
+                with connection.cursor() as cursor:
+                    cursor.execute(
+                        "UPDATE HOJAS_DE_VIDA SET TELEFONO = %s, DIRECCION = %s WHERE ID_HOJA_VIDA = %s",
+                        [telefonoDato, direccionDato, hojaDeVida.id_hoja_vida]
+                    )
 
-            i = 0
-            for aptitud in aptitudes:
-                aptitud.nombre_apt = aptitudesArray[i]
-                i += 1
-            
-            i = 0
-            for idioma in idiomas:
-                idioma.idioma = idiomasArray[i]
-                idioma.nivel = nivelArray[i]
-                i += 1
-            
-            i = 0
-            for lenguaje in lenguajesProg:
-                lenguaje.nombre_leng = lenguajeArray[i]
-                i += 1
-            
-            i = 0
-            for expLaboral in expLaborales:
-                expLaboral.nom_empresas = empresaArray[i]
-                expLaboral.tiempo_inicio = tiempoIniArray[i]
-                expLaboral.tiempo_final = tiempoFinArray[i]
-                expLaboral.cargo = cargoArray[i]
-                expLaboral.descripcion = descriptionArray[i]
-                i += 1
-            
-            i = 0
-            for formacion in formaciones:
-                formacion.titulo = tituloArray[i]
-                formacion.nom_institucion = institutoArray[i]
-                formacion.fecha_inicio = fechaIniArray[i]
-                formacion.fecha_final = fechaFinArray[i]
-                i += 1
+                    i = 0
+                    for aptitud in aptitudes:
+                        cursor.execute(
+                            "UPDATE APTITUDES SET NOMBRE_APT = %s WHERE ID_APTITUDES = %s",
+                            [aptitudesArray[i], aptitud.id_aptitudes]
+                        )
+                        i = i + 1
+                    
+                    i = 0
+                    for idioma in idiomas:
+                        cursor.execute(
+                            "UPDATE IDIOMAS SET IDIOMA = %s, NIVEL = %s WHERE ID_IDIOMA = %s",
+                            [idiomasArray[i], nivelArray[i], idioma.id_idioma]
+                        )
+                        i = i + 1
+                    
+                    i = 0
+                    for lenguaje in lenguajesProg:
+                        cursor.execute(
+                            "UPDATE LENGUAJES_PROG SET NOMBRE_LENG = %s WHERE ID_LENGUAJE = %s",
+                            [lenguajeArray[i], lenguaje.id_lenguaje]
+                        )
+                        i = i + 1
 
-            # Guardamos los datos
-            hojaDeVida.save()
-            for idioma in idiomas:
-                idioma.save()
-            for aptitud in aptitudes:
-                aptitud.save()
-            for lenguaje in lenguajesProg:
-                lenguaje.save()
-            for formacion in formaciones:
-                formacion.save()
-            for expLaboral in expLaborales:
-                expLaboral.save()
+                    i = 0
+                    for expLaboral in expLaborales:
+                        cursor.execute(
+                            "UPDATE EXP_LABORALES SET NOM_EMPRESAS = %s, CARGO = %s, DESCRIPCION = %s, " +
+                              "TIEMPO_INICIO = %s, TIEMPO_FINAL = %s WHERE ID_EXP = %s",
+                            [empresaArray[i], cargoArray[i], descriptionArray[i], tiempoIniArray[i],
+                             tiempoFinArray[i], expLaboral.id_exp]
+                        )
+                        i = i + 1
+
+                    i = 0
+                    for formacion in formaciones:
+                        cursor.execute(
+                            "UPDATE FORMACIONES_ACADEMICAS SET TITULO = %s, NOM_INSTITUCION = %s, " +
+                              "FECHA_INICIO = %s, FECHA_FINAL = %s WHERE ID_FORMACION = %s",
+                            [tituloArray[i], institutoArray[i], fechaIniArray[i], fechaFinArray[i],
+                             formacion.id_formacion]
+                        )
+                        i = i + 1
 
             return JsonResponse({'status': 'success', 'message': 'Su hoja de vida se actualizo correctamente.'})
         except Exception as e:
@@ -165,8 +182,6 @@ def guardarHVAdmin(request):
 @csrf_exempt
 def guardarEstudianteAdmin(request, idStudent):
     if request.method == 'POST':
-        estudiante = Estudiantes.objects.filter(id_estudiante=idStudent).first()
-
         tipo_id = request.POST.get('tipo_id').strip()
         correo = request.POST.get('correo').strip()
         nombre = request.POST.get('nombre').strip()
@@ -181,13 +196,13 @@ def guardarEstudianteAdmin(request, idStudent):
 
         try:
             # Guardamos los datos
-            estudiante.tipo_id = tipo_id
-            estudiante.correo_estudiante = correo
-            estudiante.nom_estudiante = nombre
-            estudiante.apellido = apellido
-            estudiante.password_estudiante = make_password(contraseña)
-            estudiante.fecha_nac = fechaNac
-            estudiante.save()
+            with transaction.atomic():
+                with connection.cursor() as cursor:
+                    cursor.execute(
+                        "UPDATE ESTUDIANTES SET TIPO_ID = %s, CORREO_ESTUDIANTE = %s, NOM_ESTUDIANTE = %s, " +
+                        "APELLIDO = %s, PASSWORD_ESTUDIANTE = %s, FECHA_NAC = %s WHERE ID_ESTUDIANTE = %s",
+                        [tipo_id, correo, nombre, apellido, contraseña, fechaNac, idStudent]
+                    )
             return JsonResponse({'status': 'success', 'message': 'El estudiante se modificó correctamente.'})
         except Exception as e:
             # Error por el cual no se pudo guardar
@@ -200,8 +215,6 @@ def guardarEstudianteAdmin(request, idStudent):
 @csrf_exempt
 def guardarEmpresaAdmin(request, idEmpres):
     if request.method == 'POST':
-        empresa = Empresas.objects.filter(nit=idEmpres).first()
-
         nombre = request.POST.get('nombre').strip()
         direccion = request.POST.get('dirección').strip()
         correo = request.POST.get('correo').strip()
@@ -215,12 +228,13 @@ def guardarEmpresaAdmin(request, idEmpres):
         
         try:
             # Guardamos los datos
-            empresa.nom_empresa = nombre
-            empresa.direccion = direccion
-            empresa.correo_emp = correo
-            empresa.telefono = telefono
-            empresa.password_emp = make_password(contraseña)
-            empresa.save()
+            with transaction.atomic():
+                with connection.cursor() as cursor:
+                    cursor.execute(
+                        "UPDATE EMPRESAS SET NOM_EMPRESA = %s, DIRECCION = %s, CORREO_EMP = %s, " +
+                        "PASSWORD_EMP = %s, TELEFONO = %s WHERE NIT = %s",
+                        [nombre, direccion, correo, contraseña, telefono, idEmpres]
+                    )
             return JsonResponse({'status': 'success', 'message': 'La empresa se modificó correctamente.'})
         except Exception as e:
             # Error por el cual no se pudo guardar
@@ -235,13 +249,18 @@ def guardarCursoAdmin(request, idCurse):
 
         nombre = request.POST.get('nombre').strip()
         precio = request.POST.get('precio')
-        dificultad = request.POST.get('dificultad').strip()
-        lenguaje = request.POST.get('lenguaje').strip()
-        tiempo = request.POST.get('tiempo').strip()
+        dificultad = request.POST.get('dificultad')
+        lenguaje = request.POST.get('lenguaje')
+        tiempo = request.POST.get('tiempo')
         certificado = request.POST.get('certificado')
         descripcion = request.POST.get('descripcion').strip()
 
-        if lenguaje == "HTML":
+        print(dificultad)
+        print(lenguaje)
+        print(tiempo)
+        print(certificado)
+
+        if lenguaje == 1:
             urlImage = "html.jpg"
 
         # Validaciones
@@ -251,15 +270,15 @@ def guardarCursoAdmin(request, idCurse):
         
         try:
             # Guardamos los datos
-            curso.nom_curso = nombre
-            curso.precio = precio
-            curso.dificultad = dificultad
-            curso.lenguaje = lenguaje
-            curso.tiempo = tiempo
-            curso.certificado = certificado
-            curso.descripcion = descripcion
-            curso.url_imagen = urlImage
-            curso.save()
+            with transaction.atomic():
+                with connection.cursor() as cursor:
+                    cursor.execute(
+                        "UPDATE CURSOS SET NOM_CURSO = %s, PRECIO = %s, ID_TIPO_DIFICULTAD = %s, " +
+                        "ID_TIPO_CONTENIDO = %s, ID_TIPO_DURACION = %s, ID_TIPO_CERTIFICADO = %s, " +
+                        "DESCRIPCION = %s WHERE ID_CURSO = %s",
+                        [nombre, precio, dificultad, lenguaje, tiempo, certificado, descripcion, idCurse]
+                    )
+
             return JsonResponse({'status': 'success', 'message': 'El curso se modificó correctamente.'})
         except Exception as e:
             # Error por el cual no se pudo guardar
@@ -274,8 +293,10 @@ def guardarOfertaAdmin(request, idOfert):
         oferta = OfertasEmpleos.objects.filter(id_oferta=idOfert).first()
         oferta = OfertasEmpleos.objects.filter(id_oferta=idOfert).first()
 
+        fechaPub = request.POST.get('fechaPub')
         nombre = request.POST.get('nombre').strip()
         salario = request.POST.get('salario')
+        tipoCont = request.POST.get('tipoCont')
         estado = request.POST.get('estado')
         descripcion = request.POST.get('descripcion').strip()
 
@@ -286,11 +307,13 @@ def guardarOfertaAdmin(request, idOfert):
         
         try:
             # Guardamos los datos
-            oferta.nombre_oferta = nombre
-            oferta.salario = salario
-            oferta.estado = estado
-            oferta.descripcion = descripcion
-            oferta.save()
+            with transaction.atomic():
+                with connection.cursor() as cursor:
+                    cursor.execute(
+                        "UPDATE OFERTAS_EMPLEOS SET nombre_oferta = %s, salario = %s, estado = %s, " +
+                        "descripcion = %s, id_tipo_cont = %s, fecha_pub = %s WHERE id_oferta = %s",
+                        [nombre, salario, estado, descripcion, tipoCont, fechaPub, idOfert]
+                    )
             return JsonResponse({'status': 'success', 'message': 'La oferta se modificó correctamente.'})
         except Exception as e:
             # Error por el cual no se pudo guardar

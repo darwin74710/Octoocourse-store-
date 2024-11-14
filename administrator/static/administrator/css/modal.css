@@ -9,7 +9,7 @@
     background-color: rgba(34, 34, 34, 0.712);
 }
 
-#marcoModal{
+#marcoModal, #agregarModal{
     width: 800px; height: auto;
     border-radius: 10px;
     padding: 10px;
@@ -18,7 +18,13 @@
     flex-direction: column;
 }
 
-#marcoModal h1{
+#agregarModal{
+    height: 60%;
+    border: 1px solid var(--borde1);
+    overflow-y: auto; overflow-x: hidden;
+}
+
+#marcoModal h1, #agregarModal h1{
     font-size: 35px;
     color: var(--letratitulo1);
     border-bottom: 1px solid var(--borde1);
@@ -38,6 +44,37 @@
     margin: 5px;
 }
 
+#agregarModal .contentInputs{
+    display: flex;
+    align-content: center;
+    justify-content: center;
+}
+
+#agregarModal .contentInputs .minContentInput{
+    display: flex;
+    margin: 10px;
+    width: 100%;
+    flex-direction: column;
+}
+
+#agregarModal .contentInputs .minContentInput input{
+    border: 1px solid var(--borde1);
+    border-radius: 10px;
+    margin: 0 5px;
+}
+
+#agregarModal .contentInputs .minContentInput textarea{
+    border: 1px solid var(--borde1);
+    border-radius: 10px;
+    width: 100%; height: 200px;
+}
+
+#agregarModal .contentInputs .minContentInput p{
+    text-align: center;
+    color: var(--letra1);
+    margin: 0;
+}
+
 #botonesOpciones{
     margin: 10px;
     display: flex;
@@ -45,9 +82,10 @@
     justify-content: center;
 }
 
-#botonesOpciones a{
+#botonesOpciones a, #botonesOpciones button{
     text-decoration: none;
     text-align: center;
+    border: none;
     margin: 10px 5px;
     padding: 0 10px;
     display: block;
@@ -58,12 +96,22 @@
     transition: all 0.3s ease 0s;
 }
 
-#botonesOpciones a:hover{
+#botonesOpciones a:hover, #botonesOpciones button:hover{
     background-color: var(--hFondoBotones1); color: var(--hLetraBotones1);
 }
 
 @media screen and (max-width:800px) {
     #marcoModal{
         width: 100%;
+    }
+
+    #botonesOpciones{
+        display: flex;
+        flex-direction: column;
+    }
+
+    #agregarModal .contentInputs{
+        display: flex;
+        flex-direction: column;
     }
 }

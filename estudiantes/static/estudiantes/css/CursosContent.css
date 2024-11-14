@@ -10,6 +10,15 @@
     color: var(--letratitulo1);
 }
 
+#MarcoContentCursos h4{
+    display: block;
+    height: 100%;
+    font-size: 150px;
+    margin: 50px auto;
+    font-weight: bold;
+    color: var(--letra1);
+}
+
 #MarcoContentCursos iframe{
     background-color: black;
     border: 3px solid var(--borde1);
