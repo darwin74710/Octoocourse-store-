@@ -79,14 +79,18 @@
 
     <!-- INTERFAZ CONTENTCURSOS -->
     <div id="MarcoContentCursos">
-        <h1>{{ subcontent.nom_subcont|upper }}</h1>
-        <iframe src="{{ subcontent.url_cont }}" frameborder="0" scrolling="no"></iframe>
-        
-        <!-- le añado a la url el curso en donde estoy parado. -->
-        <a onclick="volverInfoCurso(this)">
-            Volver
-            <h5>{{ id_curso }}</h5>
-        </a>
+        {% if id_curso %}
+            <h1>{{ subcontent.nom_subcont|upper }}</h1>
+            <iframe src="{{ subcontent.url_cont }}" frameborder="0" scrolling="no"></iframe>
+            
+            <!-- le añado a la url el curso en donde estoy parado. -->
+            <a onclick="volverInfoCurso(this)">
+                Volver
+                <h5>{{ id_curso }}</h5>
+            </a>
+        {% else %}
+            <h4>Este curso no existe.</h4>
+        {% endif %}
     </div>
     
     <!-- Footer -->

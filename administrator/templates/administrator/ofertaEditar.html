@@ -39,10 +39,12 @@
     </header>
 
     <div id="marcoOfertas">
-        <a id="volverBoton" href="{% url 'ofertaAdmin' %}"><i class="bi bi-house"></i></a>
-        
+        <div id="botonesConfig">
+            <a id="btnIzquierda" href="{% url 'ofertaAdmin' %}"><i class="bi bi-house"></i></a>
+        </div>
         <form class="FormAjax" method="POST" action="{% url 'guardarOfertaAdmin' idOfert=oferta.id_oferta %}">
             <h1>MODIFICAR OFERTA</h1>
+            <p style="display: none;" id="idOfertaIr">{{ oferta.id_oferta }}</p>
 
             <div class="ContFilaInputs">
                 <div class="minContInputs">
@@ -54,15 +56,31 @@
                     <input type="number" id="textBlock" name="nit_empresa" value="{{ oferta.nit.nit }}" disabled>
                 </div>
                 <div class="minContInputs">
-                    <p>Nombre</p>
-                    <input type="text" name="nombre" value="{{ oferta.nombre_oferta }}">
+                    <p>Fecha Publicación</p>
+                    <input type="date" name="fechaPub" value="{{ oferta.fecha_pub|date:'Y-m-d' }}">
                 </div>
             </div>
             <div class="ContFilaInputs">
                 <div class="minContInputs">
+                    <p>Nombre</p>
+                    <input type="text" name="nombre" value="{{ oferta.nombre_oferta }}">
+                </div>
+                <div class="minContInputs">
                     <p>Salario</p>
                     <input type="number" name="salario" value="{{ oferta.salario }}">
                 </div>
+                <div class="minContInputs">
+                    <p>Tipo Contrato</p>
+                    <select name="tipoCont">
+                        {% for contrato in tipoCont %}
+                            <option value="{{ contrato.id_tipo_cont }}" {% if oferta.id_tipo_cont.nombre_tipo == contrato.nombre_tipo %}selected{% endif %}>
+                                {{ contrato.nombre_tipo }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+            <div class="ContFilaInputs">
                 <div class="minContInputs">
                     <p>Estado</p>
 
@@ -81,11 +99,21 @@
 
             <div class="botones">
                 <button type="submit">Guardar</button>
-                <a id="btnAdicional">Tipo Contrato</a>
-                <a id="btnAdicional">Conocimientos</a>
+                <a id="btnAdicional" onclick="irConocimientos()">Conocimientos</a>
             </div>
         </form>
     </div>
+
+    <script>
+        function irConocimientos(){
+            const idOferta = document.getElementById('idOfertaIr').innerText;
+            const idParametro = encodeURIComponent(idOferta);
+            
+            var cursoInfoUrl = "{% url 'conocimientos' %}";
+
+            window.location.href = `${cursoInfoUrl}?idOferta=${idParametro}`;
+        }
+    </script>
 
     <!-- Footer -->
     <footer class="piePag">

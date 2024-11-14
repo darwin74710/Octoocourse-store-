@@ -1,9 +1,14 @@
 function modalOpenExit(tipo, ventana, elemento){
     const Modal = document.getElementById("modalOpciones");
     const marco = document.getElementById("marcoModal");
+    const addModal = document.getElementById("agregarModal");
 
     Modal.style.display = "none";
     marco.style.display = "none";
+
+    if (addModal != null){
+        addModal.style.display = "none";
+    }
 
     if (tipo === "desactive"){
         Modal.style.display = "none";
@@ -97,16 +102,39 @@ function ofertas(elemento){
     var documentoInfo = elemento.querySelector("#documentoInfo");
     var salarioInfo = elemento.querySelector("#salarioInfo");
     var estadoInfo = elemento.querySelector("#estadoInfo");
+    var fechaInfo = elemento.querySelector("#fechaInfo");
     
     var nombreRecib = document.getElementById("nombreRecib");
     var documentoRecib = document.getElementById("documentoRecib");
     var salarioRecib = document.getElementById("salarioRecib");
     var estadoRecib = document.getElementById("estadoRecib");
+    var fechaRecib = document.getElementById("fechaRecib");
 
     if (nombreInfo && documentoInfo && salarioInfo && estadoInfo) {
         nombreRecib.textContent = nombreInfo.textContent;
         documentoRecib.textContent = documentoInfo.textContent;
         salarioRecib.textContent = salarioInfo.textContent;
         estadoRecib.textContent = estadoInfo.textContent;
+        fechaRecib.textContent = fechaInfo.textContent;
+    }
+}
+
+function marcoAgregar(tipo){
+    const Modal = document.getElementById("modalOpciones");
+    const addModal = document.getElementById("agregarModal");
+    const marco = document.getElementById("marcoModal");
+
+    Modal.style.display = "none";
+    addModal.style.display = "none";
+    marco.style.display = "none";
+
+    if (tipo === "desactive"){
+        Modal.style.display = "none";
+        addModal.style.display = "none";
+    }
+    
+    if (tipo === "active"){
+        Modal.style.display = "flex";
+        addModal.style.display = "flex";
     }
 }

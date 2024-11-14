@@ -71,11 +71,11 @@ def guardarHV(request):
         else:
             hojaDeVida = None
         
-        idiomas = Idiomas.objects.filter(id_hojavida=hojaDeVida.id_hoja_vida)
         aptitudes = Aptitudes.objects.filter(id_hojavida=hojaDeVida.id_hoja_vida)
+        idiomas = Idiomas.objects.filter(id_hojavida=hojaDeVida.id_hoja_vida)
         lenguajesProg = LenguajesProg.objects.filter(id_hojavida=hojaDeVida.id_hoja_vida)
-        formaciones = FormacionesAcademicas.objects.filter(id_hojavida=hojaDeVida.id_hoja_vida)
         expLaborales = ExpLaborales.objects.filter(id_hojavida=hojaDeVida.id_hoja_vida)
+        formaciones = FormacionesAcademicas.objects.filter(id_hojavida=hojaDeVida.id_hoja_vida)
 
         # Guardo los datos de los inputs en nuevas variables
         #--- DATOS PERSONALES ---
@@ -83,77 +83,77 @@ def guardarHV(request):
         direccionDato = request.POST.get('direccion').strip()
 
         #--- APTITUDES ---
-        aptitud1 = request.POST.get('aptitud_1').strip()
-        aptitud2 = request.POST.get('aptitud_2').strip()
-        aptitud3 = request.POST.get('aptitud_3').strip()
-        aptitud4 = request.POST.get('aptitud_4').strip()
-        aptitud5 = request.POST.get('aptitud_5').strip()
-        aptitudesArray = [aptitud1, aptitud2, aptitud3, aptitud4, aptitud5]
+        aptitudesArray = []
+        i = 1
+        for _ in range(aptitudes.count()):
+            aptitud = request.POST.get('aptitud_' + str(i)).strip()
+            aptitudesArray.append(aptitud)
+            i = i + 1
 
         #--- IDIOMAS ---
-        idioma1 = request.POST.get('idioma_1').strip()
-        idioma2 = request.POST.get('idioma_2').strip()
-        idioma3 = request.POST.get('idioma_3').strip()
-        nivel1 = request.POST.get('nivel_1').strip()
-        nivel2 = request.POST.get('nivel_2').strip()
-        nivel3 = request.POST.get('nivel_3').strip()
-        idiomasArray = [idioma1, idioma2, idioma3]
-        nivelArray = [nivel1, nivel2, nivel3]
+        idiomasArray = []
+        nivelArray = []
+        i = 1
+        for _ in range(idiomas.count()):
+            idioma = request.POST.get('idioma_' + str(i)).strip()
+            nivel = request.POST.get('nivel_' + str(i)).strip()
+            idiomasArray.append(idioma)
+            nivelArray.append(nivel)
+            i = i + 1
 
         #--- LENGUAJES PROG ---
-        lenguaje1 = request.POST.get('lenguajeProg_1').strip()
-        lenguaje2 = request.POST.get('lenguajeProg_2').strip()
-        lenguaje3 = request.POST.get('lenguajeProg_3').strip()
-        lenguaje4 = request.POST.get('lenguajeProg_4').strip()
-        lenguaje5 = request.POST.get('lenguajeProg_5').strip()
-        lenguaje6 = request.POST.get('lenguajeProg_6').strip()
-        lenguajeArray = [lenguaje1, lenguaje2, lenguaje3, lenguaje4, lenguaje5, lenguaje6]
+        lenguajeArray = []
+        i = 1
+        for _ in range(lenguajesProg.count()):
+            lenguaje = request.POST.get('lenguajeProg_' + str(i)).strip()
+            lenguajeArray.append(lenguaje)
+            i = i + 1
 
         #--- EXP PROFESIONALES ---
-        #exp 1
-        cargo1 = request.POST.get('exp_cargo_1').strip()
-        empresa1 = request.POST.get('exp_empresa_1').strip()
-        tiempoIni1 = request.POST.get('exp_tiempoIni_1').strip()
-        tiempoFin1 = request.POST.get('exp_tiempoFin_1').strip()
-        description1 = request.POST.get('exp_description_1').strip()
+        cargoArray = []
+        empresaArray = []
+        tiempoIniArray = []
+        tiempoFinArray = []
+        descriptionArray = []
 
-        #exp 2
-        cargo2 = request.POST.get('exp_cargo_2').strip()
-        empresa2 = request.POST.get('exp_empresa_2').strip()
-        tiempoIni2 = request.POST.get('exp_tiempoIni_2').strip()
-        tiempoFin2 = request.POST.get('exp_tiempoFin_2').strip()
-        description2 = request.POST.get('exp_description_2').strip()
+        i = 1
+        for _ in range(expLaborales.count()):
+            cargo = request.POST.get('exp_cargo_' + str(i)).strip()
+            empresa = request.POST.get('exp_empresa_' + str(i)).strip()
+            tiempoIni = request.POST.get('exp_tiempoIni_' + str(i)).strip()
+            tiempoFin = request.POST.get('exp_tiempoFin_' + str(i)).strip()
+            description = request.POST.get('exp_description_' + str(i)).strip()
 
-        cargoArray = [cargo1, cargo2]
-        empresaArray = [empresa1, empresa2]
-        tiempoIniArray = [tiempoIni1, tiempoIni2]
-        tiempoFinArray = [tiempoFin1, tiempoFin2]
-        descriptionArray = [description1, description2]
+            cargoArray.append(cargo)
+            empresaArray.append(empresa)
+            tiempoIniArray.append(tiempoIni)
+            tiempoFinArray.append(tiempoFin)
+            descriptionArray.append(description)
+            i = i + 1
         
         #--- FORMACIÓN ACADEMICA ---
-        #form 1
-        titulo1 = request.POST.get('academ_titulo_1').strip()
-        instituto1 = request.POST.get('academ_institu_1').strip()
-        fechaIni1 = request.POST.get('academ_fechaIni_1').strip()
-        fechaFin1 = request.POST.get('academ_fechaFin_1').strip()
+        tituloArray = []
+        institutoArray = []
+        fechaIniArray = []
+        fechaFinArray = []
+        i = 1
 
-        #form 2
-        titulo2 = request.POST.get('academ_titulo_2').strip()
-        instituto2 = request.POST.get('academ_institu_2').strip()
-        fechaIni2 = request.POST.get('academ_fechaIni_2').strip()
-        fechaFin2 = request.POST.get('academ_fechaFin_2').strip()
+        for _ in range(formaciones.count()):
+            titulo = request.POST.get('academ_titulo_' + str(i)).strip()
+            instituto = request.POST.get('academ_institu_' + str(i)).strip()
+            fechaIni = request.POST.get('academ_fechaIni_' + str(i)).strip()
+            fechaFin = request.POST.get('academ_fechaFin_' + str(i)).strip()
 
-        tituloArray = [titulo1, titulo2]
-        institutoArray = [instituto1, instituto2]
-        fechaIniArray = [fechaIni1, fechaIni2]
-        fechaFinArray = [fechaFin1, fechaFin2]
-
-        #VALIDACIONES
-        
+            tituloArray.append(titulo)
+            institutoArray.append(instituto)
+            fechaIniArray.append(fechaIni)
+            fechaFinArray.append(fechaFin)
+            i = i + 1
 
         try:
             # Actualizamos los datos
-            hojaDeVida.telefono = telefonoDato
+            if not telefonoDato == "":
+                hojaDeVida.telefono = telefonoDato
             hojaDeVida.direccion = direccionDato
 
             i = 0
@@ -175,18 +175,24 @@ def guardarHV(request):
             i = 0
             for expLaboral in expLaborales:
                 expLaboral.nom_empresas = empresaArray[i]
-                expLaboral.tiempo_inicio = tiempoIniArray[i]
-                expLaboral.tiempo_final = tiempoFinArray[i]
                 expLaboral.cargo = cargoArray[i]
                 expLaboral.descripcion = descriptionArray[i]
+
+                if not tiempoIniArray[i] == "":
+                    expLaboral.tiempo_inicio = tiempoIniArray[i]
+                if not tiempoFinArray[i] == "":
+                    expLaboral.tiempo_final = tiempoFinArray[i]
                 i += 1
             
             i = 0
             for formacion in formaciones:
                 formacion.titulo = tituloArray[i]
                 formacion.nom_institucion = institutoArray[i]
-                formacion.fecha_inicio = fechaIniArray[i]
-                formacion.fecha_final = fechaFinArray[i]
+
+                if not fechaIniArray[i] == "":
+                    formacion.fecha_inicio = fechaIniArray[i]
+                if not fechaFinArray[i] == "":
+                    formacion.fecha_final = fechaFinArray[i]
                 i += 1
 
             # Guardamos los datos
@@ -224,7 +230,6 @@ def aplicarCurso(request):
             cursoDisponible = cursosDisponibles[0]
         else:
             return JsonResponse({'status': 'error', 'message': 'Curso no encontrado.'})
-
         try:
             # Guardamos la activación
             cursoDisponible.activacion = 1
@@ -247,23 +252,18 @@ def aplicarOferta(request):
 
         ofertasDisponibles = OfertasDisponibles.objects.filter(id_estudiante=idEstudiante, id_oferta=idOferta)
         if ofertasDisponibles.exists():
-            ofertaDisponible = ofertasDisponibles[0]
+            ofertaDisponible = ofertasDisponibles.first()
         else:
-            estudiantes = Estudiantes.objects.filter(id_estudiante = idEstudiante)[0]
-            ofertasEmpleos = OfertasEmpleos.objects.filter(id_oferta = idOferta)[0]
-
-            ofertaDisponible = OfertasDisponibles.objects.create(id_estudiante=estudiantes, id_oferta=ofertasEmpleos, activacion = 0)
-
-        if ofertaDisponible.activacion == 0:
+            estudiantes = Estudiantes.objects.filter(id_estudiante = idEstudiante).first()
+            ofertasEmpleos = OfertasEmpleos.objects.filter(id_oferta = idOferta).first()
             try:
-                # Guardamos la activación
-                ofertaDisponible.activacion = 1
-                ofertaDisponible.save()
+                ofertaDisponible = OfertasDisponibles.objects.create(id_estudiante=estudiantes, id_oferta=ofertasEmpleos, activacion = 1)
                 return JsonResponse({'status': 'success', 'message': 'Aplicaste a la oferta correctamente.'})
             except Exception as e:
-                # Error por el cual no se pudo guardar
+                # Error por el cual no se pudo crear
                 return JsonResponse({'status': 'error', 'message': str(e)})
-        else:
+            
+        if ofertaDisponible.activacion == 1:
             # Lo dirijimos a pruebas en caso de que ya este aplicado a la oferta junto al id del estudiante y de la oferta.
             url_pruebas = reverse('Pruebas', kwargs={'idEstudiante': idEstudiante, 'idOferta': idOferta})
             return JsonResponse({'status': 'redirect', 'url': url_pruebas})

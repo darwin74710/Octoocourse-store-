@@ -1,0 +1,229 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contenidos</title>
+
+    <!-- Scripts css -->
+    <link rel="stylesheet" href="{% static 'administrator/css/navBar.css' %}" />
+    <link rel="stylesheet" href="{% static 'administrator/css/footer.css' %}" />
+    <link rel="stylesheet" href="{% static 'administrator/css/cursos.css' %}" />
+    <link rel="stylesheet" href="{% static 'administrator/css/modal.css' %}" />
+    <link rel="stylesheet" href="{% static 'administrator/css/miniContModal.css' %}" />
+
+    <!-- Cargar tema -->
+    <script src="{% static 'administrator/js/Front/Temas.js' %}"></script>
+
+    <!-- Imagenes -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <!-- Botstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+</head>
+
+<body style="background-color: var(--fondo1);">
+    <!-- NavBar -->
+    <header id="navBar">
+        <img id="logo" src="{% static 'administrator/img/navBar/Logo2.png' %}" alt="">
+
+        <!-- MENU PC -->
+        <div id="derecha">
+            <a id="btn_icono" onclick="cambiarTema()" style="cursor: pointer;"><i class="bi bi-brilliance"></i></a>
+            <div class="linea"></div>
+            <a id="btn_icono" href="{% url 'logout' %}"><i class="fa-solid fa-arrow-right-from-bracket"></i></a>
+        </div>
+    </header>
+
+    <div id="marcoCursos">
+        <div id="botonesConfig">
+            <a id="btnIzquierda" onclick="agregarContenido()"><i class="bi bi-plus-lg"></i></a>
+            <a onclick="volverMinContent()"><i class="bi bi-house"></i></a>
+        </div>
+        <div id="cursoRecib" style="display: none;">{{ curso.id_curso }}</div>
+        <!-- Metodo para volver a la edición de cursos dandole el id -->
+        <script>
+            function volverMinContent(){
+                const idCurso = document.getElementById('cursoRecib').innerText;
+                const idParametro = encodeURIComponent(idCurso);
+                
+                var cursoInfoUrl = "{% url 'cursoEditar' %}";
+    
+                window.location.href = `${cursoInfoUrl}?idCurso=${idParametro}`;
+            }
+        </script>
+
+        <div id="listaOpciones">
+            {% for contenido in contenidos %}
+                <div class="marcoOpcion" onclick="modalSubContenidos(this, '{{ contenido.nom_contenido }}')">
+                    <h3 id="nomContInfo">{{ contenido.nom_contenido }}</h3>
+                    <p id="idContInfo">{{ contenido.id_contenido }}</p>
+                    {% for subcontenido in subcontenidos %}
+                        {% if subcontenido.id_contenido.id_contenido == contenido.id_contenido %}
+                            <p class="subContenidos">{{ subcontenido.id_subcont }}|{{ subcontenido.nom_subcont }}|{{ subcontenido.url_cont }}</p>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div id="fondoModals">
+        <div id="modal1">        
+            <form class="nombreEditar FormAjax" method="POST" action="{% url 'editarContenido' %}">
+            <!-- Modal para ver SubContenidos -->
+                <input id="tituloSubContent" type="text" name="contentNombre">
+                <input  type="hidden" id="idContenidoEdit" name="idContentInput">
+                <button type="submit">Guardar Nombre</button>
+            </form>
+
+            <h1>SubContenidos</h1>
+            
+            <div id="listaOpciones" class="subContenidosList">
+                <!-- Aquí se agregan elementos desde la función -->
+            </div>
+
+            <div id="botonesOpciones">
+                <button onclick="crearSubContenido()">Añadir</button>
+                <a onclick="eliminarContenido()">Eliminar Contenido</a>
+                <a onclick="cerrarModals()">Salir</a>
+            </div>
+        </div>
+
+        <script>
+            function eliminarContenido(){
+                const idContenido = document.getElementById("idContenidoEdit").value;
+                const idParametro = encodeURIComponent(idContenido);
+
+                const idCurso = document.getElementById("cursoRecib").innerText;
+                
+                var InfoUrl = "{% url 'eliminarContenido' %}";
+
+                window.location.href = `${InfoUrl}?idContenido=${idParametro}&idCurso=${idCurso}`;
+            }
+        </script>
+
+        <form id="modal2" class="FormAjax" method="POST" action="{% url 'crearContenido' %}">
+            <!-- Modal para agregar un contenido -->
+             <h1>Agregar Contenido</h1>
+
+             <div class="inputsContentsInfo">
+                <div class="miniInputContent">
+                    <p>Nombre</p>
+                    <input type="text" name="contentNombre">
+                    <input type="hidden" name="cursoIdCrearContent" value="{{ curso.id_curso }}">
+                    
+                </div>
+             </div>
+
+            <div id="botonesOpciones">
+                <button type="submit">Crear</button>
+                <a onclick="cerrarModals()">Salir</a>
+            </div>
+        </form>
+
+        <form id="modal3" class="FormAjax" method="POST" action="{% url 'crearSubContenido' %}">
+            <!-- Modal para agregar un subContenido -->
+            <h1>Crear SubContenido</h1>
+            <p>La url tiene que ser de un powerpoint en una carpeta pública de OneDrive.</p>
+            <input type="hidden" id="idContenidoCrearSub" name="idContenido">
+
+            <div class="inputsContentsInfo">
+            <div class="miniInputContent">
+                <p>Nombre</p>
+                <input type="text" name="nombreSubContenido">
+            </div>
+            <div class="miniInputContent">
+                <p>URL</p>
+                <input type="text" name="urlSubContenido">
+            </div>
+            </div>
+
+            <div id="botonesOpciones">
+                <button type="submit">Crear</button>
+                <a onclick="cerrarModals()">Salir</a>
+            </div>
+        </form>
+
+        <form id="modal4" class="FormAjax" method="POST" action="{% url 'editarSubContenido' %}">
+            <!-- Modal para modificar Sub Contenido -->
+            <h1>Modificar SubContenido</h1>
+            <p>La url tiene que ser de un powerpoint en una carpeta pública de OneDrive.</p>
+            <input type="hidden" id="modifiSubContId" name="idSubContenido">
+             <div class="inputsContentsInfo">
+                <div class="miniInputContent">
+                    <p>Nombre</p>
+                    <input type="text" id="modifiSubContNomb" name="nombreSubContenido">
+                </div>
+                <div class="miniInputContent">
+                    <p>URL</p>
+                    <input type="text" id="modifiSubContUrl" name="urlSubContenido">
+                </div>
+             </div>
+
+            <div id="botonesOpciones">
+                <button type="submit">Guardar</button>
+                <a onclick="eliminarSubContenido()">Eliminar</a>
+                <a onclick="cerrarModals()">Salir</a>
+            </div>
+        </form>
+
+        <script>
+            function eliminarSubContenido(){
+                const idSubContenido = document.getElementById("modifiSubContId").value;
+                const idParametro = encodeURIComponent(idSubContenido);
+
+                const idCurso = document.getElementById("cursoRecib").innerText;
+                
+                var InfoUrl = "{% url 'eliminarSubContenido' %}";
+
+                window.location.href = `${InfoUrl}?idSubContenido=${idParametro}&idCurso=${idCurso}`;
+            }
+        </script>
+    </div>
+
+    <!-- Footer -->
+    <footer class="piePag">
+        <div id="Marco1">
+            <div class="Elementos">
+                <h1>SOBRE NOSOTROS</h1>
+                <p>Somos OctooCourse, ofrecemos cursos para reforzar el aprendizaje de amantes a la programación,
+                    también contamos con ofertas de empleo para generar
+                    oportunidades y llegar al camino del éxito.
+                </p>
+            </div>
+            <div class="Elementos">
+                <h1>SÍGUENOS</h1>
+                <div id="redes">
+                    <a href="https://whatsapp.com" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                    <a href="https://www.facebook.com/profile.php?id=61567434383968" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://www.instagram.com/octoocourse/" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.youtube.com/@OctooCourse" target="_blank"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+        <div id="Marco2">&copy; 2024 OctooCourse - Todos los Derechos Reservados.</div>
+    </footer>
+
+    <!-- Scripts AJAX -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- Scripts js -->
+    <script src="{% static 'administrator/js/Front/navBar.js' %}"></script>
+    <script src="{% static 'administrator/js/Front/modal.js' %}"></script>
+    <script src="{% static 'administrator/js/Front/cambiarTem.js' %}"></script>
+    <script src="{% static 'administrator/js/Front/miniModalContent.js' %}"></script>
+
+    <script src="{% static 'administrator/js/DataBase/ConfigData.js' %}"></script>
+
+    <!-- Scripts Botstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

@@ -23,12 +23,13 @@ class Empresas(models.Model):
 
 class OfertasEmpleos(models.Model):
     id_oferta = models.IntegerField(primary_key=True)
+    nit = models.ForeignKey(Empresas, models.DO_NOTHING, db_column='nit', blank=True, null=True)
     nombre_oferta = models.CharField(max_length=50, blank=True, null=True)
     salario = models.DecimalField(max_digits=15, decimal_places=2, blank=True, null=True)
     descripcion = models.CharField(max_length=1000, blank=True, null=True)
     estado = models.BooleanField(blank=True, null=True)
     fecha_pub = models.DateField(blank=True, null=True)
-    nit = models.ForeignKey(Empresas, models.DO_NOTHING, db_column='nit', blank=True, null=True)
+    id_tipo_cont = models.ForeignKey('TipoCont', models.DO_NOTHING, db_column='id_tipo_cont', blank=True, null=True)
 
     class Meta:
         managed = False
@@ -38,7 +39,7 @@ class OfertasEmpleos(models.Model):
 class Conocimientos(models.Model):
     id_conocimiento = models.IntegerField(primary_key=True)
     nom_con = models.CharField(max_length=100, blank=True, null=True)
-    id_oferta = models.ForeignKey(OfertasEmpleos, models.DO_NOTHING, db_column='id_oferta', blank=True, null=True)
+    id_oferta = models.IntegerField(blank=True, null=True)
 
     class Meta:
         managed = False
@@ -46,14 +47,12 @@ class Conocimientos(models.Model):
 
 
 class TipoCont(models.Model):
-    id_tipo_cont = models.IntegerField(primary_key=True)  # The composite primary key (id_tipo_cont, id_oferta) found, that is not supported. The first column is selected.
-    tipo_cont = models.CharField(max_length=50, blank=True, null=True)
-    id_oferta = models.ForeignKey(OfertasEmpleos, models.DO_NOTHING, db_column='id_oferta')
+    id_tipo_cont = models.IntegerField(primary_key=True)
+    nombre_tipo = models.CharField(max_length=50)
 
     class Meta:
         managed = False
         db_table = 'TIPO_CONT'
-        unique_together = (('id_tipo_cont', 'id_oferta'),)
 
 
 class RespuestasOfertas(models.Model):

@@ -66,7 +66,7 @@
             <div id="botonesOpciones">
                 <a onclick="editInformation('hojaVida')">Hoja de Vida</a>
                 <a onclick="editInformation('estudiante')">Modificar Estudiante</a>
-                <a>Eliminar Usuario</a>
+                <a onclick="editInformation('eliminar')">Eliminar Estudiante</a>
                 <a onclick="modalOpenExit('desactive', 'estudiantes', this)">Salir</a>
             </div>
         </div>
@@ -82,6 +82,8 @@
                 var cursoInfoUrl = "{% url 'estudianteEditar' %}";
             }else if(tipoEdicion === "hojaVida"){
                 var cursoInfoUrl = "{% url 'hojaVidaVisualizar' %}";
+            }else if(tipoEdicion === "eliminar"){
+                var cursoInfoUrl = "{% url 'estudianteEliminar' %}";
             }
             
 

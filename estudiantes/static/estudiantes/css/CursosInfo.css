@@ -21,6 +21,15 @@
     border-bottom: 1px solid var(--borde1);
 }
 
+#MarcoInfoCursos h4{
+    display: block;
+    height: 100%;
+    font-size: 150px;
+    margin: 50px auto;
+    font-weight: bold;
+    color: var(--letra1);
+}
+
 #MarcoInfoCursos img{
     margin: 0 auto;
     width: 500px; height: 300px;

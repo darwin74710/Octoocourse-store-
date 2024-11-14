@@ -6,24 +6,32 @@
     border-radius: 10px;
 }
 
-#marcoOfertas #volverBoton{
+#marcoOfertas #botonesConfig{
+    display: flex;
+}
+
+#marcoOfertas #botonesConfig #btnIzquierda{
+    margin-left: auto;
+}
+
+#marcoOfertas #botonesConfig a{
     width: 45px;
     display: block;
     color: var(--letraBotones1); background-color: var(--fondoBotones1);
     margin: 0;
+    margin-left: 5px;
     margin-bottom: 10px;
-    margin-left: auto;
     padding: 0 5px;
     border-radius: 10px;
     cursor: pointer;
     transition: all 0.3s ease 0s;
 }
 
-#marcoOfertas #volverBoton:hover{
+#marcoOfertas #botonesConfig a:hover{
     background-color: var(--hFondoBotones1); color: var(--hLetraBotones1);
 }
 
-#marcoOfertas #volverBoton i{
+#marcoOfertas #botonesConfig a i{
     font-size: 35px;
 }
 

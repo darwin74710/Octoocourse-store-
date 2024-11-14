@@ -39,8 +39,9 @@
     </header>
 
     <div id="marcoEmpresas">
-        <a id="volverBoton" href="{% url 'empresaAdmin' %}"><i class="bi bi-house"></i></a>
-
+        <div id="botonesConfig">
+            <a id="btnIzquierda" href="{% url 'empresaAdmin' %}"><i class="bi bi-house"></i></a>
+        </div>
         <form class="FormAjax" method="POST" action="{% url 'guardarEmpresaAdmin' idEmpres=empresa.nit %}">
             <h1>MODIFICAR EMPRESA</h1>
 

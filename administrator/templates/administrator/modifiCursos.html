@@ -39,7 +39,10 @@
     </header>
 
     <div id="marcoCursos">
-        <a id="volverBoton" href="{% url 'administratorAdmin' %}"><i class="bi bi-house"></i></a>
+        <div id="botonesConfig">
+            <a id="btnIzquierda" onclick="marcoAgregar('active')"><i class="bi bi-plus-lg"></i></a>
+            <a href="{% url 'administratorAdmin' %}"><i class="bi bi-house"></i></a>
+        </div>
         <div id="listaOpciones">
             {% if cursos %}
                 {% for curso in cursos %}
@@ -47,16 +50,10 @@
                         <h3 id="nombreInfo">{{ curso.nom_curso.strip|upper }}</h3>
                         <p id="documentoInfo">{{ curso.id_curso }}</p>
                         <p id="precioInfo">{{ curso.precio }}</p>
-                        <p id="lenguajeInfo">{{ curso.lenguaje }}</p>
-                        <p id="nivelInfo">{{ curso.dificultad }}</p>
-                        <p id="tiempoInfo">{{ curso.tiempo }}</p>
-                        <p id="certificadoInfo">
-                            {% if curso.certificado == 0 %}
-                                Sin Certificado
-                            {% elif curso.certificado == 1 %}
-                                Con Certificado
-                            {% endif %}
-                        </p>
+                        <p id="lenguajeInfo">{{ curso.id_tipo_contenido.nombre_tipo }}</p>
+                        <p id="nivelInfo">{{ curso.id_tipo_dificultad.nombre_tipo }}</p>
+                        <p id="tiempoInfo">{{ curso.id_tipo_duracion.nombre_tipo }}</p>
+                        <p id="certificadoInfo">{{ curso.id_tipo_certificado.nombre_tipo }}</p>
                     </div>
                 {% endfor %}
             {% endif %}
@@ -68,25 +65,99 @@
             <h1 id="nombreRecib"></h1>
             <div class="minInfo"><h2>ID: </h2><h2 id="documentoRecib"></h2></div>
             <div class="minInfo"><h2>Precio: </h2><h2 id="precioRecib"></h2></div>
-            <div class="minInfo"><h2>Lenguaje: </h2><h2 id="lenguajeRecib"></h2></div>
+            <div class="minInfo"><h2>Contenido: </h2><h2 id="lenguajeRecib"></h2></div>
             <div class="minInfo"><h2>Nivel: </h2><h2 id="nivelRecib"></h2></div>
             <div class="minInfo"><h2>Tiempo: </h2><h2 id="tiempoRecib"></h2></div>
             <div class="minInfo"><h2>Certificado: </h2><h2 id="certificadoRecib"></h2></div>
 
             <div id="botonesOpciones">
-                <a onclick="editInformation()">Modificar curso</a>
-                <a>Eliminar curso</a>
+                <a onclick="editInformation('editar')">Modificar curso</a>
+                <a onclick="editInformation('eliminar')">Eliminar curso</a>
                 <a onclick="modalOpenExit('desactive', 'cursos', this)">Salir</a>
             </div>
         </div>
+
+        <form id="agregarModal" class="FormAjax" method="POST" action="{% url 'cursoAñadir' %}">
+            <h1>Crear Curso</h1>
+
+            <div class="contentInputs">
+                <div class="minContentInput">
+                    <p>Nombre</p>
+                    <input type="text" name="nombreCurso">
+                </div>
+                <div class="minContentInput">
+                    <p>Precio</p>
+                    <input type="number" name="precio">
+                </div>
+                <div class="minContentInput">
+                    <p>Contenido</p>
+                    <select name="contenido">
+                        {% for contenido in tipoContenido %}
+                            <option value="{{ contenido.id_tipo_contenido }}">
+                                {{ contenido.nombre_tipo }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+
+            <div class="contentInputs">
+                <div class="minContentInput">
+                    <p>Dificultad</p>
+                    <select name="dificultad">
+                        {% for dificultad in tipoDificultad %}
+                            <option value="{{ dificultad.id_tipo_dificultad }}">
+                                {{ dificultad.nombre_tipo }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="minContentInput">
+                    <p>Tiempo</p>
+                    <select name="tiempo">
+                        {% for duracion in tipoDuracion %}
+                            <option value="{{ duracion.id_tipo_duracion }}">
+                                {{ duracion.nombre_tipo }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="minContentInput">
+                    <p>Certificado</p>
+                    <select name="certificado">
+                        {% for certificado in tipoCertificado %}
+                            <option value="{{ certificado.id_tipo_certificado }}">
+                                {{ certificado.nombre_tipo }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+
+            <div class="contentInputs">
+                <div class="minContentInput">
+                    <p>Descripción</p>
+                    <textarea name="descripcion"></textarea>
+                </div>
+            </div>
+
+            <div id="botonesOpciones">
+                <button type="submit">Añadir</button>
+                <a onclick="marcoAgregar('desactive')">Salir</a>
+            </div>
+        </form>
     </div>
 
     <script>
-        function editInformation(){
+        function editInformation(dato){
             const idCurso = document.getElementById('documentoRecib').innerText;
             const idParametro = encodeURIComponent(idCurso);
-
-            var cursoInfoUrl = "{% url 'cursoEditar' %}";
+            
+            if (dato == "editar"){
+                var cursoInfoUrl = "{% url 'cursoEditar' %}";
+            }else if(dato == "eliminar"){
+                var cursoInfoUrl = "{% url 'cursoEliminar' %}";
+            }
 
             window.location.href = `${cursoInfoUrl}?idCurso=${idParametro}`;
         }
@@ -115,10 +186,15 @@
         <div id="Marco2">&copy; 2024 OctooCourse - Todos los Derechos Reservados.</div>
     </footer>
 
+    <!-- Scripts AJAX -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
     <!-- Scripts js -->
     <script src="{% static 'administrator/js/Front/navBar.js' %}"></script>
     <script src="{% static 'administrator/js/Front/modal.js' %}"></script>
     <script src="{% static 'administrator/js/Front/cambiarTem.js' %}"></script>
+
+    <script src="{% static 'administrator/js/DataBase/ConfigData.js' %}"></script>
 
     <!-- Scripts Botstrap -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"

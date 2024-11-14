@@ -75,17 +75,7 @@
         </i>
         <i class="bi bi-cash"> : {{ ofertasEmpleos.salario }}</i>
         <i class="bi bi-briefcase"> : 
-            {% if contrato.id_tipo_cont == 1 %}
-                Término Fijo
-            {% elif contrato.id_tipo_cont == 2 %}
-                Término Indefinido
-            {% elif contrato.id_tipo_cont == 3 %}
-                Obra o Labor
-            {% elif contrato.id_tipo_cont == 4 %}
-                Aprendizaje
-            {% else %}
-                Tipo de contrato desconocido
-            {% endif %}
+            {{ ofertasEmpleos.id_tipo_cont.nombre_tipo }}
         </i>
         <h2>Descripción</h2>
         <p>{{ ofertasEmpleos.descripcion }}</p>

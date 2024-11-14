@@ -94,19 +94,8 @@ function filtro_contrato(contrato) {
     var dato;
     let checkButton;
 
-    if(contrato === 'Fijo'){
-        checkButton = document.getElementById('FijoFilter');
-        dato = "|fijo";
-    }else if(contrato === 'Indefinido'){
-        checkButton = document.getElementById('IndefinidoFilter');
-        dato = "|indefinido";
-    }else if(contrato === 'ObraLabor'){
-        checkButton = document.getElementById('ObraLaborFilter');
-        dato = "|obra";
-    }else if(contrato === 'Aprendizaje'){
-        checkButton = document.getElementById('AprendizajeFilter');
-        dato = "|aprendizaje";
-    }
+    checkButton = document.getElementById(contrato + 'Filter');
+    dato = "|" + contrato;
 
     change_filtros(checkButton, dato, filtrado);
 }
