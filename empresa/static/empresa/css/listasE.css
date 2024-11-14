@@ -1,126 +1,132 @@
-.marcoCV{
-    width: 100%;
-    z-index: 1;
-    display: block;
+:root {
+    --primary-color: #4a90e2;
+    --secondary-color: #50c878;
+    --background-color: #f0f4f8;
+    --text-color: #333;
+    --hover-color: #3a7bd5;
+    --shadow-color: rgba(0, 0, 0, 0.1);
 }
 
-.marcoOfertas{
-    width: 100%;
-    z-index: 1;
-    display: none;
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    line-height: 1.6;
 }
 
-.marcoUsuarios{
-    width: 100%;
-    z-index: 1;
-    display: none;
+.marcoCV {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px var(--shadow-color);
 }
 
-.listas{
-    overflow: auto;
-    background-color: #f3d9ff;
-    width: 100%; height: 100vh;
-}
-
-h3{
-    margin: 10px auto;
-    width: 80%;
-    font-size: 50px;
-    font-weight: bold;
-    color: #560581;
-    border-bottom: 3px solid #560581;
+h3 {
+    color: #3F2A8C !important;
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
     text-align: center;
 }
 
-.interact{
-    background-color: #8021bb;
+.listas {
+    list-style-type: none;
+    padding: 0;
+}
+
+.interact {
     display: flex;
-    word-break: break-word;
-    height: auto; width: 80%;
-    list-style: none;
-    margin: 10px auto;
-    border-radius: 10px;
-    color: white;
+    justify-content: space-between;
+    align-items: center;
+    background-color: white;
+    margin-bottom: 1rem;
+    padding: 1rem;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px var(--shadow-color);
+    background-color: #DEDEDE;
+}
+
+.interact:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 8px var(--shadow-color);
+}
+
+.interact p {
+    margin: 0;
     font-weight: bold;
-    transition: all 0.3s ease 0s;
+    color: var(--text-color);
+    padding-right: 25px;
 }
 
-.interact p{
-    padding: 20px 10px;
-}
 
-.interact img{
-    background-color: #560581;
-    border: 2px solid #8021bb;
+.visualizar {
+    width: 24px;
+    height: 24px;
     cursor: pointer;
-    padding: 5px;
-    width: 65px; height: 65px;
+    transition: transform 0.2s ease;
 }
 
-.interact img:hover{
-    background-color: #2e0346;
+.visualizar:hover {
+    transform: scale(1.2);
 }
 
-.interact .crudLista{
-    margin-left: auto;
-    display: flex;
-    flex-direction: row;
-}
-
-.interact .crudLista .eliminar{
-    border-radius: 0px 10px 10px 0px;
-}
-
-
-.volver-btn-container {
-    position: absolute; 
-    top: 20px;
-    left: 20px; 
-    z-index: 10; 
-}
-
-.volver-btn {
-    background-color: #560581; 
-    color: white; 
-    padding: 10px 20px; 
+.btn-hoja-vida {
+    background-color: #8021bb;
+    color: white;
     border: none;
-    border-radius: 5px; 
-    font-size: 18px; 
-    text-decoration: none; 
-    cursor: pointer; 
-    transition: background-color 0.3s ease; 
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
-.volver-btn:hover {
-    background-color: #8021bb; 
+.btn-hoja-vida:hover {
+    background-color: #6a1b9a;
+}
+
+.back-button {
+    background-color: var(--color-primary);
+    color: var(--color-text-light);
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    font-size: 1rem;
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 1rem;
+}
+
+.back-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+}
+
+.back-button:hover {
+    background-color: var(--color-secondary);
+    transform: translateY(-2px);
+}
+
+.btn-close{
+    background-color: #8021bb !important;
 }
 
 
-@media screen and (max-width:1000px) {
-    h3{
-        font-size: 30px;
+
+
+
+@media (max-width: 768px) {
+    .marcoCV {
+        padding: 1rem;
     }
-    
-    .interact{
+
+    .interact {
         flex-direction: column;
+        align-items: flex-start;
     }
 
-    .interact p{
-        padding: 10px 10px;
-        padding-bottom: 0px;
-    }
-
-    .interact .crudLista{
-        margin: auto;
-    }
-
-    .interact .crudLista .eliminar{
-        border-radius: 10px;
-    }
-
-    .interact img{
-        width: 30%; height: 30%;
-        border-radius: 10px;
-        margin: 5px auto;
-    }
 }

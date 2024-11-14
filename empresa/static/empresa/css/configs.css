@@ -12,24 +12,11 @@
     background-color: var(--fondoTitulo2);
     color: var(--letraTitulo2);
     text-align: center;
+    
 }
 
-#MarcoConfig a {
-    text-decoration: none;
-    margin: 10px auto;
-    padding: 5px 15px;
-    font-size: 20px;
-    color: var(--letraBotones1);
-    background-color: var(--fondoBotones1);
-    border-radius: 100px;
-    cursor: pointer;
-    transition: all 0.3s ease 0s;
-}
 
-#MarcoConfig a:hover {
-    background-color: var(--hFondoBotones1);
-    color: var(--hLetraBotones1);
-}
+
 
 .marcoOpcion {
     height: 100px;
@@ -39,9 +26,10 @@
     background-color: var(--fondoBotones2);
     cursor: pointer;
     display: flex;
+    
 }
 
-.marcoOpcion:hover, #plantillaHV:hover {
+.marcoOpcion:hover{
     filter: brightness(85%);
     transition: filter 0.3s ease;
 }
@@ -73,13 +61,7 @@
     font-size: 65px;
 }
 
-#btnAdjuntar {
-    display: inline;
-}
 
-#btnPlantilla {
-    display: none;
-}
 
 @media screen and (max-width:800px) {
     #MarcoConfig {
@@ -113,6 +95,12 @@
     }
 }
 
+
+
+
+
+
+
 #modalMisDatos {
     display: none;
     position: fixed;
@@ -126,10 +114,12 @@
     border-radius: 16px;
     box-shadow: 0px 10px 30px rgba(138, 43, 226, 0.2);
     width: 90%;
-    max-width: 500px;
+    max-width: 800px;
     z-index: 9999;
     transition: all 0.3s ease;
 }
+
+
 
 #modalOverlay {
     position: fixed;
@@ -149,11 +139,28 @@
     margin-top: 25px;
 }
 
-.campo {
+.section {
+    margin-bottom: 30px;
+}
+
+.section h2 {
+    color: #2e0346;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.campo-row {
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    margin: 15px 0;
+    margin-bottom: 20px;
+}
+
+.campo {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    width: 30%;
     padding: 10px;
     background-color: #f8f4ff;
     border-radius: 8px;
@@ -171,25 +178,21 @@
 
 .campo span {
     font-size: 1rem;
-    color: #4a148c;
+    color: #131116;
 }
 
-#modalMisDatos h2 {
-    color: #4a148c;
-    margin-bottom: 20px;
-}
 
-#modalMisDatos button {
-    background-color: #7e57c2;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 25px;
+.close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 30px;
+    font-weight: bold;
+    color: #5e35b1;
     cursor: pointer;
-    transition: background-color 0.3s ease;
-    margin-top: 20px;
+    transition: color 0.3s ease;
 }
 
-#modalMisDatos button:hover {
-    background-color: #5e35b1;
+.close:hover {
+    color: #7e57c2;
 }

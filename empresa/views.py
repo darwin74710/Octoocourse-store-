@@ -3,32 +3,49 @@ from django.db import connection
 from django.contrib import messages
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
-from login.models import Conocimiento, TipoCont, OfertaEmpleo, Empresa, Estudiante
+from login.models import Conocimiento, TipoCont, OfertaEmpleo, Empresa, Estudiante, OfertaDisponible
 from estudiantes.models import Estudiantes, HojasDeVida, Idiomas, Aptitudes, LenguajesProg, FormacionesAcademicas, ExpLaborales
 from datetime import date
 from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+from django.contrib.auth.hashers import check_password, make_password
+from django.core.mail import send_mail
 
+def enviar_correo(request, id_estudiante):
+    estudiante = Estudiante.objects.get(id_estudiante=id_estudiante)
 
+    if request.method == 'POST':
+        correo_estudiante = request.POST['correoEstudiante']
+        correo_usuario = request.POST['correoUsuario']
+        mensaje = request.POST['mensaje']
 
+        subject = f'Oferta de empleo para {estudiante.nom_estudiante} {estudiante.apellido}'
+        message = f"Estimado {estudiante.nom_estudiante},\n\n{mensaje}\n\nEnviado por: {correo_usuario}"
+
+        try:
+            send_mail(subject, message, correo_usuario, [correo_estudiante])
+            return redirect('inicioE')  # Redirigir a alguna página después de enviar el correo
+        except Exception as e:
+            print(f"Error al enviar el correo: {e}")
+            return render(request, 'error_page.html')  # Mostrar una página de error si hay problemas
+
+    return render(request, 'empresa/aboutMeStudent.html', {'estudiante': estudiante})
 
 
 
 @login_required
 def crearOferta(request):
+    tipos_contrato = TipoCont.objects.all() 
     if request.method == 'POST':
         nombre_oferta = request.POST.get('nombre_oferta')
         salario = request.POST.get('salario')
         descripcion = request.POST.get('descripcion')
         conocimientos_text = request.POST.get('conocimientos')
-        tipo_cont = request.POST.get('tipo_cont')
-        print(f'Tipo de contrato recibido: {tipo_cont}')
+        tipo_cont_id = request.POST.get('tipo_cont')  
 
         estado = 1 if request.POST.get('estado') == 'on' else 0
-
         nit_empresa = request.session.get('nit')
-
-        fecha_pub = date.today() 
-
+        fecha_pub = date.today()
 
         with connection.cursor() as cursor:
             cursor.execute("SELECT oferta_id_seq.NEXTVAL FROM dual")
@@ -36,13 +53,13 @@ def crearOferta(request):
 
         oferta = OfertaEmpleo(
             id_oferta=id_oferta,
-            nit=nit_empresa, 
+            nit=nit_empresa,
             nombre_oferta=nombre_oferta,
             salario=salario,
             descripcion=descripcion,
             estado=estado,
-            fecha_pub=fecha_pub  
-
+            fecha_pub=fecha_pub,
+            id_tipo_cont_id=tipo_cont_id  
         )
         oferta.save()
 
@@ -54,19 +71,20 @@ def crearOferta(request):
                     nom_con=conocimiento_nombre.strip()
                 )
 
-        TipoCont.objects.create(
-            id_oferta=oferta,
-            tipo_cont=tipo_cont
-        )
-
         return render(request, 'empresa/publicaro.html')
 
-    return render(request, 'empresa/publicaro.html')
+    return render(request, 'empresa/publicaro.html', {'tipos_contrato': tipos_contrato})
 
 
 @login_required 
 def inicioE(request):
     return render(request, 'empresa/inicioE.html')
+
+
+def subir_examen(request):
+
+    return render(request, 'empresa/aboutMeStudent.html')
+
 
 @login_required 
 def logout_view(request):
@@ -144,18 +162,49 @@ def estudiantesE(request):
     return render(request, 'empresa/estudiantesE.html', {'estudiantes': estudiantes})
 
 
-
+@login_required
 def configE(request):
-    return render(request, 'empresa/configE.html')
-
-@login_required 
-def ofertasE(request):
     nit_empresa = request.session.get('nit')
+    empresa_data = None
+    conteo_ofertas_creadas = 0  
+    conteo_ofertas_activas = 0
+    conteo_ofertas_inactivas = 0
+
+    if nit_empresa:
+        empresa_data = Empresa.objects.filter(nit=nit_empresa).values(
+            'nom_empresa', 'correo_emp', 'nit', 'direccion', 'telefono'
+        ).first()
+
+        conteo_ofertas_creadas = OfertaEmpleo.objects.filter(nit=nit_empresa).count()
+        conteo_ofertas_activas = OfertaEmpleo.objects.filter(nit=nit_empresa, estado=1).count()
+        conteo_ofertas_inactivas = OfertaEmpleo.objects.filter(nit=nit_empresa, estado=0).count()
+
+
+    data = {
+        'empresa': empresa_data,
+        'conteo_ofertas_creadas': conteo_ofertas_creadas,
+        'conteo_ofertas_activas': conteo_ofertas_activas,
+        'conteo_ofertas_inactivas': conteo_ofertas_inactivas
+    }
+
+    return render(request, 'empresa/configE.html', data)
+
+
+@login_required
+def ofertasE(request):
+    tipos_contrato = TipoCont.objects.all() 
+    nit_empresa = request.session.get('nit')
+    
     ofertas = OfertaEmpleo.objects.filter(nit=nit_empresa)
-    return render(request, 'empresa/ofertasE.html', {'ofertas': ofertas})
+    
+    for oferta in ofertas:
+        conteo_aplicantes = OfertaDisponible.objects.filter(id_oferta=oferta.id_oferta).count()
+        oferta.conteo_aplicantes = conteo_aplicantes  
+    
+    return render(request, 'empresa/ofertasE.html', {'ofertas': ofertas, 'tipos_contrato': tipos_contrato})
 
 
-@login_required 
+@login_required
 def detalle_oferta(request, id_oferta):
     oferta = get_object_or_404(OfertaEmpleo, id_oferta=id_oferta)
     
@@ -163,22 +212,37 @@ def detalle_oferta(request, id_oferta):
 
     nit_empresa = request.session.get('nit')
 
+    request.session['current_id_oferta'] = id_oferta
+    id_oferta = request.session.get('current_id_oferta')
+
+    oferta_actual = OfertaEmpleo.objects.filter(nit=nit_empresa, id_oferta=id_oferta).first()
+
+    estudiantes_aplicados = OfertaDisponible.objects.filter(id_oferta=id_oferta).values_list('id_estudiante', flat=True)
+    
+    estudiantes = Estudiante.objects.filter(id_estudiante__in=estudiantes_aplicados).values('nom_estudiante', 'apellido', 'id_estudiante')
+
+
     context = {
         'oferta': oferta,
+        'oferta_actual': oferta_actual,
+        'estudiantes': estudiantes, 
         'tipo_contrato': datos_adicionales.get('tipo_contrato'),
         'conocimientos': datos_adicionales.get('conocimientos'),
     }
     
+
     return render(request, 'empresa/DetallesOferta.html', context)
 
 @login_required
 def eliminar_oferta(request, id_oferta):
     oferta = get_object_or_404(OfertaEmpleo, id_oferta=id_oferta)
     
+    OfertaDisponible.objects.filter(id_oferta=id_oferta).delete()
+    
     oferta.delete()
     messages.success(request, "Oferta eliminada con éxito.")
 
-    return redirect('ofertasE')  
+    return redirect('ofertasE')
 
 @login_required
 def editar_oferta(request, id_oferta):
@@ -188,13 +252,6 @@ def editar_oferta(request, id_oferta):
         oferta.nombre_oferta = request.POST.get('nombre_oferta', oferta.nombre_oferta)
         oferta.salario = request.POST.get('salario', oferta.salario)
         oferta.descripcion = request.POST.get('descripcion', oferta.descripcion)
-
-        tipo_contrato = request.POST.get('tipo_contrato')
-        if tipo_contrato:
-            tipo_cont, created = TipoCont.objects.update_or_create(
-                id_oferta=oferta,
-                defaults={'tipo_cont': tipo_contrato}
-            )
 
         conocimientos_existentes = list(Conocimiento.objects.filter(id_oferta=oferta).values_list('nom_con', flat=True))
 
@@ -210,27 +267,23 @@ def editar_oferta(request, id_oferta):
         return redirect('ofertasE')  
 
     conocimientos_existentes = Conocimiento.objects.filter(id_oferta=oferta).values_list('nom_con', flat=True)
-    tipo_contrato_existente = TipoCont.objects.filter(id_oferta=oferta).first()
 
     return render(request, 'empresa/editar_oferta.html', {
         'oferta': oferta,
-        'conocimientos_existentes': conocimientos_existentes,
-        'tipo_contrato_existente': tipo_contrato_existente,
+        'conocimientos_existentes': conocimientos_existentes
     })
-
 
 
 
 def obtener_tablas_tc(id_oferta):
     oferta = get_object_or_404(OfertaEmpleo, id_oferta=id_oferta)
 
-    tipo_cont = TipoCont.objects.filter(id_oferta=oferta).values('tipo_cont')
-
-    conocimientos = Conocimiento.objects.filter(id_oferta=oferta).values_list('nom_con', flat=True)  # Cambiado 'oferta' a 'id_oferta'
+    tipo_cont = oferta.id_tipo_cont.nombre_tipo if oferta.id_tipo_cont else None
+    conocimientos = Conocimiento.objects.filter(id_oferta=oferta).values_list('nom_con', flat=True)
 
     datos = {
-        'tipo_contrato': tipo_cont[0]['tipo_cont'] if tipo_cont else None,
-        'conocimientos': list(conocimientos),  
+        'tipo_contrato': tipo_cont,
+        'conocimientos': list(conocimientos),
     }
 
     return datos
@@ -239,9 +292,23 @@ def obtener_tablas_tc(id_oferta):
 def des_ofertas(request):
     return render(request, 'empresa/des_ofertas.html')
 
+@login_required
 def listEAp(request):
-    return render(request, 'empresa/listEAp.html')
+    nit_empresa = request.session.get('nit')
+    id_oferta = request.session.get('current_id_oferta')  
+    
+    oferta_actual = OfertaEmpleo.objects.filter(nit=nit_empresa, id_oferta=id_oferta).first()
 
+    estudiantes_aplicados = OfertaDisponible.objects.filter(id_oferta=id_oferta).values_list('id_estudiante', flat=True)
+    
+    estudiantes = Estudiante.objects.filter(id_estudiante__in=estudiantes_aplicados).values('nom_estudiante', 'apellido', 'id_estudiante')
+    ofertas = OfertaEmpleo.objects.filter(nit=nit_empresa, id_oferta=id_oferta).values('nombre_oferta').first()
+
+    return render(request, 'empresa/listEAp.html', {
+        'oferta_actual': oferta_actual,
+        'estudiantes': estudiantes, 
+        'ofertas': ofertas
+    })
 
 
 def mis_datos(request):
@@ -262,3 +329,49 @@ def mis_datos(request):
         except Empresa.DoesNotExist:
             return JsonResponse({'error': 'Empresa no encontrada'}, status=404)
     return JsonResponse({'error': 'No autenticado'}, status=401)
+
+@csrf_exempt
+def guardarContra(request):
+    if request.method == 'POST':
+        nit = request.session.get('nit')
+        # Busco la tabla de estudiantes
+        empresas = Empresa.objects.filter(nit=nit)
+        if empresas.exists():
+            empresa = empresas[0]
+        else:
+            return JsonResponse({'status': 'error', 'message': 'Empresa no encontrado.'})
+
+        # Guardo los datos de los inputs en nuevas variables
+        viejaContra = request.POST.get('old_contra').strip()
+        nuevaContra1 = request.POST.get('nuv_contra1').strip()
+        nuevaContra2 = request.POST.get('nuv_contra2').strip()
+
+        #VALIDACIONES
+        # En caso de que las contraseñas no tengan nada
+        if viejaContra == "" or nuevaContra1 == "" or nuevaContra2 == "":
+            # Enviamos una respuesta al JAVAX
+            return JsonResponse({'status': 'error', 'message': 'No debe dejar ningún campo vacío.'})
+
+        # Comparamos las dos contraseñas incluso si la de la base de datos se encuentra encriptada en caso de que no sean iguales
+        if not check_password(viejaContra, empresa.password_emp):
+            return JsonResponse({'status': 'error', 'message': 'La contraseña actual es incorrecta.'})
+
+        # Comparamos las dos contraseñas por si son iguales
+        if nuevaContra1 != nuevaContra2:
+            return JsonResponse({'status': 'error', 'message': 'Las contraseñas no coinciden.'})
+        
+        # Comparamos que no repita la misma contraseña que ya tiene
+        if check_password(nuevaContra1, empresa.password_emp):
+            return JsonResponse({'status': 'error', 'message': 'La nueva contraseña debe ser diferente.'})
+
+        try:
+            # Guardamos la nueva contraseña de forma encriptada
+            empresa.password_emp = make_password(nuevaContra1)
+            empresa.save()
+            return JsonResponse({'status': 'success', 'message': 'Su contraseña se a actualizado correctamente.'})
+        except Exception as e:
+            # Error por el cual no se pudo guardar
+            return JsonResponse({'status': 'error', 'message': str(e)})
+    
+    # En caso de que no se este realizando un post
+    return JsonResponse({'status': 'error', 'message': 'Método no permitido.'})

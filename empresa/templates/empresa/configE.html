@@ -11,7 +11,8 @@
     <link rel="stylesheet" href="{% static 'estudiantes/css/navBar.css' %}" />
     <link rel="stylesheet" href="{% static 'estudiantes/css/footer.css' %}" />
     <link rel="stylesheet" href="{% static 'empresa/css/configs.css' %}" />
-    <link rel="stylesheet" href="{% static 'estudiantes/css/modalConfig.css' %}" />
+    <link rel="stylesheet" href="{% static 'empresa/css/ModalConfig.css' %}" />
+
 
     <!-- Cargar tema -->
     <script src="{% static 'estudiantes/js/Front/Temas.js' %}"></script>
@@ -69,11 +70,10 @@
     <!-- Configuración Interfaz -->
     <div id="MarcoConfig">
         <h1>INFORMACIÓN PERSONAL</h1>
-        <div onclick="modalConfig('contraActive')" class="marcoOpcion">
-            <i id="document" class="bi bi-person-lock"></i>
-            <h2>MODIFICAR CONTRASEÑA</h2>
-        </div>
-        <div onclick="modalConfig('misDatosActive')" class="marcoOpcion">
+        <div onclick="modalConfig('contraActive')" class="marcoOpcion"><i id="document" class="bi bi-person-lock"></i><h2>MODIFICAR CONTRASEÑA</h2></div>
+
+        
+        <div onclick="abrirModal()" class="marcoOpcion">
             <i id="document" class="bi bi-person"></i>
             <h2>MIS DATOS</h2>
         </div>
@@ -91,40 +91,6 @@
         </div>
     </div>
 
-    <div id="modalOverlay" onclick="cerrarModal()"></div> <!-- Fondo oscuro detrás del modal -->
-
-    <div id="modalMisDatos">
-        <h1>MIS DATOS</h1>
-        <div class="contenidoModal">
-            <div class="campo">
-                <label>Nombre:</label>
-                <span>{{ nombre }}</span>
-            </div>
-            <div class="campo">
-                <label>Correo:</label>
-                <span>{{ correo }}</span>
-            </div>
-            <div class="campo">
-                <label>NIT:</label>
-                <span>{{ nit }}</span>
-            </div>
-            <div class="campo">
-                <label>Ofertas Creadas:</label>
-                <span>{{ ofertas_creadas }}</span>
-            </div>
-            <div class="campo">
-                <label>Ofertas Activas:</label>
-                <span>{{ ofertas_activas }}</span>
-            </div>
-            <div class="campo">
-                <label>Ofertas Desactivadas:</label>
-                <span>{{ ofertas_desactivadas }}</span>
-            </div>
-        </div>
-        <div class="botones">
-            <a onclick="cerrarModal()" class="btnIzquierda">Regresar</a>
-        </div>
-    </div>
 
     <!-- Modal -->
     <div id="modalConfig">
@@ -151,15 +117,71 @@
                 <button type="submit">Aplicar</button>
             </div>
         </form>
-
-
-        <div class="botones">
-            <a onclick="modalConfig('hvMDesactive')" class="btnIzquierda">Regresar</a>
-            <button type="submit">Aplicar</button>
-        </div>
-        </form>
     </div>
     <!--Fin modal cambiar contraseña-->
+
+    <!-- Modal Mis Datos -->
+    {% if empresa %}
+    <div id="modalOverlay" onclick="cerrarModal()"></div>
+    <div id="modalMisDatos">
+        <span class="close" onclick="cerrarModal()">&times;</span>
+        <div class="contenidoModal">
+            <!-- Sección Mis Datos -->
+            <div class="section">
+                <h2>Mis Datos</h2>
+                <div class="campo-row">
+                    <div class="campo">
+                        <label>Nombre:</label>
+                        <span>{{ empresa.nom_empresa }}</span>
+                    </div>
+                    <div class="campo">
+                        <label>Correo:</label>
+                        <span>{{ empresa.correo_emp }}</span>
+                    </div>
+                    <div class="campo">
+                        <label>NIT:</label>
+                        <span>{{ empresa.nit }}</span>
+                    </div>
+                </div>
+                <div class="campo-row">
+                    <div class="campo">
+                        <label>Dirección:</label>
+                        <span>{{ empresa.direccion }}</span>
+                    </div>
+                    <div class="campo">
+                        <label>Contraseña:</label>
+                        <span>{{ empresa.password_emp }}</span>
+                    </div>
+                    <div class="campo">
+                        <label>Teléfono:</label>
+                        <span>{{ empresa.telefono }}</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sección Ofertas -->
+            <div class="section">
+                <h2>Ofertas</h2>
+                <div class="campo-row">
+                    <div class="campo">
+                        <label>Ofertas Creadas:</label>
+                        <span>{{ conteo_ofertas_creadas }}</span>
+                    </div>
+                    <div class="campo">
+                        <label>Ofertas Activas:</label>
+                        <span>{{ conteo_ofertas_activas }}</span>
+                    </div>
+                    <div class="campo">
+                        <label>Ofertas Inactivas:</label>
+                        <span>{{ conteo_ofertas_inactivas }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% else %}
+    <p>No se encontraron datos de la empresa.</p>
+    {% endif %}
 
     <!-- Footer -->
     <footer class="piePag">

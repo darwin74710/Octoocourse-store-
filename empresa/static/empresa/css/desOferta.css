@@ -98,3 +98,35 @@ body {
         font-size: 0.875rem;
     }
 }
+
+.pdf-upload {
+    background-color: #f0e6ff;
+    border-radius: 10px;
+    padding: 1.5rem;
+    margin-top: 1.5rem;
+    border: 2px solid #8021bb;
+}
+
+.pdf-upload h3 {
+    color: #8021bb;
+    margin-bottom: 1rem;
+}
+
+.pdf-upload .form-control {
+    border-color: #8021bb;
+}
+
+.pdf-upload .form-control:focus {
+    border-color: #6a1b9a;
+    box-shadow: 0 0 0 0.2rem rgba(128, 33, 187, 0.25);
+}
+
+.pdf-upload .btn-primary {
+    background-color: #8021bb;
+    border-color: #8021bb;
+}
+
+.pdf-upload .btn-primary:hover {
+    background-color: #6a1b9a;
+    border-color: #6a1b9a;
+}

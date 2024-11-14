@@ -5,13 +5,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Detalles oferta</title>
+    <title>Detalles oferta - {{ oferta.nombre_oferta }}</title>
 
     <!-- Scripts css -->
-    <link rel="stylesheet" href="{% static 'empresa/css/navBarE.css' %}" />
     <link rel="stylesheet" href="{% static 'empresa/css/footerE.css' %}" />
     <link rel="stylesheet" href="{% static 'empresa/css/InicioE.css' %}" />
-    <link rel="stylesheet" href="{% static 'empresa/css/desOferta.css' %}" /> 
+    <link rel="stylesheet" href="{% static 'empresa/css/desOferta.css' %}" />
+    <link rel="stylesheet" href="{% static 'empresa/css/listasE.css' %}" />
+
+
 
     <!-- Iconos -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -22,60 +24,22 @@
 </head>
 
 <body>
-    <!-- NavBar -->
-    <header id="navBar">
-        <img id="logo" src="{% static 'estudiantes/img/navBar/Logo2.png' %}" alt="">
-
-        <!-- MENU PC -->
-        <div id="derecha">
-            <a href="{% url 'inicioE' %}"class="options_active">Inicio</a>
-            <a href="{% url 'estudiantesE' %}" class="options">Estudiantes</a> 
-            <a href="{% url 'crearOferta' %}" class="options">Publicar</a>
-            <a href="{% url 'ofertasE' %}" class="options">Ofertas</a>
-
-            <div class="linea"></div>
-
-            <a id="btn_icono" href="{% url 'configE' %}"><i class="fas fa-cog"></i></a>
-            <a id="btn_icono" href="{% url 'home' %}"><i class="fa-solid fa-arrow-right-from-bracket"></i></a>
-        </div>
-
-        <!-- MENU MOVIL -->
-        <div id="menuMovil" onclick="activarMenu()">&#9776;</div>
-        <div id="menuHamburguersa">
-            <div id="Elementos">
-                <div id="btnCerrar" onclick="activarMenu()">&times;</div>
-                <img id="logo" src="{% static 'estudiantes/img/navBar/Logo2.png' %}" alt="">
-
-                <div class="linea"></div>
-
-                <h1>Navegación</h1>
-                <a href="{% url 'inicioE' %}"class="options_active">Inicio</a>
-                <a href="{% url 'estudiantesE' %}" class="options">Estudiantes</a> 
-                <a href="{% url 'Ofertas' %}" class="options">Ofertas</a>
-                <a href="{% url 'configE' %}" class="options">Configuración</a>
-
-                <div class="linea"></div>
-                
-                <a href="{% url 'home' %}" class="logOut">Log out</a>
-            </div>
-        </div>
-    </header>
 
     <main class="container">
         <div class="detalles">
             <a href="{% url 'ofertasE' %}" class="btn-regresar"><i class="fas fa-arrow-left"></i> Regresar</a>
-            
+
             <h1 class="titulo">{{ oferta.nombre_oferta }}</h1>
             <div class="job-info">
                 <p><strong>Salario:</strong> {{ oferta.salario }}</p>
-                <p><strong>Tipo de Contrato:</strong> {{ tipo_contrato }}</p> 
+                <p><strong>Tipo de Contrato:</strong> {{ tipo_contrato }}</p>
                 <div>
                     <strong>Conocimientos Requeridos:</strong>
                     <ul>
                         {% for conocimiento in conocimientos %}
-                            <li>{{ conocimiento }}</li> 
+                        <li>{{ conocimiento }}</li>
                         {% empty %}
-                            <li>No se requieren conocimientos específicos.</li> 
+                        <li>No se requieren conocimientos específicos.</li>
                         {% endfor %}
                     </ul>
                 </div>
@@ -84,12 +48,52 @@
                 <h3>Descripción de la Oferta</h3>
                 <p>{{ oferta.descripcion }}</p>
             </div>
+
             <div class="aplicados-info mt-4 d-flex justify-content-between align-items-center">
                 <p class="mb-0">Personas Aplicadas: </p>
-                <a href="#" class="botonAplicados">Ver Aplicantes</a>
+                <button class="botonAplicados" data-bs-toggle="modal" data-bs-target="#modalAplicantes">Ver
+                    Aplicantes</button>
+            </div>
+            <!-- Nuevo campo para subir PDF -->
+            <div class="pdf-upload">
+                <h3>*Subir Examen en PDF</h3>
+                <form action="#" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="cv_pdf" class="form-label">Selecciona tu Examen en formato PDF:</label>
+                        <input type="file" class="form-control" id="cv_pdf" name="cv_pdf" accept=".pdf" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Subir</button>
+                </form>
             </div>
         </div>
     </main>
+
+    <!-- Modal de Estudiantes Aplicados -->
+    <div class="modal fade" id="modalAplicantes" tabindex="-1" aria-labelledby="modalAplicantesLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 id="modalAplicantesLabel">Estudiantes Aplicados - {{ oferta.nombre_oferta }}</h3>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="marcoCV">
+                    <ul class="listas">
+                        {% for estudiante in estudiantes %}
+                        <li class="interact">
+                            <p>{{ estudiante.nom_estudiante }} {{ estudiante.apellido }}</p>
+                            <a href="{% url 'detalle_estudiante' estudiante.id_estudiante %}" class="btn-hoja-vida">Hoja
+                                deVida</a>
+                        </li>
+                        {% empty %}
+                        <p>No hay estudiantes aplicados a esta oferta.</p>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Footer -->
     <footer class="piePag">
