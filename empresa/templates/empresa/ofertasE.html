@@ -137,9 +137,13 @@
                                 </div>
                                 <div class="mb-3">
                                     <label for="tipo_contrato" class="form-label">Tipo de Contrato</label>
-                                    <input type="text" class="form-control" id="tipo_contrato" name="tipo_contrato"
-                                        value="{{ tipo_contrato_existente.tipo_cont|default:'' }}">
-
+                                    <select class="form-select" id="contrato" name="tipo_cont" required>
+                                        <option value="">Seleccione un tipo de contrato</option>
+                                        {% for tipo in tipos_contrato %}
+                                        <option value="{{ tipo.id_tipo_cont }}">{{ tipo.nombre_tipo }}</option>
+                                        {% endfor %}
+                                        <option value="new">Agregar nuevo tipo de contrato...</option>
+                                    </select>
                                 </div>
                                 <div class="mb-3">
                                     <label for="conocimientos" class="form-label">Conocimientos Requeridos (separar por

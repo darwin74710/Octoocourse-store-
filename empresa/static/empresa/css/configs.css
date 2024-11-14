@@ -12,6 +12,7 @@
     background-color: var(--fondoTitulo2);
     color: var(--letraTitulo2);
     text-align: center;
+    
 }
 
 
@@ -25,6 +26,7 @@
     background-color: var(--fondoBotones2);
     cursor: pointer;
     display: flex;
+    
 }
 
 .marcoOpcion:hover{

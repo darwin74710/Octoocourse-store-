@@ -104,17 +104,14 @@
 
                 <div class="col-md-6 mb-3">
                     <label for="contrato" class="form-label">Tipo de Contrato:</label>
-                    <select class="form-select" id="contrato" name="tipo_cont" required
-                        onchange="checkForNewContract()">
+                    <select class="form-select" id="contrato" name="tipo_cont" required>
                         <option value="">Seleccione un tipo de contrato</option>
-                        <option value="1">Contrato a término indefinido</option>
-                        <option value="2">Contrato a término fijo</option>
-                        <option value="3">Contrato por obra o labor</option>
-                        <option value="4">Contrato de prestación de servicios</option>
-                        <option value="5">Contrato temporal</option>
-                        <option value="new">Agregar nuevo tipo de contrato...</option>
+                        {% for tipo in tipos_contrato %}
+                        <option value="{{ tipo.id_tipo_cont }}">{{ tipo.nombre_tipo }}</option>
+                        {% endfor %}
                     </select>
                 </div>
+
                 <div id="newContractContainer" style="display: none;">
                     <input class="form-control" type="text" id="nuevoContrato" placeholder="Ingrese el nuevo tipo de contrato">
                     <button class="button" type="button" onclick="addNewContract()">Agregar</button>

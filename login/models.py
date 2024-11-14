@@ -35,17 +35,14 @@ class Empresa(models.Model):
 
 
 class TipoCont(models.Model):
-    id_tipo_cont = models.DecimalField(primary_key=True, max_digits=10, decimal_places=0)
-    nombre_tipo = models.CharField(max_length=50)  
+    id_tipo_cont = models.AutoField(primary_key=True)
+    nombre_tipo = models.CharField(max_length=50)
 
     class Meta:
         db_table = 'tipo_cont'
-        constraints = [
-            models.UniqueConstraint(fields=['id_tipo_cont'], name='pk_tipo_contrato')
-        ]
 
     def __str__(self):
-        return self.nombre_tipo  
+        return self.nombre_tipo
 
 
 class OfertaEmpleo(models.Model):

@@ -1,6 +1,7 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,11 +10,13 @@
     <link rel="stylesheet" href="{% static 'empresa/css/aboutMe.css' %}" />
 
 </head>
+
 <body>
     <button class="back-button" onclick="history.back()">Regresar</button>
     <div class="container">
         <header>
-            <img class="profile-img" src="{% static 'empresa/img/user.png' %}" alt="{{ estudiante.nombre }} {{ estudiante.apellido }}">
+            <img class="profile-img" src="{% static 'empresa/img/user.png' %}"
+                alt="{{ estudiante.nombre }} {{ estudiante.apellido }}">
             <h1>{{ estudiante.nom_estudiante }} {{ estudiante.apellido }}</h1>
         </header>
 
@@ -21,7 +24,7 @@
             <h2>Datos Personales</h2>
             <div class="info-item">
                 <img src="{% static 'empresa/img/doc.png' %}" alt="id">
-                <p>{{ estudiante.tipo_id }}:  {{ estudiante.id_estudiante }} </p>
+                <p>{{ estudiante.tipo_id }}: {{ estudiante.id_estudiante }} </p>
             </div>
             <div class="info-item">
                 <img src="{% static 'empresa/img/mail.png' %}" alt="Correo">
@@ -37,40 +40,40 @@
             <h2>Aptitudes</h2>
             <div class="skills">
                 {% if aptitudes %}
-                    {% for aptitud in aptitudes %}
-                        <span class="skill-tag">{{ aptitud.nombre_apt }}</span>
-                    {% endfor %}
+                {% for aptitud in aptitudes %}
+                <span class="skill-tag">{{ aptitud.nombre_apt }}</span>
+                {% endfor %}
                 {% else %}
-                    <p>No se encontraron aptitudes.</p>
+                <p>No se encontraron aptitudes.</p>
                 {% endif %}
             </div>
         </section>
-        
+
         <section class="section">
             <h2>Idiomas</h2>
             <div class="languages">
                 {% if idiomas %}
-                    {% for idioma in idiomas %}
-                        <div class="language-tag">
-                            <h2>{{ idioma.idioma }}</h2>
-                            <p>Nivel: {{ idioma.nivel }}</p>
-                        </div>
-                    {% endfor %}
+                {% for idioma in idiomas %}
+                <div class="language-tag">
+                    <h2>{{ idioma.idioma }}</h2>
+                    <p>Nivel: {{ idioma.nivel }}</p>
+                </div>
+                {% endfor %}
                 {% else %}
-                    <p>No se encontraron idiomas.</p>
+                <p>No se encontraron idiomas.</p>
                 {% endif %}
             </div>
         </section>
-        
+
         <section class="section">
             <h2>Lenguajes</h2>
             <div class="knowledge">
                 {% if lenguajesProg %}
-                    {% for lenguaje in lenguajesProg %}
-                        <span class="knowledge-tag">{{ lenguaje.nombre_leng.strip }}</span>
-                    {% endfor %}
+                {% for lenguaje in lenguajesProg %}
+                <span class="knowledge-tag">{{ lenguaje.nombre_leng.strip }}</span>
+                {% endfor %}
                 {% else %}
-                    <p>No se encontraron lenguajes.</p>
+                <p>No se encontraron lenguajes.</p>
                 {% endif %}
             </div>
         </section>
@@ -78,46 +81,124 @@
         <section class="section">
             <h2>Formación Académica</h2>
             {% if formaciones %}
-                            {% for formacion in formaciones %}
-                                <div class="infoExp">
-                                    <h2>{{ formacion.titulo.strip }}</h2>
-                                    <h4>{{ formacion.nom_institucion.strip }}</h4>
-                                    <h4>{{ formacion.fecha_inicio }} / {{ formacion.fecha_final }}</h4>
-                                </div>
-                            {% endfor %}
-                        {% else %}
-                            <div class="infoExp">
-                                <h2>NOMBRE_TITULO</h2>
-                                <h4>NOMBRE_INSTITUCIÓN</h4>
-                                <h4>TIEMPO_INICIO / TIEMPO_FINAL</h4>
-                            </div>
-                        {% endif %}
+            {% for formacion in formaciones %}
+            <div class="infoExp">
+                <h2>{{ formacion.titulo.strip }}</h2>
+                <h4>{{ formacion.nom_institucion.strip }}</h4>
+                <h4>{{ formacion.fecha_inicio }} / {{ formacion.fecha_final }}</h4>
+            </div>
+            {% endfor %}
+            {% else %}
+            <div class="infoExp">
+                <h2>NOMBRE_TITULO</h2>
+                <h4>NOMBRE_INSTITUCIÓN</h4>
+                <h4>TIEMPO_INICIO / TIEMPO_FINAL</h4>
+            </div>
+            {% endif %}
         </section>
 
         <section class="section">
             <h2>Experiencia Laboral</h2>
             {% if expLaborales %}
-                {% for experiencia in expLaborales %}
-                    <div class="experience-item">
-                        <h3>{{ experiencia.cargo }}</h3>
-                        <p><strong>{{ experiencia.nom_empresas }}</strong></p>
-                        <p>{{ experiencia.tiempo_inicio }} - {{ experiencia.tiempo_final }}</p>
-                        <p>{{ experiencia.descripcion }}</p>
-                    </div>
-                {% endfor %}
+            {% for experiencia in expLaborales %}
+            <div class="experience-item">
+                <h3>{{ experiencia.cargo }}</h3>
+                <p><strong>{{ experiencia.nom_empresas }}</strong></p>
+                <p>{{ experiencia.tiempo_inicio }} - {{ experiencia.tiempo_final }}</p>
+                <p>{{ experiencia.descripcion }}</p>
+            </div>
+            {% endfor %}
             {% else %}
-                <p>No se encontró experiencia laboral.</p>
+            <p>No se encontró experiencia laboral.</p>
             {% endif %}
         </section>
         <div class="button-container">
-            <button class="print-button">Imprimir CV</button>
-            <button class="hire-button">Contratar</button>
-        </div>
+            <button class="print-button" onclick="window.print()">Imprimir CV</button>
+            <form action="{% url 'enviar_correo' estudiante.id_estudiante %}" method="POST">
+                {% csrf_token %}
+                <button type="submit" class="hire-button">Contratar</button>
+            </form>
+            <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#enviarCorreoModal">
+                Enviar Correo
+              </button>
 
         </div>
+
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="enviarCorreoModal" tabindex="-1" aria-labelledby="enviarCorreoModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="enviarCorreoModalLabel">Enviar Correo</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- Formulario dentro del modal -->
+                    <form id="formEnviarCorreo" method="POST">
+                        {% csrf_token %}
+
+                        <!-- Campo para correo del estudiante -->
+                        <div class="mb-3">
+                            <label for="correoEstudiante" class="form-label">Correo del Estudiante</label>
+                            <input type="email" class="form-control" id="correoEstudiante" name="correoEstudiante"
+                                value="{{ estudiante.correo_estudiante }}" readonly>
+                        </div>
+
+                        <!-- Campo para correo del usuario logueado -->
+                        <div class="mb-3">
+                            <label for="correoUsuario" class="form-label">Tu Correo</label>
+                            <input type="email" class="form-control" id="correoUsuario" name="correoUsuario"
+                                value="{{ request.user.email }}" readonly>
+                        </div>
+
+                        <!-- Campo para mensaje -->
+                        <div class="mb-3">
+                            <label for="mensaje" class="form-label">Mensaje</label>
+                            <textarea class="form-control" id="mensaje" name="mensaje" rows="3"></textarea>
+                        </div>
+
+                        <!-- Botón para enviar -->
+                        <button type="submit" class="btn btn-primary">Enviar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
     <footer>
         <p>&copy; 2024 OctooCourse - Todos los Derechos Reservados</p>
     </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        document.querySelector('.print-button').addEventListener('click', function () {
+            window.print();
+        });
+
+        function enviarCorreo() {
+            fetch("{% url 'enviar_correo' estudiante.id_estudiante %}", {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': '{{ csrf_token }}'
+                },
+                body: JSON.stringify({
+                    'usuario_email': '{{ request.user.email }}',
+                    'estudiante_id': '{{ estudiante.id_estudiante }}'
+                })
+            })
+                .then(response => response.json())
+                .then(data => {
+                    alert('Correo enviado exitosamente');
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        }
+    </script>
 </body>
+
 </html>

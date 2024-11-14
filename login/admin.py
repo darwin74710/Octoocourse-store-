@@ -33,8 +33,8 @@ class OfertaEmpleoAdmin(admin.ModelAdmin):
 
 @admin.register(TipoCont)
 class TipoContAdmin(admin.ModelAdmin):
-    list_display = ('id_tipo_cont', 'nombre_tipo')  
-    search_fields = ('nombre_tipo',)  
+    list_display = ('id_tipo_cont', 'nombre_tipo')
+    search_fields = ('nombre_tipo',)
 
 
 @admin.register(Conocimiento)

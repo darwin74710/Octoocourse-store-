@@ -48,9 +48,23 @@
                 <h3>Descripción de la Oferta</h3>
                 <p>{{ oferta.descripcion }}</p>
             </div>
+
             <div class="aplicados-info mt-4 d-flex justify-content-between align-items-center">
                 <p class="mb-0">Personas Aplicadas: </p>
-                <button class="botonAplicados" data-bs-toggle="modal" data-bs-target="#modalAplicantes">Ver Aplicantes</button>
+                <button class="botonAplicados" data-bs-toggle="modal" data-bs-target="#modalAplicantes">Ver
+                    Aplicantes</button>
+            </div>
+            <!-- Nuevo campo para subir PDF -->
+            <div class="pdf-upload">
+                <h3>*Subir Examen en PDF</h3>
+                <form action="#" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="cv_pdf" class="form-label">Selecciona tu Examen en formato PDF:</label>
+                        <input type="file" class="form-control" id="cv_pdf" name="cv_pdf" accept=".pdf" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Subir</button>
+                </form>
             </div>
         </div>
     </main>
@@ -61,7 +75,7 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h3  id="modalAplicantesLabel">Estudiantes Aplicados - {{ oferta.nombre_oferta }}</h3>
+                    <h3 id="modalAplicantesLabel">Estudiantes Aplicados - {{ oferta.nombre_oferta }}</h3>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="marcoCV">
@@ -69,7 +83,8 @@
                         {% for estudiante in estudiantes %}
                         <li class="interact">
                             <p>{{ estudiante.nom_estudiante }} {{ estudiante.apellido }}</p>
-                            <a href="{% url 'detalle_estudiante' estudiante.id_estudiante %}" class="btn-hoja-vida">Hoja deVida</a>
+                            <a href="{% url 'detalle_estudiante' estudiante.id_estudiante %}" class="btn-hoja-vida">Hoja
+                                deVida</a>
                         </li>
                         {% empty %}
                         <p>No hay estudiantes aplicados a esta oferta.</p>

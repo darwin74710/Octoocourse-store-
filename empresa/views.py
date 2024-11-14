@@ -9,12 +9,33 @@ from datetime import date
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.hashers import check_password, make_password
+from django.core.mail import send_mail
 
+def enviar_correo(request, id_estudiante):
+    estudiante = Estudiante.objects.get(id_estudiante=id_estudiante)
+
+    if request.method == 'POST':
+        correo_estudiante = request.POST['correoEstudiante']
+        correo_usuario = request.POST['correoUsuario']
+        mensaje = request.POST['mensaje']
+
+        subject = f'Oferta de empleo para {estudiante.nom_estudiante} {estudiante.apellido}'
+        message = f"Estimado {estudiante.nom_estudiante},\n\n{mensaje}\n\nEnviado por: {correo_usuario}"
+
+        try:
+            send_mail(subject, message, correo_usuario, [correo_estudiante])
+            return redirect('inicioE')  # Redirigir a alguna página después de enviar el correo
+        except Exception as e:
+            print(f"Error al enviar el correo: {e}")
+            return render(request, 'error_page.html')  # Mostrar una página de error si hay problemas
+
+    return render(request, 'empresa/aboutMeStudent.html', {'estudiante': estudiante})
 
 
 
 @login_required
 def crearOferta(request):
+    tipos_contrato = TipoCont.objects.all() 
     if request.method == 'POST':
         nombre_oferta = request.POST.get('nombre_oferta')
         salario = request.POST.get('salario')
@@ -52,14 +73,18 @@ def crearOferta(request):
 
         return render(request, 'empresa/publicaro.html')
 
-    return render(request, 'empresa/publicaro.html')
-
-
+    return render(request, 'empresa/publicaro.html', {'tipos_contrato': tipos_contrato})
 
 
 @login_required 
 def inicioE(request):
     return render(request, 'empresa/inicioE.html')
+
+
+def subir_examen(request):
+
+    return render(request, 'empresa/aboutMeStudent.html')
+
 
 @login_required 
 def logout_view(request):
@@ -167,6 +192,7 @@ def configE(request):
 
 @login_required
 def ofertasE(request):
+    tipos_contrato = TipoCont.objects.all() 
     nit_empresa = request.session.get('nit')
     
     ofertas = OfertaEmpleo.objects.filter(nit=nit_empresa)
@@ -175,7 +201,7 @@ def ofertasE(request):
         conteo_aplicantes = OfertaDisponible.objects.filter(id_oferta=oferta.id_oferta).count()
         oferta.conteo_aplicantes = conteo_aplicantes  
     
-    return render(request, 'empresa/ofertasE.html', {'ofertas': ofertas})
+    return render(request, 'empresa/ofertasE.html', {'ofertas': ofertas, 'tipos_contrato': tipos_contrato})
 
 
 @login_required
@@ -227,13 +253,6 @@ def editar_oferta(request, id_oferta):
         oferta.salario = request.POST.get('salario', oferta.salario)
         oferta.descripcion = request.POST.get('descripcion', oferta.descripcion)
 
-        tipo_contrato = request.POST.get('tipo_contrato')
-        if tipo_contrato:
-            tipo_cont, created = TipoCont.objects.update_or_create(
-                id_oferta=oferta,
-                defaults={'tipo_cont': tipo_contrato}
-            )
-
         conocimientos_existentes = list(Conocimiento.objects.filter(id_oferta=oferta).values_list('nom_con', flat=True))
 
         nuevos_conocimientos = request.POST.getlist('conocimientos')  
@@ -248,12 +267,10 @@ def editar_oferta(request, id_oferta):
         return redirect('ofertasE')  
 
     conocimientos_existentes = Conocimiento.objects.filter(id_oferta=oferta).values_list('nom_con', flat=True)
-    tipo_contrato_existente = TipoCont.objects.filter(id_oferta=oferta).first()
 
     return render(request, 'empresa/editar_oferta.html', {
         'oferta': oferta,
-        'conocimientos_existentes': conocimientos_existentes,
-        'tipo_contrato_existente': tipo_contrato_existente,
+        'conocimientos_existentes': conocimientos_existentes
     })
 
 
