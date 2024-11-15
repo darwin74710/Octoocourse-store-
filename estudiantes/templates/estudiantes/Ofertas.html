@@ -104,7 +104,7 @@
                 <div class="ofertaElement" onclick="activarInfo(this)">
                     <h1>{{ data.nombre_oferta }}</h1>
                     
-                    <i class="bi bi-person"> : 1 Aplicados</i>
+                    <i class="bi bi-person"> : {{ data.contAplicados }} Aplicados</i>
 
                     <i class="bi bi-terminal"> : 
                         {% for conocimiento in data.conocimientos %}
@@ -117,6 +117,7 @@
                     </i>
                     <p>{{ data.descripcion }}</p>
                     <h5>{{ data.id_oferta }}</h5>
+                    <h5 id="idEstudianteInput">{{ idEstudiante }}</h5>
                     
                     {% if ofertasDisponibles %}
                         {% for ofertaDisponible in ofertasDisponibles %}

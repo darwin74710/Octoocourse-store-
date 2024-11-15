@@ -78,7 +78,7 @@
 
     <!-- Principal Interfaz -->
     <!-- Carousel Slider (Bootstrap)-->
-    <div id="carouselExampleDark" class="carousel carousel-dark slide" style="margin: 30px;">
+    <div id="carouselExampleDark" class="carousel carousel-dark slide">
         <div class="carousel-indicators">
             <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active"
                 aria-current="true" aria-label="Slide 1"></button>
@@ -108,32 +108,21 @@
         </button>
     </div>
 
-    <!-- Imagene carousel-->
-    <div id="imgCarousel">
-        <div class="contImg"><img src="{% static 'estudiantes/img/principal/titulo.png' %}" alt=""></div>
-        <div class="contImg"><img src="{% static 'estudiantes/img/principal/estudiantesNav.png' %}" alt=""></div>
-        <div class="contImg"><img src="{% static 'estudiantes/img/principal/empresasNav.png' %}" alt=""></div>
-    </div>
-
     <!-- Info-->
     <div class="infoCont">
-        <div class="izquierda">
-            <img src="{% static 'estudiantes/img/principal/hi.png' %}" alt="">
-            <div class="infoMensaje">
-                <h1>¿QUÉ ES OCTOOCOURSE?</h1>
-                <p>Octoocourse es una web enfocada a la programación, disponemos de cursos y ofertas de empleo para los usuarios.</p>
-            </div>
+        <img src="{% static 'estudiantes/img/principal/hi.png' %}" alt="">
+        <div class="infoMensaje">
+            <h1>¿QUÉ ES OCTOOCOURSE?</h1>
+            <p>Octoocourse es una web enfocada a la programación, disponemos de cursos y ofertas de empleo para los usuarios.</p>
         </div>
     </div>
 
     <div id="ultimoCont" class="infoCont">
-        <div class="derecha">
-            <img src="{% static 'estudiantes/img/principal/roles.png' %}" alt="">
-            <div class="infoMensaje">
-                <h1>ROLES</h1>
-                <p>Disponemos de dos roles (estudiante, empresa). Cada uno cuenta con diferentes funciones dentro de la web.</p>
-            </div>
+        <div class="infoMensaje">
+            <h1>ROLES</h1>
+            <p>Disponemos de dos roles (estudiante, empresa). Cada uno cuenta con diferentes funciones dentro de la web.</p>
         </div>
+        <img src="{% static 'estudiantes/img/principal/roles.png' %}" alt="">
     </div>
 
     <!-- Footer -->

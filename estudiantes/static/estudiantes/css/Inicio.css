@@ -5,13 +5,14 @@
 }
 
 #carouselExampleDark{
+    width: 800px; height: 210px;
+    margin: 10px auto;
     border: 5px solid var(--letratitulo1);
     display: block;
 }
 
-#imgCarousel{
-    width: 100%; height: auto;
-    display: none;
+.d-block{
+    width: 800px; height: 200px;
 }
 
 .contImg{
@@ -24,8 +25,10 @@
     width: 100%; height: 100%;
 }
 
-.infoCont .izquierda, .infoCont .derecha{
-    margin: 10px;
+.infoCont{
+    align-content: center;
+    justify-content: center;
+    margin: 20px 0;
     display: flex;
     flex-direction: row;
 }
@@ -34,7 +37,8 @@
     margin-bottom: 30px;
 }
 
-.infoCont .izquierda img, .infoCont .derecha img{
+.infoCont img{
+    width: 250px; height: 250px;
     border: 5px solid var(--letratitulo1);
     border-radius: 500px;
 }
@@ -56,37 +60,17 @@
     font-size: 25px;
 }
 
-.izquierda img{
-    margin-left: 5%;
-    order: 1;
-}
-
-.izquierda .infoMensaje{
-    margin-right: auto;
-    order: 2;
-}
-
-.derecha img{
-    margin-right: 5%;
-    order: 2;
-}
-
-.derecha .infoMensaje{
-    margin-left: auto;
-    order: 1;
-}
-
 
 @media screen and (max-width:1200px) {
-    .infoCont .izquierda, .infoCont .derecha{
+    .infoCont{
         display: flex;
         flex-direction: column;
     }
 
-    .infoCont img, .infoCont img{
+    .infoCont img{
         margin: auto;
         margin-top: 10px;
-        width: 50%; height: 50%;
+        width: 200px; height: 200px;
         order: 1;
     }
 
@@ -106,13 +90,12 @@
     }
 }
 
-@media screen and (max-width:1000px) {
+@media screen and (max-width:800px) {
     #carouselExampleDark{
-        display: none;
+        width: 100%; height: 160px;
     }
-
-    #imgCarousel{
-        display: block;
-        padding-bottom: 10px;
+    
+    .d-block{
+        width: 100%; height: 150px;
     }
 }

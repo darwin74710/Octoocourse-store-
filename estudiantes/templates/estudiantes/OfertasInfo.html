@@ -67,7 +67,7 @@
     <div id="MarcoOfertasInfo">
         <h1>{{ ofertasEmpleos.nombre_oferta }}</h1>
 
-        <i class="bi bi-person"> : 10 Aplicados</i>
+        <i class="bi bi-person"> : {{ ofertasEmpleos.contAplicados }} Aplicados</i>
         <i class="bi bi-terminal"> : 
             {% for conocimiento in conocimientos %}
             {{ conocimiento.nom_con }}{% if not forloop.last %}, {% endif %}
@@ -80,8 +80,16 @@
         <h2>Descripción</h2>
         <p>{{ ofertasEmpleos.descripcion }}</p>
 
-        <form action="">
-            <a>Aplicar</a>
+        <form id="metAplicarOferta" method="POST" action="{% url 'aplicarOferta' %}">
+            <input type="hidden" id="inputIdOferta" name="idOferta" value="{{ ofertasEmpleos.id_oferta }}">
+            <input type="hidden" id="idEstudianteInput" name="idEstudiante" value="{{ idEstudiante }}">
+            <button type="submit">
+                {% if ofertasDisponibles %}
+                    Realizar Prueba
+                {% else %}
+                    Aplicar
+                {% endif %}
+            </button>
         </form>
         <a href="{% url 'Ofertas' %}">Regresar</a>
     </div>
@@ -108,6 +116,11 @@
         </div>
         <div id="Marco2">&copy; 2024 OctooCourse - Todos los Derechos Reservados.</div>
     </footer>
+
+    <!-- Scripts AJAX -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script src="{% static 'estudiantes/js/DataBase/ConfigData.js' %}"></script>
 
     <!-- Scripts js -->
     <script src="{% static 'estudiantes/js/Front/navBar.js' %}"></script>
