@@ -7,7 +7,9 @@ function activarInfo(elemento) {
         const idOferta = elemento.querySelector('h5').innerText;
         const idParametro = encodeURIComponent(idOferta);
 
-        window.location.href = `${ofertasInfoUrl}?idOferta=${idParametro}`;
+        const idEstudiante = elemento.querySelector("#idEstudianteInput").innerText;
+
+        window.location.href = `${ofertasInfoUrl}?idOferta=${idParametro}&idEstudiante=${idEstudiante}`;
     }else{
         /* Le paso el id al input para aplicar al curso */
         const idOferta = elemento.querySelector('h5').innerText;

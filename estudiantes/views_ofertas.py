@@ -75,6 +75,11 @@ def Ofertas(request):
     if not ofertasDisponibles.exists():
         ofertasDisponibles = None
 
+    
+    for oferta in ofertasPag:
+        ofertasDispoAux = OfertasDisponibles.objects.filter(id_oferta=oferta.id_oferta)
+        oferta.contAplicados = ofertasDispoAux.count()
+
     Datos = {
         'ofertas_data': ofertas_data,
         'contratos': contratos,
@@ -88,17 +93,25 @@ def Ofertas(request):
 @login_required(login_url=reverse_lazy('inicioS'))
 def OfertasInfo(request):
     idOferta = request.GET.get('idOferta')
+    idEstudiante = request.GET.get('idEstudiante')
 
     ofertasEmpleos = OfertasEmpleos.objects.filter(id_oferta=idOferta)
 
     if ofertasEmpleos.exists():
-        ofertasEmpleo = ofertasEmpleos[0]
+        ofertasEmpleo = ofertasEmpleos.first()
     
     conocimientos = Conocimientos.objects.filter(id_oferta=idOferta)
+
+    ofertasDisponibles = OfertasDisponibles.objects.filter(id_estudiante=idEstudiante, id_oferta=idOferta).first()
+
+    ofertasDispoAux = OfertasDisponibles.objects.filter(id_oferta=ofertasEmpleo.id_oferta)
+    ofertasEmpleo.contAplicados = ofertasDispoAux.count()
     
     Datos = {
         'ofertasEmpleos': ofertasEmpleo,
         'conocimientos': conocimientos,
+        'idEstudiante': idEstudiante,
+        'ofertasDisponibles': ofertasDisponibles,
     }
 
     return render(request, 'estudiantes/OfertasInfo.html', Datos)
