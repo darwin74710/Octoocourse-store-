@@ -118,53 +118,10 @@
                 {% csrf_token %}
                 <button type="submit" class="hire-button">Contratar</button>
             </form>
-            <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#enviarCorreoModal">
-                Enviar Correo
-              </button>
-
         </div>
 
     </div>
     <!-- Modal -->
-    <div class="modal fade" id="enviarCorreoModal" tabindex="-1" aria-labelledby="enviarCorreoModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="enviarCorreoModalLabel">Enviar Correo</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <!-- Formulario dentro del modal -->
-                    <form id="formEnviarCorreo" method="POST">
-                        {% csrf_token %}
-
-                        <!-- Campo para correo del estudiante -->
-                        <div class="mb-3">
-                            <label for="correoEstudiante" class="form-label">Correo del Estudiante</label>
-                            <input type="email" class="form-control" id="correoEstudiante" name="correoEstudiante"
-                                value="{{ estudiante.correo_estudiante }}" readonly>
-                        </div>
-
-                        <!-- Campo para correo del usuario logueado -->
-                        <div class="mb-3">
-                            <label for="correoUsuario" class="form-label">Tu Correo</label>
-                            <input type="email" class="form-control" id="correoUsuario" name="correoUsuario"
-                                value="{{ request.user.email }}" readonly>
-                        </div>
-
-                        <!-- Campo para mensaje -->
-                        <div class="mb-3">
-                            <label for="mensaje" class="form-label">Mensaje</label>
-                            <textarea class="form-control" id="mensaje" name="mensaje" rows="3"></textarea>
-                        </div>
-
-                        <!-- Botón para enviar -->
-                        <button type="submit" class="btn btn-primary">Enviar</button>
-                    </form>
-                </div>
-            </div>
-        </div>
     </div>
 
 
