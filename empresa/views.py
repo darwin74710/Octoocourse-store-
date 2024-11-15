@@ -10,26 +10,9 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.hashers import check_password, make_password
 from django.core.mail import send_mail
+import os
+from django.conf import settings
 
-def enviar_correo(request, id_estudiante):
-    estudiante = Estudiante.objects.get(id_estudiante=id_estudiante)
-
-    if request.method == 'POST':
-        correo_estudiante = request.POST['correoEstudiante']
-        correo_usuario = request.POST['correoUsuario']
-        mensaje = request.POST['mensaje']
-
-        subject = f'Oferta de empleo para {estudiante.nom_estudiante} {estudiante.apellido}'
-        message = f"Estimado {estudiante.nom_estudiante},\n\n{mensaje}\n\nEnviado por: {correo_usuario}"
-
-        try:
-            send_mail(subject, message, correo_usuario, [correo_estudiante])
-            return redirect('inicioE')  # Redirigir a alguna página después de enviar el correo
-        except Exception as e:
-            print(f"Error al enviar el correo: {e}")
-            return render(request, 'error_page.html')  # Mostrar una página de error si hay problemas
-
-    return render(request, 'empresa/aboutMeStudent.html', {'estudiante': estudiante})
 
 
 
@@ -81,9 +64,43 @@ def inicioE(request):
     return render(request, 'empresa/inicioE.html')
 
 
-def subir_examen(request):
 
-    return render(request, 'empresa/aboutMeStudent.html')
+
+@login_required
+def subir_examen(request, id_oferta):
+    if request.method == 'POST' and request.FILES.get('cv_pdf'):
+        nit_empresa = request.session.get('nit')
+
+        oferta = get_object_or_404(OfertaEmpleo, id_oferta=id_oferta)
+        pdf_file = request.FILES['cv_pdf']
+
+
+        if pdf_file.content_type != 'application/pdf':
+            messages.error(request, "El archivo debe ser un PDF.")
+            return render(request, 'empresa/DetallesOferta.html')
+
+        if not nit_empresa or not id_oferta:
+            messages.error(request, "No se encontró la información de la empresa o la oferta.")
+            return render(request, 'empresa/DetallesOferta.html')
+
+        oferta_folder_path = os.path.join(settings.BASE_DIR, 'Data', 'OfertasExamenes', 'Examenes',str(nit_empresa), str(id_oferta))
+        os.makedirs(oferta_folder_path, exist_ok=True)
+
+        pdf_file_path = os.path.join(oferta_folder_path, f"{id_oferta}.pdf")
+
+        with open(pdf_file_path, 'wb') as file:
+            for chunk in pdf_file.chunks():
+                file.write(chunk)
+
+        messages.success(request, "Archivo PDF subido exitosamente.")
+        return redirect('detalle_oferta', id_oferta=id_oferta)  
+
+    return render(request, 'empresa/DetallesOferta.html')
+
+
+def ver_respuestas(request):
+
+    return render(request, 'empresa/verRespuestas.html')
 
 
 @login_required 

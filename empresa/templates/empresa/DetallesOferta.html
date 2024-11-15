@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="{% static 'empresa/css/InicioE.css' %}" />
     <link rel="stylesheet" href="{% static 'empresa/css/desOferta.css' %}" />
     <link rel="stylesheet" href="{% static 'empresa/css/listasE.css' %}" />
+    <link rel="stylesheet" href="{% static 'empresa/css/mensaje.css' %}" />
 
 
 
@@ -24,6 +25,17 @@
 </head>
 
 <body>
+
+    {% if messages %}
+    <div id="alert-container">
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }} alert-dismissible fade show alert-custom" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
 
     <main class="container">
         <div class="detalles">
@@ -57,14 +69,19 @@
             <!-- Nuevo campo para subir PDF -->
             <div class="pdf-upload">
                 <h3>*Subir Examen en PDF</h3>
-                <form action="#" method="post" enctype="multipart/form-data">
+                <form action="{% url 'subir_examen' oferta.id_oferta %}" method="post" enctype="multipart/form-data">
                     {% csrf_token %}
+                    <input type="hidden" name="id_oferta" value="{{ id_oferta }}">
                     <div class="mb-3">
                         <label for="cv_pdf" class="form-label">Selecciona tu Examen en formato PDF:</label>
                         <input type="file" class="form-control" id="cv_pdf" name="cv_pdf" accept=".pdf" required>
                     </div>
                     <button type="submit" class="btn btn-primary">Subir</button>
                 </form>
+            </div>
+            <div class="aplicados-info mt-4 d-flex justify-content-between align-items-center">
+                <p class="mb-0">Respuestas: </p>
+                <button class="botonAplicados" data-bs-toggle="modal" data-bs-target="#modalRespuestas">Ver Respuestas</button>
             </div>
         </div>
     </main>
@@ -88,6 +105,32 @@
                         </li>
                         {% empty %}
                         <p>No hay estudiantes aplicados a esta oferta.</p>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Modal de Estudiantes que Respondierno -->
+    <div class="modal fade" id="modalRespuestas" tabindex="-1" aria-labelledby="modalRespuestasLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 id="modalRespuestasLabel">Estudiantes que Respondieron</h3>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="marcoCV">
+                    <ul class="listas">
+                        {% for estudiante in estudiantes %}
+                        <li class="interact">
+                            <p>NOM ESTUDIANTE</p>
+                            <a href="#" class="btn-hoja-vida">visualizar</a>
+                        </li>
+                        {% empty %}
+                        <p>No hay respuestas de estudiantes.</p>
                         {% endfor %}
                     </ul>
                 </div>
