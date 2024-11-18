@@ -82,19 +82,19 @@
             <i class="bi bi-file-earmark-text"> : {{ curso.id_tipo_certificado.nombre_tipo }}</i>
 
             <div id="btnesNavs">
-                {% if cursoDisponible.activacion == 0 %}
-                    <form id="metAplicarCurso" method="POST" action="{% url 'aplicarCurso' %}">
-                        <input type="hidden" name="idCurso" value="{{ cursoDisponible.id_curso.id_curso }}">
-                        <input type="hidden" name="idEstudiante" value="{{ cursoDisponible.id_estudiante.id_estudiante }}">
-                        <button type="submit">Aplicar</button>
-                    </form>
-                {% else %}
+                <form id="metAplicarCurso" method="POST" action="{% url 'aplicarCurso' %}">
+                    <input type="hidden" name="idCurso" value="{{ curso.id_curso }}">
+                    <input type="hidden" name="idEstudiante" value="{{ idStudent }}">
                     {% if cursoAprobado %}
-                        <a>Descargar Certificado</a>
+                            <a>Descargar Certificado</a>
                     {% else %}
-                        <a>Realizar Prueba</a>
+                        {% if cursoDisponible %}
+                            <button type="submit">Realizar Prueba</button>
+                        {% else %}
+                            <button type="submit">Aplicar</button>
+                        {% endif %}
                     {% endif %}
-                {% endif %}
+                </form>
                 <a href="{% url 'Cursos' %}">Regresar</a>
             </div>
             

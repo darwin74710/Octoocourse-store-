@@ -54,6 +54,8 @@ $(document).ready(function() { /* Esperamos a que el DOM se cargue por completo 
                 if (response.status === 'success') {
                     alert(response.message);
                     location.reload();
+                } else if (response.status === 'redirect') {
+                    window.location.href = response.url;
                 } else {
                     alert(response.message);
                 }

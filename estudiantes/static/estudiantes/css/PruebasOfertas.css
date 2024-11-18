@@ -1,0 +1,141 @@
+.mensaje, #OpcionesPrueba{
+    margin: 30px auto;
+    width: 800px;
+    text-align: center;
+    align-content: center;
+    justify-content: center;
+}
+
+.mensaje h1{
+    font-size: 35px;
+    text-align: center;
+    margin: auto;
+    color: var(--letratitulo1);
+    border-bottom: 1px solid var(--borde1);
+}
+
+.mensaje img{
+    margin: 10px;
+    width: 500px; height: 500px;
+    border: 5px solid var(--letratitulo1);
+    border-radius: 500px;
+}
+
+#pruebaEmpresa{
+    width: 800px;
+    margin: auto;
+    border: 3px solid var(--borde1);
+    border-radius: 20px;
+}
+
+#marcoRespuesta{
+    width: 100%;
+    margin: 10px 0;
+    border: 1px solid var(--borde1);
+    border-radius: 20px;
+}
+
+#marcoRespuesta h2{
+    font-size: 30px;
+    color: var(--letratitulo1);
+}
+
+#marcoRespuesta p{
+    margin: 10px;
+    text-align: left;
+    color: var(--letra1);
+}
+
+#btnArchivo{
+    display: flex;
+}
+
+#btnArchivo #btnSeleccionar, #marcoRespuesta a, #formularioArchivo button{
+    text-decoration: none;
+    text-align: center;
+    border: none;
+    margin: 0 20px;
+    margin-right: 0;
+    padding: 0 10px;
+    display: block;
+    font-size: 20px;
+    color: var(--letraBotones1); background-color: var(--fondoBotones1);
+    border-radius: 10px 0 0 0;
+    cursor: pointer;
+    transition: all 0.3s ease 0s;
+}
+
+#marcoRespuesta a{
+    margin: 10px;
+    border-radius: 10px;
+}
+
+#formularioArchivo p{
+    text-align: center;
+    font-size: 15px;
+    margin: 0 20px;
+}
+
+#formularioArchivo button{
+    width: 95%;
+    margin: 2px auto;
+    border-radius: 0 0 10px 10px;
+}
+
+#btnArchivo #btnSeleccionar:hover, #marcoRespuesta a:hover, #formularioArchivo button:hover{
+    background-color: var(--hFondoBotones1); color: var(--hLetraBotones1);
+}
+
+#btnArchivo #btnSeleccionar{
+    margin-bottom: 0;
+}
+
+#btnArchivo #nombreArchivo{
+    width: 100%;
+    margin: 0 20px;
+    margin-bottom: 0;
+    border-radius: 0 10px 0 0;
+    margin-left: 0;
+    border: 1px solid var(--borde1);
+    text-align: left;
+    padding-left: 10px;
+}
+
+@media screen and (max-width:800px) {
+    .mensaje, #OpcionesPrueba{
+        width: 100%;
+    }
+
+    .mensaje img{
+        width: 200px; height: 200px;
+    }
+
+    #pruebaEmpresa{
+        width: 100%;
+        margin: auto;
+    }
+
+
+    #btnArchivo{
+        display: flex;
+        flex-direction: column;
+    }
+
+    #btnArchivo #btnSeleccionar{
+        width: 95%;
+        margin: 0 10px;
+        margin-bottom: 0;
+        border-radius: 10px 10px 0 0;
+    }
+    
+    #btnArchivo #nombreArchivo{
+        width: 95%;
+        margin: 0 10px;
+        margin-top: 0;
+        border-radius: 0;
+    }
+
+    #formularioArchivo button{
+        margin: 0 10px;
+    }
+}

@@ -1,5 +1,5 @@
 from estudiantes.models import Estudiantes, HojasDeVida, Idiomas, Aptitudes, FormacionesAcademicas, LenguajesProg, ExpLaborales
-from estudiantes.models_cursos import CursosDisponibles
+from estudiantes.models_cursos import CursosDisponibles, Cursos, RespuestasCurso, CursosAprobados
 from estudiantes.models_Empresas import OfertasDisponibles, OfertasEmpleos
 from django.contrib.auth.hashers import check_password, make_password
 from django.http import JsonResponse
@@ -227,18 +227,59 @@ def aplicarCurso(request):
 
         cursosDisponibles = CursosDisponibles.objects.filter(id_estudiante=idEstudiante, id_curso=idCurso)
         if cursosDisponibles.exists():
-            cursoDisponible = cursosDisponibles[0]
+            cursoDisponible = cursosDisponibles.first()
         else:
-            return JsonResponse({'status': 'error', 'message': 'Curso no encontrado.'})
+            estudiantes = Estudiantes.objects.filter(id_estudiante = idEstudiante).first()
+            cursos = Cursos.objects.filter(id_curso = idCurso).first()
+            try:
+                # Guardamos el curso
+                cursoDisponible = CursosDisponibles.objects.create(id_estudiante=estudiantes, id_curso=cursos, activacion = 1)
+                return JsonResponse({'status': 'success', 'message': 'Aplicaste al curso correctamente.'})
+            except Exception as e:
+                # Error por el cual no se pudo guardar
+                return JsonResponse({'status': 'error', 'message': str(e)})  
+            
+        if cursoDisponible.activacion == 1:
+            # Lo dirijimos a pruebas en caso de que ya este aplicado a la oferta junto al id del estudiante y de la oferta.
+            url_pruebas = reverse('PruebasCursos', kwargs={'idEstudiante': idEstudiante, 'idCurso': idCurso})
+            return JsonResponse({'status': 'redirect', 'url': url_pruebas})
+    # En caso de que no se este realizando un post
+    return JsonResponse({'status': 'error', 'message': 'Método no permitido.'})
+
+# Esta función es para validar la prueba del curso.
+@csrf_exempt
+def validarCurso(request):
+    if request.method == 'POST':
+        # Busco las tablas necesarias
+        idCurso = request.POST.get('idCursoInput')
+        idEstudiante = request.session.get('id_estudiante')
+        
+        eleccionRespId = request.POST.getlist('eleccionRespId')
+
+        for eleccion in eleccionRespId:
+            if eleccion == "" or eleccion == None:
+                return JsonResponse({'status': 'error', 'message': 'Seleccione todas las respuestas.'})
+
+        respuestasArrayTexto = request.POST.get('respuestasArray')
+
+        respuestasArray = respuestasArrayTexto.split('|')
+        
+        i = 1
+        while i < len(respuestasArray):
+            respuesta = RespuestasCurso.objects.filter(id_respuesta = int(respuestasArray[i])).first()
+            if respuesta.validacion == 0:
+                return JsonResponse({'status': 'error', 'message': 'Elegiste mal, vuelve a intentarlo.'})
+            i = i + 1
+
         try:
-            # Guardamos la activación
-            cursoDisponible.activacion = 1
-            cursoDisponible.save()
-            return JsonResponse({'status': 'success', 'message': 'Aplicaste al curso correctamente.'})
+            cursos = Cursos.objects.filter(id_curso = idCurso).first()
+            estudiantes = Estudiantes.objects.filter(id_estudiante = idEstudiante).first()
+            # Creamos el registro para el curso aprobado.
+            cursosAprobados = CursosAprobados.objects.create(id_estudiante=estudiantes, id_curso=cursos)
+            return JsonResponse({'status': 'success', 'message': 'Resolviste la prueba correctamente.'})
         except Exception as e:
-            # Error por el cual no se pudo guardar
+            # Error por el cual no se pudo crear
             return JsonResponse({'status': 'error', 'message': str(e)})
-    
     # En caso de que no se este realizando un post
     return JsonResponse({'status': 'error', 'message': 'Método no permitido.'})
 
@@ -265,7 +306,7 @@ def aplicarOferta(request):
             
         if ofertaDisponible.activacion == 1:
             # Lo dirijimos a pruebas en caso de que ya este aplicado a la oferta junto al id del estudiante y de la oferta.
-            url_pruebas = reverse('Pruebas', kwargs={'idEstudiante': idEstudiante, 'idOferta': idOferta})
+            url_pruebas = reverse('PruebasOfertas', kwargs={'idEstudiante': idEstudiante, 'idOferta': idOferta})
             return JsonResponse({'status': 'redirect', 'url': url_pruebas})
     
     # En caso de que no se este realizando un post

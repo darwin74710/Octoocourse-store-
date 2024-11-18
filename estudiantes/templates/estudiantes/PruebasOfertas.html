@@ -10,6 +10,8 @@
     <!-- Scripts css -->
     <link rel="stylesheet" href="{% static 'estudiantes/css/navBar.css' %}" />
     <link rel="stylesheet" href="{% static 'estudiantes/css/footer.css' %}" />
+    <link rel="stylesheet" href="{% static 'estudiantes/css/PruebasOfertas.css' %}" />
+    <link rel="stylesheet" href="{% static 'estudiantes/css/mensaje.css' %}" />
 
     <!-- Cargar tema -->
     <script src="{% static 'estudiantes/js/Front/Temas.js' %}"></script>
@@ -23,6 +25,18 @@
 </head>
 
 <body style="background-color: var(--fondo1);">
+    <!-- Mensajes de éxito o error -->
+    {% if messages %}
+    <div id="alert-container">
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }} alert-dismissible fade show alert-custom" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+    
     <!-- NavBar -->
     <header id="navBar">
         <img id="logo" src="{% static 'estudiantes/img/navBar/Logo2.png' %}" alt="">
@@ -64,16 +78,77 @@
     
     {% if usuarioActual != usuarioURL %}
     <!-- EN CASO DE QUE ALGUIEN INTENTE INGRESAR CON TU ID EN LA URL Y NO SEA EL PROPIETARIO -->
-        <h1>NO TIENES PERMITIDO INGRESAR A ESTA PRUEBA</h1>
+        <div class="mensaje">
+            <img src="{% static 'estudiantes/img/Ofertas/pulpoTriste.png' %}" alt="">
+            <h1>NO TIENES PERMITIDO INGRESAR A ESTA PRUEBA</h1>
+        </div>
     {% else %}
         {% if ofertaActiva == 0 %}
         <!-- SI NO A APLICADO A LA PRUEBA -->
-        <h1>ESTE USUARIO NO ESTA APLICADO A ESTA PRUEBA</h1>
+        <div class="mensaje">
+            <img src="{% static 'estudiantes/img/Ofertas/pulpoTriste.png' %}" alt="">
+            <h1>ESTE USUARIO NO ESTÁ APLICADO A ESTA PRUEBA</h1>
+        </div>
         {% elif ofertaActiva == 1 %}
             <!-- TODO CORRECTO -->
-            <h1>ESTE USUARIO ESTA APLICADO A ESTA PRUEBA</h1>
+            <div class="mensaje">
+                <h1>{{ ofertaEmpleo.nombre_oferta }}</h1>
+            </div>
+
+            <div id="OpcionesPrueba">
+                {% if urlPDFExamen %}
+                    <iframe id="pruebaEmpresa" src="{{ urlPDFExamen }}" width="100%" height="700px"></iframe>
+                {% else %}
+                    <div class="mensaje" id="mensajeErrorPdf">
+                        <img src="{% static 'estudiantes/img/Ofertas/pulpoTriste.png' %}" alt="">
+                        <h1>PDF NO ENCONTRADO</h1>
+                    </div>
+                {% endif %}
+
+                <div id="marcoRespuesta">
+                    <h2>MI RESPUESTA</h2>
+                    <p>Subir la respuesta en un archivo PDF.</p>
+                    <form id="formularioArchivo" method="POST" action="{% url 'GuardarRespuesta' %}" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <input type="hidden" name="idOfertaInput" value="{{ idOferta }}">
+
+                        {% if urlPDFRespuesta %}
+                            <p style="color: green;">Se cargó el archivo correctamente.</p>
+                        {% else %}
+                            <p style="color: red;">No a cargado ningún archivo.</p>
+                        {% endif %}
+                        <div id="btnArchivo">
+                            <label for="urlArchivo" id="btnSeleccionar">Seleccionar</label>
+                            <input type="file" id="urlArchivo" name="urlArchivo" style="display:none;" onchange="updateFileName()" accept=".pdf" required>
+                            <div id="nombreArchivo">Ningún archivo seleccionado</div>
+                        </div>
+
+                        <button type="submit">Subir Archivo</button>
+                    </form>
+
+                    {% if urlPDFRespuesta %}
+                        <a href="{{ urlPDFRespuesta }}" target="_blank">Visualizar</a>
+                    {% endif %}
+                    <a href="{% url 'Ofertas' %}">Volver</a>
+                </div>
+            </div>
+            
         {% endif %}
     {% endif %}
+
+    <script>
+        function updateFileName() {
+            var urlArchivo = document.getElementById('urlArchivo');
+            var nombreArchivo = document.getElementById('nombreArchivo');
+            
+            // Verificar si el usuario seleccionó un archivo
+            if (urlArchivo.files && urlArchivo.files[0]) {
+                nombreArchivo.textContent = urlArchivo.files[0].name;
+            } else {
+                nombreArchivo.textContent = 'Ningún archivo seleccionado';
+            }
+        }
+    </script>
 
     <!-- Footer -->
     <footer class="piePag">
@@ -97,6 +172,11 @@
         </div>
         <div id="Marco2">&copy; 2024 OctooCourse - Todos los Derechos Reservados.</div>
     </footer>
+
+    <!-- Scripts AJAX -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script src="{% static 'estudiantes/js/DataBase/ConfigData.js' %}"></script>
 
     <!-- Scripts js -->
     <script src="{% static 'estudiantes/js/Front/navBar.js' %}"></script>
