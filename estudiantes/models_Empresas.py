@@ -55,16 +55,6 @@ class TipoCont(models.Model):
         db_table = 'TIPO_CONT'
 
 
-class RespuestasOfertas(models.Model):
-    id_respuestas_ofertas = models.IntegerField(primary_key=True)
-    id_oferta = models.ForeignKey(OfertasEmpleos, models.DO_NOTHING, db_column='id_oferta', blank=True, null=True)
-    id_estudiante = models.ForeignKey('Estudiantes', models.DO_NOTHING, db_column='id_estudiante', blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'RESPUESTAS_OFERTAS'
-
-
 class OfertasDisponibles(models.Model):
     id_ofer_disponible = models.IntegerField(primary_key=True)
     activacion = models.BooleanField(blank=True, null=True)

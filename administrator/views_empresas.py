@@ -3,6 +3,9 @@ from administrator.models_empresas import Empresas, OfertasEmpleos
 from django.db import connection, transaction
 from django.http import HttpResponse
 from django.shortcuts import redirect
+import os
+import shutil
+from django.conf import settings
 
 def empresaAdmin(request):
     empresas = Empresas.objects.all()
@@ -23,6 +26,19 @@ def empresaEliminar(request):
     if empresa is None:
         return HttpResponse("Empresa no encontrada", status=404)
     else:
+        # Elimino todas las carpetas de los pdfs
+        carpetaPDF1 = 'OfertasExamenes/Examenes/' + str(idEmpres)
+        ExamenesPDF = os.path.join(settings.DATA_ROOT, carpetaPDF1)
+
+        carpetaPDF2 = 'OfertasExamenes/Respuestas/' + str(idEmpres)
+        RespuestasPDF = os.path.join(settings.DATA_ROOT, carpetaPDF2)
+
+        if os.path.exists(ExamenesPDF):
+            shutil.rmtree(ExamenesPDF)
+        
+        if os.path.exists(RespuestasPDF):
+            shutil.rmtree(RespuestasPDF)
+
         with transaction.atomic():
             with connection.cursor() as cursor:
                 for oferta in ofertas:
@@ -32,10 +48,6 @@ def empresaEliminar(request):
                     )
                     cursor.execute(
                         "DELETE FROM OFERTAS_DISPONIBLES WHERE ID_OFERTA = %s",
-                        [oferta.id_oferta]
-                    )
-                    cursor.execute(
-                        "DELETE FROM RESPUESTAS_OFERTAS WHERE ID_OFERTA = %s",
                         [oferta.id_oferta]
                     )
                     cursor.execute(

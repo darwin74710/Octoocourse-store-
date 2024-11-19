@@ -5,6 +5,9 @@ from django.shortcuts import redirect, render
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
 from django.urls import reverse
+import os
+import shutil
+from django.conf import settings
 
 def ofertaAdmin(request):
     ofertas = OfertasEmpleos.objects.all()
@@ -31,6 +34,19 @@ def ofertaEliminar(request):
     if oferta is None:
         return HttpResponse("Oferta no encontrada", status=404)
     else:
+        # Elimino todas las carpetas de los pdfs
+        carpetaPDF1 = 'OfertasExamenes/Examenes/' + str(oferta.nit.nit) + '/' + str(oferta.id_oferta)
+        ExamenPDF = os.path.join(settings.DATA_ROOT, carpetaPDF1)
+
+        carpetaPDF2 = 'OfertasExamenes/Respuestas/' + str(oferta.nit.nit) + '/' + str(oferta.id_oferta)
+        RespuestasPDF = os.path.join(settings.DATA_ROOT, carpetaPDF2)
+
+        if os.path.exists(ExamenPDF):
+            shutil.rmtree(ExamenPDF)
+        
+        if os.path.exists(RespuestasPDF):
+            shutil.rmtree(RespuestasPDF)
+
         with transaction.atomic():
             with connection.cursor() as cursor:
                 cursor.execute(
@@ -39,10 +55,6 @@ def ofertaEliminar(request):
                 )
                 cursor.execute(
                     "DELETE FROM OFERTAS_DISPONIBLES WHERE ID_OFERTA = %s",
-                    [idOferta]
-                )
-                cursor.execute(
-                    "DELETE FROM RESPUESTAS_OFERTAS WHERE ID_OFERTA = %s",
                     [idOferta]
                 )
                 cursor.execute(

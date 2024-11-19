@@ -1,0 +1,122 @@
+.mensaje, #OpcionesPrueba{
+    margin: 30px auto;
+    width: 800px;
+    text-align: center;
+    align-content: center;
+    justify-content: center;
+}
+
+.mensaje h1{
+    font-size: 35px;
+    text-align: center;
+    margin: auto;
+    color: var(--letratitulo1);
+    border-bottom: 1px solid var(--borde1);
+}
+
+.mensaje img{
+    margin: 10px;
+    width: 500px; height: 500px;
+    border: 5px solid var(--letratitulo1);
+    border-radius: 500px;
+}
+
+.marcoPreguntas{
+    width: 800px;
+    margin: 20px auto;
+}
+
+.pregunta{
+    width: 95%;
+    padding: 5px;
+    margin: 5px auto;
+    border: 1px solid var(--borde1);
+    border-radius: 10px;
+}
+
+.pregunta h2, .pregunta h3{
+    margin: 0;
+    font-size: 20px;
+    color: var(--letratitulo1);
+}
+
+.pregunta h2{
+    text-align: center;
+    color: var(--letratitulo1);
+}
+
+.pregunta h3{
+    margin: 5px 10px;
+    text-align: left;
+    color: var(--letra1);
+}
+
+.pregunta .respuesta{ 
+    margin: 10px;
+    font-size: 18px;
+    color: var(--letra1); background-color: var(--fondoBotones2);
+    border: 1px solid var(--borde1);
+    border-radius: 100px;
+    padding: 5px 10px;
+    text-decoration: none;
+    text-align: left;
+    cursor: pointer;
+}
+
+.pregunta .respuesta:hover{
+    filter: brightness(85%);
+    transition: filter 0.3s ease;
+}
+
+#botones{
+    width: 800px;
+    margin: auto;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+}
+
+#botones a, #botones button{
+    text-decoration: none;
+    border: none;
+    text-align: center;
+    margin: 0 5px;
+    margin-bottom: 10px;
+    padding: 0 10px;
+    display: block;
+    font-size: 20px;
+    color: var(--letraBotones1); background-color: var(--fondoBotones1);
+    border-radius: 100px;
+    cursor: pointer;
+    transition: all 0.3s ease 0s;
+}
+
+#botones a:hover, #botones button:hover{
+    background-color: var(--hFondoBotones1); color: var(--hLetraBotones1);
+}
+
+
+@media screen and (max-width:800px) {
+    .mensaje, #OpcionesPrueba{
+        width: 100%;
+    }
+
+    .mensaje img{
+        width: 200px; height: 200px;
+    }
+
+    .marcoPreguntas{
+        width: 100%;
+    }
+
+    .pregunta{
+        width: 100%;
+        margin: 0;
+    }
+
+    #botones{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+}

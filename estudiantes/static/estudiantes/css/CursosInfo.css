@@ -50,6 +50,7 @@
 #MarcoInfoCursos #btnesNavs a,#MarcoInfoCursos #btnesNavs button{
     width: auto;
     text-align: center;
+    display: block;
     border: none;
     margin: 0 5px;
     margin-top: 10px;

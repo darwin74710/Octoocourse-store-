@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.core.paginator import Paginator
-from estudiantes.models_cursos import Cursos, Contenidos, SubContenidos, CursosDisponibles, CursosAprobados, TipoContenido, TipoCertificado, TipoDificultad, TipoDuracion
+from estudiantes.models_cursos import Cursos, Contenidos, SubContenidos, CursosDisponibles, CursosAprobados, TipoContenido, TipoCertificado, TipoDificultad, TipoDuracion, PreguntasCurso, RespuestasCurso
 from estudiantes.models import Estudiantes, HojasDeVida
 from django.contrib import messages
 from django.db.models import Q
@@ -8,6 +8,7 @@ import json
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse_lazy
+from datetime import date
 
 @login_required(login_url=reverse_lazy('inicioS'))
 def Inicio(request):
@@ -100,7 +101,7 @@ def CursosInfo(request):
         cursos = Cursos.objects.filter(id_curso=id_curso)
 
         if cursos.exists():
-            curso = cursos[0]
+            curso = cursos.first()
         else:
             curso = None
 
@@ -117,11 +118,7 @@ def CursosInfo(request):
         if cursosDisponibles.exists():
             cursoDisponible = cursosDisponibles[0]
         else:
-            if curso:
-                estudiante = Estudiantes.objects.get(id_estudiante=idStudent)
-                cursoDisponible = CursosDisponibles.objects.create(id_curso=curso, id_estudiante=estudiante, activacion = 0)
-            else:
-                cursoDisponible = None
+            cursoDisponible = None
 
         cursosAprobados = CursosAprobados.objects.filter(id_curso=curso.id_curso, id_estudiante=idStudent)
         if cursosAprobados.exists():
@@ -129,12 +126,18 @@ def CursosInfo(request):
         else:
             cursoAprobado = None
 
+        estudiante = Estudiantes.objects.filter(id_estudiante = idStudent).first()
+        fehaActual = date.today()
+
         Datos = {
             'curso': curso,
             'contenidos': contenidos,
             'subcontenidos': subcontenidos,
             'cursoDisponible': cursoDisponible,
             'cursoAprobado': cursoAprobado,
+            'idStudent': idStudent,
+            'estudiante': estudiante,
+            'fehaActual': fehaActual,
         }
     else:
         Datos = {
@@ -167,3 +170,38 @@ def CursosContent(request):
         }
 
     return render(request, 'estudiantes/CursosContent.html', Datos)
+
+@login_required(login_url=reverse_lazy('inicioS'))
+def Pruebas(request, idEstudiante, idCurso):
+    estudiante = Estudiantes.objects.filter(id_estudiante = idEstudiante)[0]
+    curso = Cursos.objects.filter(id_curso = idCurso)[0]
+
+    cursosDisponibles = CursosDisponibles.objects.filter(id_estudiante=estudiante, id_curso=idCurso)
+
+    if cursosDisponibles.exists():
+        cursoActivo = 1
+    else:
+        cursoActivo = 0
+
+    idStudent = request.session.get('id_estudiante')
+
+    #Realizo la busqueda de las preguntas.
+    preguntasCurso = PreguntasCurso.objects.filter(id_curso=idCurso)
+    respuestasCurso = RespuestasCurso.objects.filter(id_pregunta__in=preguntasCurso)
+
+    #Tablas para verificar si el curso está aprobado.
+    cursosAprobados = CursosAprobados.objects.filter(id_curso=curso, id_estudiante=estudiante).first()
+
+
+    Datos = {
+        'cursoActivo': cursoActivo,
+        'usuarioActual': idStudent,
+        'usuarioURL': idEstudiante,
+        'estudiante': estudiante,
+        'curso': curso,
+        'preguntasCurso': preguntasCurso,
+        'respuestasCurso': respuestasCurso,
+        'cursosAprobados': cursosAprobados,
+    }
+
+    return render(request, 'estudiantes/PruebasCursos.html', Datos)

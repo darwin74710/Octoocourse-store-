@@ -6,6 +6,11 @@ from django.shortcuts import render
 from django.db.models import Q
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse_lazy
+from django.conf import settings
+import os
+from django.http import JsonResponse
+from django.contrib import messages
+from django.shortcuts import redirect
 
 @login_required(login_url=reverse_lazy('inicioS'))
 def Ofertas(request):
@@ -118,10 +123,10 @@ def OfertasInfo(request):
 
 @login_required(login_url=reverse_lazy('inicioS'))
 def Pruebas(request, idEstudiante, idOferta):
-    estudiantes = Estudiantes.objects.filter(id_estudiante = idEstudiante)[0]
-    ofertasEmpleos = OfertasEmpleos.objects.filter(id_oferta = idOferta)[0]
+    estudiante = Estudiantes.objects.filter(id_estudiante = idEstudiante)[0]
+    ofertaEmpleo = OfertasEmpleos.objects.filter(id_oferta = idOferta)[0]
 
-    ofertasDisponibles = OfertasDisponibles.objects.filter(id_estudiante=estudiantes, id_oferta=ofertasEmpleos)
+    ofertasDisponibles = OfertasDisponibles.objects.filter(id_estudiante=estudiante, id_oferta=ofertaEmpleo)
 
     if ofertasDisponibles.exists():
         ofertaActiva = 1
@@ -130,10 +135,71 @@ def Pruebas(request, idEstudiante, idOferta):
 
     idStudent = request.session.get('id_estudiante')
 
+    # Ruta del archivo PDF EXAMEN OFERTA
+    nombreArchivoExamen = 'OfertasExamenes/Examenes/' + str(ofertaEmpleo.nit.nit) + '/' + str(ofertaEmpleo.id_oferta) + '/' + str(ofertaEmpleo.id_oferta) + '.pdf'
+    urlPDFExamen = f"{settings.DATA_URL}{nombreArchivoExamen}"
+
+    # Verificados si el pdf existe
+    examenPDF = os.path.join(settings.DATA_ROOT, nombreArchivoExamen.strip('/'))
+    if not os.path.exists(examenPDF):
+        urlPDFExamen = None
+
+    
+    # Ruta del archivo PDF ESTUDIANTE
+    nombreArchivoEstudiante = 'OfertasExamenes/Respuestas/' + str(ofertaEmpleo.nit.nit) + '/' + str(ofertaEmpleo.id_oferta) + '/' + str(estudiante.id_estudiante) + '.pdf'
+    urlPDFRespuesta = f"{settings.DATA_URL}{nombreArchivoEstudiante}"
+
+    # Verificados si el pdf existe
+    respuestaPDF = os.path.join(settings.DATA_ROOT, nombreArchivoEstudiante.strip('/'))
+    if not os.path.exists(respuestaPDF):
+        urlPDFRespuesta = None
+        
     Datos = {
         'ofertaActiva': ofertaActiva,
         'usuarioActual': idStudent,
         'usuarioURL': idEstudiante,
+        'estudiante': estudiante,
+        'ofertaEmpleo': ofertaEmpleo,
+        'urlPDFExamen': urlPDFExamen,
+        'urlPDFRespuesta': urlPDFRespuesta,
+        'idOferta': idOferta,
     }
 
-    return render(request, 'estudiantes/Pruebas.html', Datos)
+    return render(request, 'estudiantes/PruebasOfertas.html', Datos)
+
+def GuardarRespuesta(request):
+    if request.method == 'POST' and request.FILES.get('urlArchivo'):
+        id_Estudiante = request.session.get('id_estudiante')
+        idOferta = request.POST.get('idOfertaInput')
+        urlArchivo = request.FILES.get('urlArchivo')
+
+        oferta = OfertasEmpleos.objects.filter(id_oferta = idOferta).first()
+
+        # Ruta del archivo PDF ESTUDIANTE
+        nombreArchivoEstudiante = 'OfertasExamenes/Respuestas/' + str(oferta.nit.nit) + '/' + str(idOferta) + '/' + str(id_Estudiante) + '.pdf'
+
+        # Verificados si el pdf existe y eliminarlo
+        respuestaPDF = os.path.join(settings.DATA_ROOT, nombreArchivoEstudiante.strip('/'))
+        if os.path.exists(respuestaPDF):
+            os.remove(respuestaPDF)
+
+        # Ruta para guardar el arhivo
+        rutaCrearArchivo = os.path.join(settings.DATA_ROOT, f'OfertasExamenes/Respuestas/' + str(oferta.nit.nit) + '/' + str(idOferta) + '/')
+        if not os.path.exists(rutaCrearArchivo):
+            os.makedirs(rutaCrearArchivo)
+
+        try:
+            archivoGuardado = os.path.join(rutaCrearArchivo, f'{id_Estudiante}.pdf')
+
+            with open(archivoGuardado, 'wb') as archivo_destino:
+                for chunk in urlArchivo.chunks():
+                    archivo_destino.write(chunk)
+
+            messages.success(request, "El archivo se subió correctamente.")
+            return redirect('PruebasOfertas', idEstudiante=id_Estudiante, idOferta=idOferta)
+        except Exception as e:
+            messages.error(request, str(e))
+            return redirect('PruebasOfertas', idEstudiante=id_Estudiante, idOferta=idOferta)
+
+    messages.error(request, "No se subió ningún archivo.")
+    return redirect('PruebasOfertas', idEstudiante=id_Estudiante, idOferta=idOferta)
