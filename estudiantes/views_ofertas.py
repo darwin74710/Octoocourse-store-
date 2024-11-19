@@ -136,7 +136,7 @@ def Pruebas(request, idEstudiante, idOferta):
     idStudent = request.session.get('id_estudiante')
 
     # Ruta del archivo PDF EXAMEN OFERTA
-    nombreArchivoExamen = 'OfertasExamenes/Examenes/' + str(ofertaEmpleo.nit.nit) + '/' + str(ofertaEmpleo.id_oferta) + '/' + str(ofertaEmpleo.id_oferta) + '.pdf'
+    nombreArchivoExamen = 'OfertasExamenes/Examenes/' + str(ofertaEmpleo.nit.nit) + '/' + str(ofertaEmpleo.id_oferta) + '.pdf'
     urlPDFExamen = f"{settings.DATA_URL}{nombreArchivoExamen}"
 
     # Verificados si el pdf existe
