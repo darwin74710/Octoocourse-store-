@@ -136,7 +136,7 @@ def Pruebas(request, idEstudiante, idOferta):
     idStudent = request.session.get('id_estudiante')
 
     # Ruta del archivo PDF EXAMEN OFERTA
-    nombreArchivoExamen = 'OfertasExamenes/Examenes/' + str(ofertaEmpleo.nit.nit) + '/' + str(ofertaEmpleo.id_oferta) + '.pdf'
+    nombreArchivoExamen = 'OfertasExamenes/Examenes/' + str(ofertaEmpleo.nit.nit) + '/' + str(ofertaEmpleo.id_oferta) + '/' + str(ofertaEmpleo.id_oferta) + '.pdf'
     urlPDFExamen = f"{settings.DATA_URL}{nombreArchivoExamen}"
 
     # Verificados si el pdf existe
@@ -146,7 +146,7 @@ def Pruebas(request, idEstudiante, idOferta):
 
     
     # Ruta del archivo PDF ESTUDIANTE
-    nombreArchivoEstudiante = 'OfertasExamenes/Respuestas/' + str(ofertaEmpleo.id_oferta) + '/' + str(estudiante.id_estudiante) + '.pdf'
+    nombreArchivoEstudiante = 'OfertasExamenes/Respuestas/' + str(ofertaEmpleo.nit.nit) + '/' + str(ofertaEmpleo.id_oferta) + '/' + str(estudiante.id_estudiante) + '.pdf'
     urlPDFRespuesta = f"{settings.DATA_URL}{nombreArchivoEstudiante}"
 
     # Verificados si el pdf existe
@@ -173,9 +173,10 @@ def GuardarRespuesta(request):
         idOferta = request.POST.get('idOfertaInput')
         urlArchivo = request.FILES.get('urlArchivo')
 
+        oferta = OfertasEmpleos.objects.filter(id_oferta = idOferta).first()
+
         # Ruta del archivo PDF ESTUDIANTE
-        nombreArchivoEstudiante = 'OfertasExamenes/Respuestas/' + str(idOferta) + '/' + str(id_Estudiante) + '.pdf'
-        urlPDFRespuesta = f"{settings.DATA_URL}{nombreArchivoEstudiante}"
+        nombreArchivoEstudiante = 'OfertasExamenes/Respuestas/' + str(oferta.nit.nit) + '/' + str(idOferta) + '/' + str(id_Estudiante) + '.pdf'
 
         # Verificados si el pdf existe y eliminarlo
         respuestaPDF = os.path.join(settings.DATA_ROOT, nombreArchivoEstudiante.strip('/'))
@@ -183,7 +184,7 @@ def GuardarRespuesta(request):
             os.remove(respuestaPDF)
 
         # Ruta para guardar el arhivo
-        rutaCrearArchivo = os.path.join(settings.DATA_ROOT, f'OfertasExamenes/Respuestas/' + str(idOferta) + '/')
+        rutaCrearArchivo = os.path.join(settings.DATA_ROOT, f'OfertasExamenes/Respuestas/' + str(oferta.nit.nit) + '/' + str(idOferta) + '/')
         if not os.path.exists(rutaCrearArchivo):
             os.makedirs(rutaCrearArchivo)
 

@@ -8,6 +8,7 @@ import json
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse_lazy
+from datetime import date
 
 @login_required(login_url=reverse_lazy('inicioS'))
 def Inicio(request):
@@ -125,6 +126,9 @@ def CursosInfo(request):
         else:
             cursoAprobado = None
 
+        estudiante = Estudiantes.objects.filter(id_estudiante = idStudent).first()
+        fehaActual = date.today()
+
         Datos = {
             'curso': curso,
             'contenidos': contenidos,
@@ -132,6 +136,8 @@ def CursosInfo(request):
             'cursoDisponible': cursoDisponible,
             'cursoAprobado': cursoAprobado,
             'idStudent': idStudent,
+            'estudiante': estudiante,
+            'fehaActual': fehaActual,
         }
     else:
         Datos = {

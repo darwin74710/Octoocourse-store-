@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="{% static 'estudiantes/css/navBar.css' %}" />
     <link rel="stylesheet" href="{% static 'estudiantes/css/footer.css' %}" />
     <link rel="stylesheet" href="{% static 'estudiantes/css/CursosInfo.css' %}" />
+    <link rel="stylesheet" href="{% static 'estudiantes/css/certificado.css' %}" />
 
     <!-- Cargar tema -->
     <script src="{% static 'estudiantes/js/Front/Temas.js' %}"></script>
@@ -86,7 +87,7 @@
                     <input type="hidden" name="idCurso" value="{{ curso.id_curso }}">
                     <input type="hidden" name="idEstudiante" value="{{ idStudent }}">
                     {% if cursoAprobado %}
-                            <a>Descargar Certificado</a>
+                            <a onclick="descargarCertificado()">Descargar Certificado</a>
                     {% else %}
                         {% if cursoDisponible %}
                             <button type="submit">Realizar Prueba</button>
@@ -150,6 +151,23 @@
             <h4>Este curso no existe.</h4>
         {% endif %}
     </div>
+
+    <div style="display: none;">
+        <div id="certificado">
+            <div id="marcoCertificado">
+                <img id="bordeSup" src="{% static 'estudiantes/img/Cursos/bordeSup.png' %}" alt="">
+                <img id="bordeInf" src="{% static 'estudiantes/img/Cursos/bordeinf.png' %}" alt="">
+                <img id="liston" src="{% static 'estudiantes/img/Cursos/liston.png' %}" alt="">
+                <img id="imgLogoCerti" src="{% static 'estudiantes/img/navBar/Logo2Black.png' %}" alt="">
+                <h1>CERTIFICA A</h1>
+                <h2>{{ estudiante.nom_estudiante }} {{ estudiante.apellido }}</h2>
+                <h3>Por haber participado y aprobado el curso virtual:</h3>
+                <h4>{{ curso.nom_curso }}</h4>
+    
+                <h5>{{ fehaActual }}</h5>
+            </div>
+        </div>
+    </div>
     
     <!-- Footer -->
     <footer class="piePag">
@@ -177,6 +195,10 @@
     <!-- Scripts js -->
     <script src="{% static 'estudiantes/js/Front/navBar.js' %}"></script>
     <script src="{% static 'estudiantes/js/Front/cursos.js' %}"></script>
+    <script src="{% static 'estudiantes/js/Front/cursosInfo.js' %}"></script>
+
+    <!-- Scripts html2pdf -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
     <!-- Scripts AJAX -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
