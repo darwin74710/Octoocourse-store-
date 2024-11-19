@@ -5,18 +5,22 @@
     justify-content: center;
     align-items: center;
     top: 0;
-    z-index: 6;
-    background-color: rgba(34, 34, 34, 0.712);
+    z-index: 9999;
+    background: rgba(138, 43, 226, 0.4);
+    transition: all 0.3s ease;
 }
 
 #modalContra{
     display: flex;
     border-radius: 10px;
     padding: 10px;
-    margin: auto;
     background-color: var(--fondo1);
-    position: fixed;
+    position: relative; 
     flex-direction: column;
+    margin: auto; 
+    max-width: 90%; 
+    max-height: 90%; 
+    overflow: auto; 
 }
 
 #modalContra{

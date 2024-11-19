@@ -66,40 +66,49 @@ def inicioE(request):
 
 
 
+
 @login_required
 def subir_examen(request, id_oferta):
+    oferta = get_object_or_404(OfertaEmpleo, id_oferta=id_oferta)
+    nit_empresa = request.session.get('nit')
+
+    pdf_file_path = os.path.join(
+        settings.BASE_DIR, 
+        'Data', 
+        'OfertasExamenes', 
+        'Examenes', 
+        str(nit_empresa), 
+        f"{id_oferta}.pdf"
+    )
+
+    # Verificar si el archivo PDF ya existe
+    pdf_existe = os.path.exists(pdf_file_path)
+
     if request.method == 'POST' and request.FILES.get('cv_pdf'):
-        nit_empresa = request.session.get('nit')
-
-        oferta = get_object_or_404(OfertaEmpleo, id_oferta=id_oferta)
         pdf_file = request.FILES['cv_pdf']
-
 
         if pdf_file.content_type != 'application/pdf':
             messages.error(request, "El archivo debe ser un PDF.")
-            return render(request, 'empresa/DetallesOferta.html')
+            return render(request, 'empresa/DetallesOferta.html', {'oferta': oferta, 'id_oferta': id_oferta, 'pdf_existe': pdf_existe})
 
         if not nit_empresa or not id_oferta:
             messages.error(request, "No se encontró la información de la empresa o la oferta.")
-            return render(request, 'empresa/DetallesOferta.html')
+            return render(request, 'empresa/DetallesOferta.html', {'oferta': oferta, 'id_oferta': id_oferta, 'pdf_existe': pdf_existe})
 
-        oferta_folder_path = os.path.join(settings.BASE_DIR, 'Data', 'OfertasExamenes', 'Examenes',str(nit_empresa), str(id_oferta))
+        oferta_folder_path = os.path.join(settings.BASE_DIR, 'Data', 'OfertasExamenes', 'Examenes', str(nit_empresa))
         os.makedirs(oferta_folder_path, exist_ok=True)
 
-        pdf_file_path = os.path.join(oferta_folder_path, f"{id_oferta}.pdf")
-
+        # Guardar el archivo PDF en la carpeta de la empresa
         with open(pdf_file_path, 'wb') as file:
             for chunk in pdf_file.chunks():
                 file.write(chunk)
 
         messages.success(request, "Archivo PDF subido exitosamente.")
-        return redirect('detalle_oferta', id_oferta=id_oferta)  
+        return redirect('subir_examen', id_oferta=id_oferta) 
 
-    return render(request, 'empresa/DetallesOferta.html')
-
+    return render(request, 'empresa/DetallesOferta.html', {'oferta': oferta, 'id_oferta': id_oferta, 'pdf_existe': pdf_existe})
 
 def ver_respuestas(request):
-
     return render(request, 'empresa/verRespuestas.html')
 
 
@@ -228,6 +237,17 @@ def detalle_oferta(request, id_oferta):
     datos_adicionales = obtener_tablas_tc(id_oferta)
 
     nit_empresa = request.session.get('nit')
+    
+    pdf_file_path = os.path.join(
+        settings.BASE_DIR, 
+        'Data', 
+        'OfertasExamenes', 
+        'Examenes', 
+        str(nit_empresa), 
+        f"{id_oferta}.pdf"
+    )
+    
+    pdf_existe = os.path.exists(pdf_file_path)
 
     request.session['current_id_oferta'] = id_oferta
     id_oferta = request.session.get('current_id_oferta')
@@ -238,28 +258,45 @@ def detalle_oferta(request, id_oferta):
     
     estudiantes = Estudiante.objects.filter(id_estudiante__in=estudiantes_aplicados).values('nom_estudiante', 'apellido', 'id_estudiante')
 
-
     context = {
         'oferta': oferta,
         'oferta_actual': oferta_actual,
         'estudiantes': estudiantes, 
         'tipo_contrato': datos_adicionales.get('tipo_contrato'),
         'conocimientos': datos_adicionales.get('conocimientos'),
+        'pdf_existe': pdf_existe,  
     }
     
-
     return render(request, 'empresa/DetallesOferta.html', context)
+
+
 
 @login_required
 def eliminar_oferta(request, id_oferta):
     oferta = get_object_or_404(OfertaEmpleo, id_oferta=id_oferta)
-    
-    OfertaDisponible.objects.filter(id_oferta=id_oferta).delete()
-    
-    oferta.delete()
-    messages.success(request, "Oferta eliminada con éxito.")
+    nit_empresa = request.session.get('nit')
 
-    return redirect('ofertasE')
+    pdf_file_path = os.path.join(
+        settings.BASE_DIR, 
+        'Data', 
+        'OfertasExamenes', 
+        'Examenes', 
+        str(nit_empresa), 
+        f"{id_oferta}.pdf"
+    )
+
+    if os.path.exists(pdf_file_path):
+        os.remove(pdf_file_path)  # Eliminar archivo PDF
+        print(f"Archivo PDF {pdf_file_path} eliminado con éxito.") 
+
+    OfertaDisponible.objects.filter(id_oferta=id_oferta).delete()
+    oferta.delete()
+
+    messages.success(request, "Oferta eliminada con éxito, incluyendo su archivo PDF.")
+    
+    return redirect('ofertasE')  
+
+
 
 @login_required
 def editar_oferta(request, id_oferta):
@@ -351,14 +388,12 @@ def mis_datos(request):
 def guardarContra(request):
     if request.method == 'POST':
         nit = request.session.get('nit')
-        # Busco la tabla de estudiantes
         empresas = Empresa.objects.filter(nit=nit)
         if empresas.exists():
             empresa = empresas[0]
         else:
             return JsonResponse({'status': 'error', 'message': 'Empresa no encontrado.'})
 
-        # Guardo los datos de los inputs en nuevas variables
         viejaContra = request.POST.get('old_contra').strip()
         nuevaContra1 = request.POST.get('nuv_contra1').strip()
         nuevaContra2 = request.POST.get('nuv_contra2').strip()
