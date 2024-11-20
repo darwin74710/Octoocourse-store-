@@ -12,6 +12,9 @@ from django.contrib.auth.hashers import check_password, make_password
 from django.core.mail import send_mail
 import os
 from django.conf import settings
+from django.http import HttpResponse, FileResponse
+import shutil 
+
 
 
 
@@ -80,6 +83,8 @@ def subir_examen(request, id_oferta):
         str(nit_empresa), 
         f"{id_oferta}.pdf"
     )
+    urlPDFExamen = f"{settings.DATA_URL}{pdf_file_path}"
+
 
     # Verificar si el archivo PDF ya existe
     pdf_existe = os.path.exists(pdf_file_path)
@@ -106,10 +111,55 @@ def subir_examen(request, id_oferta):
         messages.success(request, "Archivo PDF subido exitosamente.")
         return redirect('subir_examen', id_oferta=id_oferta) 
 
-    return render(request, 'empresa/DetallesOferta.html', {'oferta': oferta, 'id_oferta': id_oferta, 'pdf_existe': pdf_existe})
+    return render(request, 'empresa/DetallesOferta.html', {'oferta': oferta, 'id_oferta': id_oferta, 'pdf_existe': pdf_existe, 'urlPDFExamen': urlPDFExamen})
 
-def ver_respuestas(request):
-    return render(request, 'empresa/verRespuestas.html')
+
+
+
+@login_required
+def estudiantes_respuestas(request, id_oferta):
+    oferta = OfertaEmpleo.objects.get(id_oferta=id_oferta)
+    nit_empresa = request.session.get('nit')
+
+    ruta_respuestas = os.path.join(settings.BASE_DIR, 'Data', 'OfertasExamenes', 'Respuestas', str(nit_empresa), str(id_oferta))
+
+    estudiantes_respuestas = []
+
+    if os.path.exists(ruta_respuestas):
+        archivos = os.listdir(ruta_respuestas)
+
+        for archivo in archivos:
+            if archivo.endswith('.pdf'):
+                #  ID del estudiante a partir del nombre del archivo
+                id_estudiante = archivo.replace('.pdf', '')
+                
+                ruta_pdf = os.path.join(settings.BASE_DIR, 'Data', 'OfertasExamenes', 'Respuestas', str(nit_empresa), str(id_oferta), f"{id_estudiante}.pdf")
+
+                # buscamos el estudiante en la base de datos
+                try:
+                    estudiante = Estudiante.objects.get(id_estudiante=id_estudiante)
+                    estudiantes_respuestas.append({
+                        'id': id_estudiante,
+                        'nombre': estudiante.nom_estudiante,
+                        'apellido': estudiante.apellido,
+                        'ruta_pdf': f"{settings.DATA_URL}{ruta_pdf}"  
+                    })
+                except Estudiante.DoesNotExist:
+                    continue
+
+    else:
+        print("La ruta no existe: ", ruta_respuestas)
+
+    # Pasar la lista de estudiantes que han respondido al template
+    return render(request, 'empresa/respuestas.html', {
+        'oferta': oferta,
+        'estudiantes_respuestas': estudiantes_respuestas,
+        'id_oferta': id_oferta,
+    })
+
+
+
+
 
 
 @login_required 
@@ -271,11 +321,13 @@ def detalle_oferta(request, id_oferta):
 
 
 
+
 @login_required
 def eliminar_oferta(request, id_oferta):
     oferta = get_object_or_404(OfertaEmpleo, id_oferta=id_oferta)
     nit_empresa = request.session.get('nit')
 
+    # Ruta del PDF asociado a la oferta
     pdf_file_path = os.path.join(
         settings.BASE_DIR, 
         'Data', 
@@ -285,16 +337,41 @@ def eliminar_oferta(request, id_oferta):
         f"{id_oferta}.pdf"
     )
 
+    # Elimina el archivo PDF de la oferta
     if os.path.exists(pdf_file_path):
-        os.remove(pdf_file_path)  # Eliminar archivo PDF
+        os.remove(pdf_file_path)
         print(f"Archivo PDF {pdf_file_path} eliminado con éxito.") 
 
+    # Ruta de la carpeta de respuestas asociada a la oferta
+    respuestas_folder_path = os.path.join(
+        settings.BASE_DIR, 
+        'Data', 
+        'OfertasExamenes', 
+        'Respuestas', 
+        str(nit_empresa), 
+        str(id_oferta)
+    )
+
+    # Elimina el folder de respuestas y sus contenidos
+    if os.path.exists(respuestas_folder_path):
+        shutil.rmtree(respuestas_folder_path)  # Elimina todo el contenido del folder
+        print(f"Carpeta de respuestas {respuestas_folder_path} eliminada con éxito.")
+
+    # Elimina los PDFs de los estudiantes asociados a la oferta
+    for root, dirs, files in os.walk(respuestas_folder_path):
+        for file in files:
+            if file.endswith('.pdf'):
+                file_path = os.path.join(root, file)
+                os.remove(file_path)
+                print(f"Archivo PDF {file_path} eliminado con éxito.")
+
+    # Elimina la oferta de la base de datos
     OfertaDisponible.objects.filter(id_oferta=id_oferta).delete()
     oferta.delete()
 
-    messages.success(request, "Oferta eliminada con éxito, incluyendo su archivo PDF.")
+    messages.success(request, "Oferta eliminada con éxito, incluyendo archivos y carpetas asociadas.")
     
-    return redirect('ofertasE')  
+    return redirect('ofertasE')
 
 
 

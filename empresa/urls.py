@@ -16,6 +16,8 @@ urlpatterns = [
     path('empresa/estudiante/<int:id_estudiante>/', views.detalle_estudiante, name='detalle_estudiante'),    
     path('guardarContra/', views.guardarContra, name='guardarContra'),
     path('subir_examen/<int:id_oferta>/', views.subir_examen, name='subir_examen'),
+    path('estudiantes_respuestas/<int:id_oferta>/', views.estudiantes_respuestas, name='estudiantes_respuestas'),
+
 
 
 ]
