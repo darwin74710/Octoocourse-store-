@@ -10,6 +10,33 @@ def register(request):
     if request.method == 'POST':
         if 'nombre' in request.POST:  # Registro de estudiante
             try:
+                nombre = request.POST['nombre']
+                apellido = request.POST['apellido']
+                email = request.POST['email']
+                id_estudiante = request.POST.get('id_estudiante')
+                fecha_nacimiento = parse_date(request.POST['fecha_nacimiento'])
+                tipo_id = request.POST['tipo_id']  
+                password = request.POST['password_estudiante']
+                password2 = request.POST['password2']
+
+
+                if not email.endswith('@elpoli.edu.co'):
+                    messages.error(request, "El correo electrónico debe terminar en '@elpoli.edu.co'.")
+                    return render(request, 'register.html')
+                
+
+                if password != password2:
+                    messages.error(request, "Las contraseñas no coinciden.")
+                    return render(request, 'register.html')
+                 
+                hashed_password = make_password(password)
+                with connection.cursor() as cursor:
+                    cursor.execute("""
+                        INSERT INTO ESTUDIANTES (ID_ESTUDIANTE, TIPO_ID, NOM_ESTUDIANTE, APELLIDO, CORREO_ESTUDIANTE, FECHA_NAC, PASSWORD_ESTUDIANTE) 
+                        VALUES (%s, %s, %s, %s, %s, %s, %s)
+                    """, [id_estudiante, tipo_id, nombre, apellido, email, fecha_nacimiento, hashed_password])
+                    
+                messages.success(request, "Registro de estudiante exitoso.")
                 # ... Código de registro de estudiante ...
                 return redirect('inicioS')
 

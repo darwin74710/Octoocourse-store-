@@ -67,10 +67,11 @@
                     Aplicantes</button>
             </div>
             {% if pdf_existe %}
-            <div class="pdf-viewer">
-                <h3>Examen en PDF</h3>
-                <a href="{{ pdf_file_path }}">Haz clic aquí para ver el PDF</a>.</p>
+            <div class="pdf-viewer text-center">
+                <h3>Examen en PDF:</h3>
+                <a href="{{ urlPDFExamen }}" class="btn-center">Haz clic aquí para ver el PDF</a>
             </div>
+            
             {% else %}
             <!-- subir PDF -->
             <div class="pdf-upload">
@@ -87,13 +88,12 @@
             </div>
             {% endif %}
 
-            <div class="aplicados-info mt-4 d-flex justify-content-between align-items-center">
-                <p class="mb-0">Respuestas: </p>
-                <button class="botonAplicados" data-bs-toggle="modal" data-bs-target="#modalRespuestas">Ver
-                    Respuestas</button>
+            <div class="aplicados-info mt-4 text-center">
+                <a class="botonAplicados btn-center" href="{% url 'estudiantes_respuestas' oferta.id_oferta %}">Ir a Ver Respuestas</a>
             </div>
         </div>
     </main>
+
 
     <!-- Modal de Estudiantes Aplicados -->
     <div class="modal fade" id="modalAplicantes" tabindex="-1" aria-labelledby="modalAplicantesLabel"
@@ -114,32 +114,6 @@
                         </li>
                         {% empty %}
                         <p>No hay estudiantes aplicados a esta oferta.</p>
-                        {% endfor %}
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-    <!-- Modal de Estudiantes que Respondierno -->
-    <div class="modal fade" id="modalRespuestas" tabindex="-1" aria-labelledby="modalRespuestasLabel"
-        aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h3 id="modalRespuestasLabel">Estudiantes que Respondieron</h3>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="marcoCV">
-                    <ul class="listas">
-                        {% for estudiante in estudiantes %}
-                        <li class="interact">
-                            <p>NOM ESTUDIANTE</p>
-                            <a href="#" class="btn-hoja-vida">visualizar</a>
-                        </li>
-                        {% empty %}
-                        <p>No hay respuestas de estudiantes.</p>
                         {% endfor %}
                     </ul>
                 </div>
