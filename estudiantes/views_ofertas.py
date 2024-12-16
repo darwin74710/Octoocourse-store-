@@ -11,8 +11,20 @@ import os
 from django.http import JsonResponse
 from django.contrib import messages
 from django.shortcuts import redirect
+from functools import wraps
+
+
+def estudiante_required(view_func):
+    @wraps(view_func)
+    def wrapper(request, *args, **kwargs):
+        if request.session.get('id_estudiante'): 
+            return view_func(request, *args, **kwargs)
+        else:
+            return redirect('acceso_denegado')  
+    return wrapper
 
 @login_required(login_url=reverse_lazy('inicioS'))
+@estudiante_required
 def Ofertas(request):
     filtros = request.GET.get('filtros')
     ofertasEmpleos = OfertasEmpleos.objects.all()
@@ -96,6 +108,7 @@ def Ofertas(request):
     return render(request, 'estudiantes/Ofertas.html', Datos)
 
 @login_required(login_url=reverse_lazy('inicioS'))
+@estudiante_required
 def OfertasInfo(request):
     idOferta = request.GET.get('idOferta')
     idEstudiante = request.GET.get('idEstudiante')
@@ -122,6 +135,7 @@ def OfertasInfo(request):
     return render(request, 'estudiantes/OfertasInfo.html', Datos)
 
 @login_required(login_url=reverse_lazy('inicioS'))
+@estudiante_required
 def Pruebas(request, idEstudiante, idOferta):
     estudiante = Estudiantes.objects.filter(id_estudiante = idEstudiante)[0]
     ofertaEmpleo = OfertasEmpleos.objects.filter(id_oferta = idOferta)[0]
@@ -203,3 +217,7 @@ def GuardarRespuesta(request):
 
     messages.error(request, "No se subió ningún archivo.")
     return redirect('PruebasOfertas', idEstudiante=id_Estudiante, idOferta=idOferta)
+
+
+def acceso_denegado(request):
+    return render(request, 'acceso_denegado.html', {'mensaje': 'No tienes permiso para acceder a esta sección.'})

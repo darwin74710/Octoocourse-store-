@@ -1,9 +1,22 @@
 from estudiantes.models import Estudiantes, HojasDeVida, Idiomas, Aptitudes, FormacionesAcademicas, LenguajesProg, ExpLaborales
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse_lazy
+from functools import wraps
+
+
+def estudiante_required(view_func):
+    @wraps(view_func)
+    def wrapper(request, *args, **kwargs):
+        # Verifica si el usuario tiene una sesión válida como empresa
+        if request.session.get('id_estudiante'): 
+            return view_func(request, *args, **kwargs)
+        else:
+            return redirect('acceso_denegado')  
+    return wrapper
 
 @login_required(login_url=reverse_lazy('inicioS'))
+@estudiante_required
 def Configuracion(request):
     id_Estudiante = request.session.get('id_estudiante')
     Tablas = obtenerTablasHV(id_Estudiante)
@@ -82,3 +95,7 @@ def obtenerTablasHV(id):
     }
 
     return Datos
+
+
+def acceso_denegado(request):
+    return render(request, 'acceso_denegado.html', {'mensaje': 'No tienes permiso para acceder a esta sección.'})

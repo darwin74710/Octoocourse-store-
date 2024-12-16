@@ -37,7 +37,6 @@ def register(request):
                     """, [id_estudiante, tipo_id, nombre, apellido, email, fecha_nacimiento, hashed_password])
                     
                 messages.success(request, "Registro de estudiante exitoso.")
-                # ... Código de registro de estudiante ...
                 return redirect('inicioS')
 
             except Exception as e:

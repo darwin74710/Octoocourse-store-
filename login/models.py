@@ -1,5 +1,6 @@
 from django.db import models
 from django.db import models, connection
+from django.contrib.auth.hashers import make_password
 
 
 
@@ -17,6 +18,11 @@ class Estudiante(models.Model):
 
     def __str__(self):
         return f"{self.nom_estudiante} {self.apellido}"
+    
+    def save(self, *args, **kwargs):
+        if self.password_estudiante:  
+            self.password_estudiante = make_password(self.password_estudiante)
+        super(Estudiante, self).save(*args, **kwargs)
 
 
 class Empresa(models.Model):
@@ -32,6 +38,11 @@ class Empresa(models.Model):
 
     def __str__(self):
         return self.nom_empresa
+    
+    def save(self, *args, **kwargs):
+        if self.password_emp:  
+            self.password_emp = make_password(self.password_emp)
+        super(Empresa, self).save(*args, **kwargs)
 
 
 class TipoCont(models.Model):
@@ -47,7 +58,7 @@ class TipoCont(models.Model):
 
 class OfertaEmpleo(models.Model):
     id_oferta = models.DecimalField(primary_key=True, max_digits=10, decimal_places=0)  
-    nit = models.DecimalField(max_digits=25, decimal_places=0)  
+    nit = models.DecimalField(max_digits=25, decimal_places=0) 
     nombre_oferta = models.CharField(max_length=50)  
     salario = models.DecimalField(max_digits=15, decimal_places=2) 
     descripcion = models.CharField(max_length=1000)  
@@ -87,7 +98,7 @@ class OfertaDisponible(models.Model):
 
 class Conocimiento(models.Model):
     id_conocimiento = models.AutoField(primary_key=True)
-    id_oferta = models.ForeignKey(OfertaEmpleo, on_delete=models.CASCADE, db_column='ID_OFERTA')
+    id_oferta = models.ForeignKey(OfertaEmpleo, on_delete=models.CASCADE, db_column='ID_OFERTA')  # Relación con OfertaEmpleo
     nom_con = models.CharField(max_length=50)
 
     class Meta:
