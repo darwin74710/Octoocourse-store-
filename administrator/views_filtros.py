@@ -6,32 +6,42 @@ from django.shortcuts import redirect, render
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
 from django.urls import reverse
+from django.contrib.auth.decorators import user_passes_test
 
+def superuser_required(view_func):
+    return user_passes_test(lambda u: u.is_superuser)(view_func)
+
+@superuser_required
 def contenidoAdmin(request):
     tipoContenido = TipoContenido.objects.all()
 
     return render(request, 'administrator/filtrosContenido.html', {'tipoContenido': tipoContenido})
 
+@superuser_required
 def dificultadAdmin(request):
     tipoDificultad = TipoDificultad.objects.all()
 
     return render(request, 'administrator/filtrosDificultad.html', {'tipoDificultad': tipoDificultad})
 
+@superuser_required
 def duracionAdmin(request):
     tipoDuracion = TipoDuracion.objects.all()
 
     return render(request, 'administrator/filtrosDuracion.html', {'tipoDuracion': tipoDuracion})
 
+@superuser_required
 def certificadoAdmin(request):
     tipoCertificado = TipoCertificado.objects.all()
 
     return render(request, 'administrator/filtrosCertificado.html', {'tipoCertificado': tipoCertificado})
 
+@superuser_required
 def contratoAdmin(request):
     tipoContrato = TipoCont.objects.all()
 
     return render(request, 'administrator/filtrosTipoContrato.html', {'tipoContrato': tipoContrato})
 
+@superuser_required
 @csrf_exempt
 def crearFiltro(request):
     if request.method == 'POST':
@@ -77,7 +87,8 @@ def crearFiltro(request):
             return JsonResponse({'status': 'success', 'message': 'El filtro se añadio correctamente.'})
         except Exception as e:
             return JsonResponse({'status': 'error', 'message': str(e)})
-        
+
+@superuser_required
 @csrf_exempt
 def editarOferta(request):
     if request.method == 'POST':
@@ -120,6 +131,7 @@ def editarOferta(request):
         except Exception as e:
             return JsonResponse({'status': 'error', 'message': str(e)})
 
+@superuser_required
 @csrf_exempt
 def eliminarFiltro(request):
     idFiltro = request.GET.get('idFiltro')

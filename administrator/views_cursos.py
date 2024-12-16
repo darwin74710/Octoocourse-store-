@@ -6,7 +6,12 @@ from django.shortcuts import redirect
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
 from django.urls import reverse
+from django.contrib.auth.decorators import user_passes_test
 
+def superuser_required(view_func):
+    return user_passes_test(lambda u: u.is_superuser)(view_func)
+
+@superuser_required
 def cursoAdmin(request):
     cursos = Cursos.objects.all()
     tipoContenido = TipoContenido.objects.all()
@@ -25,6 +30,7 @@ def cursoAdmin(request):
     return render(request, 'administrator/modifiCursos.html', Datos)
 
 @csrf_exempt
+@superuser_required
 def cursoAñadir(request):
     nombreCursoDato = request.POST.get('nombreCurso').strip()
     precioDato = request.POST.get('precio')
@@ -56,6 +62,7 @@ def cursoAñadir(request):
     except Exception as e:
             return JsonResponse({'status': 'error', 'message': str(e)})
 
+@superuser_required
 def cursoEditar(request):
     idCurso = request.GET.get('idCurso')
     curso = Cursos.objects.filter(id_curso = idCurso).first()
@@ -75,6 +82,7 @@ def cursoEditar(request):
 
     return render(request, 'administrator/cursoEditar.html', Datos)
 
+@superuser_required
 def cursoEliminar(request):
     idCurso = request.GET.get('idCurso')
     curso = Cursos.objects.filter(id_curso = idCurso).first()
@@ -107,6 +115,7 @@ def cursoEliminar(request):
 
     return redirect('cursoAdmin')
 
+@superuser_required
 def cursoContenidos(request):
     idCurso = request.GET.get('idCurso')
     curso = Cursos.objects.filter(id_curso = idCurso).first()
@@ -122,6 +131,7 @@ def cursoContenidos(request):
 
     return render(request, 'administrator/modifiContenidos.html', Datos)
 
+@superuser_required
 def cursoPreguntas(request):
     idCurso = request.GET.get('idCurso')
     curso = Cursos.objects.filter(id_curso = idCurso).first()
@@ -137,6 +147,7 @@ def cursoPreguntas(request):
 
     return render(request, 'administrator/modifiPreguntas.html', Datos)
 
+@superuser_required
 @csrf_exempt
 def crearContenido(request):
     if request.method == 'POST':
@@ -157,7 +168,8 @@ def crearContenido(request):
             return JsonResponse({'status': 'success', 'message': 'El contenido se añadio correctamente.'})
         except Exception as e:
             return JsonResponse({'status': 'error', 'message': str(e)})
-        
+
+@superuser_required
 @csrf_exempt
 def editarContenido(request):
     if request.method == 'POST':
@@ -177,7 +189,8 @@ def editarContenido(request):
             return JsonResponse({'status': 'success', 'message': 'El contenido se modificó correctamente.'})
         except Exception as e:
             return JsonResponse({'status': 'error', 'message': str(e)})
-        
+
+@superuser_required
 @csrf_exempt
 def eliminarContenido(request):
     idContenido = request.GET.get('idContenido')
@@ -192,6 +205,7 @@ def eliminarContenido(request):
     
     return redirect(f'{reverse("cursoContenidos")}?idCurso={idCurso}')
 
+@superuser_required
 @csrf_exempt
 def crearSubContenido(request):
     if request.method == 'POST':
@@ -216,7 +230,8 @@ def crearSubContenido(request):
             return JsonResponse({'status': 'success', 'message': 'El sub contenido se añadio correctamente.'})
         except Exception as e:
             return JsonResponse({'status': 'error', 'message': str(e)})
-        
+
+@superuser_required       
 @csrf_exempt
 def editarSubContenido(request):
     if request.method == 'POST':
@@ -240,7 +255,8 @@ def editarSubContenido(request):
             return JsonResponse({'status': 'success', 'message': 'El sub contenido se modificó correctamente.'})
         except Exception as e:
             return JsonResponse({'status': 'error', 'message': str(e)})
-        
+
+@superuser_required  
 @csrf_exempt
 def eliminarSubContenido(request):
     idSubContenido = request.GET.get('idSubContenido')
@@ -255,6 +271,7 @@ def eliminarSubContenido(request):
     
     return redirect(f'{reverse("cursoContenidos")}?idCurso={idCurso}')
 
+@superuser_required
 @csrf_exempt
 def crearPregunta(request):
     if request.method == 'POST':
@@ -275,7 +292,8 @@ def crearPregunta(request):
             return JsonResponse({'status': 'success', 'message': 'La pregunta se añadio correctamente.'})
         except Exception as e:
             return JsonResponse({'status': 'error', 'message': str(e)})
-        
+
+@superuser_required
 @csrf_exempt
 def editarPregunta(request):
     if request.method == 'POST':
@@ -296,7 +314,8 @@ def editarPregunta(request):
             return JsonResponse({'status': 'success', 'message': 'La pregunta se modificó correctamente.'})
         except Exception as e:
             return JsonResponse({'status': 'error', 'message': str(e)})
-        
+
+@superuser_required
 @csrf_exempt
 def eliminarPregunta(request):
     idPregunta = request.GET.get('idPregunta')
@@ -310,7 +329,8 @@ def eliminarPregunta(request):
             )
     
     return redirect(f'{reverse("cursoPreguntas")}?idCurso={idCurso}')
-        
+
+@superuser_required
 @csrf_exempt
 def crearRespuesta(request):
     if request.method == 'POST':
@@ -333,7 +353,8 @@ def crearRespuesta(request):
             return JsonResponse({'status': 'success', 'message': 'La respuesta se añadio correctamente.'})
         except Exception as e:
             return JsonResponse({'status': 'error', 'message': str(e)})
-        
+
+@superuser_required
 @csrf_exempt
 def editarRespuesta(request):
     if request.method == 'POST':
@@ -356,6 +377,7 @@ def editarRespuesta(request):
         except Exception as e:
             return JsonResponse({'status': 'error', 'message': str(e)})
 
+@superuser_required
 @csrf_exempt
 def eliminarRespuesta(request):
     idRespuesta = request.GET.get('idRespuesta')

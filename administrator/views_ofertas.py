@@ -8,12 +8,18 @@ from django.urls import reverse
 import os
 import shutil
 from django.conf import settings
+from django.contrib.auth.decorators import user_passes_test
 
+def superuser_required(view_func):
+    return user_passes_test(lambda u: u.is_superuser)(view_func)
+
+@superuser_required
 def ofertaAdmin(request):
     ofertas = OfertasEmpleos.objects.all()
 
     return render(request, 'administrator/modifiOfertas.html', {'ofertas': ofertas})
 
+@superuser_required
 def ofertaEditar(request):
     idOferta = request.GET.get('idOferta')
     tipoCont = TipoCont.objects.all()
@@ -27,6 +33,7 @@ def ofertaEditar(request):
 
     return render(request, 'administrator/ofertaEditar.html', Datos)
 
+@superuser_required
 def ofertaEliminar(request):
     idOferta = request.GET.get('idOferta')
     oferta = OfertasEmpleos.objects.filter(id_oferta = idOferta).first()
@@ -64,6 +71,7 @@ def ofertaEliminar(request):
 
     return redirect('ofertaAdmin')
 
+@superuser_required
 def conocimientos(request):
     idOferta = request.GET.get('idOferta')
     ofertaEmpleo = OfertasEmpleos.objects.filter(id_oferta = idOferta).first()
@@ -77,6 +85,7 @@ def conocimientos(request):
 
     return render(request, 'administrator/modifiConocimientos.html', Datos)
 
+@superuser_required
 @csrf_exempt
 def crearConocimiento(request):
     if request.method == 'POST':
@@ -97,7 +106,8 @@ def crearConocimiento(request):
             return JsonResponse({'status': 'success', 'message': 'El conocimiento se añadio correctamente.'})
         except Exception as e:
             return JsonResponse({'status': 'error', 'message': str(e)})
-        
+
+@superuser_required  
 @csrf_exempt
 def editarConocimiento(request):
     if request.method == 'POST':
@@ -117,7 +127,8 @@ def editarConocimiento(request):
             return JsonResponse({'status': 'success', 'message': 'El conocimiento se modificó correctamente.'})
         except Exception as e:
             return JsonResponse({'status': 'error', 'message': str(e)})
-        
+
+@superuser_required  
 @csrf_exempt
 def eliminarConocimiento(request):
     idConocimiento = request.GET.get('idConocimiento')

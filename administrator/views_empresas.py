@@ -6,18 +6,25 @@ from django.shortcuts import redirect
 import os
 import shutil
 from django.conf import settings
+from django.contrib.auth.decorators import user_passes_test
 
+def superuser_required(view_func):
+    return user_passes_test(lambda u: u.is_superuser)(view_func)
+
+@superuser_required
 def empresaAdmin(request):
     empresas = Empresas.objects.all()
 
     return render(request, 'administrator/modifiEmpresas.html', {'empresas': empresas})
 
+@superuser_required
 def empresaEditar(request):
     idEmpresa = request.GET.get('idEmpresa')
     empresa = Empresas.objects.filter(nit = idEmpresa).first()
 
     return render(request, 'administrator/empresaEditar.html', {'empresa': empresa})
 
+@superuser_required
 def empresaEliminar(request):
     idEmpres = request.GET.get('idEmpresa')
     empresa = Empresas.objects.filter(nit = idEmpres).first()
