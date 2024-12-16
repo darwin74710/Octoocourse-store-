@@ -3,12 +3,18 @@ from administrator.models_estudiantes import Estudiantes, HojasDeVida, Idiomas, 
 from django.db import connection, transaction
 from django.http import HttpResponse
 from django.shortcuts import redirect
+from django.contrib.auth.decorators import user_passes_test
 
+def superuser_required(view_func):
+    return user_passes_test(lambda u: u.is_superuser)(view_func)
+
+@superuser_required
 def estudiantesAdmin(request):
     estudiantes = Estudiantes.objects.all()
     
     return render(request, 'administrator/modifiEstudiantes.html',{'estudiantes': estudiantes})
 
+@superuser_required
 def hojaVidaVisualizar(request):
     idEstud = request.GET.get('idEstudiante')
 
@@ -50,6 +56,7 @@ def hojaVidaVisualizar(request):
 
     return render(request, 'administrator/hojaVidaVisualizar.html', Datos)
 
+@superuser_required
 def estudianteEditar(request):
     idEstud = request.GET.get('idEstudiante')
     estudiante = Estudiantes.objects.filter(id_estudiante = idEstud).first()
@@ -57,6 +64,7 @@ def estudianteEditar(request):
 
     return render(request, 'administrator/estudianteEditar.html', {'estudiante': estudiante})
 
+@superuser_required
 def estudianteEliminar(request):
     idEstud = request.GET.get('idEstudiante')
     estudiante = Estudiantes.objects.filter(id_estudiante = idEstud).first()

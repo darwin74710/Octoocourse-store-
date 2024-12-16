@@ -5,8 +5,13 @@ from django.contrib.auth.hashers import make_password
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.db import connection, transaction
+from django.contrib.auth.decorators import user_passes_test
+
+def superuser_required(view_func):
+    return user_passes_test(lambda u: u.is_superuser)(view_func)
 
 #Con esto quitamos la seguridad de tokens por csrf
+@superuser_required
 @csrf_exempt
 def guardarHVAdmin(request):
     # Preguntamos si el metodo llamado es de tipo POST
@@ -179,6 +184,7 @@ def guardarHVAdmin(request):
 
 
 # Esta función es para guardar los estudiantes
+@superuser_required
 @csrf_exempt
 def guardarEstudianteAdmin(request, idStudent):
     if request.method == 'POST':
@@ -210,8 +216,7 @@ def guardarEstudianteAdmin(request, idStudent):
     # En caso de que no se este realizando un post
     return JsonResponse({'status': 'error', 'message': 'Método no permitido.'})
 
-
-
+@superuser_required
 @csrf_exempt
 def guardarEmpresaAdmin(request, idEmpres):
     if request.method == 'POST':
@@ -242,6 +247,7 @@ def guardarEmpresaAdmin(request, idEmpres):
     # En caso de que no se este realizando un post
     return JsonResponse({'status': 'error', 'message': 'Método no permitido.'})
 
+@superuser_required
 @csrf_exempt
 def guardarCursoAdmin(request, idCurse):
     if request.method == 'POST':
@@ -286,7 +292,7 @@ def guardarCursoAdmin(request, idCurse):
     # En caso de que no se este realizando un post
     return JsonResponse({'status': 'error', 'message': 'Método no permitido.'})
 
-
+@superuser_required
 @csrf_exempt
 def guardarOfertaAdmin(request, idOfert):
     if request.method == 'POST':

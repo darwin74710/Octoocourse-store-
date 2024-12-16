@@ -5,6 +5,8 @@ from django.db import connection
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.models import User
 from django.contrib.auth.hashers import check_password
+from django.core.validators import validate_email
+from django.core.exceptions import ValidationError
 
 
 
@@ -30,20 +32,39 @@ def inicioS(request):
         nit_empresa = None
         cursor = connection.cursor()
 
-        cursor.execute("SELECT id_estudiante, password_estudiante FROM estudiantes WHERE correo_estudiante = %s", [correo])
-        estudiante = cursor.fetchone()
+        # Con esto validamos si es un correo lo que ingresamos.
+        validarCorreo = True
+        try:
+            validate_email(correo)
+        except ValidationError:
+            validarCorreo = False
 
-        if estudiante:
-            user_type = 'estudiante'
-            id_estudiante = estudiante[0]  
-            stored_password = estudiante[1]  
-        else:
-            cursor.execute("SELECT password_emp, nit FROM empresas WHERE correo_emp = %s", [correo])
-            empresa = cursor.fetchone()
-            if empresa:
-                user_type = 'empresa'
-                stored_password = empresa[0] 
-                nit_empresa = empresa[1] 
+        # Con esto busco el superUsuario de django en caso de que no sea un correo lo que validamos.
+        if not validarCorreo:
+            try:
+                usuario = User.objects.get(username=correo)
+                if usuario.is_superuser and usuario.check_password(password):
+                    login(request, usuario)
+                    messages.success(request, "Inicio de sesión exitoso como administrador")
+                    return redirect(reverse('administrator'))
+            except User.DoesNotExist:
+                pass
+
+        if validarCorreo:
+            cursor.execute("SELECT id_estudiante, password_estudiante FROM estudiantes WHERE correo_estudiante = %s", [correo])
+            estudiante = cursor.fetchone()
+
+            if estudiante:
+                user_type = 'estudiante'
+                id_estudiante = estudiante[0]  
+                stored_password = estudiante[1]  
+            else:
+                cursor.execute("SELECT password_emp, nit FROM empresas WHERE correo_emp = %s", [correo])
+                empresa = cursor.fetchone()
+                if empresa:
+                    user_type = 'empresa'
+                    stored_password = empresa[0] 
+                    nit_empresa = empresa[1] 
 
         if user_type and check_password(password, stored_password):
             user, created = User.objects.get_or_create(username=correo)

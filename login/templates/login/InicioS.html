@@ -47,7 +47,7 @@
         <h1><span>Iniciar</span> Sesión</h1>
         <form action="{% url 'inicioS' %}" method="post">
             {% csrf_token %}
-            <input type="email" id="correo" name="correo" placeholder="Correo electrónico">
+            <input type="text" id="correo" name="correo" placeholder="Correo electrónico">
             <input type="password" id="password" name="password" placeholder="password">
 
             <div class="mostrar-password">
