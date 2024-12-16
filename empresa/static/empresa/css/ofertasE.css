@@ -168,11 +168,16 @@ body{
 }
 
 .form-check-input {
-    border: 1px solid #8e44ad; 
+    width: 20px;
+    height: 20px;
+    border-radius: 5px;
+    border: 2px solid #8e44ad;
+    cursor: pointer;
 }
 
 .form-check-input:checked {
-    background-color: #8e44ad; 
+    background-color: #8e44ad !important; 
+    border-color: #8e44ad !important;
 }
 
 .form-check-label {
@@ -180,20 +185,16 @@ body{
 }
 
 .btn-cambios {
-    display: block;
-    width: 100%; 
-    background-color: #6f2c91; 
+    background-color: #8e44ad;
     color: white;
-    border: none; 
-    border-radius: 25px;
-    padding: 10px 20px; 
-    font-size: 16px; 
-    transition: background-color 0.3s; 
-    margin-top: 1rem;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
 }
 
 .btn-cambios:hover {
-    background-color: #4e1c6d; 
+    background-color: #732d91;
 }
 
 .modal-content {
@@ -268,4 +269,28 @@ body{
 .botonAplicados:hover {
     background-color: #4c3a71;
     color: #e6e0f8;
+}
+
+.tags-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-top: 10px;
+}
+
+.tag {
+    background-color: #A463BF;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+.tag .btn-close {
+    margin-left: 5px;
+    font-size: 0.8rem;
+    color: red;
 }

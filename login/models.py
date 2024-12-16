@@ -47,7 +47,7 @@ class TipoCont(models.Model):
 
 class OfertaEmpleo(models.Model):
     id_oferta = models.DecimalField(primary_key=True, max_digits=10, decimal_places=0)  
-    nit = models.DecimalField(max_digits=25, decimal_places=0)  
+    empresa = models.ForeignKey(Empresa, on_delete=models.CASCADE, db_column='NIT')  # Relación con Empresa
     nombre_oferta = models.CharField(max_length=50)  
     salario = models.DecimalField(max_digits=15, decimal_places=2) 
     descripcion = models.CharField(max_length=1000)  
@@ -87,7 +87,7 @@ class OfertaDisponible(models.Model):
 
 class Conocimiento(models.Model):
     id_conocimiento = models.AutoField(primary_key=True)
-    id_oferta = models.ForeignKey(OfertaEmpleo, on_delete=models.CASCADE, db_column='ID_OFERTA')
+    id_oferta = models.ForeignKey(OfertaEmpleo, on_delete=models.CASCADE, db_column='ID_OFERTA')  # Relación con OfertaEmpleo
     nom_con = models.CharField(max_length=50)
 
     class Meta:

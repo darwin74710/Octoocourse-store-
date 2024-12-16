@@ -9,8 +9,21 @@ from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse_lazy
 from datetime import date
+from functools import wraps
+
+
+def estudiante_required(view_func):
+    @wraps(view_func)
+    def wrapper(request, *args, **kwargs):
+        # Verifica si el usuario tiene una sesión válida como empresa
+        if request.session.get('id_estudiante'): 
+            return view_func(request, *args, **kwargs)
+        else:
+            return redirect('acceso_denegado')  
+    return wrapper
 
 @login_required(login_url=reverse_lazy('inicioS'))
+@estudiante_required
 def Inicio(request):
     idStudent = request.session.get('id_estudiante')
     estudiantes = Estudiantes.objects.filter(id_estudiante=idStudent).first()
@@ -28,6 +41,7 @@ def logout_view(request):
     return redirect('home')  
 
 @login_required(login_url=reverse_lazy('inicioS'))
+@estudiante_required
 def CursosPrincipal(request):
     filtros = request.GET.get('filtros')
     cursos = Cursos.objects.all()
@@ -93,6 +107,7 @@ def CursosPrincipal(request):
     return render(request, 'estudiantes/Cursos.html', Datos)
 
 @login_required(login_url=reverse_lazy('inicioS'))
+@estudiante_required
 def CursosInfo(request):
     id_curso = request.GET.get('idCurso')
     idStudent = request.session.get('id_estudiante')
@@ -147,6 +162,7 @@ def CursosInfo(request):
     return render(request, 'estudiantes/CursosInfo.html', Datos)
 
 @login_required(login_url=reverse_lazy('inicioS'))
+@estudiante_required
 def CursosContent(request):
     id_curso = request.GET.get('idCurso')
     idSubCont = request.GET.get('idSubContent')
@@ -172,6 +188,7 @@ def CursosContent(request):
     return render(request, 'estudiantes/CursosContent.html', Datos)
 
 @login_required(login_url=reverse_lazy('inicioS'))
+@estudiante_required
 def Pruebas(request, idEstudiante, idCurso):
     estudiante = Estudiantes.objects.filter(id_estudiante = idEstudiante)[0]
     curso = Cursos.objects.filter(id_curso = idCurso)[0]
@@ -205,3 +222,7 @@ def Pruebas(request, idEstudiante, idCurso):
     }
 
     return render(request, 'estudiantes/PruebasCursos.html', Datos)
+
+
+def acceso_denegado(request):
+    return render(request, 'acceso_denegado.html', {'mensaje': 'No tienes permiso para acceder a esta sección.'})

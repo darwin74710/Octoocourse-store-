@@ -145,14 +145,28 @@
                                         <option value="new">Agregar nuevo tipo de contrato...</option>
                                     </select>
                                 </div>
+                                <!-- Conocimientos existentes -->
                                 <div class="mb-3">
-                                    <label for="conocimientos" class="form-label">Conocimientos Requeridos (separar por
-                                        comas)</label>
+                                    <label class="form-label">Conocimientos Existentes</label>
+                                    <div class="tags-container">
+                                        {% for conocimiento in oferta.conocimientos %}
+                                        <span class="tag">
+                                            {{ conocimiento.nom_con }}
+                                            <button type="button" class="btn-close eliminar-tag" data-id="{{ conocimientos_existentes.id }}"></button>
+                                        </span>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+
+                                <!-- Conocimientos nuevos -->
+                                <div class="mb-3">
+                                    <label for="conocimientos" class="form-label">Conocimientos:</label>
                                     <input type="text" class="form-control" id="conocimientos" name="conocimientos"
-                                        value="{{ conocimientos_existentes|join:',' }}">
+                                        placeholder="Presiona Enter para agregar">
+                                    <div id="conocimientos-container" class="mt-2"></div>
                                 </div>
                                 <div class="mb-3 form-check">
-                                    <input type="checkbox" class="form-check-input" id="estado" name="estado" value="1" {% if oferta.estado == '1' %}checked{% endif %}>
+                                    <input type="checkbox" class="form-check-input" id="estado" name="estado" value="1" {% if oferta.estado == 1 %}checked{% endif %}>
                                     <label class="form-check-label" for="estado">Activo</label>
                                 </div>
                                 <button type="submit" class="btn-cambios">Guardar cambios</button>
@@ -169,6 +183,45 @@
         </div>
     </div>
     <!-- Fin oferta -->
+
+
+    <script>
+        const conocimientosInput = document.getElementById('conocimientos');
+        const conocimientosContainer = document.getElementById('conocimientos-container');
+        const form = document.getElementById('oferta-form');
+
+        conocimientosInput.addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                const conocimiento = this.value.trim();
+                if (conocimiento) {
+                    agregarConocimiento(conocimiento);
+                    this.value = '';
+                }
+            }
+        });
+
+        function agregarConocimiento(conocimiento) {
+            const tag = document.createElement('span');
+            tag.className = 'conocimiento-tag';
+            tag.innerHTML = `
+                    ${conocimiento}
+                    <button type="button" onclick="eliminarConocimiento(this)">×</button>
+                `;
+            conocimientosContainer.appendChild(tag);
+        }
+
+        function eliminarConocimiento(button) {
+            button.parentElement.remove();
+        }
+
+        form.addEventListener('submit', function (e) {
+            const conocimientos = Array.from(conocimientosContainer.children).map(tag => tag.textContent.trim());
+            const conocimientosInput = document.getElementById('conocimientos');
+            conocimientosInput.value = conocimientos.join(', ');
+        });
+    </script>
+
 
 
 

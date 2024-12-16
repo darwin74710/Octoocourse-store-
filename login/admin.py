@@ -4,7 +4,6 @@ from django.utils.translation import gettext_lazy as _
 from .models import Estudiante, Empresa, OfertaEmpleo, TipoCont, Conocimiento, HojasDeVida, LenguajesProg, Aptitudes, Idiomas, FormacionesAcademicas, ExpLaborales, OfertaDisponible
 
 
-
 class EstudianteAdmin(admin.ModelAdmin):
     list_display = ('id_estudiante', 'nom_estudiante', 'apellido', 'correo_estudiante', 'fecha_nac')
     search_fields = ('nom_estudiante', 'apellido', 'correo_estudiante')
@@ -24,8 +23,12 @@ class EmpresaAdmin(admin.ModelAdmin):
 
 @admin.register(OfertaEmpleo)
 class OfertaEmpleoAdmin(admin.ModelAdmin):
-    list_display = ('id_oferta', 'nombre_oferta', 'salario', 'nit')
-    search_fields = ('nombre_oferta', 'nit')
+    list_display = ('id_oferta', 'nombre_oferta', 'salario', 'empresa_nit')
+    search_fields = ('nombre_oferta', 'empresa__nit')
+
+    def empresa_nit(self, obj):
+        return obj.empresa.nit
+    empresa_nit.short_description = 'NIT Empresa'
 
     def delete_model(self, request, obj):
         OfertaDisponible.objects.filter(id_oferta=obj.id_oferta).delete()

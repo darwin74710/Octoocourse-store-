@@ -18,5 +18,10 @@ urlpatterns = [
     path('Ofertas/Pruebas/Guardar/Respuesta/', views_ofertas.GuardarRespuesta, name='GuardarRespuesta'),
     path('guardarHV/', views_data.guardarHV, name='guardarHV'),
     path('logout/', views_cursos.logout_view, name='logout'),  
+    path('acceso_denegado/', views_ofertas.acceso_denegado, name='acceso_denegado'),
+    path('acceso_denegado/', views_config.acceso_denegado, name='acceso_denegado'),
+
+
+
 
 ]

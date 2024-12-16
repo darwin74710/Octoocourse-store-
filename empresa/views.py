@@ -14,24 +14,37 @@ import os
 from django.conf import settings
 from django.http import HttpResponse, FileResponse
 import shutil 
+from functools import wraps
 
 
+def empresa_required(view_func):
+    @wraps(view_func)
+    def wrapper(request, *args, **kwargs):
+        # Verifica si el usuario tiene una sesión válida como empresa
+        if request.session.get('nit'): 
+            return view_func(request, *args, **kwargs)
+        else:
+            return redirect('acceso_denegado')  
+    return wrapper
 
 
 
 @login_required
+@empresa_required
 def crearOferta(request):
     tipos_contrato = TipoCont.objects.all() 
     if request.method == 'POST':
         nombre_oferta = request.POST.get('nombre_oferta')
         salario = request.POST.get('salario')
         descripcion = request.POST.get('descripcion')
-        conocimientos_text = request.POST.get('conocimientos')
+        conocimientos_text = request.POST.get('conocimientos', '')
         tipo_cont_id = request.POST.get('tipo_cont')  
 
         estado = 1 if request.POST.get('estado') == 'on' else 0
         nit_empresa = request.session.get('nit')
         fecha_pub = date.today()
+
+        conocimientos_limpios = ''.join(conocimientos_text.split()).replace('×', '')
 
         with connection.cursor() as cursor:
             cursor.execute("SELECT oferta_id_seq.NEXTVAL FROM dual")
@@ -49,7 +62,7 @@ def crearOferta(request):
         )
         oferta.save()
 
-        conocimientos_list = conocimientos_text.split(',')
+        conocimientos_list = conocimientos_limpios.split(',')
         for conocimiento_nombre in conocimientos_list:
             if conocimiento_nombre.strip():
                 Conocimiento.objects.create(
@@ -57,20 +70,22 @@ def crearOferta(request):
                     nom_con=conocimiento_nombre.strip()
                 )
 
+        messages.success(request, "Oferta publicada exitosamente.")
         return render(request, 'empresa/publicaro.html')
 
     return render(request, 'empresa/publicaro.html', {'tipos_contrato': tipos_contrato})
 
 
 @login_required 
+@empresa_required
 def inicioE(request):
     return render(request, 'empresa/inicioE.html')
 
 
 
 
-
 @login_required
+@empresa_required
 def subir_examen(request, id_oferta):
     oferta = get_object_or_404(OfertaEmpleo, id_oferta=id_oferta)
     nit_empresa = request.session.get('nit')
@@ -117,6 +132,7 @@ def subir_examen(request, id_oferta):
 
 
 @login_required
+@empresa_required
 def estudiantes_respuestas(request, id_oferta):
     oferta = OfertaEmpleo.objects.get(id_oferta=id_oferta)
     nit_empresa = request.session.get('nit')
@@ -159,9 +175,6 @@ def estudiantes_respuestas(request, id_oferta):
 
 
 
-
-
-
 @login_required 
 def logout_view(request):
     logout(request)  
@@ -169,6 +182,7 @@ def logout_view(request):
     return redirect('home')  
 
 @login_required
+@empresa_required
 def detalle_estudiante(request, id_estudiante):
     estudiante = get_object_or_404(Estudiantes, id_estudiante=id_estudiante)  
     Tablas = obtenerTablasHV(id_estudiante)  
@@ -221,6 +235,7 @@ def obtenerTablasHV(id_estudiante):
 
 
 @login_required 
+@empresa_required
 def estudiantesE(request):
     with connection.cursor() as cursor:
         cursor.execute("SELECT ID_ESTUDIANTE, TIPO_ID, NOM_ESTUDIANTE, APELLIDO, CORREO_ESTUDIANTE, FECHA_NAC FROM ESTUDIANTES")
@@ -239,6 +254,7 @@ def estudiantesE(request):
 
 
 @login_required
+@empresa_required
 def configE(request):
     nit_empresa = request.session.get('nit')
     empresa_data = None
@@ -267,20 +283,25 @@ def configE(request):
 
 
 @login_required
+@empresa_required
 def ofertasE(request):
     tipos_contrato = TipoCont.objects.all() 
     nit_empresa = request.session.get('nit')
     
     ofertas = OfertaEmpleo.objects.filter(nit=nit_empresa)
-    
+
     for oferta in ofertas:
         conteo_aplicantes = OfertaDisponible.objects.filter(id_oferta=oferta.id_oferta).count()
         oferta.conteo_aplicantes = conteo_aplicantes  
-    
+
+        oferta.conocimientos = Conocimiento.objects.filter(id_oferta=oferta)
+
+        
     return render(request, 'empresa/ofertasE.html', {'ofertas': ofertas, 'tipos_contrato': tipos_contrato})
 
 
 @login_required
+@empresa_required
 def detalle_oferta(request, id_oferta):
     oferta = get_object_or_404(OfertaEmpleo, id_oferta=id_oferta)
     
@@ -323,6 +344,7 @@ def detalle_oferta(request, id_oferta):
 
 
 @login_required
+@empresa_required
 def eliminar_oferta(request, id_oferta):
     oferta = get_object_or_404(OfertaEmpleo, id_oferta=id_oferta)
     nit_empresa = request.session.get('nit')
@@ -376,6 +398,7 @@ def eliminar_oferta(request, id_oferta):
 
 
 @login_required
+@empresa_required
 def editar_oferta(request, id_oferta):
     oferta = get_object_or_404(OfertaEmpleo, id_oferta=id_oferta)
 
@@ -398,7 +421,6 @@ def editar_oferta(request, id_oferta):
         return redirect('ofertasE')  
 
     conocimientos_existentes = Conocimiento.objects.filter(id_oferta=oferta).values_list('nom_con', flat=True)
-
     return render(request, 'empresa/editar_oferta.html', {
         'oferta': oferta,
         'conocimientos_existentes': conocimientos_existentes
@@ -424,6 +446,7 @@ def des_ofertas(request):
     return render(request, 'empresa/des_ofertas.html')
 
 @login_required
+@empresa_required
 def listEAp(request):
     nit_empresa = request.session.get('nit')
     id_oferta = request.session.get('current_id_oferta')  
@@ -504,3 +527,7 @@ def guardarContra(request):
     
     # En caso de que no se este realizando un post
     return JsonResponse({'status': 'error', 'message': 'Método no permitido.'})
+
+
+def acceso_denegado(request):
+    return render(request, 'acceso_denegado.html', {'mensaje': 'No tienes permiso para acceder a esta sección.'})
