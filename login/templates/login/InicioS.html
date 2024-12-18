@@ -96,9 +96,6 @@
                 if (!correo.value) {
                     errors.push('Por favor, ingrese su correo electrónico.');
                     correo.classList.add('input-error');
-                } else if (!/\S+@\S+\.\S+/.test(correo.value)) {
-                    errors.push('Por favor, ingrese un correo electrónico válido.');
-                    correo.classList.add('input-error');
                 } else {
                     correo.classList.remove('input-error');
                 }
