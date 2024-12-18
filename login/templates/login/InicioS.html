@@ -39,7 +39,7 @@
         </div>
         <form action="{% url 'inicioS' %}" method="post" id="login-form">
             {% csrf_token %}
-            <input type="email" id="correo" name="correo" placeholder="Correo electrónico" required aria-required="true">
+            <input type="text" id="correo" name="correo" placeholder="Correo electrónico" required aria-required="true">
             <input type="password" id="password" name="password" placeholder="Contraseña" required aria-required="true">
 
             <div class="mostrar-password">
