@@ -90,6 +90,7 @@ def inicioS(request):
                 messages.success(request, "Inicio de sesión exitoso para empresa")
                 return redirect(reverse('inicioE'))
         else:
-            messages.error(request, "Correo o contraseña incorrectos")
+            error_message = "Correo electrónico o contraseña incorrectos. Por favor, inténtelo de nuevo."
+            return render(request, 'login/InicioS.html', {'error_message': error_message})
 
     return render(request, 'login/InicioS.html')

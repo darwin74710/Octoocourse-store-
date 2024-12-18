@@ -1,6 +1,6 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
@@ -9,46 +9,38 @@
     <!--CSS-->
     <link rel="stylesheet" href="{% static '/css/stInicioS.css' %}">
     <link rel="icon" href="{% static 'empresa/img/logo.png' %}">
-    <link rel="stylesheet" href="{% static 'empresa/css/mensaje.css' %}" />
-
-
-
-    <!-- <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            document.getElementById('show-password').addEventListener('change', function () {
-                var passwordInput = document.getElementById('password');
-                if (this.checked) {
-                    passwordInput.type = 'text'; // mostrar contraseña
-                } else {
-                    passwordInput.type = 'password'; // ocultar contraseña
-                }
-            });
-        });
-    </script> -->
+    <style>
+        .error-message {
+            color: #721c24;
+            background-color: #f8d7da;
+            border: 1px solid #f5c6cb;
+            border-radius: 4px;
+            padding: 10px;
+            margin-bottom: 10px;
+            display: none;
+        }
+        
+        .input-error {
+            border: 1px solid #721c24;
+        }
+    </style>
 </head>
 
 <body>
-    <!-- Mensajes de éxito o error -->
-    {% if messages %}
-    <div id="alert-container">
-        {% for message in messages %}
-        <div class="alert alert-{{ message.tags }} alert-dismissible fade show alert-custom" role="alert">
-            {{ message }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-        {% endfor %}
-    </div>
-    {% endif %}
-
     <div class="login-container">
         <div class="logo">
             <img src="{% static 'empresa/img/logo.png' %}" alt="OctooCourse Logo">
         </div>
         <h1><span>Iniciar</span> Sesión</h1>
-        <form action="{% url 'inicioS' %}" method="post">
+        <div id="error-container" class="error-message" role="alert" aria-live="assertive">
+            {% if error_message %}
+                {{ error_message }}
+            {% endif %}
+        </div>
+        <form action="{% url 'inicioS' %}" method="post" id="login-form">
             {% csrf_token %}
-            <input type="text" id="correo" name="correo" placeholder="Correo electrónico">
-            <input type="password" id="password" name="password" placeholder="password">
+            <input type="email" id="correo" name="correo" placeholder="Correo electrónico" required aria-required="true">
+            <input type="password" id="password" name="password" placeholder="Contraseña" required aria-required="true">
 
             <div class="mostrar-password">
                 <input type="checkbox" id="show-password" name="show-password">
@@ -69,15 +61,72 @@
             <span class="close">&times;</span>
             <h2>Recuperar contraseña</h2>
             <form>
-                <input type="email" id="email" name="email" placeholder="Correo electrónico">
+                <input type="email" id="email" name="email" placeholder="Correo electrónico" required aria-required="true">
                 <button type="submit">Enviar</button>
             </form>
         </div>
     </div>
     <script src="{% static 'js/modal.js' %}"></script>
 
-    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var closeButtons = document.querySelectorAll('.btn-close');
+            closeButtons.forEach(function(button) {
+                button.addEventListener('click', function() {
+                    this.parentElement.style.display = 'none';
+                });
+            });
 
+            var form = document.getElementById('login-form');
+            var errorContainer = document.getElementById('error-container');
+
+            // Mostrar el contenedor de error si hay un mensaje de error del servidor
+            if (errorContainer.textContent.trim() !== '') {
+                errorContainer.style.display = 'block';
+            }
+
+            form.addEventListener('submit', function(event) {
+                event.preventDefault();
+                
+                var correo = document.getElementById('correo');
+                var password = document.getElementById('password');
+                var errors = [];
+
+                // Validar correo
+                if (!correo.value) {
+                    errors.push('Por favor, ingrese su correo electrónico.');
+                    correo.classList.add('input-error');
+                } else if (!/\S+@\S+\.\S+/.test(correo.value)) {
+                    errors.push('Por favor, ingrese un correo electrónico válido.');
+                    correo.classList.add('input-error');
+                } else {
+                    correo.classList.remove('input-error');
+                }
+
+                // Validar contraseña
+                if (!password.value) {
+                    errors.push('Por favor, ingrese su contraseña.');
+                    password.classList.add('input-error');
+                } else {
+                    password.classList.remove('input-error');
+                }
+
+                if (errors.length > 0) {
+                    errorContainer.innerHTML = errors.join('<br>');
+                    errorContainer.style.display = 'block';
+                } else {
+                    errorContainer.style.display = 'none';
+                    form.submit();
+                }
+            });
+
+            // Mostrar/ocultar contraseña
+            var showPasswordCheckbox = document.getElementById('show-password');
+            showPasswordCheckbox.addEventListener('change', function() {
+                password.type = this.checked ? 'text' : 'password';
+            });
+        });
+    </script>
 </body>
 
 </html>
